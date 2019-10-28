@@ -1,8 +1,11 @@
 package com.challange.crandroid.data.response
 
+import com.google.gson.annotations.SerializedName
+
 data class Game(
     val id: Int,
-    val name: String,
+    @SerializedName("name")
+    val title: String,
     val price: Double,
     val platform: String,
     val image: String

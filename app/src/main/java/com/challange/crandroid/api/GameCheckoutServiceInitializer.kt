@@ -22,7 +22,7 @@ class GameCheckoutServiceInitializer {
         httpClient.addInterceptor { chain ->
             val original = chain.request()
             val request: Request = original.newBuilder()
-//                .header("Token", BuildConfig.GameCheckoutApiKey)
+                .header("Token", BuildConfig.GameCheckoutApiKey)
                 .build()
             chain.proceed(request)
         }
