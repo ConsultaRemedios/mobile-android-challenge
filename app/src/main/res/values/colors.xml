@@ -6,4 +6,7 @@
     <color name="colorBlue">#2F7CF6</color>
     <color name="colorAppBackground">#F2F2F2</color>
     <color name="colorPrimaryText">#333333</color>
+    <color name="colorSecondaryText">#666666</color>
+    <color name="colorDetailsText">#5D5D5D</color>
+    <color name="colorGreen">#24CB64</color>
 </resources>

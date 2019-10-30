@@ -14,15 +14,16 @@ import com.challange.crandroid.data.response.Game
 import java.text.NumberFormat
 import java.util.*
 
-class GamesAdapter(context: Context, games: ArrayList<Game>) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
+class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: OnGameTapListener) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
 
     private var mGames = games
     private val mNumberFormat = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"))
     private val mContext = context
+    private val mOnGameTapListener = onGameTapListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_game_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, mOnGameTapListener)
     }
 
     override fun getItemCount(): Int {
@@ -43,11 +44,25 @@ class GamesAdapter(context: Context, games: ArrayList<Game>) : RecyclerView.Adap
         holder.price.text = mNumberFormat.format(game.price)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, onGameTapListener: OnGameTapListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        private var onGameTapListener: OnGameTapListener
+        init {
+            itemView.setOnClickListener(this)
+            this.onGameTapListener = onGameTapListener
+        }
+
         var image: ImageView = itemView.findViewById(R.id.game_image)
         var platform: TextView = itemView.findViewById(R.id.platform)
         var title: TextView = itemView.findViewById(R.id.game_title)
         var price: TextView = itemView.findViewById(R.id.game_price)
 
+        override fun onClick(v: View?) {
+            onGameTapListener.onGameTap(adapterPosition)
+        }
+    }
+
+    interface OnGameTapListener {
+        fun onGameTap(position: Int)
     }
 }

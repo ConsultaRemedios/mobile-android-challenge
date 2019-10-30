@@ -1,8 +1,10 @@
 package com.challange.crandroid
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.challange.crandroid.adapter.GamesAdapter
@@ -14,7 +16,7 @@ import retrofit2.Response
 
 private const val NUM_COLUMNS = 2
 
-class GamesActivity : AppCompatActivity() {
+class GamesActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
 
     private var mGames: ArrayList<Game> = ArrayList()
 
@@ -23,6 +25,15 @@ class GamesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_games)
 
         loadGames()
+    }
+
+    override fun onGameTap(position: Int) {
+        val game = mGames[position]
+        val intent = Intent(this, GameDetailActivity::class.java)
+        intent.putExtra("gameId", game.id)
+        startActivity(intent)
+//        val game = mGames[position]
+//        Toast.makeText(this, game.title, Toast.LENGTH_SHORT).show()
     }
 
     private fun loadGames() {
@@ -45,7 +56,7 @@ class GamesActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val layoutManager = StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayout.VERTICAL)
-        val adapter = GamesAdapter(this, mGames)
+        val adapter = GamesAdapter(this, mGames, this)
 
         val recyclerView: RecyclerView = findViewById(R.id.gamesRecyclerView)
         recyclerView.layoutManager = layoutManager
