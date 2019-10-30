@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CheckoutActivity"
-            android:label="Carrinho de Compras">
-        </activity>
+            android:name=".ConfirmationActivity"
+            android:label="Compra Concluída"></activity>
         <activity
-            android:name=".GameDetailActivity">
-        </activity>
+            android:name=".CheckoutActivity"
+            android:label="Carrinho de Compras"></activity>
+        <activity android:name=".GameDetailActivity"></activity>
         <activity android:name=".GamesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
