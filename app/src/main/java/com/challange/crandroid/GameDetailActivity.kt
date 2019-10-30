@@ -1,7 +1,9 @@
 package com.challange.crandroid
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.challange.crandroid.adapter.GameDetailImageSlider
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
@@ -20,11 +22,21 @@ class GameDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         loadGame(intent.getIntExtra("gameId", 0))
 
+
+        buttonAdicionarCarrinho.setOnClickListener(clickButtonAdicionarCarrinho)
 //        text_view_show_more.setShowingLine(7)
 //        text_view_show_more.addShowMoreText("Ler Mais")
 //        text_view_show_more.addShowLessText("Ler Menos")
+    }
+
+    val clickButtonAdicionarCarrinho = View.OnClickListener {
+        val intent = Intent(this, CheckoutActivity::class.java)
+        startActivity(intent)
     }
 
     private fun loadGame(gameId: Int) {
