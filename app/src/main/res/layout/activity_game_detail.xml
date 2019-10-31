@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     tools:context=".GameDetailActivity">
 
     <com.opensooq.pluto.PlutoView
@@ -44,9 +42,10 @@
         app:layout_constraintTop_toBottomOf="@id/custom_indicator" />
 
     <TextView
-        android:id="@+id/game_title"
+        android:id="@+id/gameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:paddingTop="16dp"
         android:textColor="@color/colorPrimaryText"
         android:textSize="24sp"
@@ -60,15 +59,15 @@
         android:paddingTop="20dp"
         app:layout_constraintBottom_toTopOf="@id/bottomMenu"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/game_title">
+        app:layout_constraintTop_toBottomOf="@id/gameTitle">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="16dp">
 
             <TextView
-                android:id="@+id/expandableTextView"
+                android:id="@+id/gameDescriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
@@ -77,16 +76,41 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/toggle_view"
+                android:id="@+id/gameDescriptionToggleViewExpand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ler Mais"
+                android:layout_below="@id/gameDescriptionTextView"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                android:text="@string/read_more"
                 android:textColor="@color/colorBlue"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/gameDescriptionToggleViewCollapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gameDescriptionTextView"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                android:text="@string/read_less"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/top_shadow_gradient"
+        app:layout_constraintBottom_toTopOf="@id/bottomMenu" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomMenu"
@@ -97,48 +121,54 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <TextView
-            android:id="@+id/price_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="R$ 197,88"
-            android:textColor="@color/colorBlue"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="R$ 197,88" />
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/price_tag">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_icdelivery"
-                android:tint="@color/colorGreen" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/priceTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:text="Frete:"
-                android:textColor="@color/colorGreen"
-                android:textSize="16sp" />
+                android:text="R$ 197,88"
+                android:textColor="@color/colorBlue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="R$ 197,88" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:text="R$ 12,90"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="16sp" />
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_icdelivery"
+                    android:tint="@color/colorGreen" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:text="Frete:"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:text="R$ 12,90"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -147,14 +177,11 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorGreen"
-            android:paddingStart="16dp"
-            android:paddingLeft="12dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="16dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="10dp"
-            android:text="Adicionar ao Carrinho"
+            android:text="@string/add_to_cart"
             android:textAllCaps="false"
             android:textColor="#FFF"
             android:textSize="14sp"

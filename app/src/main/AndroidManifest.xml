@@ -17,8 +17,13 @@
         <activity
             android:name=".CheckoutActivity"
             android:label="Carrinho de Compras"></activity>
-        <activity android:name=".GameDetailActivity"></activity>
-        <activity android:name=".GamesActivity">
+        <activity
+            android:name=".GameDetailActivity"
+            android:label="@string/empty"
+            android:parentActivityName=".GamesActivity"></activity>
+        <activity
+            android:name=".GamesActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

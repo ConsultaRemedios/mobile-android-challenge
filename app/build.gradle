@@ -57,15 +57,6 @@ dependencies {
     // New Android Material
     implementation 'com.google.android.material:material:1.0.0'
 
-    // SHowMoreText
-    implementation 'com.github.mahimrocky:ShowMoreText:1.0.2'
-
-    // ExpandableTextView
-    implementation 'com.ms-square:expandableTextView:0.1.4'
-
-    // Fole (Expandable TextView)
-    implementation 'com.github.bffcorreia:fole:1.0.0'
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

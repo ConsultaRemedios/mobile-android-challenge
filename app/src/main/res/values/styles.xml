@@ -8,6 +8,7 @@
         <item name="android:textColorPrimary">@color/colorBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorControlNormal">#FFF</item>
     </style>
 
 </resources>
