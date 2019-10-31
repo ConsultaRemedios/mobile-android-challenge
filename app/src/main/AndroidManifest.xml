@@ -13,13 +13,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ConfirmationActivity"
-            android:label="Compra Concluída"></activity>
+            android:label="Compra Concluída"
+            android:parentActivityName=".GamesActivity"></activity>
         <activity
             android:name=".CheckoutActivity"
-            android:label="Carrinho de Compras"></activity>
+            android:label="Carrinho de Compras"
+            android:launchMode="singleTop"
+            android:parentActivityName=".GameDetailActivity"></activity>
         <activity
             android:name=".GameDetailActivity"
             android:label="@string/empty"
+            android:launchMode="singleTop"
             android:parentActivityName=".GamesActivity"></activity>
         <activity
             android:name=".GamesActivity"

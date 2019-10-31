@@ -12,12 +12,22 @@ class ConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirmation)
 
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         continuarComprando.setOnClickListener(clickContinuarComprando)
     }
 
+    override fun onBackPressed() {
+        navigateHome()
+    }
+
     private val clickContinuarComprando = View.OnClickListener {
+        navigateHome()
+    }
+
+    private fun navigateHome() {
         val intent = Intent(this, GamesActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        navigateUpTo(intent)
     }
 }
