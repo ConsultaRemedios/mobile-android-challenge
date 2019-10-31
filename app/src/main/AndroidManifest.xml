@@ -27,6 +27,7 @@
             android:parentActivityName=".GamesActivity"></activity>
         <activity
             android:name=".GamesActivity"
+            android:label="@string/games"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
