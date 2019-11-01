@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#F2F2F2</color>
+    <color name="colorPrimaryDark">#E0E0E0</color>
+    <color name="colorAccent">#2F7CF6</color>
+    <color name="colorTranslucidOverlay">#33000000</color>
+
+    <color name="colorText">#333333</color>
+    <color name="colorTextTitle">#333333</color>
+
+    <color name="separator">#DADADA</color>
+
+    <color name="greenText">#24CB64</color>
+
+    <color name="colorBadge">#f50f3f</color>
+    <color name="colorActionBarIcon">#757575</color>
+
+    <color name="customerFieldsTitle">#999999</color>
+    <color name="customerFields">#333333</color>
+    <color name="item_cart_card">#F9F9F9</color>
 </resources>
