@@ -6,7 +6,10 @@
     <color name="colorBlue">#2F7CF6</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGameName">#DE333333</color>
+    <color name="colorGameDescription">#5D5D5D</color>
     <color name="colorGreyBackground">#F2F2F2</color>
     <color name="colorUnselectedDot">#DEDEDE</color>
     <color name="colorRedCircle">#FF0C3E</color>
+    <color name="colorGreenText">#24CB64</color>
+    <color name="colorGreyText">#666666</color>
 </resources>
