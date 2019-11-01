@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="activity_horizontal_margin">@dimen/normal_margin</dimen>
+    <dimen name="activity_vertical_margin">@dimen/normal_margin</dimen>
+
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="simple_margin">8dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+
+    <dimen name="app_font_size">14sp</dimen>
+    <dimen name="size_text_game_title">16sp</dimen>
+    <dimen name="size_text_title_actionbar">20sp</dimen>
+
+    <dimen name="size_big_title_game">24sp</dimen>
+
+    <dimen name="bdg_text_size">8dp</dimen>
+    <dimen name="bdg_margin_top">12dp</dimen>
+    <dimen name="bdg_margin_end">12dp</dimen>
+    <dimen name="bdg_padding_horizontal">4dp</dimen>
+    <dimen name="bdg_padding_vertical">1dp</dimen>
+
+</resources>

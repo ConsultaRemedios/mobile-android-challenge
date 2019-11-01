@@ -1,11 +1,42 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:textSize">@dimen/app_font_size</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="Text.ToolbarTitle" parent="Text">
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">@dimen/size_text_title_actionbar</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="Text.Badge" parent="Text">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/bdg_text_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/bg_badge</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/bdg_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/bdg_margin_end</item>
+        <item name="android:paddingTop">@dimen/bdg_padding_vertical</item>
+        <item name="android:paddingEnd">@dimen/bdg_padding_horizontal</item>
+        <item name="android:paddingBottom">@dimen/bdg_padding_vertical</item>
+        <item name="android:paddingStart">@dimen/bdg_padding_horizontal</item>
+    </style>
+
+    <style name="Separator">
+        <item name="android:background">@color/separator</item>
     </style>
 
 </resources>
