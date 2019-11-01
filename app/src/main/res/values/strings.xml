@@ -12,4 +12,7 @@
     <string name="delivery_tax">Frete</string>
     <string name="correios">Correios:</string>
     <string name="payment">Pagamento</string>
+    <string name="ahoooy">AHOOOY!!</string>
+    <string name="purchase_was_successful">Sua compra Nº %d foi concluída com sucesso. Em breve você receberá seus produtos.</string>
+    <string name="keep_buying">Continuar Comprando</string>
 </resources>
