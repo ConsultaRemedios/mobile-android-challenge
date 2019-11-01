@@ -2,92 +2,350 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clickable="true"
     android:focusable="true">
 
-    <ScrollView
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@color/colorCartProductBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            card_view:cardElevation="1dp"
-            card_view:cardUseCompatPadding="true">
-
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/image_slider"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                app:auto_cycle="true"
-                app:corner_radius="20"
-                app:delay="0"
-                app:error_image="@drawable/game_placeholder"
-                app:period="1000"
-                app:placeholder="@drawable/game_placeholder"
-                app:selected_dot="@drawable/selected_dot"
-                app:unselected_dot="@drawable/unselected_dot" />
-        </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/game_placeholder" />
 
         <TextView
+            android:id="@+id/platform_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/product_image"
             android:fontFamily="@font/roboto"
-            android:lineSpacingExtra="28sp"
+            android:lineSpacingExtra="20sp"
+            android:textColor="@color/colorBlue"
+            android:textSize="14sp"
+            tools:text="Switch" />
+
+        <TextView
+            android:id="@+id/game_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/platform_name"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/product_image"
+            android:fontFamily="@font/roboto"
+            android:lineSpacingExtra="19sp"
             android:textColor="@color/colorGameName"
-            android:textSize="24sp"
+            android:textSize="16sp"
             tools:text="Super Mario Odyssey" />
 
         <TextView
+            android:id="@+id/game_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/colorGameDescription"
-            android:textSize="14sp"
-            tools:text="@string/lorem_ipsum" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
+            android:layout_below="@+id/game_name"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/roboto_medium"
-            android:lineSpacingExtra="19sp"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/product_image"
+            android:fontFamily="@font/roboto_bold"
+            android:lineSpacingExtra="24sp"
             android:textColor="@color/colorBlue"
-            android:textSize="16sp"
-            android:text="@string/read_more" />
+            android:textSize="20sp"
+            tools:text="R$ 197,88" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_below="@+id/game_price"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/product_image"
+            android:background="@drawable/round_select_box"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="12dp"
+                android:fontFamily="@font/roboto"
+                android:lineSpacingExtra="16sp"
+                android:text="@string/quantity"
+                android:textColor="@color/colorGameName"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/remove_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="26dp"
+                android:src="@drawable/ic_remove_circle" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="22dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:lineSpacingExtra="24sp"
+                android:textColor="@color/colorBlue"
+                android:textSize="22sp"
+                tools:text="2" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/add_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="22dp"
+                android:src="@drawable/ic_add_circle" />
+
         </LinearLayout>
-    </ScrollView>
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/address_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardElevation="1dp"
+        card_view:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/delivery_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorDeliveryAddress"
+                android:textSize="16sp"
+                android:text="@string/delivery_address" />
+
+            <TextView
+                android:id="@+id/edit_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineSpacingExtra="19sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp"
+                android:text="@string/edit" />
+
+            <TextView
+                android:id="@+id/address_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/delivery_address"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                tools:text="80510-342" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/address_cep"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                tools:text="Rua Desembargador Vieira Cavalcanti, 703" />
+
+            <TextView
+                android:id="@+id/address_city_state_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/address"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                tools:text="Curitiba - Paraná - Brasil" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/delivery_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardElevation="1dp"
+        card_view:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address_card">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/delivery_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorDeliveryAddress"
+                android:textSize="16sp"
+                android:text="@string/delivery_tax" />
+
+            <TextView
+                android:id="@+id/correios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/delivery_tax"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                android:text="@string/correios" />
+
+            <TextView
+                android:id="@+id/delivery_tax_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_below="@+id/delivery_tax"
+                android:layout_toEndOf="@+id/correios"
+                android:layout_marginStart="8dp"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                tools:text="R$ 12,90" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/payment_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        card_view:cardElevation="1dp"
+        card_view:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delivery_card">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorDeliveryAddress"
+                android:textSize="16sp"
+                android:text="@string/payment" />
+
+            <TextView
+                android:id="@+id/edit_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:lineSpacingExtra="19sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp"
+                android:text="@string/edit" />
+
+            <TextView
+                android:id="@+id/card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/payment"
+                android:lineSpacingExtra="19sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorGameName"
+                android:textSize="16sp"
+                tools:text="5678 **** **** 4536" />
+
+            <TextView
+                android:id="@+id/card_flag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_below="@+id/card_number"
+                android:lineSpacingExtra="16sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="42dp"
+                android:textColor="@color/colorDeliveryAddress"
+                android:textSize="14sp"
+                tools:text="Visa" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        app:cardUseCompatPadding="true"
+        card_view:cardElevation="1dp"
+        card_view:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-            <RelativeLayout
+
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="85dp">
 

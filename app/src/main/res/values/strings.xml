@@ -6,4 +6,10 @@
     <string name="finish_buy">Finalizar Compra</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore...</string>
     <string name="keep_buying">Continuar Comprando</string>
+    <string name="quantity">Quantidade:</string>
+    <string name="delivery_address">Endereço de Entrega</string>
+    <string name="edit">Editar</string>
+    <string name="delivery_tax">Frete</string>
+    <string name="correios">Correios:</string>
+    <string name="payment">Pagamento</string>
 </resources>

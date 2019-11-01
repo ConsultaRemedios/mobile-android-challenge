@@ -9,13 +9,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_game)
+        setContentView(R.layout.fragment_cart)
 
-        val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-        val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
-        imageSlider.setImageList(imageList)
+//        val imageList = ArrayList<SlideModel>()
+//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
+//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
+//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
+//        val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
+//        imageSlider.setImageList(imageList)
     }
 }

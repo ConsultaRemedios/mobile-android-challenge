@@ -12,4 +12,7 @@
     <color name="colorRedCircle">#FF0C3E</color>
     <color name="colorGreenText">#24CB64</color>
     <color name="colorGreyText">#666666</color>
+    <color name="colorSelectBoxBorder">#DADADA</color>
+    <color name="colorCartProductBackground">#F9F9F9</color>
+    <color name="colorDeliveryAddress">#999999</color>
 </resources>
