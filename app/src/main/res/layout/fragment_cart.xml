@@ -83,85 +83,60 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="85dp">
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginTop="22dp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="24sp"
                     android:textColor="@color/colorBlue"
                     android:textSize="20sp"
                     tools:text="R$ 197,88" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/delivery_image"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_delivery"
-                    android:layout_marginStart="16dp"
-                    android:layout_below="@+id/price"
-                    android:layout_marginTop="8dp"/>
-
-                <TextView
-                    android:id="@+id/delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:lineSpacingExtra="19sp"
-                    android:layout_below="@+id/price"
-                    android:layout_toEndOf="@+id/delivery_image"
-                    android:textColor="@color/colorGreenText"
-                    android:textSize="16sp"
-                    android:text="@string/delivery_fare" />
-
-                <TextView
-                    android:id="@+id/delivery_tax"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:lineSpacingExtra="19sp"
-                    android:layout_below="@+id/price"
-                    android:layout_toEndOf="@+id/delivery"
-                    android:textColor="@color/colorGreyText"
-                    android:textSize="16sp"
-                    tools:text="R$ 12,90" />
-
                 <Button
                     android:id="@+id/add_to_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="58dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="24dp"
                     android:paddingTop="10dp"
-                    android:textAllCaps="false"
                     android:paddingBottom="10dp"
-                    android:layout_toEndOf="@+id/delivery_tax"
+                    android:textAllCaps="true"
+                    android:layout_toEndOf="@+id/price"
                     android:background="@drawable/round_button"
                     android:fontFamily="@font/roboto_medium"
                     android:lineSpacingExtra="16sp"
-                    android:text="@string/add_to_cart"
+                    android:text="@string/finish_buy"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/keep_buying"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:lineSpacingExtra="16sp"
+                    android:layout_below="@+id/add_to_cart"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="15sp"
+                    android:text="@string/keep_buying" />
             </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
