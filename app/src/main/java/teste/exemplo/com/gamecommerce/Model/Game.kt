@@ -13,4 +13,6 @@ class Game {
     val platform = ""
     @Json(name = "image")
     val image = ""
+    @Json(name = "description")
+    val description = ""
 }

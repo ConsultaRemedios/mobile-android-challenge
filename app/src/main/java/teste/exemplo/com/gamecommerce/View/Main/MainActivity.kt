@@ -12,15 +12,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import teste.exemplo.com.gamecommerce.Presenter.Main.IMainActivityPresenter
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import teste.exemplo.com.gamecommerce.Presenter.Main.MainActivityPresenter
+import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
+import teste.exemplo.com.gamecommerce.View.Game.GameFragment
 
 
 class MainActivity: AppCompatActivity(), IMainActivityView {
 
 
-    var service: GameService = GameService()
     private lateinit var adapter: GamesAdapter
     private lateinit var mainActivityPresenter: IMainActivityPresenter
 
@@ -29,15 +29,9 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         setContentView(R.layout.activity_main)
         mainActivityPresenter = MainActivityPresenter(this)
         configureRecyclerView()
-        setAdapter()
+        configureAdapter()
         checkConnectivity()
         getData()
-//        val imageList = ArrayList<SlideModel>()
-//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-//        imageList.add(SlideModel(R.drawable.game_super_mario_odyssey))
-//        val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
-//        imageSlider.setImageList(imageList)
     }
 
     override fun configureRecyclerView() {
@@ -48,9 +42,18 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         recyclerView.layoutManager = layoutManager
     }
 
-    override fun setAdapter() {
+    override fun configureAdapter() {
         adapter = GamesAdapter(this)
         recyclerView.adapter = adapter
+
+        adapter.onItemClick = { game ->
+            Cache.setSelectedGameId(game.id)
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.home_container, GameFragment(R.id.home_container), "GameFragment")
+                .addToBackStack("GameFragment")
+                .commit()
+        }
     }
 
 
@@ -98,7 +101,7 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
     private fun getData() {
         val thread = object : Thread() {
             override fun run() {
-                mainActivityPresenter.getGamesData(service)
+                mainActivityPresenter.getGamesData()
             }
         }
         thread.start()

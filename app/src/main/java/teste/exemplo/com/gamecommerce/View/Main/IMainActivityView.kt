@@ -3,7 +3,7 @@ package teste.exemplo.com.gamecommerce.View.Main
 interface IMainActivityView {
 
     fun configureRecyclerView()
-    fun setAdapter()
+    fun configureAdapter()
     fun checkConnectivity()
     fun setLoadingVisibility(visibility: Int)
     fun showLoading()

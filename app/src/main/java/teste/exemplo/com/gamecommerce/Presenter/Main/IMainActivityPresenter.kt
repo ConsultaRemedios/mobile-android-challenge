@@ -5,5 +5,5 @@ import androidx.appcompat.app.AppCompatActivity
 import teste.exemplo.com.gamecommerce.Service.GameService
 
 interface IMainActivityPresenter {
-    fun getGamesData(service: GameService)
+    fun getGamesData()
 }

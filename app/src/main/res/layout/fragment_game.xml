@@ -8,7 +8,19 @@
     android:clickable="true"
     android:focusable="true">
 
+    <ImageView
+        android:id="@+id/loadingImageView"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/loading"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView2" />
+
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -21,141 +33,146 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            card_view:cardElevation="1dp"
-            card_view:cardUseCompatPadding="true">
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                card_view:cardElevation="1dp"
+                card_view:cardUseCompatPadding="true">
 
-            <com.denzcoskun.imageslider.ImageSlider
-                android:id="@+id/image_slider"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                app:auto_cycle="true"
-                app:corner_radius="20"
-                app:delay="0"
-                app:error_image="@drawable/game_placeholder"
-                app:period="1000"
-                app:placeholder="@drawable/game_placeholder"
-                app:selected_dot="@drawable/selected_dot"
-                app:unselected_dot="@drawable/unselected_dot" />
-        </androidx.cardview.widget.CardView>
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    app:auto_cycle="true"
+                    app:corner_radius="20"
+                    app:delay="0"
+                    app:error_image="@drawable/game_placeholder"
+                    app:period="1000"
+                    app:placeholder="@drawable/game_placeholder"
+                    app:selected_dot="@drawable/selected_dot"
+                    app:unselected_dot="@drawable/unselected_dot" />
+            </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/colorGameName"
-            android:textSize="24sp"
-            tools:text="Super Mario Odyssey" />
+            <TextView
+                android:id="@+id/game_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/colorGameName"
+                android:textSize="24sp"
+                tools:text="Super Mario Odyssey" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/colorGameDescription"
-            android:textSize="14sp"
-            tools:text="@string/lorem_ipsum" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/colorGameDescription"
+                android:textSize="14sp"
+                tools:text="@string/lorem_ipsum" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="18dp"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/colorBlue"
-            android:textSize="16sp"
-            android:text="@string/read_more" />
+            <TextView
+                android:id="@+id/read_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/read_more"
+                android:textColor="@color/colorBlue"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="85dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-            <RelativeLayout
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/price"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/colorBlue"
+                android:textSize="20sp"
+                tools:text="R$ 197,88" />
 
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="18dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:textColor="@color/colorBlue"
-                    android:textSize="20sp"
-                    tools:text="R$ 197,88" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delivery_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/price"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_delivery" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/delivery_image"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_delivery"
-                    android:layout_marginStart="16dp"
-                    android:layout_below="@+id/price"
-                    android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/delivery_image"
+                android:fontFamily="@font/roboto"
+                android:text="@string/delivery_fare"
+                android:textColor="@color/colorGreenText"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:layout_below="@+id/price"
-                    android:layout_toEndOf="@+id/delivery_image"
-                    android:textColor="@color/colorGreenText"
-                    android:textSize="16sp"
-                    android:text="@string/delivery_fare" />
+            <TextView
+                android:id="@+id/delivery_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/delivery"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/colorGreyText"
+                android:textSize="16sp"
+                tools:text="R$ 12,90" />
 
-                <TextView
-                    android:id="@+id/delivery_tax"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:layout_below="@+id/price"
-                    android:layout_toEndOf="@+id/delivery"
-                    android:textColor="@color/colorGreyText"
-                    android:textSize="16sp"
-                    tools:text="R$ 12,90" />
-
-                <Button
-                    android:id="@+id/add_to_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="36dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="16dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="10dp"
-                    android:textAllCaps="false"
-                    android:paddingBottom="10dp"
-                    android:layout_toEndOf="@+id/delivery_tax"
-                    android:background="@drawable/round_button"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/add_to_cart"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+            <Button
+                android:id="@+id/add_to_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toEndOf="@+id/delivery_tax"
+                android:background="@drawable/round_button"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="12dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="10dp"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

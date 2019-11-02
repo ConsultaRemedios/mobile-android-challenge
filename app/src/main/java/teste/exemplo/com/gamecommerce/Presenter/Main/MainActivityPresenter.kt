@@ -10,8 +10,9 @@ import teste.exemplo.com.gamecommerce.Util.Cache
 
 
 class MainActivityPresenter(val mainActivityView: IMainActivityView) : IMainActivityPresenter {
+    var service: GameService = GameService()
 
-    override fun getGamesData(service: GameService) {
+    override fun getGamesData() {
         service.getGames("QceNFo1gHd09MJDzyswNqzStlxYGBzUG")
             .doOnError { mainActivityView.showTryAgainSnackbar() }
             .subscribe { response -> Cache.setGames(response)

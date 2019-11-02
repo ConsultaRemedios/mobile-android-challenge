@@ -5,8 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 import teste.exemplo.com.gamecommerce.Model.Game
-import teste.exemplo.com.gamecommerce.Model.GamesResponse
-import java.util.*
 
 
 interface RestAPI {

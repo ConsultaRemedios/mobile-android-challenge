@@ -3,7 +3,6 @@ package teste.exemplo.com.gamecommerce.View.Main
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import android.text.Html
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,10 +15,15 @@ import teste.exemplo.com.gamecommerce.R
 import teste.exemplo.com.gamecommerce.Util.Cache
 
 
+
+
 class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.ViewHolder>(), IGamesAdapterView  {
 
     private var game: Game = Game()
     private var viewHolder: ViewHolder? = null
+
+    var onItemClick: ((Game) -> Unit)? = null
+
 
     @NonNull
     override fun onCreateViewHolder(@NonNull parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,7 +55,7 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
         Glide.with(context).load(game.image).into(viewHolder!!.gameImageView)
     }
 
-    class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val gameImageView: ImageView
         val game_name: TextView
@@ -59,6 +63,9 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
         val game_price: TextView
 
         init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(Cache.getGames()[adapterPosition])
+            }
             gameImageView = itemView.findViewById(R.id.gameImageView)
             platform_name = itemView.findViewById(R.id.platform_name)
             game_name = itemView.findViewById(R.id.game_name)
