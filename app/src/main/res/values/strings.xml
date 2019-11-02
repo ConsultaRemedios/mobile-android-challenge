@@ -5,7 +5,6 @@
     <string name="add_to_cart">Adicionar ao Carrinho</string>
     <string name="finish_buy">Finalizar Compra</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore...</string>
-    <string name="keep_buying">Continuar Comprando</string>
     <string name="quantity">Quantidade:</string>
     <string name="delivery_address">Endereço de Entrega</string>
     <string name="edit">Editar</string>
@@ -15,4 +14,8 @@
     <string name="ahoooy">AHOOOY!!</string>
     <string name="purchase_was_successful">Sua compra Nº %d foi concluída com sucesso. Em breve você receberá seus produtos.</string>
     <string name="keep_buying">Continuar Comprando</string>
+    <string name="failed_load_data">Falha ao carregar dados</string>
+    <string name="try_again">Tentar Novamente</string>
+    <string name="not_connected">Sem conexão com a Internet</string>
+    <string name="connect">Conectar</string>
 </resources>

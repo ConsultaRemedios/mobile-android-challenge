@@ -61,6 +61,7 @@
             tools:text="Super Mario Odyssey" />
 
         <TextView
+            android:id="@+id/game_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
