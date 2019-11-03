@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">CR Android Challange</string>
+    <string name="app_name">CR Android Challenge</string>
+    <string name="empty" />
     <string name="games">Games</string>
     <string name="read_more">Ler Mais</string>
     <string name="read_less">Ler Menos</string>
     <string name="add_to_cart">Adicionar ao Carrinho</string>
-    <string name="empty" />
+    <string name="shipping_address">Endereço de Entrega</string>
 </resources>

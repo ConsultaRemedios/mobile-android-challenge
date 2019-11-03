@@ -9,4 +9,5 @@
     <color name="colorSecondaryText">#666666</color>
     <color name="colorDetailsText">#5D5D5D</color>
     <color name="colorGreen">#24CB64</color>
+    <color name="colorBorder">#DADADA</color>
 </resources>
