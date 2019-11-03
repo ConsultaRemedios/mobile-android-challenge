@@ -9,117 +9,25 @@
     android:clickable="true"
     android:focusable="true">
 
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorCartProductBackground"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/product_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/game_placeholder" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/cart_item"
+        tools:itemCount="2">
 
-        <TextView
-            android:id="@+id/platform_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toEndOf="@+id/product_image"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/colorBlue"
-            android:textSize="14sp"
-            tools:text="Switch" />
-
-        <TextView
-            android:id="@+id/game_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/platform_name"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toEndOf="@+id/product_image"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/colorGameName"
-            android:textSize="16sp"
-            tools:text="Super Mario Odyssey" />
-
-        <TextView
-            android:id="@+id/game_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/game_name"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toEndOf="@+id/product_image"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/colorBlue"
-            android:textSize="20sp"
-            tools:text="R$ 197,88" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_below="@+id/game_price"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toEndOf="@+id/product_image"
-            android:background="@drawable/round_select_box"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="12dp"
-                android:fontFamily="@font/roboto"
-                android:text="@string/quantity"
-                android:textColor="@color/colorGameName"
-                android:textSize="14sp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/remove_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="26dp"
-                android:src="@drawable/ic_remove_circle" />
-
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="22dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:textColor="@color/colorBlue"
-                android:textSize="22sp"
-                tools:text="2" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/add_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="22dp"
-                android:src="@drawable/ic_add_circle" />
-
-        </LinearLayout>
-    </RelativeLayout>
+    </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/address_card"
@@ -130,7 +38,7 @@
         card_view:cardCornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -357,7 +265,7 @@
                     tools:text="R$ 197,88" />
 
                 <Button
-                    android:id="@+id/add_to_cart"
+                    android:id="@+id/finish_purchase"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_alignParentEnd="true"
@@ -384,7 +292,7 @@
                     android:layout_marginTop="9dp"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/roboto_bold"
-                    android:layout_below="@+id/add_to_cart"
+                    android:layout_below="@+id/finish_purchase"
                     android:textColor="@color/colorBlue"
                     android:textSize="15sp"
                     android:text="@string/keep_buying" />

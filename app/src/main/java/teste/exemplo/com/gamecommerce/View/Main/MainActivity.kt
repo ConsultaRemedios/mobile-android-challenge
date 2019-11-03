@@ -6,12 +6,12 @@ import android.view.View
 import teste.exemplo.com.gamecommerce.R
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import teste.exemplo.com.gamecommerce.Service.GameService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import teste.exemplo.com.gamecommerce.Presenter.Main.IMainActivityPresenter
 import android.content.Intent
 import androidx.recyclerview.widget.GridLayoutManager
+import teste.exemplo.com.gamecommerce.Model.Cart
 import teste.exemplo.com.gamecommerce.Presenter.Main.MainActivityPresenter
 import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
@@ -28,10 +28,23 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainActivityPresenter = MainActivityPresenter(this)
+        configureToolbar(getString(R.string.app_name), false)
         configureRecyclerView()
         configureAdapter()
         checkConnectivity()
         getData()
+    }
+
+    override fun configureToolbar(title: String, hasBackArrow: Boolean){
+        if(hasBackArrow){
+            backArrow.visibility = View.VISIBLE
+        } else {
+            backArrow.visibility = View.GONE
+        }
+        toolbar_title.text = title
+        cart_items.text = Cart.totalItems.toString()
+        backArrow.setOnClickListener { onBackPressed() }
+
     }
 
     override fun configureRecyclerView() {
@@ -47,6 +60,7 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         recyclerView.adapter = adapter
 
         adapter.onItemClick = { game ->
+            configureToolbar(game.platform, true)
             Cache.setSelectedGameId(game.id)
             supportFragmentManager
                 .beginTransaction()
@@ -112,4 +126,14 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         setLoadingVisibility(View.GONE)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount == 0){
+            configureToolbar(getString(R.string.app_name), false)
+        }
+    }
+
+    override fun getToken(): String {
+        return getString(R.string.token)
+    }
 }

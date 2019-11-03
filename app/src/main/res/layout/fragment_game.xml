@@ -13,6 +13,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/loading"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +94,7 @@
                 android:layout_marginEnd="18dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/read_more"
+                android:visibility="invisible"
                 android:textColor="@color/colorBlue"
                 android:textSize="16sp" />
         </LinearLayout>

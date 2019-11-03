@@ -37,20 +37,19 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         viewHolder = holder
         viewHolder!!.setIsRecyclable(false)
-        Log.d("JOGO",Cache.getGames()[0].image)
         game = Cache.getGames()[position]
 
         setHolderTexts()
         setImage()
     }
 
-    fun setHolderTexts() {
+    override fun setHolderTexts() {
         viewHolder!!.game_name.text = game.name
         viewHolder!!.platform_name.text = game.platform
         viewHolder!!.game_price.text = formatMoney(game.price)
     }
 
-    fun setImage() {
+    override fun setImage() {
         Glide.with(context).load(game.image).into(viewHolder!!.gameImageView)
     }
 

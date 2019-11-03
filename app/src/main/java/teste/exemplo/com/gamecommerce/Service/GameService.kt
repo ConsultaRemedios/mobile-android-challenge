@@ -23,4 +23,11 @@ class GameService {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    @Synchronized
+    fun checkout(token: String): Observable<String> {
+        return RestUtil.api.checkout(token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }

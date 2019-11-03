@@ -19,12 +19,14 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.loadingImageView
+import teste.exemplo.com.gamecommerce.Model.Cart
+import teste.exemplo.com.gamecommerce.Model.Game
+import teste.exemplo.com.gamecommerce.Model.GameAddedToCart
 import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
-import teste.exemplo.com.gamecommerce.Util.MoneyUtil
 import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
-import java.text.NumberFormat
-import java.util.*
+import teste.exemplo.com.gamecommerce.View.Cart.CartFragment
+import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 import kotlin.collections.ArrayList
 
 
@@ -42,7 +44,7 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
         gamePresenter = GamePresenter(this)
 
         showLoading()
-        checkConnectivity()
+        (activity as MainActivity).checkConnectivity()
         getData()
     }
 
@@ -56,23 +58,6 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
 
     override fun setLoadingVisibility(visibility: Int) {
         loadingImageView.visibility = visibility
-    }
-
-    override fun checkConnectivity() {
-        if (!ConnectivityUtil.isNetworkConnected(activity!!.applicationContext))
-            Snackbar.make(
-                scrollView2,
-                getString(R.string.not_connected),
-                Snackbar.LENGTH_INDEFINITE
-            )
-                .setAction(R.string.connect) {
-                    startActivityForResult(
-                        Intent(
-                            android.provider.Settings.ACTION_SETTINGS
-                        ), 0
-                    )
-                }
-                .setActionTextColor(ContextCompat.getColor(activity!!.applicationContext, R.color.colorBlue)).show()
     }
 
     override fun showTryAgainSnackbar() {
@@ -95,17 +80,18 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
         thread.start()
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun updateGame(){
+    override fun updateGame(game_price: String, delivery_value: String){
         val game = Cache.getGame()
+        (activity as MainActivity).configureToolbar(game.platform, true)
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel(game.image))
         image_slider.setImageList(imageList)
         setDescriptionVisibility(!game.description.equals(""))
         game_name.text = game.name
-        price.text = formatMoney(game.price)
-        delivery_tax.text = "R$ 10,00"
+        price.text = game_price
+        delivery_tax.text = delivery_value
         setLoadingVisibility(View.GONE)
+        add_to_cart.setOnClickListener { gamePresenter.addGameToCart() }
     }
 
     override fun setDescriptionVisibility(visible: Boolean){
@@ -116,6 +102,18 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
             description.visibility = View.VISIBLE
             read_more.visibility = View.VISIBLE
         }
+    }
+
+    override fun goToCartFragment(){
+        (activity as MainActivity).supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.home_container, CartFragment(R.id.home_container), "CartFragment")
+            .addToBackStack("CartFragment")
+            .commit()
+    }
+
+    override fun getToken(): String {
+        return getString(R.string.token)
     }
 
 }

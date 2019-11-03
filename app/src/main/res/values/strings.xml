@@ -18,4 +18,11 @@
     <string name="try_again">Tentar Novamente</string>
     <string name="not_connected">Sem conexão com a Internet</string>
     <string name="connect">Conectar</string>
+    <string name="example_card_number">5678 **** **** 4536</string>
+    <string name="example_card_flag">Visa</string>
+    <string name="example_addess_cep">80510-342</string>
+    <string name="example_address_line">Rua Desembargador Vieira Cavalcanti, 703</string>
+    <string name="example_city_state_country">Curitiba - Paraná - Brasil</string>
+    <string name="purchase_cart">Carrinho de Compras</string>
+    <string name="token">QceNFo1gHd09MJDzyswNqzStlxYGBzUG</string>
 </resources>

@@ -13,7 +13,7 @@ class MainActivityPresenter(val mainActivityView: IMainActivityView) : IMainActi
     var service: GameService = GameService()
 
     override fun getGamesData() {
-        service.getGames("QceNFo1gHd09MJDzyswNqzStlxYGBzUG")
+        service.getGames(mainActivityView.getToken())
             .doOnError { mainActivityView.showTryAgainSnackbar() }
             .subscribe { response -> Cache.setGames(response)
             mainActivityView.updateList()}
