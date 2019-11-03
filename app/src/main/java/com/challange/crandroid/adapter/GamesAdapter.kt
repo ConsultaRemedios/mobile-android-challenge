@@ -37,7 +37,7 @@ class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val game = mGames[position]
 
-        val requestOptions = RequestOptions.placeholderOf(R.drawable.ic_launcher_background)
+        val requestOptions = RequestOptions.placeholderOf(R.drawable.game_cover_placeholder)
         Glide.with(mContext)
             .load(game.image)
             .apply(requestOptions)

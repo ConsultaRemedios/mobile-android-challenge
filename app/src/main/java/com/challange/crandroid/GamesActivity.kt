@@ -3,13 +3,15 @@ package com.challange.crandroid
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.challange.crandroid.adapter.GamesAdapter
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
 import com.challange.crandroid.data.response.Game
+import kotlinx.android.synthetic.main.activity_games.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,13 +29,16 @@ class GamesActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         loadGames()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_games_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onGameTap(position: Int) {
         val game = mGames[position]
         val intent = Intent(this, GameDetailActivity::class.java)
         intent.putExtra("gameId", game.id)
         startActivity(intent)
-//        val game = mGames[position]
-//        Toast.makeText(this, game.title, Toast.LENGTH_SHORT).show()
     }
 
     private fun loadGames() {
@@ -61,5 +66,8 @@ class GamesActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         val recyclerView: RecyclerView = findViewById(R.id.gamesRecyclerView)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+
+        progressIndicator.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
     }
 }
