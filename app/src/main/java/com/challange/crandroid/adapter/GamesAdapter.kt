@@ -15,13 +15,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.challange.crandroid.R
 import com.challange.crandroid.data.response.Game
+import com.challange.crandroid.utils.GenericUtils
+import com.challange.crandroid.utils.GenericUtils.Companion.brazilianNumberFormat
 import java.text.NumberFormat
 import java.util.*
 
 class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: OnGameTapListener) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
 
     private var mGames = games
-    private val mNumberFormat = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"))
     private val mContext = context
     private val mOnGameTapListener = onGameTapListener
 
@@ -48,7 +49,7 @@ class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: 
 
         holder.platform.text = game.platform
         holder.title.text = game.title
-        holder.price.text = mNumberFormat.format(game.price)
+        holder.price.text = brazilianNumberFormat().format(game.price)
     }
 
     class ViewHolder(itemView: View, onGameTapListener: OnGameTapListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
