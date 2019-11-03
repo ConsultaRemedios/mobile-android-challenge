@@ -37,7 +37,7 @@ class GamesActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
     override fun onGameTap(position: Int) {
         val game = mGames[position]
         val intent = Intent(this, GameDetailActivity::class.java)
-        intent.putExtra("gameId", game.id)
+        intent.putExtra("game", game)
         startActivity(intent)
     }
 

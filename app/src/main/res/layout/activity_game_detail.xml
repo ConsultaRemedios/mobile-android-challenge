@@ -6,23 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".GameDetailActivity">
 
+    <ProgressBar
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.opensooq.pluto.PlutoView
         android:id="@+id/plutoGameDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:visibility="gone"
         app:auto_cycle="false"
         app:indicator_visibility="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.opensooq.pluto.PlutoIndicator
-        android:id="@+id/custom_indicator"
+        android:id="@+id/plutoIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingTop="16dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/plutoGameDetails"
@@ -39,7 +50,8 @@
         android:layout_height="2dp"
         android:layout_marginTop="16dp"
         android:background="#DADADA"
-        app:layout_constraintTop_toBottomOf="@id/custom_indicator" />
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/plutoIndicator" />
 
     <TextView
         android:id="@+id/gameTitle"
@@ -49,14 +61,17 @@
         android:paddingTop="16dp"
         android:textColor="@color/colorPrimaryText"
         android:textSize="24sp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/separator"
         tools:text="Super Mario Odyssey" />
 
     <ScrollView
+        android:id="@+id/gameDescription"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="20dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottomMenu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gameTitle">
@@ -107,9 +122,11 @@
     </ScrollView>
 
     <View
+        android:id="@+id/shadowTop"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="@drawable/top_shadow_gradient"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottomMenu" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,6 +134,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">

@@ -1,6 +1,7 @@
 package com.challange.crandroid.data.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Game(
     val id: Int,
@@ -9,4 +10,4 @@ data class Game(
     val price: Double,
     val platform: String,
     val image: String
-)
+) : Serializable

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.challange.crandroid.adapter.GameDetailImageSlider
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
+import com.challange.crandroid.data.response.Game
 import com.challange.crandroid.data.response.GameDetails
 import com.challange.crandroid.utils.GenericUtils.Companion.brazilianNumberFormat
 import kotlinx.android.synthetic.main.activity_game_detail.*
@@ -16,12 +17,18 @@ import retrofit2.Response
 
 class GameDetailActivity : AppCompatActivity() {
 
+    lateinit var mGame: Game
+    val myVisible: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
 
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        mGame = intent.getSerializableExtra("game") as Game
+        supportActionBar?.title = mGame.platform
 
         gameDescriptionToggleViewExpand.setOnClickListener(expandDescription)
         gameDescriptionToggleViewCollapse.setOnClickListener(collapseDescription)
@@ -30,7 +37,7 @@ class GameDetailActivity : AppCompatActivity() {
         // Perform collapse function to start activity with game description collapsed
         gameDescriptionToggleViewCollapse.performClick()
 
-        loadGame(intent.getIntExtra("gameId", 0))
+        loadGameDetails(mGame)
     }
 
     private val expandDescription = View.OnClickListener {
@@ -54,17 +61,24 @@ class GameDetailActivity : AppCompatActivity() {
         val images = gameDetails.images as MutableList<String>
         val adapter = GameDetailImageSlider(images)
         plutoGameDetails.create(adapter, lifecycle = lifecycle)
-        plutoGameDetails.setCustomIndicator(custom_indicator)
+        plutoGameDetails.setCustomIndicator(plutoIndicator)
 
         gameTitle.text = gameDetails.name
         gameDescriptionTextView.text = gameDetails.description
         priceTag.text = brazilianNumberFormat().format(gameDetails.price)
 
-        supportActionBar?.title = gameDetails.platform // usar extras
+        plutoGameDetails.visibility = View.VISIBLE
+        plutoIndicator.visibility = View.VISIBLE
+        separator.visibility = View.VISIBLE
+        gameTitle.visibility = View.VISIBLE
+        gameDescription.visibility = View.VISIBLE
+        shadowTop.visibility = View.VISIBLE
+        bottomMenu.visibility = View.VISIBLE
+        progressIndicator.visibility = View.GONE
     }
 
-    private fun loadGame(gameId: Int) {
-        GameCheckoutServiceInitializer().gameCheckoutService().getGameDetails(gameId)
+    private fun loadGameDetails(game: Game) {
+        GameCheckoutServiceInitializer().gameCheckoutService().getGameDetails(game.id)
             .enqueue(object : Callback<GameDetails> {
                 override fun onResponse(call: Call<GameDetails>, response: Response<GameDetails>) {
                     if (response.isSuccessful) {
