@@ -1,5 +1,7 @@
 package teste.exemplo.com.gamecommerce.View.Main
 
+import android.view.View
+
 interface IMainActivityView {
 
     fun configureToolbar(title: String, hasBackArrow: Boolean)
@@ -11,4 +13,5 @@ interface IMainActivityView {
     fun showTryAgainSnackbar()
     fun updateList()
     fun getToken(): String
+    fun goToCart(view: View)
 }

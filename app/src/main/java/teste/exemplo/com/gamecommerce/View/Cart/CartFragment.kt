@@ -9,8 +9,11 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.recyclerView
@@ -23,7 +26,11 @@ import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
 import teste.exemplo.com.gamecommerce.View.Game.GameFragment
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 
-class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragmentView  {
+class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragmentView,
+    CartAdapter.DataChangedResponse {
+    override fun onDataChange() {
+        cartPresenter.getData()
+    }
 
     private lateinit var adapter: CartAdapter
     lateinit var cartPresenter: ICartPresenter
@@ -51,6 +58,7 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
 
     override fun configureAdapter(){
         adapter = CartAdapter(activity as Context)
+        adapter.dataChanged = this
         recyclerView.adapter = adapter
     }
 
@@ -74,8 +82,11 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
         (activity as MainActivity).configureToolbar(getString(R.string.purchase_cart), true)
     }
 
-    override fun updatePrices(totalPrice: String, delivery_tax:String){
+    override fun updateTotalPrice(totalPrice: String) {
         price.text = totalPrice
+    }
+
+    override fun updateDeliveryTax(delivery_tax: String) {
         delivery_tax_value.text = delivery_tax
     }
 

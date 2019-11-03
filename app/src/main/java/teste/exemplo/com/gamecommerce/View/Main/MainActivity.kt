@@ -10,11 +10,13 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import teste.exemplo.com.gamecommerce.Presenter.Main.IMainActivityPresenter
 import android.content.Intent
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import teste.exemplo.com.gamecommerce.Model.Cart
 import teste.exemplo.com.gamecommerce.Presenter.Main.MainActivityPresenter
 import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
+import teste.exemplo.com.gamecommerce.View.Cart.CartFragment
 import teste.exemplo.com.gamecommerce.View.Game.GameFragment
 
 
@@ -135,5 +137,17 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
 
     override fun getToken(): String {
         return getString(R.string.token)
+    }
+
+    override fun goToCart(view: View){
+        if(Cart.items.size > 0) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.home_container, CartFragment(R.id.home_container), "CartFragment")
+                .addToBackStack("CartFragment")
+                .commit()
+        } else {
+            Toast.makeText(this,"Não há produtos no Carrinho", Toast.LENGTH_SHORT).show()
+        }
     }
 }

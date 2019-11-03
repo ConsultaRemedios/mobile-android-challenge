@@ -23,10 +23,17 @@ class GamePresenter(var gameView: IGameFragmentView) : IGamePresenter {
 
     override fun addGameToCart(){
         val game = Cache.getGame()
-        Cart.items.add(GameAddedToCart(game, 1))
+        val gameAlreadyAdded = Cart.items.find { it.game.id == game.id }
+        if(gameAlreadyAdded == null) {
+            Cart.items.add(GameAddedToCart(game, 1))
+        } else {
+            Cart.items.remove(gameAlreadyAdded)
+            gameAlreadyAdded.qty += 1
+            Cart.items.add(gameAlreadyAdded)
+        }
         Cart.totalItems += 1
-        Cart.totalPrice += game.price
         Cart.totalTax += 10.0
+        Cart.totalPrice += 10.0 + game.price
         gameView.goToCartFragment()
     }
 
