@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import teste.exemplo.com.gamecommerce.Presenter.Main.IMainActivityPresenter
 import android.content.Intent
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import teste.exemplo.com.gamecommerce.Model.Cart
 import teste.exemplo.com.gamecommerce.Presenter.Main.MainActivityPresenter
@@ -18,6 +19,8 @@ import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
 import teste.exemplo.com.gamecommerce.View.Cart.CartFragment
 import teste.exemplo.com.gamecommerce.View.Game.GameFragment
+
+
 
 
 class MainActivity: AppCompatActivity(), IMainActivityView {
@@ -29,6 +32,7 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         mainActivityPresenter = MainActivityPresenter(this)
         configureToolbar(getString(R.string.app_name), false)
         configureRecyclerView()
@@ -66,7 +70,7 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
             Cache.setSelectedGameId(game.id)
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.home_container, GameFragment(R.id.home_container), "GameFragment")
+                .replace(R.id.home_container, GameFragment(), "GameFragment")
                 .addToBackStack("GameFragment")
                 .commit()
         }
@@ -147,11 +151,21 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         if(Cart.items.size > 0) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.home_container, CartFragment(R.id.home_container), "CartFragment")
+                .replace(R.id.home_container, CartFragment(), "CartFragment")
                 .addToBackStack("CartFragment")
                 .commit()
         } else {
             Toast.makeText(this,getString(R.string.empty_cart), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val fragments = supportFragmentManager.fragments
+        supportFragmentManager.putFragment(
+            outState,
+            "FRAGMENT",
+            fragments[fragments.size - 1]!!
+        )
     }
 }

@@ -1,18 +1,18 @@
 package teste.exemplo.com.gamecommerce.Model
 
-import com.squareup.moshi.Json;
+import com.squareup.moshi.Json
 
 class Game {
     @Json(name = "id")
-    val id = 0
+    var id = 0
     @Json(name = "name")
-    val name = ""
+    var name = ""
     @Json(name = "price")
-    val price = 0.0
+    var price = 0.0
     @Json(name = "platform")
-    val platform = ""
+    var platform = ""
     @Json(name = "image")
-    val image = ""
+    var image = ""
     @Json(name = "description")
-    val description = ""
+    var description = ""
 }

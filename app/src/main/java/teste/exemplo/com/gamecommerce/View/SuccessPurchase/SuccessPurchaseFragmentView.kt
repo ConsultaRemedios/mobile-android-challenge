@@ -14,7 +14,7 @@ import teste.exemplo.com.gamecommerce.Presenter.SuccessPurchase.SuccessPurchaseP
 import teste.exemplo.com.gamecommerce.R
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 
-class SuccessPurchaseFragmentView(contentLayoutId: Int) : Fragment(contentLayoutId), ISuccessPurchaseFragmentView {
+class SuccessPurchaseFragmentView : Fragment(), ISuccessPurchaseFragmentView {
 
     private lateinit var successPurchasePresenter: ISuccessPurchasePresenter
 

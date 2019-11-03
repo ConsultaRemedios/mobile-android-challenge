@@ -20,7 +20,7 @@ import teste.exemplo.com.gamecommerce.R
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 import teste.exemplo.com.gamecommerce.View.SuccessPurchase.SuccessPurchaseFragmentView
 
-class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragmentView,
+class CartFragment : Fragment(), ICartFragmentView,
     CartAdapter.DataChangedResponse {
     override fun onDataChange() {
         cartPresenter.getData()
@@ -98,7 +98,7 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
     override fun goToSuccessPurchaseScreen(){
         (activity as MainActivity).supportFragmentManager
             .beginTransaction()
-            .replace(R.id.home_container, SuccessPurchaseFragmentView(R.id.home_container), "SuccessPurchaseFragmentView")
+            .replace(R.id.home_container, SuccessPurchaseFragmentView(), "SuccessPurchaseFragmentView")
             .addToBackStack("SuccessPurchaseFragmentView")
             .commit()
     }

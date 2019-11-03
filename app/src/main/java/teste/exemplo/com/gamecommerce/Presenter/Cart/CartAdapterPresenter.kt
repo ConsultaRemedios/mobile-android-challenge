@@ -13,7 +13,7 @@ class CartAdapterPresenter(var cartAdapterView: ICartAdapterView) : ICartAdapter
             Cart.items[position].qty -= 1
         }
         Cart.totalTax -= 10.0
-        Cart.totalGamesPrice -= Cart.items[position].game.price
+        Cart.totalGamesPrice -= currentCartItem.game.price
         Cart.totalPrice -= 10.0 + currentCartItem.game.price
         Cart.totalItems -= 1
         cartAdapterView.notifyDataHasChanged()

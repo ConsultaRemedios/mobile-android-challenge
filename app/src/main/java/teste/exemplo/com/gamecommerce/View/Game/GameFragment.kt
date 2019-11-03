@@ -23,9 +23,11 @@ import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 import kotlin.collections.ArrayList
 
 
-class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragmentView {
+class GameFragment: Fragment(), IGameFragmentView {
 
     lateinit var gamePresenter: IGamePresenter
+
+
 
     @Nullable
     override fun onCreateView(@NonNull inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
@@ -79,7 +81,8 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel(game.image))
         image_slider.setImageList(imageList)
-        setDescriptionVisibility(!game.description.equals(""))
+        game.description = getString(R.string.lorem_ipsum)
+        setDescriptionVisibility(game.description != "")
         game_name.text = game.name
         price.text = game_price
         delivery_tax.text = delivery_value
@@ -89,18 +92,18 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
 
     override fun setDescriptionVisibility(visible: Boolean){
         if(visible) {
-            description.visibility = View.GONE
-            read_more.visibility = View.GONE
-        } else {
             description.visibility = View.VISIBLE
             read_more.visibility = View.VISIBLE
+        } else {
+            description.visibility = View.GONE
+            read_more.visibility = View.GONE
         }
     }
 
     override fun goToCartFragment(){
         (activity as MainActivity).supportFragmentManager
             .beginTransaction()
-            .replace(R.id.home_container, CartFragment(R.id.home_container), "CartFragment")
+            .replace(R.id.home_container, CartFragment(), "CartFragment")
             .addToBackStack("CartFragment")
             .commit()
     }
