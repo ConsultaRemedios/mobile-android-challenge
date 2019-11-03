@@ -1,5 +1,6 @@
 package teste.exemplo.com.gamecommerce.Presenter.Cart
 
+import android.util.Log
 import teste.exemplo.com.gamecommerce.Model.Cart
 import teste.exemplo.com.gamecommerce.Service.GameService
 import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
@@ -11,8 +12,13 @@ class CartPresenter(var cartView: ICartFragmentView) : ICartPresenter {
 
     override fun getData(){
         cartView.updateToolbar()
-        cartView.updateTotalPrice(formatMoney(Cart.totalPrice))
-        cartView.updateDeliveryTax(formatMoney(Cart.totalTax))
+        if(Cart.totalGamesPrice > 250.0){
+            cartView.updateTotalPrice(formatMoney(Cart.totalGamesPrice))
+            cartView.updateDeliveryTax(formatMoney(0.0))
+        } else {
+            cartView.updateTotalPrice(formatMoney(Cart.totalPrice))
+            cartView.updateDeliveryTax(formatMoney(Cart.totalTax))
+        }
         cartView.updatePaymentData()
         cartView.updateAddress()
         cartView.setOnClickListeners()
@@ -23,7 +29,8 @@ class CartPresenter(var cartView: ICartFragmentView) : ICartPresenter {
             cartView.showEmptyCartToast()
         service.checkout(cartView.getToken())
             .doOnError { cartView.showTryAgainSnackbar() }
-            .subscribe { cartView.goToSuccessPurchaseScreen() }
-            .dispose()
+            .subscribe {    response -> Log.d("RESPOSTA", response.toString())
+                cartView.goToSuccessPurchaseScreen() }
+            .isDisposed
     }
 }

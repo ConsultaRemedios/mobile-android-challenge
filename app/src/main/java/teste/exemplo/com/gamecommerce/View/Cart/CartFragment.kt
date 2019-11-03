@@ -10,22 +10,15 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import io.reactivex.Observable
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_cart.recyclerView
-import teste.exemplo.com.gamecommerce.Model.Cart
 import teste.exemplo.com.gamecommerce.Presenter.Cart.CartPresenter
 import teste.exemplo.com.gamecommerce.Presenter.Cart.ICartPresenter
 import teste.exemplo.com.gamecommerce.R
-import teste.exemplo.com.gamecommerce.Util.Cache
-import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
-import teste.exemplo.com.gamecommerce.View.Game.GameFragment
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
+import teste.exemplo.com.gamecommerce.View.SuccessPurchase.SuccessPurchaseFragmentView
 
 class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragmentView,
     CartAdapter.DataChangedResponse {
@@ -35,7 +28,7 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
     }
 
     private lateinit var adapter: CartAdapter
-    lateinit var cartPresenter: ICartPresenter
+    private lateinit var cartPresenter: ICartPresenter
 
     @Nullable
     override fun onCreateView(@NonNull inflater: LayoutInflater, @Nullable container: ViewGroup?, @Nullable savedInstanceState: Bundle?): View? {
@@ -105,8 +98,8 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
     override fun goToSuccessPurchaseScreen(){
         (activity as MainActivity).supportFragmentManager
             .beginTransaction()
-            .replace(R.id.home_container, GameFragment(R.id.home_container), "CartFragment")
-            .addToBackStack("CartFragment")
+            .replace(R.id.home_container, SuccessPurchaseFragmentView(R.id.home_container), "SuccessPurchaseFragmentView")
+            .addToBackStack("SuccessPurchaseFragmentView")
             .commit()
     }
 

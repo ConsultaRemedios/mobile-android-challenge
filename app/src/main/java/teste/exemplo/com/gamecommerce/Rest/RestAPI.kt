@@ -1,6 +1,7 @@
 package teste.exemplo.com.gamecommerce.Rest
 
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -24,5 +25,5 @@ interface RestAPI {
     @POST("checkout")
     fun checkout(
         @Header("token") token: String
-    ): Observable<String>
+    ): Observable<Response<Void>>
 }

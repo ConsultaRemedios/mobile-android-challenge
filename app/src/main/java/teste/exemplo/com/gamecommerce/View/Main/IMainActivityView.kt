@@ -14,4 +14,5 @@ interface IMainActivityView {
     fun updateList()
     fun getToken(): String
     fun goToCart(view: View)
+    fun search(view: View)
 }

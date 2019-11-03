@@ -2,15 +2,8 @@ package teste.exemplo.com.gamecommerce.Util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import java.util.*
 import android.net.NetworkCapabilities
-import android.net.Network
-import android.net.NetworkInfo
 import android.os.Build
-import androidx.core.content.ContextCompat.getSystemService
-
-
-
 
 object ConnectivityUtil {
     fun isNetworkConnected(context: Context): Boolean {

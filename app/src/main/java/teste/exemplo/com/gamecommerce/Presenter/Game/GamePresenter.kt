@@ -34,6 +34,7 @@ class GamePresenter(var gameView: IGameFragmentView) : IGamePresenter {
         Cart.totalItems += 1
         Cart.totalTax += 10.0
         Cart.totalPrice += 10.0 + game.price
+        Cart.totalGamesPrice += game.price
         gameView.goToCartFragment()
     }
 

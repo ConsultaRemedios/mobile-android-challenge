@@ -3,9 +3,9 @@ package teste.exemplo.com.gamecommerce.Service
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Response
 import teste.exemplo.com.gamecommerce.Model.Game
 import teste.exemplo.com.gamecommerce.Util.RestUtil
-import java.util.*
 
 
 class GameService {
@@ -25,7 +25,7 @@ class GameService {
     }
 
     @Synchronized
-    fun checkout(token: String): Observable<String> {
+    fun checkout(token: String): Observable<Response<Void>> {
         return RestUtil.api.checkout(token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -4,7 +4,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
 
 
-class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.ViewHolder>(), IGamesAdapterView  {
+class GamesAdapter(private var context: Context) : RecyclerView.Adapter<GamesAdapter.ViewHolder>(), IGamesAdapterView  {
 
     private var game: Game = Game()
     private var viewHolder: ViewHolder? = null
@@ -44,9 +43,9 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
     }
 
     override fun setHolderTexts() {
-        viewHolder!!.game_name.text = game.name
-        viewHolder!!.platform_name.text = game.platform
-        viewHolder!!.game_price.text = formatMoney(game.price)
+        viewHolder!!.gameName.text = game.name
+        viewHolder!!.platformName.text = game.platform
+        viewHolder!!.gamePrice.text = formatMoney(game.price)
     }
 
     override fun setImage() {
@@ -55,19 +54,15 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
 
     inner class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val gameImageView: ImageView
-        val game_name: TextView
-        val platform_name: TextView
-        val game_price: TextView
+        val gameImageView: ImageView = itemView.findViewById(R.id.gameImageView)
+        val gameName: TextView = itemView.findViewById(R.id.game_name)
+        val platformName: TextView = itemView.findViewById(R.id.platform_name)
+        val gamePrice: TextView = itemView.findViewById(R.id.game_price)
 
         init {
             itemView.setOnClickListener {
                 onItemClick?.invoke(Cache.getGames()[adapterPosition])
             }
-            gameImageView = itemView.findViewById(R.id.gameImageView)
-            platform_name = itemView.findViewById(R.id.platform_name)
-            game_name = itemView.findViewById(R.id.game_name)
-            game_price = itemView.findViewById(R.id.game_price)
         }
     }
 }

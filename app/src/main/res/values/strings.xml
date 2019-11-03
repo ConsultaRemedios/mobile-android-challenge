@@ -26,4 +26,5 @@
     <string name="purchase_cart">Carrinho de Compras</string>
     <string name="token">QceNFo1gHd09MJDzyswNqzStlxYGBzUG</string>
     <string name="empty_cart">Não há produtos no Carrinho</string>
+    <string name="purchase_finished">Compra Concluída</string>
 </resources>

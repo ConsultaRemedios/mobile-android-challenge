@@ -139,6 +139,10 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
         return getString(R.string.token)
     }
 
+    override fun search(view: View){
+        //TODO: Implement search method
+    }
+
     override fun goToCart(view: View){
         if(Cart.items.size > 0) {
             supportFragmentManager

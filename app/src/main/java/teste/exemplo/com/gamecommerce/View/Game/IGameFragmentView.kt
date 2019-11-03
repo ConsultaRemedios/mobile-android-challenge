@@ -1,7 +1,5 @@
 package teste.exemplo.com.gamecommerce.View.Game
 
-import android.view.View
-
 interface IGameFragmentView {
     fun showLoading()
     fun setLoadingVisibility(visibility: Int)
