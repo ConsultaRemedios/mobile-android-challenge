@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
@@ -30,6 +31,7 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
     CartAdapter.DataChangedResponse {
     override fun onDataChange() {
         cartPresenter.getData()
+        adapter.notifyDataSetChanged()
     }
 
     private lateinit var adapter: CartAdapter
@@ -73,7 +75,6 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
             cartPresenter.finishPurchase()
         }
         keep_buying.setOnClickListener {
-            (activity as MainActivity).supportFragmentManager.popBackStackImmediate()
             (activity as MainActivity).supportFragmentManager.popBackStackImmediate()
         }
     }
@@ -122,5 +123,9 @@ class CartFragment(contentLayoutId: Int) : Fragment(contentLayoutId), ICartFragm
 
     override fun getToken(): String {
         return getString(R.string.token)
+    }
+
+    override fun showEmptyCartToast(){
+        Toast.makeText(activity, R.string.empty_cart,Toast.LENGTH_SHORT).show()
     }
 }

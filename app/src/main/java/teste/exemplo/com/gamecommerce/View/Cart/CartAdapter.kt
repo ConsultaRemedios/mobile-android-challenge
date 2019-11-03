@@ -1,7 +1,6 @@
 package teste.exemplo.com.gamecommerce.View.Cart
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import teste.exemplo.com.gamecommerce.R
 
 import teste.exemplo.com.gamecommerce.Util.MoneyUtil
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
-
 
 
 class CartAdapter(private var context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>(),
@@ -87,6 +85,14 @@ class CartAdapter(private var context: Context) : RecyclerView.Adapter<CartAdapt
 
     override fun notifyDataHasChanged(){
         dataChanged.onDataChange()
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     inner class ViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {

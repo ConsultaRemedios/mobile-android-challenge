@@ -1,6 +1,5 @@
 package teste.exemplo.com.gamecommerce.View.Game
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.ViewGroup
@@ -13,18 +12,12 @@ import teste.exemplo.com.gamecommerce.Presenter.Game.IGamePresenter
 import teste.exemplo.com.gamecommerce.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_game.*
-import android.content.Intent
 import androidx.core.content.ContextCompat
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.loadingImageView
-import teste.exemplo.com.gamecommerce.Model.Cart
-import teste.exemplo.com.gamecommerce.Model.Game
-import teste.exemplo.com.gamecommerce.Model.GameAddedToCart
 import teste.exemplo.com.gamecommerce.Util.Cache
-import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
-import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
 import teste.exemplo.com.gamecommerce.View.Cart.CartFragment
 import teste.exemplo.com.gamecommerce.View.Main.MainActivity
 import kotlin.collections.ArrayList

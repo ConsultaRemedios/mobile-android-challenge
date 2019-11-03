@@ -12,4 +12,5 @@ interface ICartFragmentView {
     fun goToSuccessPurchaseScreen()
     fun showTryAgainSnackbar()
     fun getToken(): String
+    fun showEmptyCartToast()
 }

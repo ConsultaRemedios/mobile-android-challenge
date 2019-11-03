@@ -1,6 +1,7 @@
 package teste.exemplo.com.gamecommerce.Presenter.Cart
 
 import teste.exemplo.com.gamecommerce.Model.Cart
+import teste.exemplo.com.gamecommerce.View.Cart.CartAdapter
 import teste.exemplo.com.gamecommerce.View.Cart.ICartAdapterView
 
 class CartAdapterPresenter(var cartAdapterView: ICartAdapterView) : ICartAdapterPresenter {
@@ -15,7 +16,6 @@ class CartAdapterPresenter(var cartAdapterView: ICartAdapterView) : ICartAdapter
         Cart.totalTax -= 10.0
         Cart.totalPrice -= 10.0 + currentCartItem.game.price
         Cart.totalItems -= 1
-        cartAdapterView.updateHolderViews(position)
         cartAdapterView.notifyDataHasChanged()
     }
     override fun addCartQuantity(position: Int){
@@ -23,7 +23,6 @@ class CartAdapterPresenter(var cartAdapterView: ICartAdapterView) : ICartAdapter
         Cart.totalTax += 10.0
         Cart.totalPrice += 10.0 + Cart.items[position].game.price
         Cart.totalItems += 1
-        cartAdapterView.updateHolderViews(position)
         cartAdapterView.notifyDataHasChanged()
     }
 }

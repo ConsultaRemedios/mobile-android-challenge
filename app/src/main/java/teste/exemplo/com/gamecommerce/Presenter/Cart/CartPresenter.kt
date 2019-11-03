@@ -15,9 +15,12 @@ class CartPresenter(var cartView: ICartFragmentView) : ICartPresenter {
         cartView.updateDeliveryTax(formatMoney(Cart.totalTax))
         cartView.updatePaymentData()
         cartView.updateAddress()
+        cartView.setOnClickListeners()
     }
 
     override fun finishPurchase(){
+        if(Cart.items.size <= 0)
+            cartView.showEmptyCartToast()
         service.checkout(cartView.getToken())
             .doOnError { cartView.showTryAgainSnackbar() }
             .subscribe { cartView.goToSuccessPurchaseScreen() }

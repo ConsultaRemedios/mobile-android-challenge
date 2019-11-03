@@ -147,7 +147,7 @@ class MainActivity: AppCompatActivity(), IMainActivityView {
                 .addToBackStack("CartFragment")
                 .commit()
         } else {
-            Toast.makeText(this,"Não há produtos no Carrinho", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.empty_cart), Toast.LENGTH_SHORT).show()
         }
     }
 }
