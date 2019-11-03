@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/relativeLayout"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorCartProductBackground"
@@ -56,7 +57,7 @@
         android:textSize="20sp"
         tools:text="R$ 197,88" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_below="@+id/item_price"
@@ -64,10 +65,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/item_image"
-        android:background="@drawable/round_select_box"
-        android:orientation="horizontal">
+        android:background="@drawable/round_select_box">
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -75,35 +76,44 @@
             android:fontFamily="@font/roboto"
             android:text="@string/quantity"
             android:textColor="@color/colorGameName"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/remove_quantity"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="26dp"
-            android:src="@drawable/ic_remove_circle" />
+            android:src="@drawable/ic_remove_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/quantity"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/quantity"
-            android:layout_width="wrap_content"
+            android:layout_width="51dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="22dp"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:textColor="@color/colorBlue"
             android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_quantity"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="2" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/add_quantity"
-            android:layout_width="wrap_content"
+            android:layout_width="51dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="22dp"
-            android:src="@drawable/ic_add_circle" />
+            android:src="@drawable/ic_add_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

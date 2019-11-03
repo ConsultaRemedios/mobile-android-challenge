@@ -12,223 +12,232 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:scrollbars="vertical"
+        android:paddingTop="?attr/actionBarSize"
+        android:paddingBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="false">
+        card_view:layout_constraintBottom_toTopOf="@+id/card_upper_shadow">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/cart_item"
-        tools:itemCount="2">
-
-    </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/address_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardElevation="1dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView">
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/delivery_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/colorDeliveryAddress"
-                android:textSize="16sp"
-                android:text="@string/delivery_address" />
-
-            <TextView
-                android:id="@+id/edit_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/colorBlue"
-                android:textSize="16sp"
-                android:text="@string/edit" />
-
-            <TextView
-                android:id="@+id/address_cep"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/delivery_address"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                tools:text="80510-342" />
+                tools:itemCount="2"
+                tools:listitem="@layout/cart_item">
 
-            <TextView
-                android:id="@+id/address"
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/address_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/address_cep"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                tools:text="Rua Desembargador Vieira Cavalcanti, 703" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView"
+                card_view:cardCornerRadius="0dp"
+                card_view:cardElevation="1dp"
+                card_view:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/address_city_state_country"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/delivery_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/delivery_address"
+                        android:textColor="@color/colorDeliveryAddress"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/edit_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/edit"
+                        android:textColor="@color/colorBlue"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/address_cep"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/delivery_address"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="42dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp"
+                        tools:text="80510-342" />
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/address_cep"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="42dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp"
+                        tools:text="Rua Desembargador Vieira Cavalcanti, 703" />
+
+                    <TextView
+                        android:id="@+id/address_city_state_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/address"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="42dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp"
+                        tools:text="Curitiba - Paraná - Brasil" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/delivery_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/address"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                tools:text="Curitiba - Paraná - Brasil" />
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_card"
+                card_view:cardCornerRadius="0dp"
+                card_view:cardElevation="1dp"
+                card_view:cardUseCompatPadding="true">
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/delivery_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        card_view:cardElevation="1dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address_card">
+                    <TextView
+                        android:id="@+id/delivery_tax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/delivery_tax"
+                        android:textColor="@color/colorDeliveryAddress"
+                        android:textSize="16sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/correios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/delivery_tax"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/correios"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/delivery_tax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/colorDeliveryAddress"
-                android:textSize="16sp"
-                android:text="@string/delivery_tax" />
+                    <TextView
+                        android:id="@+id/delivery_tax_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/delivery_tax"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="42dp"
+                        android:layout_toEndOf="@+id/correios"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp"
+                        tools:text="R$ 12,90" />
 
-            <TextView
-                android:id="@+id/correios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/delivery_tax"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                android:text="@string/correios" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/delivery_tax_value"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/payment_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:layout_below="@+id/delivery_tax"
-                android:layout_toEndOf="@+id/correios"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                tools:text="R$ 12,90" />
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delivery_card"
+                card_view:cardCornerRadius="0dp"
+                card_view:cardElevation="1dp"
+                card_view:cardUseCompatPadding="true">
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/payment"
+                        android:textColor="@color/colorDeliveryAddress"
+                        android:textSize="16sp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/payment_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        card_view:cardElevation="1dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delivery_card">
+                    <TextView
+                        android:id="@+id/edit_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/edit"
+                        android:textColor="@color/colorBlue"
+                        android:textSize="16sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/payment"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="42dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorGameName"
+                        android:textSize="16sp"
+                        tools:text="5678 **** **** 4536" />
 
-            <TextView
-                android:id="@+id/payment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/colorDeliveryAddress"
-                android:textSize="16sp"
-                android:text="@string/payment" />
+                    <TextView
+                        android:id="@+id/card_flag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/card_number"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="42dp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorDeliveryAddress"
+                        android:textSize="14sp"
+                        tools:text="Visa" />
 
-            <TextView
-                android:id="@+id/edit_payment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:textColor="@color/colorBlue"
-                android:textSize="16sp"
-                android:text="@string/edit" />
-
-            <TextView
-                android:id="@+id/card_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/payment"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorGameName"
-                android:textSize="16sp"
-                tools:text="5678 **** **** 4536" />
-
-            <TextView
-                android:id="@+id/card_flag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:layout_below="@+id/card_number"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="42dp"
-                android:textColor="@color/colorDeliveryAddress"
-                android:textSize="14sp"
-                tools:text="Visa" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 
 
     <View
