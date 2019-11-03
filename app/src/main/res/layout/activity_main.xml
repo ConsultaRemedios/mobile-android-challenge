@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/colorGreyBackground">
 
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        card_view:cardElevation="4dp"
+        card_view:cardCornerRadius="0dp">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -65,14 +74,14 @@
                 android:text="0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
-
+    </androidx.cardview.widget.CardView>
     <ImageView
         android:id="@+id/loadingImageView"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/loading"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/cardToolbar"/>
 
 
     <FrameLayout

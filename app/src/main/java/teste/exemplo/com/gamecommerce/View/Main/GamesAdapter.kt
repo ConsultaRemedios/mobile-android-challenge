@@ -13,8 +13,7 @@ import io.reactivex.annotations.NonNull
 import teste.exemplo.com.gamecommerce.Model.Game
 import teste.exemplo.com.gamecommerce.R
 import teste.exemplo.com.gamecommerce.Util.Cache
-
-
+import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
 
 
 class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.ViewHolder>(), IGamesAdapterView  {
@@ -48,7 +47,7 @@ class GamesAdapter(var context: Context) : RecyclerView.Adapter<GamesAdapter.Vie
     fun setHolderTexts() {
         viewHolder!!.game_name.text = game.name
         viewHolder!!.platform_name.text = game.platform
-        viewHolder!!.game_price.text = game.price.toString()
+        viewHolder!!.game_price.text = formatMoney(game.price)
     }
 
     fun setImage() {

@@ -21,6 +21,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.loadingImageView
 import teste.exemplo.com.gamecommerce.Util.Cache
 import teste.exemplo.com.gamecommerce.Util.ConnectivityUtil
+import teste.exemplo.com.gamecommerce.Util.MoneyUtil
+import teste.exemplo.com.gamecommerce.Util.MoneyUtil.formatMoney
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragmentView {
 
@@ -97,7 +103,7 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
         image_slider.setImageList(imageList)
         setDescriptionVisibility(!game.description.equals(""))
         game_name.text = game.name
-        price.text = game.price.toString()
+        price.text = formatMoney(game.price)
         delivery_tax.text = "R$ 10,00"
         setLoadingVisibility(View.GONE)
     }
@@ -111,4 +117,5 @@ class GameFragment(contentLayoutId: Int) : Fragment(contentLayoutId), IGameFragm
             read_more.visibility = View.VISIBLE
         }
     }
+
 }
