@@ -2,6 +2,7 @@ package com.challange.crandroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.challange.crandroid.adapter.GameDetailImageSlider
@@ -17,8 +18,7 @@ import retrofit2.Response
 
 class GameDetailActivity : AppCompatActivity() {
 
-    lateinit var mGame: Game
-    val myVisible: Boolean = false
+    private lateinit var mGame: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,11 @@ class GameDetailActivity : AppCompatActivity() {
         gameDescriptionToggleViewCollapse.performClick()
 
         loadGameDetails(mGame)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_game_details_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private val expandDescription = View.OnClickListener {
