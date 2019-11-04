@@ -1,12 +1,13 @@
-package com.example.cheesecakenews.view.games
+package com.example.mobile_android_challenge.repository
 
-import com.example.cheesecakenews.model.Game
 import javax.inject.Inject
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.cheesecakenews.data.DBHelper
+import com.example.mobile_android_challenge.data.DBHelper
+import com.example.mobile_android_challenge.model.Game
+
 import com.example.mobile_android_challenge.view_model.GamesViewModel
 import com.example.mobile_android_challenge.view_model.ViewModelFactory
 import io.reactivex.disposables.CompositeDisposable

@@ -1,6 +1,7 @@
-package com.example.cheesecakenews.api
+package com.example.mobile_android_challenge.api
 
 import com.example.mobile_android_challenge.BuildConfig
+import com.example.mobile_android_challenge.api.ApiClient
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

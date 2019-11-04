@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.cheesecakenews.model.GameItem
 import com.example.mobile_android_challenge.R
+import com.example.mobile_android_challenge.model.GameItem
 import com.example.mobile_android_challenge.util.isVisible
 import com.example.mobile_android_challenge.util.loadImage
 import com.example.mobile_android_challenge.view.cart.CartActivity
@@ -40,6 +40,7 @@ class GameActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
         game_view_loading.isVisible = true
         val data: Bundle? = intent.extras
         var gameId = data?.getLong("game_id")

@@ -7,8 +7,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.cheesecakenews.model.Game
 import com.example.mobile_android_challenge.R
+import com.example.mobile_android_challenge.model.Game
 import com.example.mobile_android_challenge.view.cart.CartActivity
 import com.example.mobile_android_challenge.view.game.GameActivity
 import com.example.mobile_android_challenge.view.games_list.adapter.GamesAdapter

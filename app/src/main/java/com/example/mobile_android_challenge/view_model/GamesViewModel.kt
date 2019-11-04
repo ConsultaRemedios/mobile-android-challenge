@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cheesecakenews.api.ApiClient
-import com.example.cheesecakenews.api.NewsApi
-import com.example.cheesecakenews.model.Game
 import com.example.mobile_android_challenge.SchedulerProvider
+import com.example.mobile_android_challenge.api.ApiClient
+import com.example.mobile_android_challenge.api.NewsApi
+import com.example.mobile_android_challenge.model.Game
 import com.example.mobile_android_challenge.repository.GamesRepository
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

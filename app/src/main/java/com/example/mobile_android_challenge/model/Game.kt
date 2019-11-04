@@ -1,4 +1,4 @@
-package com.example.cheesecakenews.model
+package com.example.mobile_android_challenge.model
 
 data class Game(
     val id: Long,

@@ -1,7 +1,7 @@
-package com.example.cheesecakenews.api
+package com.example.mobile_android_challenge.api
 
-import com.example.cheesecakenews.model.Game
-import com.example.cheesecakenews.model.GameItem
+import com.example.mobile_android_challenge.model.Game
+import com.example.mobile_android_challenge.model.GameItem
 import io.reactivex.Observable
 import javax.inject.Inject
 

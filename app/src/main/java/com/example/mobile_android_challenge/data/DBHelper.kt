@@ -1,4 +1,4 @@
-package com.example.cheesecakenews.data
+package com.example.mobile_android_challenge.data
 
 import android.content.ContentValues
 import android.content.Context
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.cheesecakenews.model.Game
+import com.example.mobile_android_challenge.model.Game
 import com.example.mobile_android_challenge.model.ItemCart
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {

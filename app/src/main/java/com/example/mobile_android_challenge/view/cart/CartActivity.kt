@@ -2,6 +2,7 @@ package com.example.mobile_android_challenge.view.cart
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.example.mobile_android_challenge.view_model.CartViewModel
 import com.example.mobile_android_challenge.view_model.ViewModelFactory
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_cart.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.cart_card_bottom.*
 import kotlinx.android.synthetic.main.cart_card_bottom.view.*
 import javax.inject.Inject
@@ -57,7 +59,6 @@ class CartActivity : AppCompatActivity() {
         adapter = CartAdapter()
         adapter.update(list)
 
-//
         view_cart_bottom.tv_continue_purchase.setOnClickListener {
             onBackPressed()
         }
@@ -69,7 +70,7 @@ class CartActivity : AppCompatActivity() {
         }
         rc_cart.adapter = adapter
         setPrices(list)
-//        progressBar.visibility = View.GONE
+        progress_bar.visibility = View.GONE
     }
 
     private fun setPrices(items: List<ItemCart>) {

@@ -1,8 +1,7 @@
 package com.example.mobile_android_challenge
 
 import android.content.Context
-import com.example.cheesecakenews.MyApp
-import com.example.cheesecakenews.api.NetworkModule
+import com.example.mobile_android_challenge.api.NetworkModule
 import com.example.mobile_android_challenge.view.cart.CartActivity
 import com.example.mobile_android_challenge.view.checkout.CheckoutActivity
 import com.example.mobile_android_challenge.view.game.GameActivity

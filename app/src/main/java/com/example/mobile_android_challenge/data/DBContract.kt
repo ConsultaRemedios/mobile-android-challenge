@@ -1,4 +1,4 @@
-package com.example.cheesecakenews.data
+package com.example.mobile_android_challenge.data
 
 import android.provider.BaseColumns
 

@@ -5,13 +5,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cheesecakecart.view.games.CartRepository
-import com.example.cheesecakenews.api.ApiClient
-import com.example.cheesecakenews.api.NewsApi
-import com.example.cheesecakenews.model.GameItem
 import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.SchedulerProvider
+import com.example.mobile_android_challenge.api.ApiClient
+import com.example.mobile_android_challenge.api.NewsApi
+import com.example.mobile_android_challenge.model.GameItem
 import com.example.mobile_android_challenge.model.ItemCart
+import com.example.mobile_android_challenge.repository.CartRepository
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 

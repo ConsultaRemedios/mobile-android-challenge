@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.cheesecakenews.model.Game
 import com.example.mobile_android_challenge.R
+import com.example.mobile_android_challenge.model.Game
 import kotlinx.android.synthetic.main.item_game_adapter.view.*
 
 class GamesAdapter(val clickListener: ((Game) -> Unit)?) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
