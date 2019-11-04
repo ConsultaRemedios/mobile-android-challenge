@@ -3,6 +3,8 @@ package com.example.mobile_android_challenge
 import android.content.Context
 import com.example.cheesecakenews.MyApp
 import com.example.cheesecakenews.api.NetworkModule
+import com.example.cheesecakenews.view.game_item.GameActivity
+import com.example.mobile_android_challenge.view.game.GameActivity
 import com.example.mobile_android_challenge.view.games_list.GamesActivity
 
 import dagger.BindsInstance
@@ -24,6 +26,9 @@ class AppModule
 abstract class AndroidInjectorsModule {
     @ContributesAndroidInjector
     abstract fun gamesActivity(): GamesActivity
+
+    @ContributesAndroidInjector
+    abstract fun gameActivity(): GameActivity
 
 }
 
