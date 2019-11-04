@@ -9,7 +9,8 @@
     android:focusable="true"
     card_view:cardUseCompatPadding="true"
     card_view:cardElevation="4dp"
-    card_view:cardCornerRadius="3dp">
+    card_view:cardCornerRadius="3dp"
+    android:id="@+id/gameCardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

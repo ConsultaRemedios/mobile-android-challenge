@@ -10,7 +10,7 @@
     android:focusable="true">
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scrollViewCartFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadeScrollbars="false"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scrollView"
+                app:layout_constraintTop_toBottomOf="@+id/scrollViewCartFragment"
                 card_view:cardCornerRadius="0dp"
                 card_view:cardElevation="1dp"
                 card_view:cardUseCompatPadding="true">

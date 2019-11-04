@@ -32,15 +32,34 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation "com.github.denzcoskun:ImageSlideshow:$slideshow"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit2"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
     androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    testImplementation 'androidx.test:runner:1.2.0'
+    testImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$espressoVersion") {
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
+
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation 'org.mockito:mockito-inline:2.8.47'
+    testImplementation 'de.jodamob.kotlin:kotlin-runner-junit4:0.3.1'
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+
+    androidTestImplementation "com.google.dexmaker:dexmaker:1.2"
+    androidTestImplementation "com.google.dexmaker:dexmaker-mockito:1.2"
 }
 
 

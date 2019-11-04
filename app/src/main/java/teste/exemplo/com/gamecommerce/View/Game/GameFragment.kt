@@ -13,7 +13,6 @@ import teste.exemplo.com.gamecommerce.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_game.*
 import androidx.core.content.ContextCompat
-import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.loadingImageView
@@ -78,9 +77,7 @@ class GameFragment: Fragment(), IGameFragmentView {
     override fun updateGame(game_price: String, delivery_value: String){
         val game = Cache.getGame()
         (activity as MainActivity).configureToolbar(game.platform, true)
-        val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(game.image))
-        image_slider.setImageList(imageList)
+        Glide.with(activity as MainActivity).load(game.image).into(game_image)
         game.description = getString(R.string.lorem_ipsum)
         setDescriptionVisibility(game.description != "")
         game_name.text = game.name
