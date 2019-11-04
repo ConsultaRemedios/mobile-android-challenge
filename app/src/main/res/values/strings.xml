@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Games</string>
+    <string name="read_more">Ler Mais</string>
+    <string name="delivery_fare">Frete:</string>
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
+    <string name="finish_buy">Finalizar Compra</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore...</string>
+    <string name="quantity">Quantidade:</string>
+    <string name="delivery_address">Endereço de Entrega</string>
+    <string name="edit">Editar</string>
+    <string name="delivery_tax">Frete</string>
+    <string name="correios">Correios:</string>
+    <string name="payment">Pagamento</string>
+    <string name="ahoooy">AHOOOY!!</string>
+    <string name="purchase_was_successful">Sua compra Nº %d foi concluída com sucesso. Em breve você receberá seus produtos.</string>
+    <string name="keep_buying">Continuar Comprando</string>
+    <string name="failed_load_data">Falha ao carregar dados</string>
+    <string name="try_again">Tentar Novamente</string>
+    <string name="not_connected">Sem conexão com a Internet</string>
+    <string name="connect">Conectar</string>
+    <string name="example_card_number">5678 **** **** 4536</string>
+    <string name="example_card_flag">Visa</string>
+    <string name="example_addess_cep">80510-342</string>
+    <string name="example_address_line">Rua Desembargador Vieira Cavalcanti, 703</string>
+    <string name="example_city_state_country">Curitiba - Paraná - Brasil</string>
+    <string name="purchase_cart">Carrinho de Compras</string>
+    <string name="token">QceNFo1gHd09MJDzyswNqzStlxYGBzUG</string>
+    <string name="empty_cart">Não há produtos no Carrinho</string>
+    <string name="purchase_finished">Compra Concluída</string>
+</resources>
