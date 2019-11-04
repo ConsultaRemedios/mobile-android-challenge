@@ -1,4 +1,4 @@
-package com.example.mobile_android_challenge
+package com.example.cheesecakenews
 
 import android.app.Activity
 import android.app.Application
