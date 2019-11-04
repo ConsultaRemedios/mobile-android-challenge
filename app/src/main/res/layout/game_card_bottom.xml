@@ -41,31 +41,30 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-                android:layout_width="0dp"
-                android:layout_height="21dp"
-                android:ellipsize="end"
-                android:visibility="invisible"
-                android:textSize="@dimen/size_text_game_title"
-                android:text="@string/freight_label"
-                android:textColor="@color/greenText"
-                app:layout_constraintStart_toEndOf="@+id/img_freight"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_game_price"
-                android:id="@+id/gameFreightTitle"/>
+            android:id="@+id/gameFreightTitle"
+            android:layout_width="0dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="6dp"
+            android:ellipsize="end"
+            android:text="@string/freight_label"
+            android:textColor="@color/greenText"
+            android:textSize="@dimen/size_text_game_title"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/img_freight"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_price" />
 
         <TextView
-                android:id="@+id/tv_game_freight_price"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:visibility="invisible"
-                android:textSize="@dimen/size_text_game_title"
-                android:text="@string/freight_price"
-                android:textColor="#666666"
-                app:layout_constraintStart_toEndOf="@+id/gameFreightTitle"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_game_price"
-        />
+            android:id="@+id/tv_game_freight_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:text="@string/freight_price"
+            android:textColor="#666666"
+            android:textSize="@dimen/size_text_game_title"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/gameFreightTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_price" />
 
         <Button
                 android:id="@+id/btn_game_add_to_cart"

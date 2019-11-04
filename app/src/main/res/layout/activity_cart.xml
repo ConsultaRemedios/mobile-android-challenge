@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".view.cart.CartActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar_cart"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/view_cart_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cart_toolbar" />
+
     <include
         android:id="@+id/cart_toolbar"
         layout="@layout/custom_toobar"
@@ -15,32 +25,36 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <include
-        android:id="@+id/customerInformation"
+        android:id="@+id/customer_Information"
         layout="@layout/customer_info"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/view_cart_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/rc_cart"/>
+        app:layout_constraintTop_toBottomOf="@+id/rc_cart" />
 
     <include
         android:id="@+id/view_cart_bottom"
         layout="@layout/cart_card_bottom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_cart"
         android:layout_width="409dp"
-        android:layout_height="329dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cart_toolbar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

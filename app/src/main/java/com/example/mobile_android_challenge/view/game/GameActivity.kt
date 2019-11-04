@@ -61,8 +61,10 @@ class GameActivity : AppCompatActivity() {
 
     private fun onMovieFetched(gameItem: GameItem?) {
         if(gameItem != null){
-            main_toolbar.tv_title_game.text = gameItem.platform.toUpperCase()
-
+            main_toolbar.tv_title.text = gameItem.platform.toUpperCase()
+            main_toolbar.img_arrow.setOnClickListener {
+                onBackPressed()
+            }
             game_bottom_view.tv_game_price.text = getString(R.string.item_price,
                 gameItem.price.toString())
             img_detail_cover.loadImage(gameItem.image)

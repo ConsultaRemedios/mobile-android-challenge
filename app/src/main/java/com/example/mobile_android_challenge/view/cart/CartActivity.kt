@@ -16,9 +16,10 @@ import com.example.mobile_android_challenge.view_model.CartViewModel
 import com.example.mobile_android_challenge.view_model.ViewModelFactory
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_cart.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.cart_card_bottom.*
 import kotlinx.android.synthetic.main.cart_card_bottom.view.*
+import kotlinx.android.synthetic.main.custom_toobar.view.*
 import javax.inject.Inject
 
 
@@ -40,12 +41,9 @@ class CartActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
-
         cartViewModel.data.observe(this, cartObserver)
         cartViewModel.fetchCartItems(this.baseContext)
     }
-
-
 
     private fun onCartFetched(list: List<ItemCart>?) {
         if (list != null) {
@@ -68,9 +66,14 @@ class CartActivity : AppCompatActivity() {
             val intent = Intent(this.baseContext, CheckoutActivity::class.java)
             this.baseContext.startActivity(intent)
         }
+
+        cart_toolbar.img_arrow.setOnClickListener {
+            onBackPressed()
+        }
+
         rc_cart.adapter = adapter
         setPrices(list)
-        progress_bar.visibility = View.GONE
+        progress_bar_cart.visibility = View.GONE
     }
 
     private fun setPrices(items: List<ItemCart>) {
@@ -81,10 +84,10 @@ class CartActivity : AppCompatActivity() {
         if (totalPrice < 250) {
             var totalAmount = 0
             items.map { itemCart -> totalAmount = (itemCart.quantity + totalAmount) }
-            customerInformation.tv_cart_price.text = getString(R.string.item_price, (totalAmount * 10).toString())
+            customer_Information.tv_cart_price.text = getString(R.string.item_price, (totalAmount * 10).toString())
             return
         }
-        customerInformation.tv_cart_price.text = getString(R.string.free_label)
+        view_cart_bottom.tv_cart_price.text = getString(R.string.free_label)
     }
 
     private fun onCheckout(s: String?) {

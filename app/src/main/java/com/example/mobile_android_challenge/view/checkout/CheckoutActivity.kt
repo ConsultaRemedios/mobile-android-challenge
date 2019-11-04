@@ -7,6 +7,7 @@ import android.view.View
 import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.view.games_list.GamesActivity
 import kotlinx.android.synthetic.main.activity_checkout.*
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.custom_toobar.view.*
 
 class CheckoutActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class CheckoutActivity : AppCompatActivity() {
         tv_back_to_purchase.setOnClickListener {
             val intent = Intent(this.baseContext, GamesActivity::class.java)
             this.baseContext.startActivity(intent)
+        }
+
+        purchase_toolbar.img_arrow.setOnClickListener {
+            onBackPressed()
         }
     }
 }
