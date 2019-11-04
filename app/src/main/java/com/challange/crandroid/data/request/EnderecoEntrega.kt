@@ -8,5 +8,6 @@ data class EnderecoEntrega(
     val logradouro: String,
     val numero: String,
     val cidade: String,
-    val estado: String
+    val estado: String,
+    val pais: String
 )
