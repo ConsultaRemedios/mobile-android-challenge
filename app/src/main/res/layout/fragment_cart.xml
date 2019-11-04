@@ -15,12 +15,9 @@
         android:layout_height="wrap_content"
         android:fadeScrollbars="false"
         android:scrollbars="vertical"
-        android:paddingTop="?attr/actionBarSize"
-        android:paddingBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        card_view:layout_constraintBottom_toTopOf="@+id/card_upper_shadow">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="2"
-                tools:listitem="@layout/cart_item">
+                tools:listitem="@layout/cart_item"
+                android:background="@color/colorCartProductBackground">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -50,7 +48,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginTop="16dp"
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:id="@+id/delivery_address"
@@ -118,7 +117,6 @@
                 android:id="@+id/delivery_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address_card"
@@ -128,7 +126,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:id="@+id/delivery_tax"
@@ -175,17 +175,18 @@
                 android:id="@+id/payment_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/delivery_card"
                 card_view:cardCornerRadius="0dp"
-                card_view:cardElevation="1dp"
+                card_view:cardElevation="0dp"
                 card_view:cardUseCompatPadding="true">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
 
                     <TextView
                         android:id="@+id/payment"
@@ -239,7 +240,6 @@
         </LinearLayout>
     </ScrollView>
 
-
     <View
         android:id="@+id/card_upper_shadow"
         android:layout_width="match_parent"
@@ -253,6 +253,8 @@
         android:id="@+id/purchase_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

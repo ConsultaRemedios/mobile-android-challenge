@@ -27,17 +27,16 @@
         android:layout_height="wrap_content"
         android:fadeScrollbars="false"
         android:scrollbars="vertical"
-        android:paddingTop="?attr/actionBarSize"
-        android:paddingBottom="50dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        card_view:layout_constraintBottom_toTopOf="@+id/card_upper_shadow">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="85dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -116,16 +115,17 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        card_view:cardUseCompatPadding="true"
+        android:layout_height="wrap_content"
+        card_view:cardUseCompatPadding="false"
         card_view:cardElevation="0dp"
+        card_view:cardCornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/price"
@@ -168,6 +168,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="48dp"
+                android:layout_marginBottom="18dp"
                 android:layout_toEndOf="@+id/delivery"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/colorGreyText"
