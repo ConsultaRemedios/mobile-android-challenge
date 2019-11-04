@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:paddingBottom="8dp"
-                    android:text="Endereço de Entrega"
+                    android:text="@string/shipping_address"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:text="Editar"
+                    android:text="@string/edit"
                     android:textColor="@color/colorBlue"
                     android:textSize="16sp"
                     app:layout_constraintRight_toRightOf="parent"
@@ -140,7 +140,7 @@
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/shippingAddressLabel"
-                    tools:text="80510-342" />
+                    android:text="@string/mock_cep" />
 
                 <TextView
                     android:id="@+id/streetAndNumber"
@@ -150,7 +150,7 @@
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cep"
-                    tools:text="Rua Desembargador Vieira Cavalcanti, 703" />
+                    android:text="@string/mock_logradouro" />
 
                 <TextView
                     android:id="@+id/city"
@@ -160,7 +160,7 @@
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/streetAndNumber"
-                    tools:text="Curitiba - Paraná - Brasil" />
+                    android:text="@string/mock_cidade" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,6 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
+                    android:text="@string/freight"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -189,7 +190,7 @@
                     android:id="@+id/freightType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Correios:"
+                    android:text="@string/mock_correios"
                     android:textColor="#333"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -226,10 +227,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
+                    android:text="@string/payment"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Pagamento" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/buttonEditPayment"
@@ -237,7 +238,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    android:text="Editar"
+                    android:text="@string/edit"
                     android:textColor="@color/colorBlue"
                     android:textSize="16sp"
                     app:layout_constraintRight_toRightOf="parent"
@@ -247,7 +248,7 @@
                     android:id="@+id/cardNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5678 **** **** 4536"
+                    android:text="@string/mock_numero_cartao"
                     android:textColor="#333"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -257,7 +258,7 @@
                     android:id="@+id/cardBrand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Visa"
+                    android:text="@string/mock_cartao_visa"
                     android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardNumber" />
@@ -287,8 +288,7 @@
             android:id="@+id/cartPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="R$ 210,78"
+            android:layout_marginStart="16dp"
             android:textColor="@color/colorBlue"
             android:textSize="20sp"
             android:textStyle="bold"

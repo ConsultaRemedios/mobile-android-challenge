@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.challange.crandroid.adapter.GameDetailImageSlider
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
+import com.challange.crandroid.data.CartItem
 import com.challange.crandroid.data.response.Game
 import com.challange.crandroid.data.response.GameDetails
+import com.challange.crandroid.singleton.Cart
 import com.challange.crandroid.utils.GenericUtils.Companion.brazilianNumberFormat
 import kotlinx.android.synthetic.main.activity_game_detail.*
 import retrofit2.Call
@@ -58,6 +61,11 @@ class GameDetailActivity : AppCompatActivity() {
     }
 
     private val addToCart = View.OnClickListener {
+        if (!Cart.itens.any { it.game == mGame })
+            Cart.itens.add(CartItem(mGame, 1, 0.00))
+        else
+            Toast.makeText(this, "Jogo já adicionado ao carrinho", Toast.LENGTH_SHORT).show()
+
         val intent = Intent(this, CheckoutActivity::class.java)
         startActivity(intent)
     }

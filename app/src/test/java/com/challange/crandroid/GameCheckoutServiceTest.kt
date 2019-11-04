@@ -17,7 +17,8 @@ class GameCheckoutServiceTest {
 
     @Test
     fun assertGetGameDetails() {
-        var it = GameCheckoutServiceInitializer().gameCheckoutService().getGameDetails(102).execute()
+        var it =
+            GameCheckoutServiceInitializer().gameCheckoutService().getGameDetails(102).execute()
         Assert.assertTrue(it.isSuccessful)
         Assert.assertNotNull(it.body())
 
@@ -28,10 +29,18 @@ class GameCheckoutServiceTest {
 
     @Test
     fun assertCheckout() {
-        val enderecoEntrega = EnderecoEntrega("80510-342", "Rua Desembargador Vieira Cavalcanti", "703", "Curitiba", "Paraná", "Brasil")
+        val enderecoEntrega = EnderecoEntrega(
+            "80510-342",
+            "Rua Desembargador Vieira Cavalcanti",
+            "703",
+            "Curitiba",
+            "Paraná",
+            "Brasil"
+        )
 
         val checkout = Checkout(emptyList(), enderecoEntrega, 0.00)
-        val it = GameCheckoutServiceInitializer().gameCheckoutService().checkout(checkout!!).execute()
+        val it =
+            GameCheckoutServiceInitializer().gameCheckoutService().checkout(checkout!!).execute()
         Assert.assertTrue(it.isSuccessful)
     }
 }
