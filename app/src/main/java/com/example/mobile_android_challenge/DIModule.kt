@@ -2,6 +2,8 @@ package com.example.mobile_android_challenge
 
 import android.content.Context
 import com.example.cheesecakenews.MyApp
+import com.example.cheesecakenews.api.NetworkModule
+import com.example.mobile_android_challenge.view.games_list.GamesActivity
 
 import dagger.BindsInstance
 import dagger.Component
@@ -20,7 +22,9 @@ class AppModule
 
 @Module
 abstract class AndroidInjectorsModule {
-    //TODO
+    @ContributesAndroidInjector
+    abstract fun gamesActivity(): GamesActivity
+
 }
 
 @Singleton
@@ -28,7 +32,6 @@ abstract class AndroidInjectorsModule {
     AndroidInjectionModule::class,
     AppModule::class,
     AndroidInjectorsModule::class
-
 ))
 
 interface AppComponent : AndroidInjector<MyApp> {

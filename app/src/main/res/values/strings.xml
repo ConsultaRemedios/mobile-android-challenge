@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">mobile-android-challenge</string>
+    <string name="app_name">GameMarket</string>
+
+    <string name="main_title">Games</string>
+    <string name="game_title">Game</string>
+    <string name="purchase_title">Compra Concluída</string>
+
+    <string name="main_button_add_game">Adicionar Item</string>
+    <string name="main_button_remove_game">Remover Item</string>
+    <string name="main_button_go_to_next_page">Abrir segunda tela</string>
+
+    <string name="item_game_minus">-</string>
+    <string name="item_game_plus">+</string>
+
+    <string name="item_price">R$ %1$s</string>
+    <string name="freight_price">R$ 10,00</string>
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
+    <string name="freight_label">Frete:</string>
+    <string name="read_more">Ler mais</string>
+    <string name="finish_purchase">Finalizar Compra</string>
+    <string name="continue_purchase">Continuar Comprando</string>
+    <string name="customer_address_title">Endereço de Entrega</string>
+    <string name="edit_label">Editar</string>
+    <string name="customer_address">80510-342 Rua Desembargador Vieira Cavalcanti, 703 Curitiba - Paraná - Brasil
+    </string>
+    <string name="post_offices">Correios:</string>
+    <string name="payment_title">Pagamento</string>
+    <string name="card_number">5678 **** **** 4536</string>
+    <string name="card_type">Visa</string>
+    <string name="toolbar_cart_title">Carrinho de Compras</string>
+    <string name="free_label">Grátis</string>
+    <string name="purchase_success_text">AHOOOY!!</string>
+    <string name="purchase_message">Sua compra Nº 00001 foi concluída com sucesso. Em breve você receberá seus
+        produtos.
+    </string>
 </resources>
