@@ -58,7 +58,5 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="2"
                 tools:visibility="visible" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </Toolbar>

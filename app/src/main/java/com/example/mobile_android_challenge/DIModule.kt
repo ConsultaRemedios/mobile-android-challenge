@@ -3,7 +3,8 @@ package com.example.mobile_android_challenge
 import android.content.Context
 import com.example.cheesecakenews.MyApp
 import com.example.cheesecakenews.api.NetworkModule
-import com.example.cheesecakenews.view.game_item.GameActivity
+import com.example.mobile_android_challenge.view.cart.CartActivity
+import com.example.mobile_android_challenge.view.checkout.CheckoutActivity
 import com.example.mobile_android_challenge.view.game.GameActivity
 import com.example.mobile_android_challenge.view.games_list.GamesActivity
 
@@ -30,6 +31,11 @@ abstract class AndroidInjectorsModule {
     @ContributesAndroidInjector
     abstract fun gameActivity(): GameActivity
 
+    @ContributesAndroidInjector
+    abstract fun cartActivity(): CartActivity
+
+    @ContributesAndroidInjector
+    abstract fun checkoutActivity(): CheckoutActivity
 }
 
 @Singleton

@@ -9,6 +9,7 @@ import com.example.cheesecakecart.view.games.CartRepository
 import com.example.cheesecakenews.api.ApiClient
 import com.example.cheesecakenews.api.NewsApi
 import com.example.cheesecakenews.model.GameItem
+import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.SchedulerProvider
 import com.example.mobile_android_challenge.model.ItemCart
 import io.reactivex.disposables.CompositeDisposable
@@ -69,7 +70,7 @@ class GameViewModel
         if(!isMaxItem) {
             _sizeCart.value = repository.countCart()
         } else {
-            _msgLimitItem.value =  "Só pdoe 10 itens por vez"
+            _msgLimitItem.value = context.getString(R.string.limit_itens)
         }
     }
 }

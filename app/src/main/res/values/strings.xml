@@ -23,6 +23,7 @@
     <string name="edit_label">Editar</string>
     <string name="customer_address">80510-342 Rua Desembargador Vieira Cavalcanti, 703 Curitiba - Paraná - Brasil
     </string>
+    <string name="limit_itens">Somente possivel adicionar 10 itens de cada item</string>
     <string name="post_offices">Correios:</string>
     <string name="payment_title">Pagamento</string>
     <string name="card_number">5678 **** **** 4536</string>

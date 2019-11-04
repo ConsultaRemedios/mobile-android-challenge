@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/purchase_toolbar"
+        layout="@layout/custom_toobar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/img_purchase"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/ic_bag" android:layout_marginTop="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/purchase_toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_purchase_success"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/purchase_success_text"
+        android:textSize="@dimen/size_big_title_game"
+        android:textColor="@color/greenText"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/img_purchase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_purchase_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/purchase_message"
+        android:textSize="@dimen/app_font_size"
+        android:textColor="@color/colorText"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_purchase_success"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_back_to_purchase"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textSize="@dimen/app_font_size"
+        android:textColor="@color/colorAccent"
+        android:text="@string/continue_purchase"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_purchase_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

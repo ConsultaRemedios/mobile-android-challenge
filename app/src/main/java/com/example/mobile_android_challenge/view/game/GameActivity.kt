@@ -12,6 +12,7 @@ import com.example.cheesecakenews.model.GameItem
 import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.util.isVisible
 import com.example.mobile_android_challenge.util.loadImage
+import com.example.mobile_android_challenge.view.cart.CartActivity
 import com.example.mobile_android_challenge.view_model.GameViewModel
 import com.example.mobile_android_challenge.view_model.ViewModelFactory
 import dagger.android.AndroidInjection
@@ -40,19 +41,20 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         game_view_loading.isVisible = true
-        val data: Bundle = intent.extras
-        var gameId = data.getLong(
-            "game_id")
+        val data: Bundle? = intent.extras
+        var gameId = data?.getLong("game_id")
 
         gameViewModel.data.observe(this, gameObserver)
         gameViewModel.sizeCart.observe(this, gameObserverCart)
         gameViewModel.msgLimitItem?.observe(this, gameObserverCartLimit)
-        gameViewModel.fetchGameItem(gameId.toLong())
+        if (gameId != null) {
+            gameViewModel.fetchGameItem(gameId.toLong())
+        }
         gameViewModel.loadCountCart(this.baseContext, false)
 
         img_cart.setOnClickListener {
-//            val intent = Intent(this.baseContext, CartActivity::class.java)
-//            this.baseContext.startActivity(intent)
+            val intent = Intent(this.baseContext, CartActivity::class.java)
+            this.baseContext.startActivity(intent)
         }
     }
 
