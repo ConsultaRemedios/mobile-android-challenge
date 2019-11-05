@@ -42,14 +42,16 @@ class GamesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         gameViewModel.data.observe(this, itemsObserver)
-        gameViewModel.data.observe(this, gameObserverCart)
+        gameViewModel.sizeCart.observe(this, gameObserverCart)
+
         gameViewModel.fetchGames(this.baseContext)
+        gameViewModel.loadCountCart(this.baseContext)
+        main_toolbar.img_arrow.visibility = View.GONE
+
         img_cart.setOnClickListener {
             val intent = Intent(this.baseContext, CartActivity::class.java)
             this.baseContext.startActivity(intent)
         }
-        gameViewModel.loadCountCart(this.baseContext, false)
-        main_toolbar.img_arrow.visibility = View.GONE
     }
 
     private fun onItemsFetched(list: List<Game>?) {

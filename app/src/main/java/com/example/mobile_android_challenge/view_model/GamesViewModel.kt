@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.SchedulerProvider
 import com.example.mobile_android_challenge.api.ApiClient
 import com.example.mobile_android_challenge.api.NewsApi
@@ -40,12 +39,8 @@ class GamesViewModel @Inject constructor(val api: ApiClient, private val schedul
         }
     }
 
-    fun loadCountCart(context: Context, isMaxItem: Boolean) {
+    fun loadCountCart(context: Context) {
         var repository = CartRepository(context)
-        if(!isMaxItem) {
-            _sizeCart.value = repository.countCart()
-        } else {
-            _msgLimitItem.value = context.getString(R.string.limit_itens)
-        }
+        _sizeCart.value = repository.countCart()
     }
 }
