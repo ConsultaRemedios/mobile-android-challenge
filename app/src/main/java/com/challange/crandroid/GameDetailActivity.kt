@@ -97,12 +97,12 @@ class GameDetailActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         updateViewWithGameDetails(response.body()!!)
                     } else {
-                        TODO("Notify can't load games")
+                        Toast.makeText(parent, "Hmmm, não achei não heim pae 🤨", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<GameDetails>, t: Throwable) {
-                    TODO("Notify can't load games")
+                    Toast.makeText(parent, "QUe coisa, você esta no meio de um festival por acaso?", Toast.LENGTH_LONG).show()
                 }
             })
     }

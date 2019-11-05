@@ -65,13 +65,17 @@ class CheckoutActivity : AppCompatActivity(), NumberPicker.OnValueChangeListener
         GameCheckoutServiceInitializer().gameCheckoutService().checkout(Cart)
             .enqueue(object: Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    progressDialog.dismiss()
-                    Cart.limparCarrinho()
-                    navigateToConfirmation()
+                    if (response.isSuccessful) {
+                        progressDialog.dismiss()
+                        Cart.limparCarrinho()
+                        navigateToConfirmation()
+                    } else {
+                        Toast.makeText(parent, "Eita miseria, tem algo errado com seu carrinho macho", Toast.LENGTH_LONG).show()
+                    }
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Toast.makeText(parent, "Oh no! Não conseguimos enviar seus games marotos =/", Toast.LENGTH_LONG).show()
                 }
             })
     }

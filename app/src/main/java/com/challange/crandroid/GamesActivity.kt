@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.challange.crandroid.adapter.GamesAdapter
@@ -49,12 +50,12 @@ class GamesActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
                         mGames = response.body() as ArrayList<Game>
                         initRecyclerView()
                     } else {
-                        TODO("Notify can't load games")
+                        Toast.makeText(parent, "Cadê os games servidor, fica de misério não", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<List<Game>>, t: Throwable) {
-                    TODO("Notify can't load games")
+                    Toast.makeText(parent, "Parece que a internet caiu. ping google.com -t", Toast.LENGTH_LONG).show()
                 }
             })
     }
