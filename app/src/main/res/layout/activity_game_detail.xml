@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/plutoIndicator" />
 
     <TextView
-        android:id="@+id/gameTitle"
+        android:id="@+id/game_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/bottomMenu"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gameTitle">
+        app:layout_constraintTop_toBottomOf="@id/game_title">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -149,7 +149,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/priceTag"
+                android:id="@+id/price_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R$ 197,88"

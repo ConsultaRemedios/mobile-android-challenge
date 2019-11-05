@@ -76,14 +76,14 @@ class GameDetailActivity : AppCompatActivity() {
         plutoGameDetails.create(adapter, lifecycle = lifecycle)
         plutoGameDetails.setCustomIndicator(plutoIndicator)
 
-        gameTitle.text = gameDetails.name
+        game_title.text = gameDetails.name
         gameDescriptionTextView.text = gameDetails.description
-        priceTag.text = brazilianNumberFormat().format(gameDetails.price)
+        price_tag.text = brazilianNumberFormat().format(gameDetails.price)
 
         plutoGameDetails.visibility = View.VISIBLE
         plutoIndicator.visibility = View.VISIBLE
         separator.visibility = View.VISIBLE
-        gameTitle.visibility = View.VISIBLE
+        game_title.visibility = View.VISIBLE
         gameDescription.visibility = View.VISIBLE
         shadowTop.visibility = View.VISIBLE
         bottomMenu.visibility = View.VISIBLE

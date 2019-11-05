@@ -5,8 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.challange.crandroid.adapter.CheckoutItensAdapter
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
+import com.challange.crandroid.data.CartItem
 import com.challange.crandroid.singleton.Cart
 import com.challange.crandroid.utils.GenericUtils.Companion.brazilianNumberFormat
 import kotlinx.android.synthetic.main.activity_checkout.*
@@ -26,6 +29,14 @@ class CheckoutActivity : AppCompatActivity() {
         Cart.calcularCarrinho()
         cartPrice.text = brazilianNumberFormat().format(Cart.valorTotal)
         freightPrice.text = brazilianNumberFormat().format(Cart.valorFrete)
+
+        val viewManager = LinearLayoutManager(this);
+        val checkoutItemsAdapter = CheckoutItensAdapter(this, Cart.itens as ArrayList<CartItem>)
+
+        findViewById<RecyclerView>(R.id.cartItensRecyclerView).apply {
+            adapter = checkoutItemsAdapter
+            layoutManager = viewManager
+        }
     }
 
     private val clickFinalizarCompra = View.OnClickListener {
