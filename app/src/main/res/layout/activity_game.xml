@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.game.GameActivity"
+    android:background="@android:color/white">
+
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/custom_toobar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/game_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/game_bottom_view"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_detail_cover"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginEnd="90dp"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/view_detail_line"
+                style="@style/Separator"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/img_detail_cover"/>
+
+            <TextView
+                android:id="@+id/tv_detail_game_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                tools:text="Super Mario Odyssey"
+                android:layout_marginEnd="16dp"
+                android:textSize="@dimen/size_big_title_game"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_detail_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+            <TextView
+                android:id="@+id/tv_detail_game_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore..."
+                android:lines="4"
+                android:textSize="@dimen/app_font_size"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="18dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_game_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_detail_read_more"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/read_more"
+                android:visibility="invisible"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size_text_game_title"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_game_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/game_view_loading"
+        layout="@layout/loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        tools:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/game_bottom_view"/>
+
+    <include
+        android:id="@+id/game_bottom_view"
+        layout="@layout/game_card_bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_scroll_view"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="4dp"
+        android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_cover"
+            android:background="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_cover"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="9dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/divider_line"
+            style="@style/Separator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_cover" />
+
+        <TextView
+                android:id="@+id/tv_console_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="PS4"
+                android:ellipsize="end"
+                android:padding="4dp"
+                android:textSize="@dimen/app_font_size"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_line"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="4dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"/>
+
+        <TextView
+                android:id="@+id/tv_title_game"
+                android:layout_width="0dp"
+                android:layout_height="49dp"
+                android:ellipsize="end"
+                android:textSize="@dimen/size_text_game_title"
+                tools:text="Mario"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="4dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="4dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:padding="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_console_name" android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_price"/>
+
+        <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:padding="4dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/size_text_title_actionbar"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title_game"
+                tools:text="R$199,00" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
