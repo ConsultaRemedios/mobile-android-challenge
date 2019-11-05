@@ -7,7 +7,6 @@ import android.view.View
 import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.view.games_list.GamesActivity
 import kotlinx.android.synthetic.main.activity_checkout.*
-import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.custom_toobar.view.*
 
 class CheckoutActivity : AppCompatActivity() {
@@ -16,7 +15,7 @@ class CheckoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        tv_purchase_message.setText(R.string.purchase_title)
+        tv_purchase_message.setText(R.string.sale_title)
         purchase_toolbar.img_cart.visibility = View.GONE
         purchase_toolbar.img_search.visibility = View.GONE
 
