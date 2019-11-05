@@ -20,14 +20,16 @@ import com.challange.crandroid.utils.GenericUtils.Companion.brazilianNumberForma
 import java.text.NumberFormat
 import java.util.*
 
-class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: OnGameTapListener) : RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
+class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: OnGameTapListener) :
+    RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
 
     private var mGames = games
     private val mContext = context
     private val mOnGameTapListener = onGameTapListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_game_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_game_item, parent, false)
         return ViewHolder(view, mOnGameTapListener)
     }
 
@@ -52,9 +54,11 @@ class GamesAdapter(context: Context, games: ArrayList<Game>, onGameTapListener: 
         holder.price.text = brazilianNumberFormat().format(game.price)
     }
 
-    class ViewHolder(itemView: View, onGameTapListener: OnGameTapListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class ViewHolder(itemView: View, onGameTapListener: OnGameTapListener) :
+        RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private var onGameTapListener: OnGameTapListener
+
         init {
             itemView.setOnClickListener(this)
             this.onGameTapListener = onGameTapListener

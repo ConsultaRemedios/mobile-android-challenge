@@ -53,6 +53,7 @@
         tools:text="R$197,88" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/quantity_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -71,7 +72,7 @@
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantidade: 1"
+            tools:text="Quantidade: 1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_iccart"
-        android:title="Carrinho"
+        android:title="@string/cart"
         app:showAsAction="ifRoom" />
 
 </menu>

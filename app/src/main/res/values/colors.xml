@@ -10,4 +10,5 @@
     <color name="colorDetailsText">#5D5D5D</color>
     <color name="colorGreen">#24CB64</color>
     <color name="colorBorder">#DADADA</color>
+    <color name="red">#FF0C3E</color>
 </resources>

@@ -5,9 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.NumberPicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.challange.crandroid.adapter.CheckoutItensAdapter
+import com.challange.crandroid.adapter.CheckoutItemsAdapter
 import com.challange.crandroid.api.GameCheckoutServiceInitializer
 import com.challange.crandroid.data.CartItem
 import com.challange.crandroid.singleton.Cart
@@ -16,8 +17,14 @@ import kotlinx.android.synthetic.main.activity_checkout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.challange.crandroid.widget.NumberPickerDialog
+import android.widget.Toast
 
-class CheckoutActivity : AppCompatActivity() {
+
+class CheckoutActivity : AppCompatActivity(), NumberPicker.OnValueChangeListener, CheckoutItemsAdapter.OnQuantityTapListener {
+
+    private var mAdapter: CheckoutItemsAdapter? = null
+    private var mSelectedPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,17 +33,30 @@ class CheckoutActivity : AppCompatActivity() {
         buttonFinalizarCompra.setOnClickListener(clickFinalizarCompra)
         continuarComprando.setOnClickListener(clickContinuarComprando)
 
-        Cart.calcularCarrinho()
-        cartPrice.text = brazilianNumberFormat().format(Cart.valorTotal)
-        freightPrice.text = brazilianNumberFormat().format(Cart.valorFrete)
+        updateCartValues()
 
-        val viewManager = LinearLayoutManager(this);
-        val checkoutItemsAdapter = CheckoutItensAdapter(this, Cart.itens as ArrayList<CartItem>)
+        val viewManager = LinearLayoutManager(this)
+        mAdapter = CheckoutItemsAdapter(this, Cart.itens as ArrayList<CartItem>, this)
 
         findViewById<RecyclerView>(R.id.cartItensRecyclerView).apply {
-            adapter = checkoutItemsAdapter
+            adapter = mAdapter
             layoutManager = viewManager
         }
+    }
+
+    override fun onQuantityTap(position: Int) {
+        mSelectedPosition = position
+        showNumberPicker(Cart.itens[position].quantidade)
+    }
+
+    override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
+        if (newVal == 0)
+            Cart.itens.removeAt(mSelectedPosition)
+        else
+            Cart.itens[mSelectedPosition].quantidade = newVal
+
+        updateCartValues()
+        mAdapter?.notifyDataSetChanged()
     }
 
     private val clickFinalizarCompra = View.OnClickListener {
@@ -60,6 +80,18 @@ class CheckoutActivity : AppCompatActivity() {
         val intent = Intent(this, GamesActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+    }
+
+    private fun updateCartValues() {
+        Cart.calcularCarrinho()
+        cartPrice.text = brazilianNumberFormat().format(Cart.valorTotal)
+        freightPrice.text = brazilianNumberFormat().format(Cart.valorFrete)
+    }
+
+    private fun showNumberPicker(initValue: Int) {
+        val newFragment = NumberPickerDialog(initValue)
+        newFragment.setValueChangeListener(this)
+        newFragment.show(supportFragmentManager, "time picker")
     }
 
     private fun navigateToConfirmation() {

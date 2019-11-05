@@ -15,9 +15,15 @@ object Cart : Serializable {
         }
 
         valorFrete = itens.sumByDouble { (10.00 * it.quantidade) }
-        valorTotal = itens.sumByDouble { it.precoSomaQuantidade } + valorFrete
+        valorTotal = itens.sumByDouble { it.precoSomaQuantidade }
         if (valorTotal > 250.00)
             valorFrete = 0.00
+
+        valorTotal += valorFrete
+    }
+
+    fun somaItens(): Int {
+        return itens.sumBy { it.quantidade }
     }
 
     fun limparCarrinho() {
