@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mobile_android_challenge.SchedulerProvider
 import com.example.mobile_android_challenge.api.ApiClient
-import com.example.mobile_android_challenge.api.NewsApi
+import com.example.mobile_android_challenge.api.GamesApi
 import com.example.mobile_android_challenge.model.GameItem
 import com.example.mobile_android_challenge.model.ItemCart
 import com.example.mobile_android_challenge.repository.CartRepository
@@ -50,7 +50,7 @@ class CartViewModel @Inject constructor(val api: ApiClient, private val schedule
 
     fun finishCart() {
         disposable.add(
-            api.gameCheckout(NewsApi.API_KEY).subscribeOn(schedulers.io())
+            api.gameCheckout(GamesApi.API_KEY).subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
                 .subscribe({
                     _checkoutCart.value = it

@@ -44,7 +44,7 @@ class GamesActivity : AppCompatActivity() {
         gameViewModel.data.observe(this, itemsObserver)
         gameViewModel.sizeCart.observe(this, gameObserverCart)
 
-        gameViewModel.fetchGames(this.baseContext)
+        gameViewModel.loadGames(this.baseContext)
         gameViewModel.loadCountCart(this.baseContext)
         main_toolbar.img_arrow.visibility = View.GONE
 

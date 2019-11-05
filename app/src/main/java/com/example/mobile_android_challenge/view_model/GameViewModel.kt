@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mobile_android_challenge.R
 import com.example.mobile_android_challenge.SchedulerProvider
 import com.example.mobile_android_challenge.api.ApiClient
-import com.example.mobile_android_challenge.api.NewsApi
+import com.example.mobile_android_challenge.api.GamesApi
 import com.example.mobile_android_challenge.model.GameItem
 import com.example.mobile_android_challenge.model.ItemCart
 import com.example.mobile_android_challenge.repository.CartRepository
@@ -32,7 +32,7 @@ class GameViewModel
 
     fun fetchGameItem(id: Long) {
         disposable.add(
-            api.gameItem(id, NewsApi.API_KEY).subscribeOn(schedulers.io())
+            api.gameItem(id, GamesApi.API_KEY).subscribeOn(schedulers.io())
                 .observeOn(schedulers.mainThread())
                 .subscribe({
                     _data.value = it

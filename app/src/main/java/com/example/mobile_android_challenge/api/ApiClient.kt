@@ -5,15 +5,15 @@ import com.example.mobile_android_challenge.model.GameItem
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ApiClient @Inject constructor(private val newsApi: NewsApi) {
+class ApiClient @Inject constructor(private val gamesApi: GamesApi) {
     fun games(apiKey: String): Observable<List<Game>> {
-        return newsApi.games(apiKey)
+        return gamesApi.games(apiKey)
     }
     fun gameItem(id: Long, apiKey: String): Observable<GameItem> {
-        return newsApi.gameItem(apiKey, id)
+        return gamesApi.gameItem(apiKey, id)
     }
     fun gameCheckout(apiKey: String): Observable<String> {
-        return newsApi.gameCheckout(apiKey)
+        return gamesApi.gameCheckout(apiKey)
     }
 
 }

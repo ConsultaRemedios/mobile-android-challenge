@@ -9,7 +9,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface NewsApi {
+interface GamesApi {
     companion object {
         const val URL = "https://game-checkout.herokuapp.com/"
         const val API_KEY = "QceNFo1gHd09MJDzyswNqzStlxYGBzUG"

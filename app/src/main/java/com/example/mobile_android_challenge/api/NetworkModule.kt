@@ -1,7 +1,6 @@
 package com.example.mobile_android_challenge.api
 
 import com.example.mobile_android_challenge.BuildConfig
-import com.example.mobile_android_challenge.api.ApiClient
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -31,12 +30,12 @@ class NetworkModule {
             .create()
 
         val gitApi = Retrofit.Builder()
-            .baseUrl(NewsApi.URL)
+            .baseUrl(GamesApi.URL)
             .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-            .create(NewsApi::class.java)
+            .create(GamesApi::class.java)
         return ApiClient(gitApi)
     }
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mobile_android_challenge.SchedulerProvider
 import com.example.mobile_android_challenge.api.ApiClient
-import com.example.mobile_android_challenge.api.NewsApi
+import com.example.mobile_android_challenge.api.GamesApi
 import com.example.mobile_android_challenge.model.Game
 import com.example.mobile_android_challenge.repository.CartRepository
 import com.example.mobile_android_challenge.repository.GamesRepository
@@ -23,20 +23,24 @@ class GamesViewModel @Inject constructor(val api: ApiClient, private val schedul
     private val _sizeCart = MutableLiveData<Int>()
     val sizeCart: LiveData<Int> = _sizeCart
 
-    fun fetchGames(context: Context) {
+    fun loadGames(context: Context) {
         var repository = GamesRepository(context)
         _data.value = repository.getGames()
         if(_data.value.isNullOrEmpty()) {
-            disposable.add(
-                api.games(NewsApi.API_KEY).subscribeOn(schedulers.io())
-                    .observeOn(schedulers.mainThread())
-                    .subscribe({
-                        _data.value = it
-                    }, {
-                        _data.value = emptyList()
-                        Log.e("ERROR", it.message)
-                    }))
+            fethGames()
         }
+    }
+
+    fun fethGames() {
+        disposable.add(
+            api.games(GamesApi.API_KEY).subscribeOn(schedulers.io())
+                .observeOn(schedulers.mainThread())
+                .subscribe({
+                    _data.value = it
+                }, {
+                    _data.value = emptyList()
+                    Log.e("ERROR", it.message)
+                }))
     }
 
     fun loadCountCart(context: Context) {
