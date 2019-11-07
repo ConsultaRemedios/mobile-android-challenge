@@ -1,37 +1,25 @@
-## Consulta Remedios Mobile Challenge
+# Teste Mobile Android
 
-O teste consiste em construir uma aplicação nativa Android de um pseudo ecommerce de games.
+ Aplicativo Android nativo desenvolvido como parte de processo seletivo.
 
-### Recursos
-- Siga o layout: [Layout Android](https://xd.adobe.com/spec/08671ee9-a138-4eda-4ac3-58128100283a-7e56/)
-- Documentação da api no arquivo [api.md](api.md)
-- Imagens disponiveis na pasta [images.zip](https://github.com/ConsultaRemedios/mobile-android-challenge/raw/master/images.zip)
+## Bibliotecas utilizadas
 
-### Escopo
-- Faça um fork deste repositório e faça as alterações no projeto já iniciado
-- A lista de jogos deve ser carregada automaticamente ao entrar no aplicativo, jogos devem vir da API
-- Ao clicar em algum item da lista, ir para tela de detalhes
-- O carrinho de compra deve exibir todos os itens adicionados.
-- Cada produto adicionado no carrinho, soma R$:10,00 ao frete total.
-- O frete deve se tornar grátis quando a soma de todos os produtos do carrinho for acima de R$:250,00.
+- `Retrofit` para criar clientes HTTP de chamada assíncrona utilizando interfaces.
+- `Glide` para carregar imagens de URLs e aplica-las em ImageView.
+- `Pluto` um slider para imagem/gif baseado em `RecyclerView`.
 
-### O que iremos avaliar...
-- Funcionamento do aplicativo(ele não pode quebrar)
-- Como você trabalhou em um projeto que já esta em andamento, se manteve a arquitetura, as melhorias propostas e como implementou novas funcionalidades
-- Layout(Usabilidade e se fez conforme escopo)
-- O Código(Domínio da linguagem, estrutura, uso de boas práticas, Legibilidade e Lint)
-- Uso do git e github(iremos olhar os commits; branches; pull request. Recomendado uso do gitflow)
+## Pontos de interesse
 
-### Diferencias
-- Rotinas de teste
+- Para a listagem inicial de jogos o `RecyclerView` e adaptado com o `StaggeredGridLayoutManager` para dar um visual com alturas diferentes dos itens na listagem de duas colunas.
+- O token de acesso a API está armazenado 'fisicamente' fora do projeto, utilizando `gradle.properties`. Se fosse uma situação de informação sensível que não devesse ser compartilhada no GitHub esta seria uma opção para não expor a mesma.
 
-### Como aplicar
-Faça um pull request para este repositório com o código a ser avaliado
+## Dificuldades
 
-##### Recomendações
-* Crie um código escalável
-* Versione como se estivesse trabalhando em equipe
-* Descreva em um `README.md` o que você fez de interessante, a arquitetura que usou, lista de bibliotecas que usou e as dificuldades encontradas no desenvolvimento da aplicação(Se não consegui terminar em tempo hábil, aproveite este espaço para fazer um checklist do que está faltando)
-* Preze pela qualidade, se faltar tempo para terminar o teste, faça uma lista de pendências
+- Inicialmente a maior dificuldade prevista seria com a linguagem Kotlin, pela falta de contato, porém a linguagem se mostrou bastante simplificada e produtiva, não sendo um problema.
+- Minha maior dificuldade foi em encontrar uma biblioteca para textos expansíveis, para uso na descrição do jogo, sendo que nenhum deu mesmo certo. No final, desenvolvi uma solução simples para esse comportamento.
 
-Estou aguardando o teu pull request, boa sorte!
+## O quê faltou no teste
+
+- Refatoração do código. Apesar de ser uma mudança simples, as classes Activity não possuem um pacote próprio e mais importante o código apresenta algumas inconsistências de nomenclatura que não foram possíveis dar maior atenção por falta de tempo hábil.
+- Na ActionBar eu pretendia implementar o funcionamento de busca, pelo nome do jogo, na activity inicial, e o icone de carrinho de compras ficou sem o badge de auntidade de itens, fiz um teste pra incluir esse feature, mas sem sucesso, e tambem por falta de tempo ambas não foram implementadas.
+- Quanto a testes, fiz somente as chamadas da API.
