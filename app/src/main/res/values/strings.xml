@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CR Android Challenge</string>
+    <string name="empty" />
+    <string name="games">Games</string>
+    <string name="read_more">Ler Mais</string>
+    <string name="read_less">Ler Menos</string>
+    <string name="add_to_cart">Adicionar ao Carrinho</string>
+    <string name="shipping_address">Endereço de Entrega</string>
+    <string name="freight">Frete</string>
+    <string name="payment">Pagamento</string>
+    <string name="edit">Editar</string>
+    <string name="quantity_with_value">Quantidade: %1$d</string>
+    <string name="cart">Carrinho</string>
+    <string name="search">Buscar</string>
+
+    <!-- String para textos mockados   -->
+    <string name="mock_numero_cartao">5678 **** **** 4536</string>
+    <string name="mock_cartao_visa">Visa</string>
+    <string name="mock_correios">Correios:</string>
+    <string name="mock_cep">80510-342</string>
+    <string name="mock_logradouro">Rua Desembargador Vieira Cavalcanti, 703</string>
+    <string name="mock_cidade">Curitiba - Paraná - Brasil</string>
+</resources>
