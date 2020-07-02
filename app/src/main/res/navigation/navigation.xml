@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/repositoriesFragment"
+        android:name="br.com.angelorobson.templatemvi.view.repositories.RepositoriesFragment"
+        android:label="@string/repository_title"
+        tools:layout="@layout/fragment_repositories">
+        <action
+            android:id="@+id/pullRequestFragment"
+            app:destination="@id/pullRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pullRequestFragment"
+        android:name="br.com.angelorobson.templatemvi.view.pullrequest.PullRequestFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_pull_request">
+        <argument
+            android:name="repository"
+            app:argType="br.com.angelorobson.templatemvi.model.domains.Repository" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="br.com.angelorobson.templatemvi.view.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

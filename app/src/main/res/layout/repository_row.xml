@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.Repository" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/repository_row_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repository_title_text_view"
+            style="@style/TitleTextView"
+            android:text="@{item.name}"
+            app:layout_constraintEnd_toStartOf="@id/repository_profile_image_image_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Repository name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repository_sub_title_text_view"
+            style="@style/DescriptionTextView"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="45dp"
+            android:text="@{item.description}"
+            app:layout_constraintEnd_toEndOf="@id/repository_username_text_view"
+            app:layout_constraintEnd_toStartOf="@id/repository_profile_image_image_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repository_title_text_view"
+            tools:text="@string/loren_ipsum" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repository_forks_count_text_view"
+            style="@style/CountTextView"
+            android:layout_marginTop="14dp"
+            android:drawableStart="@drawable/ic_git_branch"
+            app:inToString="@{item.forksCount}"
+            app:layout_constraintStart_toStartOf="@id/repository_sub_title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/repository_sub_title_text_view"
+            tools:text="640" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repository_stargaze_count_text_view"
+            style="@style/CountTextView"
+            android:layout_marginStart="8dp"
+            android:drawableStart="@drawable/ic_star_border"
+            app:inToString="@{item.stargazersCount}"
+            app:layout_constraintStart_toEndOf="@id/repository_forks_count_text_view"
+            app:layout_constraintTop_toBottomOf="@id/repository_sub_title_text_view"
+            app:layout_constraintTop_toTopOf="@id/repository_forks_count_text_view"
+            tools:text="640" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/repository_profile_image_image_view"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="32dp"
+            app:imageUrl="@{item.user.avatarUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/repository_title_text_view"
+            tools:src="@drawable/ic_account_circle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/repository_username_text_view"
+            style="@style/UserNameTextView"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@{item.user.login}"
+            app:layout_constraintEnd_toEndOf="@id/repository_profile_image_image_view"
+            app:layout_constraintStart_toStartOf="@id/repository_profile_image_image_view"
+            app:layout_constraintTop_toBottomOf="@id/repository_profile_image_image_view"
+            tools:text="username" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
