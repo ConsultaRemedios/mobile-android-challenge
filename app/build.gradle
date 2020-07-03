@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "br.com.angelorobson.templatemvi"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -101,6 +101,8 @@ dependencies {
 
     implementation "android.arch.paging:runtime:$pagingVersion"
     implementation "android.arch.paging:rxjava2:$pagingVersion"
+
+    implementation "com.github.ImaginativeShohag:Why-Not-Image-Carousel:$whyNotImageCarousel"
 
 
     testImplementation "junit:junit:$junitVersion"

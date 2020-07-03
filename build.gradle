@@ -41,6 +41,7 @@ ext {
     mockitoVersion = '1.10.19'
     pagingVersion = '1.0.1'
     mockitoAndroidVersion = '2.28.2'
+    whyNotImageCarousel = 'v1.1.0'
 }
 
 allprojects {

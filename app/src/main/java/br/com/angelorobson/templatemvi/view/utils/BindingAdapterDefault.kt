@@ -1,6 +1,7 @@
 package br.com.angelorobson.templatemvi.view.utils
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.View
 import android.view.View.*
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import br.com.angelorobson.templatemvi.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.NumberFormat
 import java.util.*
 
 
@@ -33,6 +35,18 @@ fun inToString(view: TextView, number: Int?) {
     view.text = number.toString()
 }
 
+@BindingAdapter("convertToCurrency")
+fun convertToCurrency(view: TextView, number: Double?) {
+    view.text = number?.convertToCurrency()
+}
+
+@BindingAdapter("discount")
+fun discount(view: TextView, number: Double?) {
+    val text = view.context.getString(R.string.from, number?.convertToCurrency())
+    view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+    view.text = text
+}
+
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
     val options = RequestOptions()
             .placeholder(progressDrawable)
@@ -41,7 +55,6 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
     Glide.with(context)
             .setDefaultRequestOptions(options)
             .load(uri)
-            .apply(RequestOptions.circleCropTransform())
             .into(this)
 }
 

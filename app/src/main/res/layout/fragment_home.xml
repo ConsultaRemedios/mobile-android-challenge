@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.HomeFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/white"
+                android:iconifiedByDefault="false"
+                android:queryHint="Pesquisar" />
+
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/home_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginTop="32dp"
+                app:autoPlay="true"
+                app:autoPlayDelay="3000"
+                app:carouselBackground="@color/gray_color"
+                app:carouselType="SHOWCASE"
+                app:imageScaleType="centerCrop"
+                app:imageViewId="@id/image_view"
+                app:itemLayout="@layout/custom_fixed_size_item_layout"
+                app:showBottomShadow="false"
+                app:showCaption="false"
+                app:showIndicator="false"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_spotlights_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                tools:listitem="@layout/game_item" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/home_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/cart" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
