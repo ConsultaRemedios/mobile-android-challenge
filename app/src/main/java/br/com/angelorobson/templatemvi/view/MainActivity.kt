@@ -1,6 +1,7 @@
 package br.com.angelorobson.templatemvi.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         activityService = applicationContext.component.activityService()
         activityService.onCreate(this)
+        destinationListener()
     }
 
     private fun setupToolbar() {
@@ -33,6 +35,17 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun destinationListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeFragment -> {
+                    toolbar.visibility = View.GONE
+                }
+            }
+
+        }
     }
 
     override fun onDestroy() {
