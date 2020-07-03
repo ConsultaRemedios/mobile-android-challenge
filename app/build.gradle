@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "br.com.angelorobson.templatemvi"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -104,6 +104,11 @@ dependencies {
 
     // Image rounded
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
+    implementation 'me.relex:circleindicator:2.1.4'
+
+    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.1.0'
 
 
     testImplementation "junit:junit:$junitVersion"

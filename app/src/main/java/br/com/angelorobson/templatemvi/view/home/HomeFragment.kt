@@ -13,14 +13,16 @@ import br.com.angelorobson.templatemvi.view.home.widgets.GameAdapter
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.imaginativeworld.whynotimagecarousel.CarouselItem
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val mCompositeDisposable = CompositeDisposable()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onStart() {
+        super.onStart()
+
         val gameAdapter = GameAdapter()
 
         home_spotlights_recycler_view.apply {
@@ -46,6 +48,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 }
                                 is HomeResult.BannerLoaded -> {
                                     print(model.homeResult.banners)
+                                    val itemsCarrousel = model.homeResult.banners.map {
+                                        CarouselItem(
+                                                imageUrl = it.image
+                                        )
+                                    }
+
+                                    carousel.addData(itemsCarrousel)
+
                                 }
                                 is HomeResult.Error -> {
                                     print(model.homeResult.errorMessage)
