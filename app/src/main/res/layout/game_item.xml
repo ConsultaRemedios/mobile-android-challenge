@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/game_item_linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/game_item_image_view"
+            android:layout_width="156dp"
+            android:layout_height="157dp"
+            android:layout_gravity="left"
+            app:imageUrl="@{item.image}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_item_company_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="7dp"
+            android:text="@{item.publisher}"
+            tools:text="Nintendo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_item_game_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="@{item.title}"
+            tools:text="The Legend Of Zelda Breath of The Wild" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_item_game_pricing_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="7dp"
+            app:convertToCurrency="@{item.price}"
+            tools:text="de R$350,00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_item_game_pricing_discount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            app:convertToCurrency="@{item.discount}"
+            tools:text="R$197,00" />
+
+    </LinearLayout>
+
+</layout>

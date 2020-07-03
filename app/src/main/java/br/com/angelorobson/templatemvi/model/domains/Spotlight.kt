@@ -5,7 +5,7 @@ data class Spotlight(
         val title: String,
         val publisher: String,
         val image: String,
-        val discount: Int,
+        val discount: Double,
         val price: Double,
         val description: String,
         val rating: Double,

@@ -10,6 +10,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import br.com.angelorobson.templatemvi.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.NumberFormat
 import java.util.*
 
 
@@ -33,6 +34,14 @@ fun inToString(view: TextView, number: Int?) {
     view.text = number.toString()
 }
 
+@BindingAdapter("convertToCurrency")
+fun convertToCurrency(view: TextView, number: Double?) {
+    val d = 10.1
+    val ptBr = Locale("pt", "BR")
+    val valorString: String = NumberFormat.getCurrencyInstance(ptBr).format(d)
+    view.text = valorString;
+}
+
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
     val options = RequestOptions()
             .placeholder(progressDrawable)
@@ -41,7 +50,6 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
     Glide.with(context)
             .setDefaultRequestOptions(options)
             .load(uri)
-            .apply(RequestOptions.circleCropTransform())
             .into(this)
 }
 
