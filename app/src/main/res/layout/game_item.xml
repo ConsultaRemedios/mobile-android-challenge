@@ -12,49 +12,56 @@
 
     <LinearLayout
         android:id="@+id/game_item_linear_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="#323232"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/game_item_image_view"
-            android:layout_width="156dp"
+            android:layout_width="match_parent"
             android:layout_height="157dp"
-            android:layout_gravity="left"
-            app:imageUrl="@{item.image}" />
+            android:scaleType="centerCrop"
+            app:imageUrl="@{item.image}"
+            app:riv_corner_radius="5dp"
+            tools:src="@drawable/zelda" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_item_company_name_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="8dp"
             android:text="@{item.publisher}"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             tools:text="Nintendo" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_item_game_name_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:text="@{item.title}"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             tools:text="The Legend Of Zelda Breath of The Wild" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_item_game_pricing_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="7dp"
-            app:convertToCurrency="@{item.price}"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:discount="@{item.price}"
             tools:text="de R$350,00" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_item_game_pricing_discount_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:textColor="#0091ff"
+            android:textStyle="bold"
             app:convertToCurrency="@{item.discount}"
             tools:text="R$197,00" />
 

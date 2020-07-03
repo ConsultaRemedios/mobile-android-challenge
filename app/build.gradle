@@ -102,6 +102,9 @@ dependencies {
     implementation "android.arch.paging:runtime:$pagingVersion"
     implementation "android.arch.paging:rxjava2:$pagingVersion"
 
+    // Image rounded
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 
     testImplementation "junit:junit:$junitVersion"
 

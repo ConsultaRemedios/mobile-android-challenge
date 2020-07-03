@@ -1,6 +1,7 @@
 package br.com.angelorobson.templatemvi.view.utils
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.View
 import android.view.View.*
 import android.widget.ImageView
@@ -36,10 +37,14 @@ fun inToString(view: TextView, number: Int?) {
 
 @BindingAdapter("convertToCurrency")
 fun convertToCurrency(view: TextView, number: Double?) {
-    val d = 10.1
-    val ptBr = Locale("pt", "BR")
-    val valorString: String = NumberFormat.getCurrencyInstance(ptBr).format(d)
-    view.text = valorString;
+    view.text = number?.convertToCurrency()
+}
+
+@BindingAdapter("discount")
+fun discount(view: TextView, number: Double?) {
+    val text = view.context.getString(R.string.from, number?.convertToCurrency())
+    view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+    view.text = text
 }
 
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
