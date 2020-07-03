@@ -102,13 +102,7 @@ dependencies {
     implementation "android.arch.paging:runtime:$pagingVersion"
     implementation "android.arch.paging:rxjava2:$pagingVersion"
 
-    // Image rounded
-    implementation 'com.makeramen:roundedimageview:2.3.0'
-
-    // Optional: Circle Indicator (To fix the xml preview "Missing classes" error)
-    implementation 'me.relex:circleindicator:2.1.4'
-
-    implementation 'com.github.ImaginativeShohag:Why-Not-Image-Carousel:v1.1.0'
+    implementation "com.github.ImaginativeShohag:Why-Not-Image-Carousel:$whyNotImageCarousel"
 
 
     testImplementation "junit:junit:$junitVersion"

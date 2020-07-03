@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,19 +27,20 @@
                 android:iconifiedByDefault="false"
                 android:queryHint="Pesquisar" />
 
+
             <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-                android:id="@+id/carousel"
+                android:id="@+id/home_carousel"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_marginTop="32dp"
+                app:autoPlay="true"
+                app:autoPlayDelay="3000"
                 app:carouselBackground="@color/gray_color"
                 app:carouselType="SHOWCASE"
                 app:imageScaleType="centerCrop"
                 app:imageViewId="@id/image_view"
                 app:itemLayout="@layout/custom_fixed_size_item_layout"
                 app:showBottomShadow="false"
-                app:autoPlay="true"
-                app:autoPlayDelay="3000"
                 app:showCaption="false"
                 app:showIndicator="false"
                 app:showNavigationButtons="false"
@@ -56,6 +58,12 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/home_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
