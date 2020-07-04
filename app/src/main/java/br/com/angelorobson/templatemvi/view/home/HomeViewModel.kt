@@ -34,6 +34,7 @@ fun homeUpdate(
                         errorMessage = event.errorMessage
                 )
         ))
+        is GameClickedEvent -> dispatch(setOf(GameClickedEffect(spotlight = event.spotlight)))
     }
 }
 
@@ -82,6 +83,9 @@ class HomeViewModel @Inject constructor(
                                 }
 
                     }
+                }
+                .addConsumer(GameClickedEffect::class.java) { effect ->
+                    navigator.to(HomeFragmentDirections.gameDetailFragment(effect.spotlight))
                 }
                 .build()
 )
