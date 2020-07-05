@@ -11,8 +11,7 @@ data class SpotlightDto(
         val discount: Double,
         val price: Double,
         val description: String,
-        val rating: Double,
+        val rating: Float,
         val stars: Int,
         val reviews: Int
-
 )
