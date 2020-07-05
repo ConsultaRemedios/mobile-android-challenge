@@ -37,6 +37,9 @@
         <action
             android:id="@+id/searchGameFragment"
             app:destination="@id/searchGameFragment" />
+        <action
+            android:id="@+id/webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
@@ -55,5 +58,14 @@
         <action
             android:id="@+id/to_gameDetailFragment"
             app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="br.com.angelorobson.templatemvi.view.bannerwebview.BannerWebViewFragment"
+        android:label="activity_web_view"
+        tools:layout="@layout/fragment_banner_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

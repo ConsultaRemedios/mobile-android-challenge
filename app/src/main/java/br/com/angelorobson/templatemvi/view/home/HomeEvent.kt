@@ -13,6 +13,8 @@ data class BannersLoadedEvent(val banners: List<Banner>,
 data class GameClickedEvent(val spotlight: Spotlight) : HomeEvent()
 object SearchViewClickedEvent : HomeEvent()
 
+data class BannerClickedEvent(val url: String) : HomeEvent()
+
 data class HomeExceptionEvent(val errorMessage: String) : HomeEvent()
 
 data class SpotlightLoadedEvent(val spotlights: List<Spotlight>,
