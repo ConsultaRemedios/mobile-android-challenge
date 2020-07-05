@@ -7,6 +7,7 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.home.widgets.GameAdapter
 import br.com.angelorobson.templatemvi.view.utils.GridSpacingItemDecoration
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -25,7 +26,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView(gameAdapter)
 
         val disposable = Observable.mergeArray(
-                gameAdapter.gameClicks.map { GameClickedEvent(it) }
+                gameAdapter.gameClicks.map { GameClickedEvent(it) },
+                home_search_view.clicks().map { SearchViewClickedEvent }
         )
                 .compose(getViewModel(HomeViewModel::class).init(InitialEvent))
                 .subscribe(

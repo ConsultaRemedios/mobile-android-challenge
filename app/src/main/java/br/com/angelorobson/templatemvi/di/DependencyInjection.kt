@@ -12,6 +12,7 @@ import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailViewModel
 import br.com.angelorobson.templatemvi.view.home.HomeViewModel
 import br.com.angelorobson.templatemvi.view.pullrequest.PullRequestViewModel
 import br.com.angelorobson.templatemvi.view.repositories.RepositoriesViewModel
+import br.com.angelorobson.templatemvi.view.searchgame.SearchGameViewModel
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
 import br.com.angelorobson.templatemvi.view.utils.Navigator
@@ -115,6 +116,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GameDetailViewModel::class)
     abstract fun gameDetailViewModel(viewModel: GameDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchGameViewModel::class)
+    abstract fun searchGameViewModel(viewModel: SearchGameViewModel): ViewModel
 }
 
 

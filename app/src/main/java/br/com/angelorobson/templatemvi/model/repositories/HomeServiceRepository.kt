@@ -31,6 +31,15 @@ class HomeServiceRepository @Inject constructor(
                 }
     }
 
+    fun searchByTerm(term: String): Observable<List<Spotlight>> {
+        return spotlightService.searchGameByTerm(term)
+                .map { response ->
+                    response.map {
+                        mapDtoToDomain(it)
+                    }
+                }
+    }
+
     fun getAllSpotlights(): Observable<List<Spotlight>> {
         return spotlightService.getAll()
                 .map { response ->

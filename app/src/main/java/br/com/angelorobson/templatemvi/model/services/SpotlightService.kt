@@ -16,5 +16,5 @@ interface SpotlightService {
     fun getGame(@Path("id") id: Int): Single<SpotlightDto>
 
     @GET("games/search")
-    fun searchGame(@Query("term") term: String): Observable<Observable<SpotlightDto>>
+    fun searchGameByTerm(@Query("term") term: String): Observable<List<SpotlightDto>>
 }

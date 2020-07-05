@@ -47,6 +47,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     toolbar.visibility = GONE
                 }
+                R.id.searchGameFragment -> {
+                    toolbar.visibility = GONE
+                }
                 else -> {
                     if (Build.VERSION.SDK_INT in 19..20) {
                         setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)

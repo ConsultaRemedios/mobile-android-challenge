@@ -35,6 +35,7 @@ fun homeUpdate(
                 )
         ))
         is GameClickedEvent -> dispatch(setOf(GameClickedEffect(spotlight = event.spotlight)))
+        SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
     }
 }
 
@@ -86,6 +87,9 @@ class HomeViewModel @Inject constructor(
                 }
                 .addConsumer(GameClickedEffect::class.java) { effect ->
                     navigator.to(HomeFragmentDirections.gameDetailFragment(effect.spotlight.id))
+                }
+                .addAction(SearchViewClickedEffect::class.java) {
+                    navigator.to(HomeFragmentDirections.searchGameFragment())
                 }
                 .build()
 )

@@ -11,6 +11,7 @@ data class BannersLoadedEvent(val banners: List<Banner>,
                               val isLoading: Boolean = false) : HomeEvent()
 
 data class GameClickedEvent(val spotlight: Spotlight) : HomeEvent()
+object SearchViewClickedEvent : HomeEvent()
 
 data class HomeExceptionEvent(val errorMessage: String) : HomeEvent()
 
