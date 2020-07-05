@@ -51,5 +51,9 @@
         android:id="@+id/searchGameFragment"
         android:name="br.com.angelorobson.templatemvi.view.searchgame.SearchGameFragment"
         android:label="fragment_search_game"
-        tools:layout="@layout/fragment_search_game" />
+        tools:layout="@layout/fragment_search_game" >
+        <action
+            android:id="@+id/to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
 </navigation>

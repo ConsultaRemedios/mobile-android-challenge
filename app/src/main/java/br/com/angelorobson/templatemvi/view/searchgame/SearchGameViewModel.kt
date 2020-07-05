@@ -21,18 +21,19 @@ fun searchGameUpdate(
         event: SearchGameEvent
 ): Next<SearchGameModel, SearchGameEffect> {
     return when (event) {
-        is InitialEvent -> dispatch(setOf(ObserverSpotlightByTerm(event.term)))
+        is InitialEvent -> dispatch(setOf(ObserverSpotlightByTermEffect(event.term)))
         is GamesFoundEvent -> next(
                 model.copy(searchGameResult = SearchGameResult.GamesFoundByTerm(
                         spotlights = event.spotlights
                 ))
         )
-        is SearchGameByTermEvent -> dispatch(setOf(ObserverSpotlightByTerm(event.term)))
+        is SearchGameByTermEvent -> dispatch(setOf(ObserverSpotlightByTermEffect(event.term)))
         is SearchGameExceptionEvent -> next(
                 model.copy(searchGameResult = SearchGameResult.Error(
                         errorMessage = event.errorMessage
                 ))
         )
+        is GameFoundClickedEvent -> dispatch(setOf(GameClickedEffect(event.spotlight)))
     }
 }
 
@@ -46,7 +47,7 @@ class SearchGameViewModel @Inject constructor(
         Update(::searchGameUpdate),
         SearchGameModel(),
         RxMobius.subtypeEffectHandler<SearchGameEffect, SearchGameEvent>()
-                .addTransformer(ObserverSpotlightByTerm::class.java) { upstream ->
+                .addTransformer(ObserverSpotlightByTermEffect::class.java) { upstream ->
                     upstream.switchMap {
                         idlingResource.increment()
                         repository.searchByTerm(it.term)
@@ -63,6 +64,9 @@ class SearchGameViewModel @Inject constructor(
                                 }
 
                     }
+                }
+                .addConsumer(GameClickedEffect::class.java) { consumer ->
+                    navigator.to(SearchGameFragmentDirections.toGameDetailFragment(consumer.spotlight.id))
                 }
                 .build()
 )

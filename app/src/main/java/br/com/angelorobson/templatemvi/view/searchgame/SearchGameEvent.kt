@@ -9,6 +9,8 @@ data class InitialEvent(val term: String = "") : SearchGameEvent()
 data class GamesFoundEvent(val spotlights: List<Spotlight>,
                            val isLoading: Boolean = false) : SearchGameEvent()
 
+data class GameFoundClickedEvent(val spotlight: Spotlight) : SearchGameEvent()
+
 data class SearchGameByTermEvent(val term: String) : SearchGameEvent()
 
 data class SearchGameExceptionEvent(val errorMessage: String) : SearchGameEvent()
