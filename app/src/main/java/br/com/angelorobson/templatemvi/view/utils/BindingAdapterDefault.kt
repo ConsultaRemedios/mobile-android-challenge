@@ -5,6 +5,7 @@ import android.graphics.Paint
 import android.view.View
 import android.view.View.*
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -45,6 +46,11 @@ fun discount(view: TextView, number: Double?) {
     val text = view.context.getString(R.string.from, number?.convertToCurrency())
     view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     view.text = text
+}
+
+@BindingAdapter("convertFloatToString")
+fun convertDoubleToString(view: TextView, number: Float?) {
+    view.text = number.toString()
 }
 
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {

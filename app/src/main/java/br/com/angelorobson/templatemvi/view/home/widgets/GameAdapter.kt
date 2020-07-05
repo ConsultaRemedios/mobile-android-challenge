@@ -10,9 +10,15 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.databinding.GameItemBinding
 import br.com.angelorobson.templatemvi.model.domains.Spotlight
 import br.com.angelorobson.templatemvi.view.utils.DiffUtilCallback
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.extensions.LayoutContainer
 
 class GameAdapter : ListAdapter<Spotlight, SpotlightViewHolder>(DiffUtilCallback<Spotlight>()) {
+
+    private val gameClicksSubject = PublishSubject.create<Int>()
+    val gameClicks: Observable<Spotlight> = gameClicksSubject.map { position -> getItem(position) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotlightViewHolder {
         val binding = DataBindingUtil.bind<GameItemBinding>(
@@ -23,7 +29,7 @@ class GameAdapter : ListAdapter<Spotlight, SpotlightViewHolder>(DiffUtilCallback
                 )
         )
 
-        return SpotlightViewHolder(binding?.root!!, binding)
+        return SpotlightViewHolder(binding?.root!!, binding, gameClicksSubject)
     }
 
     override fun onBindViewHolder(holder: SpotlightViewHolder, position: Int) {
@@ -38,12 +44,14 @@ class GameAdapter : ListAdapter<Spotlight, SpotlightViewHolder>(DiffUtilCallback
 
 class SpotlightViewHolder(
         override val containerView: View,
-        private val binding: GameItemBinding?
+        private val binding: GameItemBinding?,
+        private val gameClicksSubject: PublishSubject<Int>
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(spotlight: Spotlight) {
         binding?.apply {
             item = spotlight
+            gameItemLinearLayout.clicks().map { adapterPosition }.subscribe(gameClicksSubject)
             executePendingBindings()
         }
     }

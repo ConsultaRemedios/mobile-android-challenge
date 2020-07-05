@@ -44,12 +44,7 @@
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:drawableTint">@color/colorOrange</item>
         <item name="android:textStyle">bold</item>
-
-        android:drawablePadding="4dp"
-        android:textColor="@color/colorOrange"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:drawableTint="@color/colorOrange"
     </style>
+
 
 </resources>

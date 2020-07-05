@@ -15,8 +15,11 @@
 
     <string name="try_again">Try again</string>
 
-
+    <!--    home Screen-->
     <string name="from" translatable="false">de %1$s</string>
+
+    <!--    Detail Screen-->
+    <string name="reviews" translatable="false">%1$s reviews</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

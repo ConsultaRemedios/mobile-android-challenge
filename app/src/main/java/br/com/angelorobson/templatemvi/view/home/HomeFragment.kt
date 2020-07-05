@@ -16,6 +16,7 @@ import org.imaginativeworld.whynotimagecarousel.CarouselItem
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val mCompositeDisposable = CompositeDisposable()
+    private val itemsCarousel = arrayListOf<CarouselItem>()
 
     override fun onStart() {
         super.onStart()
@@ -23,7 +24,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val gameAdapter = GameAdapter()
         setupRecyclerView(gameAdapter)
 
-        val disposable = Observable.empty<HomeEvent>()
+        val disposable = Observable.mergeArray(
+                gameAdapter.gameClicks.map { GameClickedEvent(it) }
+        )
                 .compose(getViewModel(HomeViewModel::class).init(InitialEvent))
                 .subscribe(
                         { model ->
@@ -38,17 +41,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 }
                                 is HomeResult.BannerLoaded -> {
                                     val banners = model.homeResult.banners
-                                    val itemsCarousel = banners.map {
+                                    itemsCarousel.addAll(banners.map {
                                         CarouselItem(imageUrl = it.image)
-                                    }
-
-                                    home_carousel.addData(itemsCarousel)
+                                    })
                                 }
                                 is HomeResult.Error -> {
                                     print(model.homeResult.errorMessage)
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
                                 }
                             }
+
+                            home_carousel.addData(itemsCarousel)
                         },
                         {
 

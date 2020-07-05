@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue"
+        tools:context=".view.gamedetail.GameDetailFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/game_detail_image_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mario"
+            app:imageUrl="@{item.image}"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/game_Detail_add_item_card_floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/cart"
+            app:layout_constraintBottom_toBottomOf="@+id/game_detail_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/game_detail_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/game_detail_image_view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_detail_game_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_Detail_add_item_card_floating_action_button"
+            tools:text="Mario Galaxy" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_detail_game_rating_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/white"
+            app:convertFloatToString="@{item.rating}"
+            app:layout_constraintStart_toStartOf="@id/game_detail_game_name_text_view"
+            app:layout_constraintTop_toBottomOf="@id/game_detail_game_name_text_view"
+            tools:text="4.7" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/game_detail_rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:progressBackgroundTint="@android:color/white"
+            android:progressTint="@color/yellow"
+            android:rating="@{item.rating}"
+            android:stepSize="0"
+            app:layout_constraintBottom_toBottomOf="@id/game_detail_game_rating_text_view"
+            app:layout_constraintStart_toEndOf="@id/game_detail_game_rating_text_view"
+            app:layout_constraintTop_toTopOf="@id/game_detail_game_rating_text_view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_detail_game_reviews_count_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{String.format(@string/reviews, item.reviews)}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@id/game_detail_game_rating_text_view"
+            app:layout_constraintStart_toEndOf="@id/game_detail_rating_bar"
+            app:layout_constraintTop_toTopOf="@id/game_detail_game_rating_text_view"
+            tools:text="337 reviews" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_detail_pricing_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            app:discount="@{item.price}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/game_detail_game_rating_text_view"
+            app:layout_constraintTop_toBottomOf="@id/game_detail_game_rating_text_view"
+            tools:text="de R$350,00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_detail_pricing_discount_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:convertToCurrency="@{item.discount}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/game_detail_game_rating_text_view"
+            app:layout_constraintTop_toBottomOf="@id/game_detail_pricing_text_view"
+            tools:text="R$197,00" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/gray_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_detail_pricing_discount_text_view">
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

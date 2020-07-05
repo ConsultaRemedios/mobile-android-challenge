@@ -30,5 +30,18 @@
         android:id="@+id/homeFragment"
         android:name="br.com.angelorobson.templatemvi.view.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="br.com.angelorobson.templatemvi.view.gamedetail.GameDetailFragment"
+        android:label="fragment_game_detail"
+        tools:layout="@layout/fragment_game_detail" >
+        <argument
+            android:name="game"
+            app:argType="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+    </fragment>
 </navigation>
