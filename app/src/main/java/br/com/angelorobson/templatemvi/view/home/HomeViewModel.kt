@@ -85,7 +85,7 @@ class HomeViewModel @Inject constructor(
                     }
                 }
                 .addConsumer(GameClickedEffect::class.java) { effect ->
-                    navigator.to(HomeFragmentDirections.gameDetailFragment(effect.spotlight))
+                    navigator.to(HomeFragmentDirections.gameDetailFragment(effect.spotlight.id))
                 }
                 .build()
 )

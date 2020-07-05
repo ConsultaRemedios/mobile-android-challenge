@@ -41,7 +41,7 @@
         android:label="fragment_game_detail"
         tools:layout="@layout/fragment_game_detail" >
         <argument
-            android:name="game"
-            app:argType="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

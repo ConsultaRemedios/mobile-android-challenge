@@ -1,9 +1,5 @@
 package br.com.angelorobson.templatemvi.model.domains
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
 data class Spotlight(
         val id: Int,
         val title: String,
@@ -16,4 +12,4 @@ data class Spotlight(
         val stars: Int,
         val reviews: Int
 
-) : Parcelable
+)

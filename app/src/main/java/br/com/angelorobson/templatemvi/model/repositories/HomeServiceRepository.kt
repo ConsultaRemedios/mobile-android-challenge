@@ -7,6 +7,7 @@ import br.com.angelorobson.templatemvi.model.dtos.SpotlightDto
 import br.com.angelorobson.templatemvi.model.services.BannerService
 import br.com.angelorobson.templatemvi.model.services.SpotlightService
 import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class HomeServiceRepository @Inject constructor(
@@ -20,6 +21,13 @@ class HomeServiceRepository @Inject constructor(
                     response.map {
                         mapDtoToDomain(it)
                     }
+                }
+    }
+
+    fun getGame(id: Int): Single<Spotlight> {
+        return spotlightService.getGame(id)
+                .map {
+                    mapDtoToDomain(it)
                 }
     }
 
