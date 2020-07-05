@@ -52,7 +52,7 @@ class SpotlightViewHolder(
     fun bind(spotlight: Spotlight) {
         binding?.apply {
             item = spotlight
-            gameItemLinearLayout.clicks().map { adapterPosition }.subscribe(gameClicksSubject)
+            gameFoundItemLinearLayout.clicks().map { adapterPosition }.subscribe(gameClicksSubject)
             executePendingBindings()
         }
     }
