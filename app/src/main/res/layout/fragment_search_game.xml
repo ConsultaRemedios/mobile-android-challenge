@@ -9,11 +9,16 @@
     android:orientation="vertical"
     tools:context=".view.searchgame.SearchGameFragment">
 
+    <EditText
+        android:id="@+id/game_search_view"
+        style="@style/SearchViewEnable"
+        android:layout_marginTop="8dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_game_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         tools:listitem="@layout/game_found_item" />
 
 </LinearLayout>

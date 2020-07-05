@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.searchgame.widgets.GameFoundAdapter
+import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_search_game.*
-
+import java.util.concurrent.TimeUnit
 
 class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
 
@@ -25,7 +26,10 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
         setupRecyclerView(adapter)
 
         val disposable = Observable.mergeArray(
-                adapter.gameClicks.map { GameFoundClickedEvent(it) }
+                adapter.gameClicks.map { GameFoundClickedEvent(it) },
+                game_search_view.textChanges()
+                        .debounce(100, TimeUnit.MILLISECONDS)
+                        .map { SearchGameByTermEvent(it.toString()) }
         )
                 .compose(getViewModel(SearchGameViewModel::class).init(InitialEvent()))
                 .subscribe(
