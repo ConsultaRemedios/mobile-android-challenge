@@ -20,19 +20,10 @@
 
             <EditText
                 android:id="@+id/home_search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/SearchStyle"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_search_edit_text"
-                android:clickable="true"
-                android:focusable="true"
-                android:hint="Pesquisar"
-                android:inputType="text"
-                android:queryHint="Pesquisar" />
-
+                android:layout_marginEnd="8dp" />
 
             <org.imaginativeworld.whynotimagecarousel.ImageCarousel
                 android:id="@+id/home_carousel"
