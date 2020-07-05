@@ -46,10 +46,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="SearchStyle">
+    <style name="EditTextSearchStyleDisable">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:drawableEnd">@drawable/ic_baseline_mic</item>
         <item name="android:padding">12dp</item>
         <item name="android:background">@drawable/bg_search_edit_text</item>
         <item name="android:clickable">true</item>
@@ -58,16 +57,12 @@
         <item name="android:inputType">text</item>
     </style>
 
-    <style name="SearchViewEnable" parent="SearchStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:drawableEnd">@drawable/ic_baseline_mic</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:background">@drawable/bg_search_edit_text</item>
-        <item name="android:clickable">false</item>
+
+    <style name="EditTextSearchViewEnable" parent="EditTextSearchStyleDisable">
+        <item name="android:layout_height">match_parent</item>
         <item name="android:focusable">true</item>
-        <item name="android:hint">@string/search</item>
-        <item name="android:inputType">text</item>
+        <item name="android:elevation">4dp</item>
+
     </style>
 
 

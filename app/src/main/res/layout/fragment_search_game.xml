@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,11 +14,20 @@
         android:orientation="vertical"
         tools:context=".view.searchgame.SearchGameFragment">
 
-
         <EditText
             android:id="@+id/game_search_view"
-            style="@style/SearchViewEnable"
-            android:layout_marginTop="8dp" />
+            style="@style/EditTextSearchViewEnable"
+            android:layout_marginTop="16dp" />
+
+        <ProgressBar
+            android:id="@+id/game_search_progress_horizontal"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_search_not_found_text_view"
@@ -33,9 +43,9 @@
             android:id="@+id/search_game_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             tools:listitem="@layout/game_found_item" />
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

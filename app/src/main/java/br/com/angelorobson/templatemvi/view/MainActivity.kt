@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     toolbar.visibility = GONE
                 }
                 else -> {
-                    if (Build.VERSION.SDK_INT in 19..20) {
+                   /* if (Build.VERSION.SDK_INT in 19..20) {
                         setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)
                     }
                     if (Build.VERSION.SDK_INT >= 19) {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     if (Build.VERSION.SDK_INT >= 21) {
                         setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
                         window.statusBarColor = Color.TRANSPARENT
-                    }
+                    }*/
 
                     toolbar.visibility = VISIBLE
                 }
