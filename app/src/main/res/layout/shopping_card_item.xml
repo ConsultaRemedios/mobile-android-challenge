@@ -15,23 +15,32 @@
         android:layout_height="wrap_content"
         android:background="@color/bg_shopping_card_screen">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/shopping_cart_game_image_view"
-            android:layout_width="110dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{item.spotlight.image}"
+            app:cardCornerRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/zelda" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{item.spotlight.image}"
+
+                tools:src="@drawable/zelda" />
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shopping_cart_game_title_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:text="@{item.spotlight.title}"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -44,52 +53,64 @@
             android:id="@+id/shopping_cart_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_cart_remove_or_add_items"
             android:orientation="horizontal"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
             app:layout_constraintStart_toStartOf="@id/shopping_cart_game_title_text_view"
             app:layout_constraintTop_toBottomOf="@id/shopping_cart_game_title_text_view">
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
                 android:layout_margin="2dp"
-                tools:text="-" />
+                android:background="@null"
+                android:scaleType="center"
+
+                android:src="@drawable/minus_icon"
+                android:tint="@color/white" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="1"
                 android:textColor="@color/white"
                 tools:text="10" />
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_margin="2dp"
-                tools:text="+" />
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/plus_icon"
+                android:tint="@color/white" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/shopping_cart_clear_cart"
-            android:layout_width="20dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:background="@null"
+            android:src="@drawable/ic_delete"
             app:layout_constraintBottom_toBottomOf="@id/shopping_cart_linear_layout"
             app:layout_constraintStart_toEndOf="@id/shopping_cart_linear_layout"
             app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shopping_cart_game_pricing_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:gravity="end"
             app:discount="@{item.spotlight.price}"
             app:layout_constraintBottom_toTopOf="@id/shopping_cart_game_discount_text_view"
             app:layout_constraintEnd_toEndOf="@id/shopping_cart_game_discount_text_view"
@@ -98,14 +119,17 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/shopping_cart_game_discount_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/blue"
             android:textStyle="bold"
             app:convertToCurrency="@{item.spotlight.discount}"
-            app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
+            app:layout_constraintBottom_toBottomOf="@id/shopping_cart_linear_layout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/shopping_cart_clear_cart"
             app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout"
             tools:text="R$197,00" />
 
