@@ -1,100 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_shopping_card_screen">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/shopping_cart_game_image_view"
-        android:layout_width="110dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/zelda"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shopping_cart_game_title_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/shopping_cart_game_image_view"
-        app:layout_constraintTop_toTopOf="@id/shopping_cart_game_image_view"
-        tools:text="The Legend Of Zelda Breath of The Wild" />
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.ShoppingCart" />
+    </data>
 
-    <LinearLayout
-        android:id="@+id/shopping_cart_linear_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/bg_cart_remove_or_add_items"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
-        app:layout_constraintStart_toStartOf="@id/shopping_cart_game_title_text_view"
-        app:layout_constraintTop_toBottomOf="@id/shopping_cart_game_title_text_view">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_shopping_card_screen">
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="2dp"
-            tools:text="-" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/shopping_cart_game_image_view"
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{item.spotlight.image}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/zelda" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shopping_cart_game_title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@{item.spotlight.title}"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/shopping_cart_game_image_view"
+            app:layout_constraintTop_toTopOf="@id/shopping_cart_game_image_view"
+            tools:text="The Legend Of Zelda Breath of The Wild" />
+
+        <LinearLayout
+            android:id="@+id/shopping_cart_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_cart_remove_or_add_items"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
+            app:layout_constraintStart_toStartOf="@id/shopping_cart_game_title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/shopping_cart_game_title_text_view">
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                tools:text="-" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.quantity}"
+                android:textColor="@color/white"
+                tools:text="10" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                tools:text="+" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/shopping_cart_clear_cart"
+            android:layout_width="20dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/trash"
+            app:layout_constraintBottom_toBottomOf="@id/shopping_cart_linear_layout"
+            app:layout_constraintStart_toEndOf="@id/shopping_cart_linear_layout"
+            app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shopping_cart_game_pricing_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:textColor="@color/white"
-            tools:text="10" />
+            android:textSize="12sp"
+            app:discount="@{item.spotlight.price}"
+            app:layout_constraintBottom_toTopOf="@id/shopping_cart_game_discount_text_view"
+            app:layout_constraintEnd_toEndOf="@id/shopping_cart_game_discount_text_view"
+            app:layout_constraintStart_toStartOf="@id/shopping_cart_game_discount_text_view"
+            tools:text="de R$ 250,00" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_margin="2dp"
-            tools:text="+" />
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shopping_cart_game_discount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            app:convertToCurrency="@{item.spotlight.discount}"
+            app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout"
+            tools:text="R$197,00" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/shopping_cart_clear_cart"
-        android:layout_width="20dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:src="@drawable/trash"
-        app:layout_constraintBottom_toBottomOf="@id/shopping_cart_linear_layout"
-        app:layout_constraintStart_toEndOf="@id/shopping_cart_linear_layout"
-        app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shopping_cart_game_pricing_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/shopping_cart_game_discount_text_view"
-        app:layout_constraintEnd_toEndOf="@id/shopping_cart_game_discount_text_view"
-        app:layout_constraintStart_toStartOf="@id/shopping_cart_game_discount_text_view"
-        tools:text="de R$ 250,00" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/shopping_cart_game_discount_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/shopping_cart_game_image_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/shopping_cart_linear_layout"
-        tools:text="R$197,00" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import br.com.angelorobson.templatemvi.R
+import br.com.angelorobson.templatemvi.model.database.ApplicationDatabase
 import br.com.angelorobson.templatemvi.model.services.BannerService
 import br.com.angelorobson.templatemvi.model.services.PullRequestService
 import br.com.angelorobson.templatemvi.model.services.RepositoryGitService
@@ -51,7 +52,7 @@ interface ApplicationComponent {
 }
 
 @Singleton
-@Component(modules = [ApplicationModule::class, ViewModelModule::class, ApiModule::class, RealModule::class])
+@Component(modules = [ApplicationModule::class, ViewModelModule::class, ApiModule::class, DatabaseModule::class, RealModule::class])
 interface RealComponent : ApplicationComponent {
 
     @Component.Builder
@@ -182,6 +183,16 @@ object ApiModule {
     fun pullRequestService(retrofit: Retrofit): PullRequestService {
         return retrofit.create(PullRequestService::class.java)
     }
+
+}
+
+@Module
+object DatabaseModule {
+
+    @Provides
+    @Singleton
+    @JvmStatic
+    fun shoppingCartDao(database: ApplicationDatabase) = database.shoppingCartDao()
 
 }
 
