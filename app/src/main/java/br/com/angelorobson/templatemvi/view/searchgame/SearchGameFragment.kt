@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_search_game.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 private val VOICE_RECOGNITION_CODE = 9999
@@ -47,7 +48,7 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
                         .observeOn(AndroidSchedulers.mainThread())
                         .map {
                             game_search_progress_horizontal.setVisibleOrGone(true)
-                            SearchGameByTermEvent(it.toLowerCase())
+                            SearchGameByTermEvent(it.toLowerCase(Locale.getDefault()))
                         }
         )
                 .compose(getViewModel(SearchGameViewModel::class).init(InitialEvent()))
@@ -95,7 +96,7 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
 
             override fun onSearchTermChanged(term: CharSequence?) {
                 searchTermSubject.onNext(term.toString())
-                mSearchTerm = term.toString()
+                mSearchTerm = term.toString().toLowerCase(Locale.getDefault())
 
             }
 
