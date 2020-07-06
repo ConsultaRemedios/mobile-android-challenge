@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_color"
     android:orientation="vertical">
 
 
@@ -17,16 +18,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/home_search_view"
+                style="@style/EditTextSearchStyleDisable"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/white"
-                android:iconifiedByDefault="false"
-                android:queryHint="Pesquisar" />
-
+                android:layout_marginEnd="8dp" />
 
             <org.imaginativeworld.whynotimagecarousel.ImageCarousel
                 android:id="@+id/home_carousel"

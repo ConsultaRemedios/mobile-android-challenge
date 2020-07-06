@@ -42,6 +42,8 @@ ext {
     pagingVersion = '1.0.1'
     mockitoAndroidVersion = '2.28.2'
     whyNotImageCarousel = 'v1.1.0'
+    persistentSearchVersion = '1.2.2'
+    legacySupportVersion = '1.0.0'
 }
 
 allprojects {
@@ -62,6 +64,9 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
     }
 }
 

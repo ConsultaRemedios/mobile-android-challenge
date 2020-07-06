@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="isProgressBarVisible"
+            type="Boolean" />
+
+        <variable
             name="item"
             type="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
     </data>
@@ -15,6 +19,7 @@
         android:layout_height="match_parent"
         android:background="@color/blue"
         tools:context=".view.gamedetail.GameDetailFragment">
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/game_detail_image_view"
@@ -130,6 +135,15 @@
             app:layout_constraintTop_toBottomOf="@id/game_detail_pricing_discount_text_view">
 
         </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleOrGone="@{isProgressBarVisible}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

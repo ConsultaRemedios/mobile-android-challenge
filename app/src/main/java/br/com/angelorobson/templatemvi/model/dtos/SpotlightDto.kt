@@ -6,12 +6,12 @@ import com.squareup.moshi.JsonClass
 data class SpotlightDto(
         val id: Int,
         val title: String,
-        val publisher: String,
-        val image: String,
+        val publisher: String?,
+        val image: String?,
         val discount: Double,
         val price: Double,
-        val description: String,
-        val rating: Float,
-        val stars: Int,
-        val reviews: Int
+        val description: String?,
+        val rating: Float?,
+        val stars: Int?,
+        val reviews: Int?
 )
