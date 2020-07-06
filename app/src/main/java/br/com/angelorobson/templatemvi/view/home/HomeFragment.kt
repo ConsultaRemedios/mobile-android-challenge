@@ -27,12 +27,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val gameAdapter = GameAdapter()
         setupRecyclerView(gameAdapter)
         val bannerClickSubject = PublishSubject.create<CarouselItem>()
-        val bannerClickObservable: Observable<CarouselItem> = bannerClickSubject.map { it }
 
         val disposable = Observable.mergeArray(
                 gameAdapter.gameClicks.map { GameClickedEvent(it) },
                 home_search_view.clicks().map { SearchViewClickedEvent },
-                bannerClickObservable.map { BannerClickedEvent(it.caption ?: "") }
+                bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") }
         )
                 .compose(getViewModel(HomeViewModel::class).init(InitialEvent))
                 .subscribe(

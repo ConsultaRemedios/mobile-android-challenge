@@ -47,4 +47,9 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
         mCompositeDisposable.add(disposable)
     }
 
+    override fun onDestroy() {
+        mCompositeDisposable.clear()
+        super.onDestroy()
+    }
+
 }

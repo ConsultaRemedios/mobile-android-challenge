@@ -129,28 +129,26 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
 
     private fun startVoiceRecognition() {
         if (mMicEnabled) {
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                    getString(R.string.speak_now))
-            startActivityForResult(intent, VOICE_RECOGNITION_CODE)
+            Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_PROMPT,
+                        getString(R.string.speak_now))
+
+                startActivityForResult(this, VOICE_RECOGNITION_CODE)
+            }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
-            val matches = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            game_search_search_bar.populateSearchText(matches?.get(0))
-            mSearchTermSubject.onNext(matches?.get(0)?.toLowerCase() ?: "")
-
+            data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.let {
+                val termVoiceRecognitionReturned = it[0]
+                game_search_search_bar.populateSearchText(termVoiceRecognitionReturned)
+                mSearchTermSubject.onNext(termVoiceRecognitionReturned)
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    private fun showKeyboard() {
-//        val im = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        im.showSoftInput(game_search_view, 0)
     }
 
     private fun setupRecyclerView(repositoryAdapter: GameFoundAdapter) {
