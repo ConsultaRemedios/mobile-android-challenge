@@ -31,6 +31,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val disposable = Observable.mergeArray(
                 gameAdapter.gameClicks.map { GameClickedEvent(it) },
                 home_search_view.clicks().map { SearchViewClickedEvent },
+                home_cart_floating_action_button.clicks().map { CartActionButtonClickedEvent },
                 bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") }
         )
                 .compose(getViewModel(HomeViewModel::class).init(InitialEvent))

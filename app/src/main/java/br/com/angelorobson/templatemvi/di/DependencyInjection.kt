@@ -3,6 +3,7 @@ package br.com.angelorobson.templatemvi.di
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.model.database.ApplicationDatabase
 import br.com.angelorobson.templatemvi.model.services.BannerService
@@ -14,6 +15,7 @@ import br.com.angelorobson.templatemvi.view.home.HomeViewModel
 import br.com.angelorobson.templatemvi.view.pullrequest.PullRequestViewModel
 import br.com.angelorobson.templatemvi.view.repositories.RepositoriesViewModel
 import br.com.angelorobson.templatemvi.view.searchgame.SearchGameViewModel
+import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartViewModel
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
 import br.com.angelorobson.templatemvi.view.utils.Navigator
@@ -122,6 +124,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchGameViewModel::class)
     abstract fun searchGameViewModel(viewModel: SearchGameViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ShoppingCartViewModel::class)
+    abstract fun shoppingCartViewModel(viewModel: ShoppingCartViewModel): ViewModel
 }
 
 
@@ -206,5 +213,17 @@ object RealModule {
     fun idlingResource(): IdlingResource = object : IdlingResource {
         override fun increment() {}
         override fun decrement() {}
+    }
+
+    @Provides
+    @Singleton
+    @JvmStatic
+    fun applicationDatabase(context: Context): ApplicationDatabase {
+        return Room.databaseBuilder(
+                context,
+                ApplicationDatabase::class.java,
+                "cr_challenge_database"
+        )
+                .build()
     }
 }

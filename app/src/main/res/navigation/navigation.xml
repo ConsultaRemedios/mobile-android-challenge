@@ -40,6 +40,9 @@
         <action
             android:id="@+id/webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/shoppingCardFragment"
+            app:destination="@id/shoppingCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
@@ -68,4 +71,9 @@
             android:name="url"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/shoppingCardFragment"
+        android:name="br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCardFragment"
+        android:label="fragment_shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" />
 </navigation>

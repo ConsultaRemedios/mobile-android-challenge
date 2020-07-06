@@ -7,8 +7,10 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.databinding.FragmentGameDetailBinding
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.utils.BindingFragment
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.fragment_game_detail.*
 
 
 class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
@@ -21,7 +23,11 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val disposable = Observable.empty<GameDetailEvent>()
+        val disposable = Observable.mergeArray(
+                game_Detail_add_item_card_floating_action_button.clicks().map {
+                    AddItemCardEvent(binding.item)
+                }
+        )
                 .compose(getViewModel(GameDetailViewModel::class).init(InitialEvent(args.id)))
                 .subscribe(
                         { model ->

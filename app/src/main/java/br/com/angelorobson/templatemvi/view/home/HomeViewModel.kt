@@ -37,6 +37,7 @@ fun homeUpdate(
         is GameClickedEvent -> dispatch(setOf(GameClickedEffect(spotlight = event.spotlight)))
         SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
         is BannerClickedEvent -> dispatch(setOf(BannerClickedEffect(event.url)))
+        CartActionButtonClickedEvent -> dispatch(setOf(CartActionButtonClickedEffect))
     }
 }
 
@@ -91,6 +92,9 @@ class HomeViewModel @Inject constructor(
                 }
                 .addAction(SearchViewClickedEffect::class.java) {
                     navigator.to(HomeFragmentDirections.searchGameFragment())
+                }
+                .addAction(CartActionButtonClickedEffect::class.java) {
+                    navigator.to(HomeFragmentDirections.shoppingCardFragment())
                 }
                 .addConsumer(BannerClickedEffect::class.java) { effect ->
                     navigator.to(HomeFragmentDirections.webViewFragment(effect.url))
