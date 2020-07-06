@@ -1,7 +1,9 @@
 package br.com.angelorobson.templatemvi.view.searchgame
 
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.speech.RecognizerIntent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,37 +11,43 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.searchgame.widgets.GameFoundAdapter
 import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
-import com.jakewharton.rxbinding3.widget.textChanges
+import com.wanderingcan.persistentsearch.PersistentSearchView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_search_game.*
 import java.util.concurrent.TimeUnit
+
+private val VOICE_RECOGNITION_CODE = 9999
 
 class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
 
     private val mCompositeDisposable = CompositeDisposable()
     private lateinit var mLayoutManager: LinearLayoutManager
+    private var mMicEnabled = false
 
+    private val mSearchTermSubject = PublishSubject.create<String>()
+    private var mSearchTerm: String = ""
 
     override fun onStart() {
         super.onStart()
+        mMicEnabled = isIntentAvailable(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH))
 
         val adapter = GameFoundAdapter()
         setupRecyclerView(adapter)
-
-        game_search_view.requestFocus()
-        showKeyboard()
+        initSearchBarListener(mSearchTermSubject)
 
         val disposable = Observable.mergeArray(
                 adapter.gameClicks.map { GameFoundClickedEvent(it) },
-                game_search_view.textChanges()
+                mSearchTermSubject
                         .skip(1)
+                        .distinctUntilChanged()
                         .debounce(100, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
                         .map {
                             game_search_progress_horizontal.setVisibleOrGone(true)
-                            SearchGameByTermEvent(it.toString())
+                            SearchGameByTermEvent(it.toLowerCase())
                         }
         )
                 .compose(getViewModel(SearchGameViewModel::class).init(InitialEvent()))
@@ -54,6 +62,8 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
                                     game_search_not_found_text_view.setVisibleOrGone(spotlights.isEmpty())
                                     adapter.submitList(spotlights)
                                     game_search_progress_horizontal.setVisibleOrGone(model.searchGameResult.isLoading)
+
+                                    game_search_search_bar.populateSearchText(mSearchTerm)
                                 }
                                 is SearchGameResult.Error -> {
                                     game_search_progress_horizontal.setVisibleOrGone(model.searchGameResult.isLoading)
@@ -68,9 +78,79 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
         mCompositeDisposable.add(disposable)
     }
 
+    private fun initSearchBarListener(searchTermSubject: PublishSubject<String>) {
+        game_search_search_bar.setOnSearchListener(object : PersistentSearchView.OnSearchListener {
+            override fun onSearchClosed() {
+
+            }
+
+            override fun onSearch(text: CharSequence?) {
+
+            }
+
+            override fun onSearchCleared() {
+                searchTermSubject.onNext("")
+                mSearchTerm = ""
+            }
+
+            override fun onSearchTermChanged(term: CharSequence?) {
+                searchTermSubject.onNext(term.toString())
+                mSearchTerm = term.toString()
+
+            }
+
+            override fun onSearchOpened() {
+
+            }
+
+        })
+
+
+        game_search_search_bar.setOnIconClickListener(object : PersistentSearchView.OnIconClickListener {
+            override fun OnEndIconClick() {
+                startVoiceRecognition()
+            }
+
+            override fun OnNavigationIconClick() {
+
+            }
+
+        })
+    }
+
+    private fun isIntentAvailable(intent: Intent): Boolean {
+        val mgr: PackageManager? = activity?.packageManager
+        if (mgr != null) {
+            val list = mgr.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+            return list.size > 0
+        }
+        return false
+    }
+
+    private fun startVoiceRecognition() {
+        if (mMicEnabled) {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                    getString(R.string.speak_now))
+            startActivityForResult(intent, VOICE_RECOGNITION_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == VOICE_RECOGNITION_CODE && resultCode == RESULT_OK) {
+            val matches = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            game_search_search_bar.populateSearchText(matches?.get(0))
+            mSearchTermSubject.onNext(matches?.get(0)?.toLowerCase() ?: "")
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun showKeyboard() {
-        val im = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        im.showSoftInput(game_search_view, 0)
+//        val im = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        im.showSoftInput(game_search_view, 0)
     }
 
     private fun setupRecyclerView(repositoryAdapter: GameFoundAdapter) {

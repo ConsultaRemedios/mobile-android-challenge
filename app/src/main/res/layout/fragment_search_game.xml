@@ -10,14 +10,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/white"
         android:orientation="vertical"
         tools:context=".view.searchgame.SearchGameFragment">
 
-        <EditText
-            android:id="@+id/game_search_view"
-            style="@style/EditTextSearchViewEnable"
-            android:layout_marginTop="16dp" />
+        <com.wanderingcan.persistentsearch.PersistentSearchView
+            android:id="@+id/game_search_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:endSrc="@drawable/ic_baseline_mic"
+            app:hint="@string/search"
+            app:hintAlwaysActive="true"
+            app:showMenu="false" />
+
 
         <ProgressBar
             android:id="@+id/game_search_progress_horizontal"

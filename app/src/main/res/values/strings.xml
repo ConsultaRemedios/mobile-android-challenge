@@ -21,10 +21,8 @@
     <!--    Detail Screen-->
     <string name="reviews" translatable="false">%1$s reviews</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Pesquisar</string>
     <string name="game_not_found">Jogo não encontrado</string>
+    <string name="speak_now">Pode falar agora</string>
 
 </resources>

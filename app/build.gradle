@@ -77,7 +77,7 @@ dependencies {
     implementation "com.spotify.mobius:mobius-core:$mobiusVersion"
     implementation "com.spotify.mobius:mobius-rx2:$mobiusVersion"
     implementation "com.spotify.mobius:mobius-android:$mobiusVersion"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
     testImplementation "com.spotify.mobius:mobius-test:$mobiusVersion"
 
     implementation "com.google.dagger:dagger:$daggerVersion"
@@ -101,6 +101,7 @@ dependencies {
 
     implementation "android.arch.paging:runtime:$pagingVersion"
     implementation "android.arch.paging:rxjava2:$pagingVersion"
+    implementation "com.wanderingcan.widget:persistentsearch:$persistentSearchVersion"
 
     implementation "com.github.ImaginativeShohag:Why-Not-Image-Carousel:$whyNotImageCarousel"
 
