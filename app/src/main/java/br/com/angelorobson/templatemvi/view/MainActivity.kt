@@ -1,11 +1,10 @@
 package br.com.angelorobson.templatemvi.view
 
-import android.graphics.Color
-import android.os.Build
+import android.R.attr.*
 import android.os.Bundle
-import android.view.View
-import android.view.View.*
-import android.view.WindowManager
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -15,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
