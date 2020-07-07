@@ -82,8 +82,9 @@ class GameDetailViewModel @Inject constructor(
                                 .switchMap { itemCart ->
                                     if (itemCart.id == 0) {
                                         val shoppingCart = ShoppingCart(
-                                                total = it.spotlight.discount,
+                                                totalWithDiscount = it.spotlight.discount,
                                                 quantity = 1,
+                                                totalWithoutDiscount = it.spotlight.price,
                                                 spotlight = it.spotlight
                                         )
 

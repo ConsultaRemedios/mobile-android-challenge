@@ -1,22 +1,27 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.angelorobson.templatemvi.R
+import br.com.angelorobson.templatemvi.databinding.FragmentGameDetailBinding
+import br.com.angelorobson.templatemvi.databinding.FragmentShoppingCartBinding
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.shoppingcart.widgets.ShoppingCardAdapter
+import br.com.angelorobson.templatemvi.view.utils.BindingFragment
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 
-class ShoppingCardFragment : Fragment(R.layout.fragment_shopping_cart) {
+class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
+
+    override fun getLayoutResId(): Int = R.layout.fragment_shopping_cart
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun onStart() {
-        super.onStart()
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = ShoppingCardAdapter()
         setupRecyclerView(adapter)
 
@@ -29,7 +34,11 @@ class ShoppingCardFragment : Fragment(R.layout.fragment_shopping_cart) {
 
                                 }
                                 is ShoppingCartModelResult.ShoppingCartItemsLoaded -> {
-                                    adapter.submitList(model.shoppingCartResult.shoppingItemsCart)
+                                    val result = model.shoppingCartResult
+                                    binding.itemsSize = result.itemsSize
+                                    binding.priceWithDiscount = result.totalWithDiscount
+                                    binding.priceWithoutDiscount = result.totalWithoutDiscount
+                                    adapter.submitList(result.shoppingItemsCart)
                                 }
                             }
                         },

@@ -1,9 +1,6 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
-import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
-import br.com.angelorobson.templatemvi.view.searchgame.SearchGameEffect.GameClickedEffect
-import br.com.angelorobson.templatemvi.view.searchgame.SearchGameEffect.ObserverSpotlightByTermEffect
 import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartEffect.ObserverShoppingCart
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
@@ -28,7 +25,10 @@ fun shoppingCartUpdate(
         is ShoppingItemsCartLoadedEvent -> next(
                 model.copy(
                         shoppingCartResult = ShoppingCartModelResult.ShoppingCartItemsLoaded(
-                                shoppingItemsCart = event.shoppingItemsCart
+                                shoppingItemsCart = event.shoppingItemsCart,
+                                totalWithoutDiscount = event.totalWithoutDiscount,
+                                totalWithDiscount = event.totalWithDiscount,
+                                itemsSize = event.itemsSize
                         )
                 )
         )
@@ -59,7 +59,19 @@ class ShoppingCartViewModel @Inject constructor(
                                 .map { shoppingCarts ->
                                     idlingResource.decrement()
 
-                                    ShoppingItemsCartLoadedEvent(shoppingCarts) as ShoppingCartEvent
+                                    val totalWithoutDiscount = shoppingCarts.map { it.totalWithoutDiscount }.reduce { acc, d ->
+                                        acc + d
+                                    }
+
+                                    val totalWithDiscount = shoppingCarts.map { it.totalWithDiscount }.reduce { acc, d ->
+                                        acc + d
+                                    }
+
+                                    ShoppingItemsCartLoadedEvent(
+                                            shoppingCarts,
+                                            totalWithDiscount = totalWithDiscount,
+                                            totalWithoutDiscount = totalWithoutDiscount,
+                                            itemsSize = shoppingCarts.size) as ShoppingCartEvent
                                 }.onErrorReturn {
                                     ShoppingCartExceptionsEvent(it.localizedMessage)
                                 }

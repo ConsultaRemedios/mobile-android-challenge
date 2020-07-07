@@ -24,5 +24,7 @@
     <string name="search">Pesquisar</string>
     <string name="game_not_found">Jogo não encontrado</string>
     <string name="speak_now">Pode falar agora</string>
+    <string name="products_size">Produtos (%1$s)</string>
+    <string name="total">Total</string>
 
 </resources>

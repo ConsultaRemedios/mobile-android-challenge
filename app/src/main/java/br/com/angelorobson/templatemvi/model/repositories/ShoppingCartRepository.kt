@@ -64,7 +64,8 @@ private fun mapToEntity(shoppingCart: ShoppingCart): ShoppingCartEntity {
     val game = shoppingCart.spotlight
     return ShoppingCartEntity(
             id = if (shoppingCart.id != 0) shoppingCart.id else 0,
-            total = shoppingCart.total,
+            totalWithDiscount = shoppingCart.totalWithDiscount,
+            totalWithoutDiscount = shoppingCart.totalWithoutDiscount,
             quantity = shoppingCart.quantity,
             gameEntity = GameEntity(
                     idGame = game.id,
@@ -81,7 +82,8 @@ private fun mapToDomain(cartEntity: ShoppingCartEntity): ShoppingCart {
     return ShoppingCart(
             id = cartEntity.id,
             quantity = cartEntity.quantity,
-            total = cartEntity.total,
+            totalWithDiscount = cartEntity.totalWithDiscount,
+            totalWithoutDiscount = cartEntity.totalWithoutDiscount,
             spotlight = Spotlight(
                     id = game.idGame,
                     price = game.price,

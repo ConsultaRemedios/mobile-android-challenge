@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey
 data class ShoppingCartEntity(
         @PrimaryKey(autoGenerate = true)
         val id: Int = 0,
-        val total: Double,
+        val totalWithDiscount: Double,
+        val totalWithoutDiscount: Double,
         val quantity: Int,
         @Embedded val gameEntity: GameEntity
 )

@@ -1,145 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#252525"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <data>
+
+        <variable
+            name="itemsSize"
+            type="Integer" />
+
+        <variable
+            name="priceWithoutDiscount"
+            type="Double" />
+
+        <variable
+            name="priceWithDiscount"
+            type="Double" />
+    </data>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="#252525"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            android:background="@color/bg_shopping_card_screen"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/game_search_progress_horizontal"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:indeterminate="true"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
+                android:layout_height="match_parent"
 
+                android:background="@color/bg_shopping_card_screen"
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/shopping_cart_recycler_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:clipToPadding="false"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/shopping_cart_linear_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="2"
-                tools:listitem="@layout/shopping_card_item" />
-
-            <LinearLayout
-                android:id="@+id/shopping_cart_linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#252525"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/shopping_cart_detail_purchase_relative_layout"
+                <ProgressBar
+                    android:id="@+id/game_search_progress_horizontal"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/shopping_cart_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/game_detail_pricing_discount_text_view">
+                    android:layout_marginEnd="8dp"
+                    android:clipToPadding="false"
+                    app:layout_constraintBottom_toTopOf="@+id/shopping_cart_linear_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/shopping_card_item" />
 
+                <LinearLayout
+                    android:id="@+id/shopping_cart_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#252525"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/shopping_cart_games_count_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/shopping_card_total_discount_text_view"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Produtos (7)"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/white"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/shopping_card_total_price_text_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="R$ 700,00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/white"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/shopping_cart_games_count_text_view" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/shopping_card_total_discount_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/shopping_purchase_button"
-                        android:layout_alignStart="@id/shopping_cart_games_count_text_view"
-                        android:layout_marginTop="8dp"
-                        android:text="Total"
-                        android:textAllCaps="true"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@id/shopping_cart_games_count_text_view"
-                        app:layout_constraintTop_toBottomOf="@id/shopping_cart_games_count_text_view" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/shopping_card_total_discount_currency_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/shopping_purchase_button"
-                        android:layout_alignEnd="@id/shopping_card_total_price_text_view"
-                        android:layout_marginTop="8dp"
-                        android:text="R$ 697,00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/shopping_card_total_price_text_view"
-                        app:layout_constraintTop_toBottomOf="@id/shopping_card_total_price_text_view" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/shopping_purchase_button"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/shopping_cart_detail_purchase_relative_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:backgroundTint="#1BB738"
-                        android:padding="12dp"
-                        android:text="Finalizar Compra"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/shopping_card_total_discount_currency_text_view" />
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/game_detail_pricing_discount_text_view">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_cart_games_count_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/shopping_card_total_discount_text_view"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@{String.format(@string/products_size, itemsSize)}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/white"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Produtos (7)" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_card_total_price_text_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/white"
+                            app:discount="@{priceWithoutDiscount}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/shopping_cart_games_count_text_view"
+                            tools:text="R$ 250" />
 
-    </ScrollView>
-</LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_card_total_discount_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/shopping_purchase_button"
+                            android:layout_alignStart="@id/shopping_cart_games_count_text_view"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/total"
+                            android:textAllCaps="true"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/shopping_cart_games_count_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/shopping_cart_games_count_text_view" />
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_card_total_discount_currency_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/shopping_purchase_button"
+                            android:layout_alignEnd="@id/shopping_card_total_price_text_view"
+                            android:layout_marginTop="8dp"
+                            android:text="R$ 697,00"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:convertToCurrency="@{priceWithDiscount}"
+                            app:layout_constraintEnd_toEndOf="@id/shopping_card_total_price_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/shopping_card_total_price_text_view" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/shopping_purchase_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:backgroundTint="#1BB738"
+                            android:padding="12dp"
+                            android:text="Finalizar Compra"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@id/shopping_card_total_discount_currency_text_view" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

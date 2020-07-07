@@ -12,7 +12,10 @@ sealed class ShoppingCartModelResult {
 
     data class ShoppingCartItemsLoaded(
             val shoppingItemsCart: List<ShoppingCart>,
-            val isLoading: Boolean = false
+            val isLoading: Boolean = false,
+            val totalWithDiscount: Double,
+            val totalWithoutDiscount: Double,
+            val itemsSize: Int
     ) : ShoppingCartModelResult()
 
     data class Error(
