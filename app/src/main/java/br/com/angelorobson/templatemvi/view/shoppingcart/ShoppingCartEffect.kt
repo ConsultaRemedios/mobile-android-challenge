@@ -8,4 +8,7 @@ sealed class ShoppingCartEffect {
     data class AddButtonItemClickedEffect(val shoppingCart: ShoppingCart) : ShoppingCartEffect()
     data class RemoveButtonItemClickedEffect(val shoppingCart: ShoppingCart) : ShoppingCartEffect()
     data class ClearButtonItemClickedEffect(val shoppingCart: ShoppingCart) : ShoppingCartEffect()
+    data class ButtonPurchaseEffect(val shoppingItemsCart: List<ShoppingCart>, val total: Double) : ShoppingCartEffect()
+    object ClearDatabaseEffect : ShoppingCartEffect()
+
 }

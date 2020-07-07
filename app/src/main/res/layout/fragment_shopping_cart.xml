@@ -20,6 +20,10 @@
         <variable
             name="freteValue"
             type="Double" />
+
+        <variable
+            name="isButtonPurchaseEnable"
+            type="Boolean" />
     </data>
 
 
@@ -181,6 +185,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:backgroundTint="@color/green"
+                            android:enabled="@{ isButtonPurchaseEnable ? true : false }"
                             android:padding="12dp"
                             android:text="@string/finish_purchase"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

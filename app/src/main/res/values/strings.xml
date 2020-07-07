@@ -32,5 +32,7 @@
     <string name="finish_purchase">Finalizar Compra</string>
     <string name="game_detail">Detalhes do Jogo</string>
     <string name="shopping_cart">Carrinho</string>
+    <string name="purchase_error">Houve um erro, por favor, tente novamente.</string>
+    <string name="purchase_sucessfully">Compra efetuada com sucesso!</string>
 
 </resources>

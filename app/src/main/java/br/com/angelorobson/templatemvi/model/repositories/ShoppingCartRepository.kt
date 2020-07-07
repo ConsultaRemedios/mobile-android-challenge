@@ -45,8 +45,18 @@ class ShoppingCartRepository @Inject constructor(
         }
     }
 
+    fun clearDatabase(): Completable {
+        return shoppingCartDao.clearDatabase()
+    }
+
     fun getCount(): Single<Int> {
         return shoppingCartDao.getCount()
+                .onErrorResumeNext { error ->
+                    if (error is EmptyResultSetException)
+                        Single.just(0)
+                    else
+                        Single.error(error)
+                }
     }
 
     fun getAll(): Observable<List<ShoppingCart>> {

@@ -11,6 +11,7 @@ import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.shoppingcart.widgets.ShoppingCardAdapter
 import br.com.angelorobson.templatemvi.view.utils.BindingFragment
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
@@ -22,6 +23,8 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
     override fun getLayoutResId(): Int = R.layout.fragment_shopping_cart
 
     private val compositeDisposable = CompositeDisposable()
+    private var mList = listOf<ShoppingCart>()
+    private var mTotalWithDiscount = 0.0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = ShoppingCardAdapter()
@@ -36,7 +39,8 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                     clearProductSubject.map {
                         ClearButtonItemClicked(it)
                     }
-                }
+                },
+                shopping_purchase_button.clicks().map { ButtonPurchaseClickedEvent(mList, mTotalWithDiscount) }
         )
                 .compose(getViewModel(ShoppingCartViewModel::class).init(InitialEvent))
                 .subscribe(
@@ -47,11 +51,15 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                                 }
                                 is ShoppingCartModelResult.ShoppingCartItemsLoaded -> {
                                     val result = model.shoppingCartResult
+                                    mList = result.shoppingItemsCart
+                                    mTotalWithDiscount = result.totalWithDiscount
+                                    binding.isButtonPurchaseEnable = mList.isNotEmpty()
+
                                     binding.totalQuantity = result.totalQuantity
-                                    binding.priceWithDiscount = result.totalWithDiscount
+                                    binding.priceWithDiscount = mTotalWithDiscount
                                     binding.priceWithoutDiscount = result.totalWithoutDiscount
                                     binding.freteValue = result.freteValue
-                                    adapter.submitList(result.shoppingItemsCart)
+                                    adapter.submitList(mList)
                                 }
                             }
                         },
@@ -75,7 +83,7 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         super.onDestroy()
     }
 
-    fun showConfirmDialog(shoppingCart: ShoppingCart, clearProductSubject: PublishSubject<ShoppingCart>) {
+    private fun showConfirmDialog(shoppingCart: ShoppingCart, clearProductSubject: PublishSubject<ShoppingCart>) {
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
 
         builder

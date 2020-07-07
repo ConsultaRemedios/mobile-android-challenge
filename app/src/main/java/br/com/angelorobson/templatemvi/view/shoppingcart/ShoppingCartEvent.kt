@@ -6,6 +6,9 @@ sealed class ShoppingCartEvent
 
 object InitialEvent : ShoppingCartEvent()
 data class RemoveButtonItemClicked(val shoppingCart: ShoppingCart) : ShoppingCartEvent()
+data class ButtonPurchaseClickedEvent(val shoppingItemsCart: List<ShoppingCart>, val total: Double) : ShoppingCartEvent()
+object PurchaseSuccessfully : ShoppingCartEvent()
+
 data class AddButtonItemClicked(val shoppingCart: ShoppingCart) : ShoppingCartEvent()
 data class ClearButtonItemClicked(val shoppingCart: ShoppingCart) : ShoppingCartEvent()
 data class ShoppingItemsCartLoadedEvent(val shoppingItemsCart: List<ShoppingCart>,

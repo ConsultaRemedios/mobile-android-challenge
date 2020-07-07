@@ -1,14 +1,15 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
+import android.widget.Toast
+import br.com.angelorobson.templatemvi.R
+import br.com.angelorobson.templatemvi.model.repositories.PurchaseRepository
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
 import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailEvent
 import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailExceptionEvent
 import br.com.angelorobson.templatemvi.view.gamedetail.StatusShoppingCartItemEvent
 import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartEffect.*
-import br.com.angelorobson.templatemvi.view.utils.ActivityService
-import br.com.angelorobson.templatemvi.view.utils.IdlingResource
-import br.com.angelorobson.templatemvi.view.utils.MobiusVM
-import br.com.angelorobson.templatemvi.view.utils.Navigator
+import br.com.angelorobson.templatemvi.view.utils.*
+import br.com.angelorobson.templatemvi.view.utils.HandlerErrorRemoteDataSource.validateStatusCode
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
@@ -45,12 +46,15 @@ fun shoppingCartUpdate(
         is RemoveButtonItemClicked -> dispatch(setOf(RemoveButtonItemClickedEffect(event.shoppingCart)))
         is AddButtonItemClicked -> dispatch(setOf(AddButtonItemClickedEffect(event.shoppingCart)))
         is ClearButtonItemClicked -> dispatch(setOf(ClearButtonItemClickedEffect(event.shoppingCart)))
+        is ButtonPurchaseClickedEvent -> dispatch(setOf(ButtonPurchaseEffect(event.shoppingItemsCart, total = event.total)))
+        is PurchaseSuccessfully -> dispatch(setOf(ClearDatabaseEffect))
     }
 }
 
 class ShoppingCartViewModel @Inject constructor(
         repository: ShoppingCartRepository,
         navigator: Navigator,
+        purchaseRepository: PurchaseRepository,
         activityService: ActivityService,
         idlingResource: IdlingResource
 ) : MobiusVM<ShoppingCartModel, ShoppingCartEvent, ShoppingCartEffect>(
@@ -102,7 +106,9 @@ class ShoppingCartViewModel @Inject constructor(
                                             totalQuantity = totalQuantity,
                                             freteValue = freteValue) as ShoppingCartEvent
                                 }.onErrorReturn {
-                                    ShoppingCartExceptionsEvent(it.localizedMessage)
+                                    val errorMessage = validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    ShoppingCartExceptionsEvent(errorMessage)
                                 }
 
                     }
@@ -122,7 +128,9 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toSingleDefault(InitialEvent as ShoppingCartEvent)
                                             .toObservable()
                                             .onErrorReturn {
-                                                ShoppingCartExceptionsEvent(it.localizedMessage)
+                                                val errorMessage = validateStatusCode(it)
+                                                activityService.activity.toast(errorMessage)
+                                                ShoppingCartExceptionsEvent(errorMessage)
                                             }
                                 }
 
@@ -143,7 +151,10 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toSingleDefault(InitialEvent as ShoppingCartEvent)
                                             .toObservable()
                                             .onErrorReturn {
-                                                ShoppingCartExceptionsEvent(it.localizedMessage)
+                                                val errorMessage = validateStatusCode(it)
+                                                activityService.activity.toast(errorMessage)
+
+                                                ShoppingCartExceptionsEvent(errorMessage)
                                             }
                                 }
 
@@ -157,7 +168,46 @@ class ShoppingCartViewModel @Inject constructor(
                                 .toSingleDefault(InitialEvent as ShoppingCartEvent)
                                 .toObservable()
                                 .onErrorReturn {
-                                    ShoppingCartExceptionsEvent(it.localizedMessage)
+                                    val errorMessage = validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+
+                                    ShoppingCartExceptionsEvent(errorMessage)
+                                }
+                    }
+                }
+                .addTransformer(ButtonPurchaseEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        val itemsIds = it.shoppingItemsCart.map { it.spotlight.id }
+                        val total = it.total
+
+                        purchaseRepository.checkout(itemsIds, total)
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .toSingleDefault(PurchaseSuccessfully as ShoppingCartEvent)
+                                .doAfterSuccess {
+                                    activityService.activity.toast(activityService.activity.getString(R.string.purchase_sucessfully))
+                                    navigator.to(ShoppingCardFragmentDirections.homeFragment())
+                                }
+                                .toObservable()
+                                .onErrorReturn {
+                                    activityService.activity.toast(activityService.activity.getString(R.string.purchase_error))
+                                    val errorMessage = validateStatusCode(it)
+                                    ShoppingCartExceptionsEvent(errorMessage)
+                                }
+
+                    }
+                }
+                .addTransformer(ClearDatabaseEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        repository.clearDatabase()
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .toSingleDefault(InitialEvent as ShoppingCartEvent)
+                                .toObservable()
+                                .onErrorReturn {
+                                    val errorMessage = validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    ShoppingCartExceptionsEvent(errorMessage)
                                 }
                     }
                 }

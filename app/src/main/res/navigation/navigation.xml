@@ -74,5 +74,9 @@
         android:id="@+id/shoppingCardFragment"
         android:name="br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCardFragment"
         android:label="@string/shopping_cart"
-        tools:layout="@layout/fragment_shopping_cart" />
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
