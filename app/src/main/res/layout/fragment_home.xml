@@ -47,9 +47,9 @@
                 android:id="@+id/home_spotlights_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_vertical"
                 android:layout_marginTop="16dp"
                 android:clipToPadding="false"
+                tools:itemCount="1"
                 tools:listitem="@layout/game_item" />
 
         </LinearLayout>
@@ -62,13 +62,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <com.andremion.counterfab.CounterFab
         android:id="@+id/home_cart_floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:src="@drawable/cart" />
+        android:backgroundTint="#DB4438"
+        android:src="@drawable/cart"
+        app:tint="@color/white"
+        app:backgroundTint="@color/colorAccent"
+        app:badgeBackgroundColor="@color/white"
+        app:badgePosition="RightTop"
+        app:badgeTextColor="#DB4438" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

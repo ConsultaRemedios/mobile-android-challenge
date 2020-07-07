@@ -23,6 +23,6 @@ abstract class ShoppingCartDao {
     abstract fun removeItem(idGame: Int): Completable
 
     @Query("SELECT COUNT(*) FROM ShoppingCartEntity")
-    abstract fun getCount(): Observable<Int>
+    abstract fun getCount(): Single<Int>
 
 }

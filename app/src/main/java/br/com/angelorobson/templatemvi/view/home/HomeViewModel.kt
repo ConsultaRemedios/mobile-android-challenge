@@ -1,6 +1,10 @@
 package br.com.angelorobson.templatemvi.view.home
 
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
+import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
+import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailEvent
+import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailExceptionEvent
+import br.com.angelorobson.templatemvi.view.gamedetail.StatusShoppingCartItemEvent
 import br.com.angelorobson.templatemvi.view.home.HomeEffect.*
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
@@ -28,21 +32,27 @@ fun homeUpdate(
         )
         is SpotlightLoadedEvent -> next(model.copy(
                 homeResult = HomeResult.SpotlightsLoaded(event.spotlights)
-        ))
+        ), setOf(GetItemCountEffect))
         is HomeExceptionEvent -> next(model.copy(
                 homeResult = HomeResult.Error(
                         errorMessage = event.errorMessage
                 )
         ))
         is GameClickedEvent -> dispatch(setOf(GameClickedEffect(spotlight = event.spotlight)))
-        SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
+        is SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
         is BannerClickedEvent -> dispatch(setOf(BannerClickedEffect(event.url)))
-        CartActionButtonClickedEvent -> dispatch(setOf(CartActionButtonClickedEffect))
+        is CartActionButtonClickedEvent -> dispatch(setOf(CartActionButtonClickedEffect))
+        is GetItemsCartCountEvent -> next(
+                model.copy(
+                        homeResult = HomeResult.ShoppingCartItemCount(event.count)
+                )
+        )
     }
 }
 
 class HomeViewModel @Inject constructor(
         repository: HomeServiceRepository,
+        shoppingCartRepository: ShoppingCartRepository,
         navigator: Navigator,
         activityService: ActivityService,
         idlingResource: IdlingResource
@@ -80,6 +90,22 @@ class HomeViewModel @Inject constructor(
                                     SpotlightLoadedEvent(
                                             spotlights = it
                                     ) as HomeEvent
+                                }
+                                .onErrorReturn {
+                                    HomeExceptionEvent(it.localizedMessage)
+                                }
+
+                    }
+                }
+                .addTransformer(GetItemCountEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        idlingResource.increment()
+                        shoppingCartRepository.getCount()
+                                .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map { count ->
+                                    GetItemsCartCountEvent(count) as HomeEvent
                                 }
                                 .onErrorReturn {
                                     HomeExceptionEvent(it.localizedMessage)

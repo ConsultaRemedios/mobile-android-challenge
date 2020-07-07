@@ -118,6 +118,7 @@ class GameDetailViewModel @Inject constructor(
                         shoppingCartRepository.getBy(it.spotlight!!.id)
                                 .toObservable()
                                 .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCart ->
                                     if (shoppingCart.id != 0) {
                                         StatusShoppingCartItemEvent(isCartItemAdded = true) as GameDetailEvent

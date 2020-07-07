@@ -52,6 +52,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                         CarouselItem(imageUrl = it.image, caption = it.url)
                                     })
                                 }
+                                is HomeResult.ShoppingCartItemCount -> {
+                                    val count = model.homeResult.count
+                                    if (count > 0) {
+                                        home_cart_floating_action_button.count = count
+                                    }
+                                }
                                 is HomeResult.Error -> {
                                     print(model.homeResult.errorMessage)
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)

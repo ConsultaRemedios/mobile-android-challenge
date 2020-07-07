@@ -21,6 +21,10 @@ sealed class HomeResult {
             val isLoading: Boolean = false
     ) : HomeResult()
 
+    data class ShoppingCartItemCount(
+            val count: Int
+    ) : HomeResult()
+
     data class Error(
             val errorMessage: String,
             val isLoading: Boolean = false

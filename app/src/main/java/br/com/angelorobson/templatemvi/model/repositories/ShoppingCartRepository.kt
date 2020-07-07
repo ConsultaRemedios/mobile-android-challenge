@@ -45,6 +45,10 @@ class ShoppingCartRepository @Inject constructor(
         }
     }
 
+    fun getCount(): Single<Int> {
+        return shoppingCartDao.getCount()
+    }
+
     fun getAll(): Observable<List<ShoppingCart>> {
         return shoppingCartDao.getAll()
                 .map { shoppingCartsEntities ->
