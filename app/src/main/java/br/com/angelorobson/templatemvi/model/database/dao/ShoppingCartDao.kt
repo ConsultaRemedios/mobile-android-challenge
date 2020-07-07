@@ -22,7 +22,7 @@ abstract class ShoppingCartDao {
     @Query("DELETE FROM ShoppingCartEntity WHERE idGame = :idGame")
     abstract fun removeItem(idGame: Int): Completable
 
-    @Query("SELECT COUNT(*) FROM ShoppingCartEntity")
+    @Query("SELECT SUM(quantity) FROM ShoppingCartEntity")
     abstract fun getCount(): Single<Int>
 
 }

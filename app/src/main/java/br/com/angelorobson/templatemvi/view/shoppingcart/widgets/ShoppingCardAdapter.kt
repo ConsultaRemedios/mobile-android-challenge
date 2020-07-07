@@ -10,6 +10,7 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.databinding.ShoppingCardItemBinding
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.view.utils.DiffUtilCallback
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.extensions.LayoutContainer
@@ -34,7 +35,7 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
                 )
         )
 
-        return ShoppingCartViewHolder(binding?.root!!, binding, addItemSubject, removeItemSubject, clearCartItemClicks)
+        return ShoppingCartViewHolder(binding?.root!!, binding, addItemSubject, removeItemSubject, clearCartItemSubject)
     }
 
     override fun onBindViewHolder(holder: ShoppingCartViewHolder, position: Int) {
@@ -50,14 +51,17 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
 class ShoppingCartViewHolder(
         override val containerView: View,
         private val binding: ShoppingCardItemBinding?,
-        private val gameClicksSubject: PublishSubject<Int>,
+        private val addItemClicksSubject: PublishSubject<Int>,
         private val removeItemSubject: PublishSubject<Int>,
-        private val clearCartItemClicks: Observable<ShoppingCart>
+        private val clearCartItemSubject: PublishSubject<Int>
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(shoppingCart: ShoppingCart) {
         binding?.apply {
             item = shoppingCart
+            shoppingCartAddItemImageButton.clicks().map { adapterPosition }.subscribe(addItemClicksSubject)
+            shoppingCartRemoveItemImageButton.clicks().map { adapterPosition }.subscribe(removeItemSubject)
+            shoppingCartClearCart.clicks().map { adapterPosition }.subscribe(clearCartItemSubject)
             executePendingBindings()
         }
     }

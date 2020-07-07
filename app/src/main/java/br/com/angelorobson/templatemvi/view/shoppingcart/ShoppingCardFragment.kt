@@ -25,7 +25,11 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         val adapter = ShoppingCardAdapter()
         setupRecyclerView(adapter)
 
-        val disposable = Observable.empty<ShoppingCartEvent>()
+        val disposable = Observable.mergeArray(
+                adapter.addItemClicks.map { AddButtonItemClicked(it) },
+                adapter.removeItemClicks.map { RemoveButtonItemClicked(it) },
+                adapter.clearCartItemClicks.map { ClearButtonItemClicked(it) }
+        )
                 .compose(getViewModel(ShoppingCartViewModel::class).init(InitialEvent))
                 .subscribe(
                         { model ->

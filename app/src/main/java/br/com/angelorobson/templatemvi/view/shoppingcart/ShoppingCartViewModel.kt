@@ -1,7 +1,10 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
-import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartEffect.ObserverShoppingCart
+import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailEvent
+import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailExceptionEvent
+import br.com.angelorobson.templatemvi.view.gamedetail.StatusShoppingCartItemEvent
+import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartEffect.*
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
 import br.com.angelorobson.templatemvi.view.utils.MobiusVM
@@ -38,6 +41,9 @@ fun shoppingCartUpdate(
                         shoppingCartResult = ShoppingCartModelResult.Error(errorMessage = event.errorMessage)
                 )
         )
+        is RemoveButtonItemClicked -> dispatch(setOf(RemoveButtonItemClickedEffect(event.shoppingCart)))
+        is AddButtonItemClicked -> dispatch(setOf(AddButtonItemClickedEffect(event.shoppingCart)))
+        is ClearButtonItemClicked -> dispatch(setOf(ClearButtonItemClickedEffect(event.shoppingCart)))
     }
 }
 
@@ -72,11 +78,11 @@ class ShoppingCartViewModel @Inject constructor(
                                         acc + d
                                     }
 
-                                    var freteValue = 0.0
-                                    repeat(shoppingCarts.size) {
-                                        freteValue += 10
+                                    val totalQuantity = shoppingCarts.map { it.quantity }.reduce { acc, d ->
+                                        acc + d
                                     }
 
+                                    var freteValue = totalQuantity * 10.toDouble()
 
                                     if (freteValue > 250) {
                                         freteValue = 0.0
@@ -90,6 +96,48 @@ class ShoppingCartViewModel @Inject constructor(
                                             freteValue = freteValue) as ShoppingCartEvent
                                 }.onErrorReturn {
                                     ShoppingCartExceptionsEvent(it.localizedMessage)
+                                }
+
+                    }
+                }
+                .addTransformer(AddButtonItemClickedEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        repository.getBy(it.shoppingCart.spotlight.id)
+                                .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .switchMap { itemCart ->
+                                    itemCart.totalWithDiscount += itemCart.spotlight.discount
+                                    itemCart.totalWithoutDiscount += itemCart.spotlight.price
+                                    itemCart.quantity += 1
+                                    repository.update(itemCart)
+                                            .subscribeOn(Schedulers.newThread())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .toSingleDefault(InitialEvent as ShoppingCartEvent)
+                                            .toObservable()
+                                            .onErrorReturn {
+                                                ShoppingCartExceptionsEvent(it.localizedMessage)
+                                            }
+                                }
+
+                    }
+                }
+                .addTransformer(RemoveButtonItemClickedEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        repository.getBy(it.shoppingCart.spotlight.id)
+                                .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .switchMap { itemCart ->
+                                    itemCart.totalWithDiscount -= itemCart.spotlight.discount
+                                    itemCart.totalWithoutDiscount -= itemCart.spotlight.price
+                                    itemCart.quantity -= 1
+                                    repository.update(itemCart)
+                                            .subscribeOn(Schedulers.newThread())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .toSingleDefault(InitialEvent as ShoppingCartEvent)
+                                            .toObservable()
+                                            .onErrorReturn {
+                                                ShoppingCartExceptionsEvent(it.localizedMessage)
+                                            }
                                 }
 
                     }
