@@ -67,7 +67,7 @@ class GameDetailViewModel @Inject constructor(
                                     ) as GameDetailEvent
                                 }.onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     GameDetailExceptionEvent(errorMessage)
                                 }
 
@@ -95,7 +95,7 @@ class GameDetailViewModel @Inject constructor(
                                                 .toObservable()
                                                 .onErrorReturn {
                                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                                    activityService.activity.toast(errorMessage)
+                                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                                     GameDetailExceptionEvent(errorMessage)
                                                 }
                                     } else
@@ -106,13 +106,13 @@ class GameDetailViewModel @Inject constructor(
                                                 .toObservable()
                                                 .onErrorReturn {
                                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                                    activityService.activity.toast(errorMessage)
+                                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                                     GameDetailExceptionEvent(errorMessage)
                                                 }
                                 }
                                 .onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     GameDetailExceptionEvent(errorMessage)
                                 }
 
@@ -133,7 +133,7 @@ class GameDetailViewModel @Inject constructor(
                                 }
                                 .onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     GameDetailExceptionEvent(errorMessage)
                                 }
 

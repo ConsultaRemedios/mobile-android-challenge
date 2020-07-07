@@ -9,6 +9,7 @@ import br.com.angelorobson.templatemvi.model.domains.Spotlight
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.home.widgets.GameAdapter
 import br.com.angelorobson.templatemvi.view.utils.GridSpacingItemDecoration
+import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -46,6 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 home_search_view.clicks().map { SearchViewClickedEvent },
                 home_cart_floating_action_button.clicks().map { CartActionButtonClickedEvent },
                 bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") },
+                home_try_again_button.clicks().map { InitialEvent },
                 initObservable.map { InitialEvent }
         )
                 .compose(getViewModel(HomeViewModel::class))
@@ -54,24 +56,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             when (model.homeResult) {
                                 is HomeResult.Loading -> {
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.SpotlightsLoaded -> {
                                     val list = model.homeResult.spotlights
                                     spotlights = list
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.BannerLoaded -> {
                                     val banners = model.homeResult.banners
                                     itemsCarousel.addAll(banners.map {
                                         CarouselItem(imageUrl = it.image, caption = it.url)
                                     })
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.ShoppingCartItemCount -> {
                                     val count = model.homeResult.count
                                     home_cart_floating_action_button.count = count
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.Error -> {
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(true)
                                 }
                             }
 

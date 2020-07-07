@@ -8,6 +8,17 @@
     android:background="@color/gray_color"
     android:orientation="vertical">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home_try_again_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/blue"
+        android:layout_gravity="center"
+        android:text="@string/try_again"
+        android:visibility="gone"
+        app:icon="@drawable/ic_refresh"
+        tools:visibility="visible" />
 
     <br.com.angelorobson.templatemvi.view.utils.SaveScrollNestedScrollViewer
         android:id="@+id/my_scroll_viewer"

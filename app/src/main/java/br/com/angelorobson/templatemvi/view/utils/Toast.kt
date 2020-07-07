@@ -10,3 +10,11 @@ fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
             duration
     ).show()
 }
+
+fun Context.toastWithResourceString(message: Int, duration: Int = Toast.LENGTH_LONG) {
+    Toast.makeText(
+            this,
+            message,
+            duration
+    ).show()
+}

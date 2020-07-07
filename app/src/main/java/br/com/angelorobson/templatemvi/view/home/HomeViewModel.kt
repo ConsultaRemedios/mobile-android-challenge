@@ -69,7 +69,7 @@ class HomeViewModel @Inject constructor(
                                     ) as HomeEvent
                                 }.onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 
@@ -89,7 +89,7 @@ class HomeViewModel @Inject constructor(
                                 }
                                 .onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 
@@ -107,7 +107,7 @@ class HomeViewModel @Inject constructor(
                                 }
                                 .onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 
