@@ -28,7 +28,8 @@ fun shoppingCartUpdate(
                                 shoppingItemsCart = event.shoppingItemsCart,
                                 totalWithoutDiscount = event.totalWithoutDiscount,
                                 totalWithDiscount = event.totalWithDiscount,
-                                itemsSize = event.itemsSize
+                                itemsSize = event.itemsSize,
+                                freteValue = event.freteValue
                         )
                 )
         )
@@ -54,24 +55,39 @@ class ShoppingCartViewModel @Inject constructor(
                     upstream.switchMap {
                         idlingResource.increment()
                         repository.getAll()
-                                .subscribeOn(Schedulers.io())
+                                .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCarts ->
                                     idlingResource.decrement()
 
-                                    val totalWithoutDiscount = shoppingCarts.map { it.totalWithoutDiscount }.reduce { acc, d ->
+                                    val totalWithoutDiscount = shoppingCarts.map {
+                                        it.totalWithoutDiscount
+                                    }.reduce { acc, d ->
                                         acc + d
                                     }
 
-                                    val totalWithDiscount = shoppingCarts.map { it.totalWithDiscount }.reduce { acc, d ->
+                                    val totalWithDiscount = shoppingCarts.map {
+                                        it.totalWithDiscount
+                                    }.reduce { acc, d ->
                                         acc + d
+                                    }
+
+                                    var freteValue = 0.0
+                                    repeat(shoppingCarts.size) {
+                                        freteValue += 10
+                                    }
+
+
+                                    if (freteValue > 250) {
+                                        freteValue = 0.0
                                     }
 
                                     ShoppingItemsCartLoadedEvent(
                                             shoppingCarts,
                                             totalWithDiscount = totalWithDiscount,
                                             totalWithoutDiscount = totalWithoutDiscount,
-                                            itemsSize = shoppingCarts.size) as ShoppingCartEvent
+                                            itemsSize = shoppingCarts.size,
+                                            freteValue = freteValue) as ShoppingCartEvent
                                 }.onErrorReturn {
                                     ShoppingCartExceptionsEvent(it.localizedMessage)
                                 }

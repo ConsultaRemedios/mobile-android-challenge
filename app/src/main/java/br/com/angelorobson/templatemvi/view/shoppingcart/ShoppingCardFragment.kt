@@ -38,6 +38,7 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                                     binding.itemsSize = result.itemsSize
                                     binding.priceWithDiscount = result.totalWithDiscount
                                     binding.priceWithoutDiscount = result.totalWithoutDiscount
+                                    binding.freteValue = result.freteValue
                                     adapter.submitList(result.shoppingItemsCart)
                                 }
                             }

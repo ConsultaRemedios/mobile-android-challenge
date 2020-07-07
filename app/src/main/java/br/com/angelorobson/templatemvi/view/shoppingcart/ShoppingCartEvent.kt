@@ -9,7 +9,8 @@ data class ShoppingItemsCartLoadedEvent(val shoppingItemsCart: List<ShoppingCart
                                         val isLoading: Boolean = false,
                                         val totalWithDiscount: Double,
                                         val totalWithoutDiscount: Double,
-                                        val itemsSize: Int) : ShoppingCartEvent()
+                                        val itemsSize: Int,
+                                        val freteValue: Double) : ShoppingCartEvent()
 
 data class ShoppingCartExceptionsEvent(val errorMessage: String) : ShoppingCartEvent()
 

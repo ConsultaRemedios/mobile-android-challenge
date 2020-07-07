@@ -16,6 +16,10 @@
         <variable
             name="priceWithDiscount"
             type="Double" />
+
+        <variable
+            name="freteValue"
+            type="Double" />
     </data>
 
 
@@ -89,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_above="@+id/shopping_card_total_discount_text_view"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="8dp"
                             android:text="@{String.format(@string/products_size, itemsSize)}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/white"
@@ -139,6 +143,36 @@
                             app:layout_constraintEnd_toEndOf="@id/shopping_card_total_price_text_view"
                             app:layout_constraintTop_toBottomOf="@id/shopping_card_total_price_text_view" />
 
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_card_total_frete_currency_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/shopping_purchase_button"
+                            android:layout_alignEnd="@id/shopping_card_total_price_text_view"
+                            android:layout_marginTop="8dp"
+                            android:text="R$ 100,00"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:convertToCurrency="@{freteValue}"
+                            app:layout_constraintEnd_toEndOf="@id/shopping_card_total_price_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/shopping_card_total_discount_currency_text_view" />
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/shopping_card_frete_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/frete"
+                            android:textAllCaps="true"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/shopping_cart_games_count_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/shopping_card_total_discount_text_view" />
+
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/shopping_purchase_button"
                             android:layout_width="match_parent"
@@ -151,7 +185,7 @@
                             android:text="Finalizar Compra"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textStyle="bold"
-                            app:layout_constraintTop_toBottomOf="@id/shopping_card_total_discount_currency_text_view" />
+                            app:layout_constraintTop_toBottomOf="@id/shopping_card_frete_text_view" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
