@@ -16,8 +16,14 @@ import kotlinx.android.extensions.LayoutContainer
 
 class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(DiffUtilCallback<ShoppingCart>()) {
 
-    private val gameClicksSubject = PublishSubject.create<Int>()
-    val gameClicks: Observable<ShoppingCart> = gameClicksSubject.map { position -> getItem(position) }
+    private val addItemSubject = PublishSubject.create<Int>()
+    val addItemClicks: Observable<ShoppingCart> = addItemSubject.map { position -> getItem(position) }
+
+    private val removeItemSubject = PublishSubject.create<Int>()
+    val removeItemClicks: Observable<ShoppingCart> = removeItemSubject.map { position -> getItem(position) }
+
+    private val clearCartItemSubject = PublishSubject.create<Int>()
+    val clearCartItemClicks: Observable<ShoppingCart> = clearCartItemSubject.map { position -> getItem(position) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingCartViewHolder {
         val binding = DataBindingUtil.bind<ShoppingCardItemBinding>(
@@ -28,7 +34,7 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
                 )
         )
 
-        return ShoppingCartViewHolder(binding?.root!!, binding, gameClicksSubject)
+        return ShoppingCartViewHolder(binding?.root!!, binding, addItemSubject, removeItemSubject, clearCartItemClicks)
     }
 
     override fun onBindViewHolder(holder: ShoppingCartViewHolder, position: Int) {
@@ -44,7 +50,9 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
 class ShoppingCartViewHolder(
         override val containerView: View,
         private val binding: ShoppingCardItemBinding?,
-        private val gameClicksSubject: PublishSubject<Int>
+        private val gameClicksSubject: PublishSubject<Int>,
+        private val removeItemSubject: PublishSubject<Int>,
+        private val clearCartItemClicks: Observable<ShoppingCart>
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(shoppingCart: ShoppingCart) {
