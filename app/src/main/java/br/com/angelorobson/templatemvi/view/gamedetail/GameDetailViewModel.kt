@@ -1,7 +1,6 @@
 package br.com.angelorobson.templatemvi.view.gamedetail
 
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
-import br.com.angelorobson.templatemvi.model.domains.Spotlight
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
@@ -29,12 +28,19 @@ fun gameUpdate(
                         gameDetailResult = GameDetailResult.Error(errorMessage = event.errorMessage)
                 )
         )
-        is GameLoadedEvent -> next(model.copy(
+        is GameLoadedEvent -> next<GameDetailModel, GameDetailEffect>(model.copy(
                 gameDetailResult = GameDetailResult.GameLoaded(
                         spotlight = event.spotlight
                 )
-        ))
-        is AddItemCardEvent -> dispatch(setOf(AddItemCardEventEffect(event.spotlight)))
+        ),
+                setOf(GetItemCartEffect(event.spotlight))
+        )
+        is AddOrRemoveItemCardEvent -> dispatch(setOf(AddOrRemoveItemCardEffect(event.spotlight)))
+        is StatusShoppingCartItemEvent -> next(
+                model.copy(
+                        gameDetailResult = GameDetailResult.ItemCartStatusResult(event.isCartItemAdded)
+                )
+        )
     }
 }
 
@@ -68,22 +74,61 @@ class GameDetailViewModel @Inject constructor(
 
                     }
                 }
-                .addTransformer(AddItemCardEventEffect::class.java) { upstream ->
+                .addTransformer(AddOrRemoveItemCardEffect::class.java) { upstream ->
                     upstream.switchMap {
-                        val shoppingCart = ShoppingCart(
-                                total = 100.0,
-                                quantity = 1,
-                                spotlight = it.spotlight!!
-                        )
-                        shoppingCartRepository
-                                .addItem(shoppingCart)
-                                .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .toSingleDefault(GameDetailExceptionEvent(it.toString()))
+                        shoppingCartRepository.getBy(it.spotlight!!.id)
                                 .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .switchMap { itemCart ->
+                                    if (itemCart.id == 0) {
+                                        val shoppingCart = ShoppingCart(
+                                                total = it.spotlight.discount,
+                                                quantity = 1,
+                                                spotlight = it.spotlight
+                                        )
+
+                                        shoppingCartRepository
+                                                .addItem(shoppingCart)
+                                                .subscribeOn(Schedulers.newThread())
+                                                .observeOn(AndroidSchedulers.mainThread())
+                                                .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = true) as GameDetailEvent)
+                                                .toObservable()
+                                                .onErrorReturn {
+                                                    GameDetailExceptionEvent(it.localizedMessage)
+                                                }
+                                    } else
+                                        shoppingCartRepository.remove(itemCart)
+                                                .subscribeOn(Schedulers.newThread())
+                                                .observeOn(AndroidSchedulers.mainThread())
+                                                .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = false) as GameDetailEvent)
+                                                .toObservable()
+                                                .onErrorReturn {
+                                                    GameDetailExceptionEvent(it.localizedMessage)
+                                                }
+                                }
                                 .onErrorReturn {
                                     GameDetailExceptionEvent(it.localizedMessage)
                                 }
+
+
+                    }
+                }
+                .addTransformer(GetItemCartEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        shoppingCartRepository.getBy(it.spotlight!!.id)
+                                .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .map { shoppingCart ->
+                                    if (shoppingCart.id != 0) {
+                                        StatusShoppingCartItemEvent(isCartItemAdded = true) as GameDetailEvent
+                                    } else
+                                        StatusShoppingCartItemEvent(isCartItemAdded = false) as GameDetailEvent
+                                }
+                                .onErrorReturn {
+                                    GameDetailExceptionEvent(it.localizedMessage)
+                                }
+
+
                     }
                 }
                 .build()

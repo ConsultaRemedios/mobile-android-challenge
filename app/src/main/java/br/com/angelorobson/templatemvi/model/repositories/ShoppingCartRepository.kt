@@ -1,13 +1,12 @@
 package br.com.angelorobson.templatemvi.model.repositories
 
+import androidx.room.EmptyResultSetException
 import br.com.angelorobson.templatemvi.model.database.dao.ShoppingCartDao
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.model.domains.Spotlight
 import br.com.angelorobson.templatemvi.model.entities.GameEntity
 import br.com.angelorobson.templatemvi.model.entities.ShoppingCartEntity
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
+import io.reactivex.*
 import javax.inject.Inject
 
 class ShoppingCartRepository @Inject constructor(
@@ -31,8 +30,19 @@ class ShoppingCartRepository @Inject constructor(
     fun remove(shoppingCart: ShoppingCart): Completable {
         return Single.fromCallable { mapToEntity(shoppingCart) }
                 .flatMapCompletable { shoppingCartEntity ->
-                    shoppingCartDao.removeItem(shoppingCartEntity)
+                    shoppingCartDao.removeItem(shoppingCartEntity.gameEntity.idGame)
                 }
+    }
+
+    fun getBy(idGame: Int): Single<ShoppingCart> {
+        return shoppingCartDao.getBy(idGame).map {
+            mapToDomain(it)
+        }.onErrorResumeNext { error ->
+            if (error is EmptyResultSetException)
+                Single.just(ShoppingCart())
+            else
+                Single.error(error)
+        }
     }
 
     fun getAll(): Observable<List<ShoppingCart>> {
@@ -49,6 +59,7 @@ class ShoppingCartRepository @Inject constructor(
 private fun mapToEntity(shoppingCart: ShoppingCart): ShoppingCartEntity {
     val game = shoppingCart.spotlight
     return ShoppingCartEntity(
+            id = if (shoppingCart.id != 0) shoppingCart.id else 0,
             total = shoppingCart.total,
             quantity = shoppingCart.quantity,
             gameEntity = GameEntity(

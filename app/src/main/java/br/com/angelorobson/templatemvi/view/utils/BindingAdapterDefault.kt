@@ -1,17 +1,20 @@
 package br.com.angelorobson.templatemvi.view.utils
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.view.View
 import android.view.View.*
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import br.com.angelorobson.templatemvi.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.NumberFormat
 import java.util.*
 

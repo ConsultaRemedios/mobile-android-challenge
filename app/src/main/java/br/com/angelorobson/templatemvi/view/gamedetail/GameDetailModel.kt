@@ -1,5 +1,6 @@
 package br.com.angelorobson.templatemvi.view.gamedetail
 
+import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.model.domains.Spotlight
 
 data class GameDetailModel(
@@ -13,6 +14,10 @@ sealed class GameDetailResult {
     data class GameLoaded(
             val spotlight: Spotlight,
             val isLoading: Boolean = false
+    ) : GameDetailResult()
+
+    data class ItemCartStatusResult(
+            val isCartItemAdded: Boolean = false
     ) : GameDetailResult()
 
     data class Error(

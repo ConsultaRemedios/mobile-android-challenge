@@ -25,7 +25,7 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val disposable = Observable.mergeArray(
                 game_Detail_add_item_card_floating_action_button.clicks().map {
-                    AddItemCardEvent(binding.item)
+                    AddOrRemoveItemCardEvent(binding.item)
                 }
         )
                 .compose(getViewModel(GameDetailViewModel::class).init(InitialEvent(args.id)))
@@ -40,9 +40,13 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
                                     binding.item = spotlight
                                     binding.isProgressBarVisible = model.gameDetailResult.isLoading
                                 }
+                                is GameDetailResult.ItemCartStatusResult -> {
+                                    binding.isItemAdded = model.gameDetailResult.isCartItemAdded
+                                }
                                 is GameDetailResult.Error -> {
                                     binding.isProgressBarVisible = model.gameDetailResult.isLoading
                                 }
+
                             }
                         },
                         {
