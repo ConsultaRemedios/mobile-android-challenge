@@ -1,8 +1,12 @@
 package br.com.angelorobson.templatemvi.view.gamedetail
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.databinding.FragmentGameDetailBinding
 import br.com.angelorobson.templatemvi.view.getViewModel
@@ -23,6 +27,8 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
+
         val disposable = Observable.mergeArray(
                 game_Detail_add_item_card_floating_action_button.clicks().map {
                     AddOrRemoveItemCardEvent(binding.item)
@@ -65,6 +71,17 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
                 )
 
         mCompositeDisposable.add(disposable)
+    }
+
+    private fun setupToolbar() {
+        val toolbar = toolbar
+        activity?.setActionBar(toolbar)
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+        activity?.actionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
+        activity?.actionBar?.title = null
+        toolbar.setNavigationOnClickListener {
+            Navigation.findNavController(it).popBackStack()
+        }
     }
 
     override fun onDestroy() {
