@@ -2,14 +2,8 @@ package br.com.angelorobson.templatemvi.view.home
 
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
-import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailEvent
-import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailExceptionEvent
-import br.com.angelorobson.templatemvi.view.gamedetail.StatusShoppingCartItemEvent
 import br.com.angelorobson.templatemvi.view.home.HomeEffect.*
-import br.com.angelorobson.templatemvi.view.utils.ActivityService
-import br.com.angelorobson.templatemvi.view.utils.IdlingResource
-import br.com.angelorobson.templatemvi.view.utils.MobiusVM
-import br.com.angelorobson.templatemvi.view.utils.Navigator
+import br.com.angelorobson.templatemvi.view.utils.*
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
@@ -74,7 +68,9 @@ class HomeViewModel @Inject constructor(
                                             banners = it
                                     ) as HomeEvent
                                 }.onErrorReturn {
-                                    HomeExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    HomeExceptionEvent(errorMessage)
                                 }
 
                     }
@@ -92,7 +88,9 @@ class HomeViewModel @Inject constructor(
                                     ) as HomeEvent
                                 }
                                 .onErrorReturn {
-                                    HomeExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    HomeExceptionEvent(errorMessage)
                                 }
 
                     }
@@ -108,7 +106,9 @@ class HomeViewModel @Inject constructor(
                                     GetItemsCartCountEvent(count) as HomeEvent
                                 }
                                 .onErrorReturn {
-                                    HomeExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    HomeExceptionEvent(errorMessage)
                                 }
 
                     }

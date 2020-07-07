@@ -3,10 +3,7 @@ package br.com.angelorobson.templatemvi.view.gamedetail
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
 import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
-import br.com.angelorobson.templatemvi.view.utils.ActivityService
-import br.com.angelorobson.templatemvi.view.utils.IdlingResource
-import br.com.angelorobson.templatemvi.view.utils.MobiusVM
-import br.com.angelorobson.templatemvi.view.utils.Navigator
+import br.com.angelorobson.templatemvi.view.utils.*
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
@@ -69,7 +66,9 @@ class GameDetailViewModel @Inject constructor(
                                             spotlight = game
                                     ) as GameDetailEvent
                                 }.onErrorReturn {
-                                    GameDetailExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    GameDetailExceptionEvent(errorMessage)
                                 }
 
                     }
@@ -95,7 +94,9 @@ class GameDetailViewModel @Inject constructor(
                                                 .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = true) as GameDetailEvent)
                                                 .toObservable()
                                                 .onErrorReturn {
-                                                    GameDetailExceptionEvent(it.localizedMessage)
+                                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                                    activityService.activity.toast(errorMessage)
+                                                    GameDetailExceptionEvent(errorMessage)
                                                 }
                                     } else
                                         shoppingCartRepository.remove(itemCart)
@@ -104,11 +105,15 @@ class GameDetailViewModel @Inject constructor(
                                                 .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = false) as GameDetailEvent)
                                                 .toObservable()
                                                 .onErrorReturn {
-                                                    GameDetailExceptionEvent(it.localizedMessage)
+                                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                                    activityService.activity.toast(errorMessage)
+                                                    GameDetailExceptionEvent(errorMessage)
                                                 }
                                 }
                                 .onErrorReturn {
-                                    GameDetailExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    GameDetailExceptionEvent(errorMessage)
                                 }
 
 
@@ -127,7 +132,9 @@ class GameDetailViewModel @Inject constructor(
                                         StatusShoppingCartItemEvent(isCartItemAdded = false) as GameDetailEvent
                                 }
                                 .onErrorReturn {
-                                    GameDetailExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toast(errorMessage)
+                                    GameDetailExceptionEvent(errorMessage)
                                 }
 
 
