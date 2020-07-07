@@ -8,8 +8,20 @@
     android:background="@color/gray_color"
     android:orientation="vertical">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/home_try_again_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/blue"
+        android:layout_gravity="center"
+        android:text="@string/try_again"
+        android:visibility="gone"
+        app:icon="@drawable/ic_refresh"
+        tools:visibility="visible" />
 
-    <androidx.core.widget.NestedScrollView
+    <br.com.angelorobson.templatemvi.view.utils.SaveScrollNestedScrollViewer
+        android:id="@+id/my_scroll_viewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -47,14 +59,14 @@
                 android:id="@+id/home_spotlights_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_vertical"
                 android:layout_marginTop="16dp"
                 android:clipToPadding="false"
+                tools:itemCount="1"
                 tools:listitem="@layout/game_item" />
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </br.com.angelorobson.templatemvi.view.utils.SaveScrollNestedScrollViewer>
 
     <ProgressBar
         android:id="@+id/home_progress_bar"
@@ -62,12 +74,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <com.andremion.counterfab.CounterFab
+        android:id="@+id/home_cart_floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:src="@drawable/cart" />
+        android:backgroundTint="#DB4438"
+        android:src="@drawable/cart"
+        app:backgroundTint="@color/colorAccent"
+        app:badgeBackgroundColor="@color/white"
+        app:badgePosition="RightTop"
+        app:badgeTextColor="#DB4438"
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

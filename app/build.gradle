@@ -73,6 +73,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "com.jakewharton.rxbinding3:rxbinding:$rxbindingVersion"
+    implementation 'com.github.andremion:counterfab:v1.2.2'
 
     implementation "com.spotify.mobius:mobius-core:$mobiusVersion"
     implementation "com.spotify.mobius:mobius-rx2:$mobiusVersion"
@@ -105,6 +106,10 @@ dependencies {
 
     implementation "com.github.ImaginativeShohag:Why-Not-Image-Carousel:$whyNotImageCarousel"
 
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     testImplementation "junit:junit:$junitVersion"
 

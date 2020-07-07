@@ -5,6 +5,6 @@
         android:width="1dp"
         android:color="#cccccc" />
     <solid android:color="@color/bg_shopping_card_screen" />
-    <corners android:radius="2dp" />
+    <corners android:radius="3dp" />
 
 </shape>

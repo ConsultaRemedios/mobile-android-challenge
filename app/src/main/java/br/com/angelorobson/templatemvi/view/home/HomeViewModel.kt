@@ -1,11 +1,9 @@
 package br.com.angelorobson.templatemvi.view.home
 
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
+import br.com.angelorobson.templatemvi.model.repositories.ShoppingCartRepository
 import br.com.angelorobson.templatemvi.view.home.HomeEffect.*
-import br.com.angelorobson.templatemvi.view.utils.ActivityService
-import br.com.angelorobson.templatemvi.view.utils.IdlingResource
-import br.com.angelorobson.templatemvi.view.utils.MobiusVM
-import br.com.angelorobson.templatemvi.view.utils.Navigator
+import br.com.angelorobson.templatemvi.view.utils.*
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
@@ -28,20 +26,27 @@ fun homeUpdate(
         )
         is SpotlightLoadedEvent -> next(model.copy(
                 homeResult = HomeResult.SpotlightsLoaded(event.spotlights)
-        ))
+        ), setOf(GetItemCountEffect))
         is HomeExceptionEvent -> next(model.copy(
                 homeResult = HomeResult.Error(
                         errorMessage = event.errorMessage
                 )
         ))
         is GameClickedEvent -> dispatch(setOf(GameClickedEffect(spotlight = event.spotlight)))
-        SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
+        is SearchViewClickedEvent -> dispatch(setOf(SearchViewClickedEffect))
         is BannerClickedEvent -> dispatch(setOf(BannerClickedEffect(event.url)))
+        is CartActionButtonClickedEvent -> dispatch(setOf(CartActionButtonClickedEffect))
+        is GetItemsCartCountEvent -> next(
+                model.copy(
+                        homeResult = HomeResult.ShoppingCartItemCount(event.count)
+                )
+        )
     }
 }
 
 class HomeViewModel @Inject constructor(
         repository: HomeServiceRepository,
+        shoppingCartRepository: ShoppingCartRepository,
         navigator: Navigator,
         activityService: ActivityService,
         idlingResource: IdlingResource
@@ -63,7 +68,9 @@ class HomeViewModel @Inject constructor(
                                             banners = it
                                     ) as HomeEvent
                                 }.onErrorReturn {
-                                    HomeExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    HomeExceptionEvent(errorMessage)
                                 }
 
                     }
@@ -81,7 +88,27 @@ class HomeViewModel @Inject constructor(
                                     ) as HomeEvent
                                 }
                                 .onErrorReturn {
-                                    HomeExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    HomeExceptionEvent(errorMessage)
+                                }
+
+                    }
+                }
+                .addTransformer(GetItemCountEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        idlingResource.increment()
+                        shoppingCartRepository.getCount()
+                                .toObservable()
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .map { count ->
+                                    GetItemsCartCountEvent(count) as HomeEvent
+                                }
+                                .onErrorReturn {
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    HomeExceptionEvent(errorMessage)
                                 }
 
                     }
@@ -91,6 +118,9 @@ class HomeViewModel @Inject constructor(
                 }
                 .addAction(SearchViewClickedEffect::class.java) {
                     navigator.to(HomeFragmentDirections.searchGameFragment())
+                }
+                .addAction(CartActionButtonClickedEffect::class.java) {
+                    navigator.to(HomeFragmentDirections.shoppingCardFragment())
                 }
                 .addConsumer(BannerClickedEffect::class.java) { effect ->
                     navigator.to(HomeFragmentDirections.webViewFragment(effect.url))

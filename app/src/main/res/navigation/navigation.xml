@@ -29,7 +29,6 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="br.com.angelorobson.templatemvi.view.home.HomeFragment"
-        android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/gameDetailFragment"
@@ -40,11 +39,14 @@
         <action
             android:id="@+id/webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/shoppingCardFragment"
+            app:destination="@id/shoppingCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
         android:name="br.com.angelorobson.templatemvi.view.gamedetail.GameDetailFragment"
-        android:label="fragment_game_detail"
+        android:label="@string/game_detail"
         tools:layout="@layout/fragment_game_detail" >
         <argument
             android:name="id"
@@ -67,5 +69,14 @@
         <argument
             android:name="url"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingCardFragment"
+        android:name="br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCardFragment"
+        android:label="@string/shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

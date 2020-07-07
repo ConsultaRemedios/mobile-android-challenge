@@ -2,10 +2,7 @@ package br.com.angelorobson.templatemvi.view.searchgame
 
 import br.com.angelorobson.templatemvi.model.repositories.HomeServiceRepository
 import br.com.angelorobson.templatemvi.view.searchgame.SearchGameEffect.*
-import br.com.angelorobson.templatemvi.view.utils.ActivityService
-import br.com.angelorobson.templatemvi.view.utils.IdlingResource
-import br.com.angelorobson.templatemvi.view.utils.MobiusVM
-import br.com.angelorobson.templatemvi.view.utils.Navigator
+import br.com.angelorobson.templatemvi.view.utils.*
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.dispatch
 import com.spotify.mobius.Next.next
@@ -60,7 +57,9 @@ class SearchGameViewModel @Inject constructor(
                                             gamesFound
                                     ) as SearchGameEvent
                                 }.onErrorReturn {
-                                    SearchGameExceptionEvent(it.localizedMessage)
+                                    val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    SearchGameExceptionEvent(errorMessage)
                                 }
 
                     }

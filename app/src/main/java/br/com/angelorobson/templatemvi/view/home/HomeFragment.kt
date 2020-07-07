@@ -1,12 +1,15 @@
 package br.com.angelorobson.templatemvi.view.home
 
+import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.angelorobson.templatemvi.R
+import br.com.angelorobson.templatemvi.model.domains.Spotlight
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.home.widgets.GameAdapter
 import br.com.angelorobson.templatemvi.view.utils.GridSpacingItemDecoration
+import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -18,45 +21,68 @@ import org.imaginativeworld.whynotimagecarousel.OnItemClickListener
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    companion object {
+        var myScrollViewerInstanceState: Parcelable? = null
+    }
+
     private val mCompositeDisposable = CompositeDisposable()
     private val itemsCarousel = arrayListOf<CarouselItem>()
+    private var spotlights = listOf<Spotlight>()
 
-    override fun onStart() {
-        super.onStart()
+
+    override fun onResume() {
+        super.onResume()
+
+        if (myScrollViewerInstanceState != null) {
+            my_scroll_viewer.onRestoreInstanceState(myScrollViewerInstanceState)
+        }
 
         val gameAdapter = GameAdapter()
         setupRecyclerView(gameAdapter)
         val bannerClickSubject = PublishSubject.create<CarouselItem>()
+        val initObservable = Observable.just(1)
 
         val disposable = Observable.mergeArray(
                 gameAdapter.gameClicks.map { GameClickedEvent(it) },
                 home_search_view.clicks().map { SearchViewClickedEvent },
-                bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") }
+                home_cart_floating_action_button.clicks().map { CartActionButtonClickedEvent },
+                bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") },
+                home_try_again_button.clicks().map { InitialEvent },
+                initObservable.map { InitialEvent }
         )
-                .compose(getViewModel(HomeViewModel::class).init(InitialEvent))
+                .compose(getViewModel(HomeViewModel::class))
                 .subscribe(
                         { model ->
                             when (model.homeResult) {
                                 is HomeResult.Loading -> {
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.SpotlightsLoaded -> {
-                                    val spotlights = model.homeResult.spotlights
-                                    gameAdapter.submitList(spotlights)
+                                    val list = model.homeResult.spotlights
+                                    spotlights = list
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.BannerLoaded -> {
                                     val banners = model.homeResult.banners
                                     itemsCarousel.addAll(banners.map {
                                         CarouselItem(imageUrl = it.image, caption = it.url)
                                     })
+                                    home_try_again_button.setVisibleOrGone(false)
+                                }
+                                is HomeResult.ShoppingCartItemCount -> {
+                                    val count = model.homeResult.count
+                                    home_cart_floating_action_button.count = count
+                                    home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.Error -> {
-                                    print(model.homeResult.errorMessage)
                                     hideOrVisibleProgressBar(model.homeResult.isLoading)
+                                    home_try_again_button.setVisibleOrGone(true)
                                 }
                             }
 
+                            gameAdapter.submitList(spotlights)
                             home_carousel.addData(itemsCarousel)
                             home_carousel.onItemClickListener = object : OnItemClickListener {
                                 override fun onClick(position: Int, carouselItem: CarouselItem) {
@@ -100,6 +126,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroy() {
         mCompositeDisposable.clear()
         super.onDestroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        myScrollViewerInstanceState = my_scroll_viewer.onSaveInstanceState()
     }
 
 }
