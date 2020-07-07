@@ -18,7 +18,6 @@ class GameDetailFragment : BindingFragment<FragmentGameDetailBinding>() {
     private val args: GameDetailFragmentArgs by navArgs()
     private val mCompositeDisposable = CompositeDisposable()
 
-
     override fun getLayoutResId(): Int = R.layout.fragment_game_detail
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

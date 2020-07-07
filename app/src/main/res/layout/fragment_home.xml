@@ -9,7 +9,8 @@
     android:orientation="vertical">
 
 
-    <androidx.core.widget.NestedScrollView
+    <br.com.angelorobson.templatemvi.view.utils.SaveScrollNestedScrollViewer
+        android:id="@+id/my_scroll_viewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -54,7 +55,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </br.com.angelorobson.templatemvi.view.utils.SaveScrollNestedScrollViewer>
 
     <ProgressBar
         android:id="@+id/home_progress_bar"
@@ -71,11 +72,11 @@
         android:layout_margin="16dp"
         android:backgroundTint="#DB4438"
         android:src="@drawable/cart"
-        app:tint="@color/white"
         app:backgroundTint="@color/colorAccent"
         app:badgeBackgroundColor="@color/white"
         app:badgePosition="RightTop"
-        app:badgeTextColor="#DB4438" />
+        app:badgeTextColor="#DB4438"
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
