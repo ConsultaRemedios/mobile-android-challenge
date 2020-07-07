@@ -15,7 +15,7 @@ sealed class ShoppingCartModelResult {
             val isLoading: Boolean = false,
             val totalWithDiscount: Double,
             val totalWithoutDiscount: Double,
-            val itemsSize: Int,
+            val totalQuantity: Int,
             val freteValue: Double
     ) : ShoppingCartModelResult()
 

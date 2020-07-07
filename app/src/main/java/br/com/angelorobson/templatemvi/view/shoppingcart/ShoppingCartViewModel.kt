@@ -15,6 +15,7 @@ import com.spotify.mobius.Next.next
 import com.spotify.mobius.Update
 import com.spotify.mobius.rx2.RxMobius
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.internal.operators.single.SingleInternalHelper.toObservable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -31,7 +32,7 @@ fun shoppingCartUpdate(
                                 shoppingItemsCart = event.shoppingItemsCart,
                                 totalWithoutDiscount = event.totalWithoutDiscount,
                                 totalWithDiscount = event.totalWithDiscount,
-                                itemsSize = event.itemsSize,
+                                totalQuantity = event.totalQuantity,
                                 freteValue = event.freteValue
                         )
                 )
@@ -65,34 +66,40 @@ class ShoppingCartViewModel @Inject constructor(
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCarts ->
                                     idlingResource.decrement()
+                                    var totalWithoutDiscount = 0.0
+                                    var totalWithDiscount = 0.0
+                                    var freteValue = 0.0
+                                    var totalQuantity = 0
 
-                                    val totalWithoutDiscount = shoppingCarts.map {
-                                        it.totalWithoutDiscount
-                                    }.reduce { acc, d ->
-                                        acc + d
-                                    }
+                                    if (shoppingCarts.isNotEmpty()) {
+                                        totalWithoutDiscount = shoppingCarts.map {
+                                            it.totalWithoutDiscount
+                                        }.reduce { acc, d ->
+                                            acc + d
+                                        }
 
-                                    val totalWithDiscount = shoppingCarts.map {
-                                        it.totalWithDiscount
-                                    }.reduce { acc, d ->
-                                        acc + d
-                                    }
+                                        totalWithDiscount = shoppingCarts.map {
+                                            it.totalWithDiscount
+                                        }.reduce { acc, d ->
+                                            acc + d
+                                        }
 
-                                    val totalQuantity = shoppingCarts.map { it.quantity }.reduce { acc, d ->
-                                        acc + d
-                                    }
+                                        totalQuantity = shoppingCarts.map { it.quantity }.reduce { acc, d ->
+                                            acc + d
+                                        }
 
-                                    var freteValue = totalQuantity * 10.toDouble()
+                                        freteValue = totalQuantity * 10.toDouble()
 
-                                    if (freteValue > 250) {
-                                        freteValue = 0.0
+                                        if (freteValue > 250) {
+                                            freteValue = 0.0
+                                        }
                                     }
 
                                     ShoppingItemsCartLoadedEvent(
                                             shoppingCarts,
                                             totalWithDiscount = totalWithDiscount,
                                             totalWithoutDiscount = totalWithoutDiscount,
-                                            itemsSize = shoppingCarts.size,
+                                            totalQuantity = totalQuantity,
                                             freteValue = freteValue) as ShoppingCartEvent
                                 }.onErrorReturn {
                                     ShoppingCartExceptionsEvent(it.localizedMessage)
@@ -140,6 +147,18 @@ class ShoppingCartViewModel @Inject constructor(
                                             }
                                 }
 
+                    }
+                }
+                .addTransformer(ClearButtonItemClickedEffect::class.java) { upstream ->
+                    upstream.switchMap {
+                        repository.remove(it.shoppingCart)
+                                .subscribeOn(Schedulers.newThread())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .toSingleDefault(InitialEvent as ShoppingCartEvent)
+                                .toObservable()
+                                .onErrorReturn {
+                                    ShoppingCartExceptionsEvent(it.localizedMessage)
+                                }
                     }
                 }
                 .build()

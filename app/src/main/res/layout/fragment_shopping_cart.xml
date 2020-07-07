@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="itemsSize"
+            name="totalQuantity"
             type="Integer" />
 
         <variable
@@ -94,7 +94,7 @@
                             android:layout_above="@+id/shopping_card_total_discount_text_view"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
-                            android:text="@{String.format(@string/products_size, itemsSize)}"
+                            android:text="@{String.format(@string/products_size, totalQuantity)}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/white"
                             app:layout_constraintStart_toStartOf="parent"

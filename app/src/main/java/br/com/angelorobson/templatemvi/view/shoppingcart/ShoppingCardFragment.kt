@@ -2,6 +2,7 @@ package br.com.angelorobson.templatemvi.view.shoppingcart
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.angelorobson.templatemvi.R
@@ -39,7 +40,7 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                                 }
                                 is ShoppingCartModelResult.ShoppingCartItemsLoaded -> {
                                     val result = model.shoppingCartResult
-                                    binding.itemsSize = result.itemsSize
+                                    binding.totalQuantity = result.totalQuantity
                                     binding.priceWithDiscount = result.totalWithDiscount
                                     binding.priceWithoutDiscount = result.totalWithoutDiscount
                                     binding.freteValue = result.freteValue
@@ -66,4 +67,16 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         compositeDisposable.clear()
         super.onDestroy()
     }
+
+
+}
+
+fun ImageButton.enable() {
+    this.isEnabled = true
+    this.imageAlpha = 0xFF
+}
+
+fun ImageButton.disable() {
+    this.isEnabled = false
+    this.imageAlpha = 0x3F
 }

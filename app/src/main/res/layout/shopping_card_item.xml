@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="@id/shopping_cart_game_title_text_view"
             app:layout_constraintTop_toBottomOf="@id/shopping_cart_game_title_text_view">
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <ImageButton
                 android:id="@+id/shopping_cart_remove_item_image_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -83,7 +83,7 @@
                 android:textColor="@color/white"
                 tools:text="10" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <ImageButton
                 android:id="@+id/shopping_cart_add_item_image_button"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
