@@ -129,7 +129,7 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toObservable()
                                             .onErrorReturn {
                                                 val errorMessage = validateStatusCode(it)
-                                                activityService.activity.toast(errorMessage)
+                                                activityService.activity.toastWithResourceString(errorMessage.toInt())
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
                                 }
@@ -152,7 +152,7 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toObservable()
                                             .onErrorReturn {
                                                 val errorMessage = validateStatusCode(it)
-                                                activityService.activity.toast(errorMessage)
+                                                activityService.activity.toastWithResourceString(errorMessage.toInt())
 
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
@@ -169,7 +169,7 @@ class ShoppingCartViewModel @Inject constructor(
                                 .toObservable()
                                 .onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
 
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
@@ -206,7 +206,7 @@ class ShoppingCartViewModel @Inject constructor(
                                 .toObservable()
                                 .onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
                     }

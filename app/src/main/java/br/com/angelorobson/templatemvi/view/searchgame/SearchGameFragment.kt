@@ -11,11 +11,13 @@ import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.searchgame.widgets.GameFoundAdapter
 import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
+import com.jakewharton.rxbinding3.view.clicks
 import com.wanderingcan.persistentsearch.PersistentSearchView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.fragment_game_detail.*
 import kotlinx.android.synthetic.main.fragment_search_game.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,6 +43,9 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
 
         val disposable = Observable.mergeArray(
                 adapter.gameClicks.map { GameFoundClickedEvent(it) },
+                search_game_try_again_button.clicks().map {
+                    SearchGameByTermEvent(mSearchTerm.toLowerCase(Locale.getDefault()))
+                },
                 mSearchTermSubject
                         .skip(1)
                         .distinctUntilChanged()
@@ -57,6 +62,7 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
                             when (model.searchGameResult) {
                                 is SearchGameResult.Loading -> {
                                     game_search_progress_horizontal.setVisibleOrGone(model.searchGameResult.isLoading)
+                                    search_game_try_again_button.setVisibleOrGone(false)
                                 }
                                 is SearchGameResult.GamesFoundByTerm -> {
                                     val spotlights = model.searchGameResult.spotlights
@@ -65,9 +71,13 @@ class SearchGameFragment : Fragment(R.layout.fragment_search_game) {
                                     game_search_progress_horizontal.setVisibleOrGone(model.searchGameResult.isLoading)
 
                                     game_search_search_bar.populateSearchText(mSearchTerm)
+                                    search_game_try_again_button.setVisibleOrGone(false)
                                 }
                                 is SearchGameResult.Error -> {
                                     game_search_progress_horizontal.setVisibleOrGone(model.searchGameResult.isLoading)
+                                    search_game_try_again_button.setVisibleOrGone(true)
+                                    game_search_search_bar.populateSearchText(mSearchTerm)
+                                    adapter.submitList(listOf())
                                 }
                             }
                         },
