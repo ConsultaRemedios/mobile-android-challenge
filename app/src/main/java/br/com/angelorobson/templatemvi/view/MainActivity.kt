@@ -1,10 +1,8 @@
 package br.com.angelorobson.templatemvi.view
 
-import android.R.attr.*
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -21,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var activityService: ActivityService
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private var isCartView = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +49,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.searchGameFragment -> {
                     toolbar.visibility = GONE
                 }
+                R.id.shoppingCardFragment -> {
+                    isCartView = true
+                    toolbar.visibility = VISIBLE
+                }
                 else -> {
                     /* if (Build.VERSION.SDK_INT in 19..20) {
                          setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true)
@@ -76,17 +79,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || return super.onSupportNavigateUp()
-    }
-
-    private fun setWindowFlag(bits: Int, on: Boolean) {
-        val win = window
-        val winParams = win.attributes
-        if (on) {
-            winParams.flags = winParams.flags or bits
-        } else {
-            winParams.flags = winParams.flags and bits.inv()
-        }
-        win.attributes = winParams
     }
 
 }

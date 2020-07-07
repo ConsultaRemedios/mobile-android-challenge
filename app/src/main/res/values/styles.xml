@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#0291FF</item>
+        <item name="colorPrimaryDark">#0291FF</item>
+        <item name="colorAccent">#0291FF</item>
+    </style>
+
 
     <style name="TitleTextView">
         <item name="android:gravity">left</item>
