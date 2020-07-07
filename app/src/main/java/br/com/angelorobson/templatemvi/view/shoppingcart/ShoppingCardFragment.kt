@@ -1,18 +1,19 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.angelorobson.templatemvi.R
-import br.com.angelorobson.templatemvi.databinding.FragmentGameDetailBinding
 import br.com.angelorobson.templatemvi.databinding.FragmentShoppingCartBinding
+import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.shoppingcart.widgets.ShoppingCardAdapter
 import br.com.angelorobson.templatemvi.view.utils.BindingFragment
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 
 
@@ -25,11 +26,17 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = ShoppingCardAdapter()
         setupRecyclerView(adapter)
+        val clearProductSubject = PublishSubject.create<ShoppingCart>()
 
         val disposable = Observable.mergeArray(
                 adapter.addItemClicks.map { AddButtonItemClicked(it) },
                 adapter.removeItemClicks.map { RemoveButtonItemClicked(it) },
-                adapter.clearCartItemClicks.map { ClearButtonItemClicked(it) }
+                adapter.clearCartItemClicks.switchMap {
+                    showConfirmDialog(it, clearProductSubject)
+                    clearProductSubject.map {
+                        ClearButtonItemClicked(it)
+                    }
+                }
         )
                 .compose(getViewModel(ShoppingCartViewModel::class).init(InitialEvent))
                 .subscribe(
@@ -68,6 +75,22 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         super.onDestroy()
     }
 
+    fun showConfirmDialog(shoppingCart: ShoppingCart, clearProductSubject: PublishSubject<ShoppingCart>) {
+        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
+
+        builder
+                .setTitle(R.string.clear_product)
+                .setMessage(getString(R.string.product_clear_warning_msg, shoppingCart.spotlight.title))
+                .setCancelable(false)
+                .setPositiveButton("OK") { dialog, id ->
+                    dialog.dismiss()
+                    clearProductSubject.onNext(shoppingCart)
+                }
+        builder.setNeutralButton("Cancelar") { dialog, id -> }
+
+        val alert = builder.create()
+        alert.show()
+    }
 
 }
 
