@@ -7,6 +7,6 @@ import retrofit2.http.POST
 
 interface PurchaseService {
 
-    @POST("checkouts")
+    @POST("checkout")
     fun checkout(@Body productsIds: PurchaseRequestDto): Completable
 }

@@ -11,6 +11,7 @@ import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
 import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.shoppingcart.widgets.ShoppingCardAdapter
 import br.com.angelorobson.templatemvi.view.utils.BindingFragment
+import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -40,14 +41,17 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                         ClearButtonItemClicked(it)
                     }
                 },
-                shopping_purchase_button.clicks().map { ButtonPurchaseClickedEvent(mList, mTotalWithDiscount) }
+                shopping_purchase_button.clicks().map {
+                    game_search_progress.setVisibleOrGone(true)
+                    ButtonPurchaseClickedEvent(mList, mTotalWithDiscount)
+                }
         )
                 .compose(getViewModel(ShoppingCartViewModel::class).init(InitialEvent))
                 .subscribe(
                         { model ->
                             when (model.shoppingCartResult) {
                                 is ShoppingCartModelResult.Loading -> {
-
+                                    game_search_progress.setVisibleOrGone(true)
                                 }
                                 is ShoppingCartModelResult.ShoppingCartItemsLoaded -> {
                                     val result = model.shoppingCartResult
@@ -60,6 +64,7 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                                     binding.priceWithoutDiscount = result.totalWithoutDiscount
                                     binding.freteValue = result.freteValue
                                     adapter.submitList(mList)
+                                    game_search_progress.setVisibleOrGone(false)
                                 }
                             }
                         },
