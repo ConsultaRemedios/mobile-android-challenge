@@ -10,6 +10,7 @@ import br.com.angelorobson.templatemvi.view.getViewModel
 import br.com.angelorobson.templatemvi.view.home.widgets.GameAdapter
 import br.com.angelorobson.templatemvi.view.utils.GridSpacingItemDecoration
 import br.com.angelorobson.templatemvi.view.utils.setVisibleOrGone
+import br.com.angelorobson.templatemvi.view.utils.toastWithResourceString
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -41,11 +42,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView(gameAdapter)
         val bannerClickSubject = PublishSubject.create<CarouselItem>()
         val initObservable = Observable.just(1)
+        var count = 0
 
         val disposable = Observable.mergeArray(
                 gameAdapter.gameClicks.map { GameClickedEvent(it) },
                 home_search_view.clicks().map { SearchViewClickedEvent },
-                home_cart_floating_action_button.clicks().map { CartActionButtonClickedEvent },
+                home_cart_floating_action_button.clicks()
+                        .filter {
+                            if (count > 0) {
+                                true
+                            } else {
+                                context?.toastWithResourceString(R.string.add_item_cart)
+                                false
+                            }
+                        }
+                        .map { CartActionButtonClickedEvent },
                 bannerClickSubject.map { BannerClickedEvent(it.caption ?: "") },
                 home_try_again_button.clicks().map { InitialEvent },
                 initObservable.map { InitialEvent }
@@ -72,7 +83,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                     home_try_again_button.setVisibleOrGone(false)
                                 }
                                 is HomeResult.ShoppingCartItemCount -> {
-                                    val count = model.homeResult.count
+                                    count = model.homeResult.count
                                     home_cart_floating_action_button.count = count
                                     home_try_again_button.setVisibleOrGone(false)
                                 }

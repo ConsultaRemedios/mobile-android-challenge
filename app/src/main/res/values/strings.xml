@@ -33,5 +33,6 @@
     <string name="shopping_cart">Carrinho</string>
     <string name="purchase_error">Houve um erro, por favor, tente novamente.</string>
     <string name="purchase_sucessfully">Compra efetuada com sucesso!</string>
+    <string name="add_item_cart">Adicione items ao carrinho</string>
 
 </resources>
