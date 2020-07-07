@@ -30,5 +30,7 @@
     <string name="clear_product">Limpar Produto</string>
     <string name="product_clear_warning_msg">Deseja realmente remover o produto %1$s do carrinho?</string>
     <string name="finish_purchase">Finalizar Compra</string>
+    <string name="game_detail">Detalhes do Jogo</string>
+    <string name="shopping_cart">Carrinho</string>
 
 </resources>
