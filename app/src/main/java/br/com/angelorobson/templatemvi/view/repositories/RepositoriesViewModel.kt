@@ -77,7 +77,7 @@ class RepositoriesViewModel @Inject constructor(
                                             var hasError = false
                                             if (it.errorMessage.isNotEmpty()) {
                                                 hasError = true
-                                                activityService.activity.toast(it.errorMessage, Toast.LENGTH_LONG)
+                                                activityService.activity?.toast(it.errorMessage, Toast.LENGTH_LONG)
                                             }
 
                                             RepositoriesLoadedEvent(
@@ -92,7 +92,7 @@ class RepositoriesViewModel @Inject constructor(
                                         .subscribeOn(Schedulers.newThread())
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .map {
-                                            activityService.activity.toast(it.localizedMessage, Toast.LENGTH_LONG)
+                                            activityService.activity?.toast(it.localizedMessage, Toast.LENGTH_LONG)
 
                                             RepositoriesLoadedEvent(
                                                     repositories = repository.list,

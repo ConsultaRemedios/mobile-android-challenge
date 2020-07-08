@@ -6,7 +6,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.di.TestComponent
 import br.com.angelorobson.templatemvi.utils.FileUtils
@@ -17,7 +16,6 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
-import org.hamcrest.core.IsNot.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -71,14 +69,6 @@ class HomeFragmentTest {
 
         mockWebServer.dispatcher = dispatcher
         mockWebServer.start(8500)
-    }
-
-    @Test
-    fun views() {
-        onView(withId(R.id.home_spotlights_recycler_view)).check(matches(isDisplayed()))
-        onView(withId(R.id.home_try_again_button)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.home_cart_floating_action_button)).check(matches(isDisplayed()))
-        onView(withId(R.id.home_carousel)).check(matches(isDisplayed()))
     }
 
     @Test

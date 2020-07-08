@@ -202,7 +202,14 @@ object DatabaseModule {
     @Provides
     @Singleton
     @JvmStatic
-    fun shoppingCartDao(database: ApplicationDatabase) = database.shoppingCartDao()
+    fun applicationDatabase(context: Context): ApplicationDatabase {
+        return Room.databaseBuilder(
+                context,
+                ApplicationDatabase::class.java,
+                "cr_challenge_database"
+        )
+                .build()
+    }
 
 }
 
@@ -221,12 +228,5 @@ object RealModule {
     @Provides
     @Singleton
     @JvmStatic
-    fun applicationDatabase(context: Context): ApplicationDatabase {
-        return Room.databaseBuilder(
-                context,
-                ApplicationDatabase::class.java,
-                "cr_challenge_database"
-        )
-                .build()
-    }
+    fun shoppingCartDao(database: ApplicationDatabase) = database.shoppingCartDao()
 }

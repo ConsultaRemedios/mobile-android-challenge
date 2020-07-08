@@ -95,7 +95,7 @@ class ShoppingCartViewModel @Inject constructor(
                                             freteValue = freteValue) as ShoppingCartEvent
                                 }.onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage)
+                                    activityService.activity?.toast(errorMessage)
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
 
@@ -117,7 +117,7 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toObservable()
                                             .onErrorReturn {
                                                 val errorMessage = validateStatusCode(it)
-                                                activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                                activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
                                 }
@@ -140,7 +140,7 @@ class ShoppingCartViewModel @Inject constructor(
                                             .toObservable()
                                             .onErrorReturn {
                                                 val errorMessage = validateStatusCode(it)
-                                                activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                                activityService.activity?.toastWithResourceString(errorMessage.toInt())
 
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
@@ -157,7 +157,7 @@ class ShoppingCartViewModel @Inject constructor(
                                 .toObservable()
                                 .onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
 
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
@@ -173,12 +173,12 @@ class ShoppingCartViewModel @Inject constructor(
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .toSingleDefault(PurchaseSuccessfully as ShoppingCartEvent)
                                 .doAfterSuccess {
-                                    activityService.activity.toast(activityService.activity.getString(R.string.purchase_sucessfully))
+                                    activityService.activity?.toast(activityService.activity?.getString(R.string.purchase_sucessfully))
                                     navigator.to(ShoppingCardFragmentDirections.homeFragment())
                                 }
                                 .toObservable()
                                 .onErrorReturn {
-                                    activityService.activity.toast(activityService.activity.getString(R.string.purchase_error))
+                                    activityService.activity?.toast(activityService.activity?.getString(R.string.purchase_error))
                                     val errorMessage = validateStatusCode(it)
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
@@ -194,7 +194,7 @@ class ShoppingCartViewModel @Inject constructor(
                                 .toObservable()
                                 .onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
                     }

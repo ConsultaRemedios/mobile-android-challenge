@@ -5,8 +5,8 @@ import android.app.Activity
 class ActivityService {
 
     private var _activity: Activity? = null
-    val activity: Activity
-        get() = _activity!!
+    val activity: Activity?
+        get() = _activity
 
     fun onCreate(activity: Activity) {
         this._activity = activity
