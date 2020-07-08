@@ -1,18 +1,18 @@
-package br.com.angelorobson.templatemvi.model
+package br.com.angelorobson.templatemvi.model.builders
 
-import br.com.angelorobson.templatemvi.model.builders.SpotlightBuilder
-import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
-import br.com.angelorobson.templatemvi.model.domains.Spotlight
+import GameEntityBuilder
+import br.com.angelorobson.templatemvi.model.entities.GameEntity
+import br.com.angelorobson.templatemvi.model.entities.ShoppingCartEntity
 import kotlin.random.Random
 
-class ShoppingCartBuilder {
+class ShoppingCartEntityBuilder {
 
     data class Builder(
             var id: Int = 0,
             var totalWithDiscount: Double = 0.0,
             var totalWithoutDiscount: Double = 0.0,
             var quantity: Int = 0,
-            var spotlight: Spotlight = Spotlight()
+            var gameEntity: GameEntity? = null
     ) {
 
         fun id(id: Int) =
@@ -21,22 +21,22 @@ class ShoppingCartBuilder {
         fun totalWithDiscount(totalWithDiscount: Double) = apply { this.totalWithDiscount = totalWithDiscount }
         fun totalWithoutDiscount(totalWithoutDiscount: Double) = apply { this.totalWithoutDiscount = totalWithoutDiscount }
         fun totalWithoutDiscount(quantity: Int) = apply { this.quantity = quantity }
-        fun spotlight(spotlight: Spotlight) = apply { this.spotlight = spotlight }
+        fun spotlight(gameEntity: GameEntity) = apply { this.gameEntity = gameEntity }
 
-        fun oneSpotlight() = apply {
+        fun oneShoppingCartEntity() = apply {
             id = Random(50).nextInt()
             totalWithDiscount = 0.0
             totalWithoutDiscount = 0.0
             quantity = 0
-            spotlight = SpotlightBuilder.Builder().oneSpotlight().build()
+            gameEntity = GameEntityBuilder.Builder().oneGameEntity().build()
         }
 
-        fun build() = ShoppingCart(
+        fun build() = ShoppingCartEntity(
                 id = id,
                 totalWithDiscount = totalWithDiscount,
                 totalWithoutDiscount = totalWithoutDiscount,
                 quantity = quantity,
-                spotlight = spotlight
+                gameEntity = gameEntity!!
         )
     }
 }

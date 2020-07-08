@@ -54,14 +54,14 @@ class PullRequestViewModel @Inject constructor(
                                 }
                                 .onErrorReturn {
                                     val errorMessage = validateStatusCode(it)
-                                    activityService.activity.toast(errorMessage, Toast.LENGTH_LONG)
+                                    activityService.activity?.toast(errorMessage, Toast.LENGTH_LONG)
                                     PullRequestExceptionEvent(errorMessage)
                                 }
                     }
                 }
                 .addConsumer(PullRequestClickedEffect::class.java) { consumer ->
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(consumer.pullRequest.htmlUrl))
-                    activityService.activity.startActivity(intent)
+                    activityService.activity?.startActivity(intent)
                 }
                 .build()
 )

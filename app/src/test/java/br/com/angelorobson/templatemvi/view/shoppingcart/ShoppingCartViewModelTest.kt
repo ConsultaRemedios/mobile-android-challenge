@@ -1,7 +1,7 @@
 package br.com.angelorobson.templatemvi.view.shoppingcart
 
 
-import br.com.angelorobson.templatemvi.model.ShoppingCartBuilder
+import br.com.angelorobson.templatemvi.model.builders.ShoppingCartBuilder
 import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartEffect.ObserverShoppingCart
 import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartModelResult.ShoppingCartItemsLoaded
 import com.spotify.mobius.test.NextMatchers.*

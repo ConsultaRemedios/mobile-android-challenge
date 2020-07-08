@@ -68,8 +68,10 @@ class HomeViewModel @Inject constructor(
                                             banners = it
                                     ) as HomeEvent
                                 }.onErrorReturn {
+                                    idlingResource.decrement()
+
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 
@@ -88,8 +90,10 @@ class HomeViewModel @Inject constructor(
                                     ) as HomeEvent
                                 }
                                 .onErrorReturn {
+                                    idlingResource.decrement()
+
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 
@@ -103,11 +107,13 @@ class HomeViewModel @Inject constructor(
                                 .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { count ->
+                                    idlingResource.decrement()
+
                                     GetItemsCartCountEvent(count) as HomeEvent
                                 }
                                 .onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                     HomeExceptionEvent(errorMessage)
                                 }
 

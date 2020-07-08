@@ -58,7 +58,7 @@ class SearchGameViewModel @Inject constructor(
                                     ) as SearchGameEvent
                                 }.onErrorReturn {
                                     val errorMessage = HandlerErrorRemoteDataSource.validateStatusCode(it)
-                                    activityService.activity.toastWithResourceString(errorMessage.toInt())
+                                    activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                     SearchGameExceptionEvent(errorMessage)
                                 }
 
