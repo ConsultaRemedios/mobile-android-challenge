@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "The Legend Of Zelda Breath of The Wild",
+    "price": 350,
+    "discount": 100
+  },
+  {
+    "id": 3,
+    "title": "Mario Galaxy",
+    "price": 350,
+    "discount": 100
+  },
+  {
+    "id": 4,
+    "title": "The Last of Us",
+    "price": 430,
+    "discount": 230
+  }
+]

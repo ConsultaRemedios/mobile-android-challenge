@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "The Legend Of Zelda Breath of The Wild",
+    "publisher": "Nintendo",
+    "image": "https://switch-brasil.com/wp-content/uploads/2020/02/Zelda-Breath-of-the-Wild_Keyart.jpg",
+    "discount": 100,
+    "price": 350,
+    "description": "The Legend of Zelda: Breath of the Wild é um jogo eletrônico de ação-aventura desenvolvido pela Nintendo Entertainment Planning & Development e publicado pela Nintendo. É o décimo nono título da série The Legend of Zelda e foi lançado mundialmente para Wii U e Nintendo Switch em 3 de março de 2017.",
+    "rating": 5,
+    "stars": 5,
+    "reviews": 450
+  },
+  {
+    "id": 2,
+    "title": "Hollow Knight",
+    "publisher": "Team Cherry",
+    "image": "https://www.gamerview.com.br/wp-content/uploads/2017/03/hollow_knight_bg.jpg",
+    "discount": 2,
+    "price": 300,
+    "description": "Hollow Knight é um jogo indie de gênero metroidvania desenvolvido e publicado pela Team Cherry. O jogo foi lançado para Microsoft Windows, macOS e Linux em 2017 e, posteriormente, para Nintendo Switch, Playstation 4 e Xbox One em 2018[1]. O seu desenvolvimento foi sustentado através de uma campanha no site de financiamento coletivo Kickstarter, onde arrecadou cerca de A$57.000 no final de 2014.",
+    "rating": 4.7,
+    "stars": 4,
+    "reviews": 30
+  },
+  {
+    "id": 3,
+    "title": "Mario Galaxy",
+    "publisher": "Nintendo",
+    "image": "https://i.ytimg.com/vi/2pklIgYHIQ0/maxresdefault.jpg",
+    "discount": 100,
+    "price": 350,
+    "description": "Super Mario Galaxy é um jogo eletrônico de plataforma desenvolvido pela Nintendo Entertainment Analysis & Development e publicado pela Nintendo. Ele foi lançado exclusivamente para Wii em novembro de 2007. É o terceiro título tridimensional da série Super Mario e o décimo quinto no geral.",
+    "rating": 4.7,
+    "stars": 4,
+    "reviews": 300
+  },
+  {
+    "id": 4,
+    "title": "The Last of Us",
+    "publisher": "Naughty Dog",
+    "image": "https://cdn.folhape.com.br/upload/dn_arquivo/2020/04/the-last-of-us.jpg",
+    "discount": 230,
+    "price": 430,
+    "description": "The Last of Us é um jogo eletrônico de ação-aventura e sobrevivência desenvolvido pela Naughty Dog e publicado pela Sony Computer Entertainment. Ele foi lançado exclusivamente para PlayStation 3 em 14 de junho de 2013. Na história, os jogadores controlam Joel, um homem encarregado de escoltar uma adolescente chamada Ellie através de um Estados Unidos pós-apocalíptico. The Last of Us é jogado a partir de uma perspectiva em terceira pessoa, com os jogadores usando armas de fogo, armas improvisadas e furtividade a fim de defenderem-se de humanos hostis e criaturas canibalísticas infectadas por uma mutação do fungo Cordyceps. Um Modo de Escuta permite a localização de inimigos por meio de uma escuta e percepção espacial aprimoradas.",
+    "rating": 4.7,
+    "stars": 4,
+    "reviews": 3003
+  },
+  {
+    "id": 5,
+    "title": "Soul River",
+    "publisher": "Crystal Dynamics",
+    "image": "https://static.wixstatic.com/media/1ce80c_95453b7f41f44eda98fc646ef9b05117~mv2.png/v1/fill/w_560,h_328,al_c,q_85,usm_0.66_1.00_0.01/159.webp",
+    "discount": 100,
+    "price": 150,
+    "description": "Legacy of Kain: Soul Reaver é um jogo eletrônico de ação-aventura com perspectiva em terceira pessoa criado pela Crystal Dynamics e publicado pela Eidos Interactive. O jogo foi lançado no dia 16 de agosto de 1999 para PlayStation e sistemas Microsoft Windows e em 27 de janeiro de 2000 para Sega Dreamcast.",
+    "rating": 3.7,
+    "stars": 3,
+    "reviews": 303
+  },
+  {
+    "id": 6,
+    "title": "Chrono Trigger",
+    "publisher": "Square",
+    "image": "https://epicplay.com/wp-content/uploads/2018/08/chronotrigger-082115-1280-1522029030841_1280w-1200x675.jpg.webp",
+    "discount": 230,
+    "price": 430,
+    "description": "Chrono Trigger é um jogo de RPG eletrônico desenvolvido pela Square Co. Foi lançado para o console Super Nintendo no Japão em março de 1995, e uma versão aprimorada para PlayStation foi lançada em novembro de 1999.",
+    "rating": 5,
+    "stars": 5,
+    "reviews": 203
+  }
+]

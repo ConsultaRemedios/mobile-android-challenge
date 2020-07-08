@@ -1,6 +1,7 @@
 package br.com.angelorobson.templatemvi.di
 
 import android.content.Context
+import br.com.angelorobson.templatemvi.model.database.dao.ShoppingCartDao
 import br.com.angelorobson.templatemvi.utils.TestIdlingResource
 import br.com.angelorobson.templatemvi.view.utils.IdlingResource
 import dagger.BindsInstance
@@ -19,6 +20,9 @@ interface TestComponent : ApplicationComponent {
     interface Builder {
         @BindsInstance
         fun context(context: Context): Builder
+
+        @BindsInstance
+        fun shoppingCartDao(shoppingCartDao: ShoppingCartDao): Builder
 
         fun build(): TestComponent
     }
