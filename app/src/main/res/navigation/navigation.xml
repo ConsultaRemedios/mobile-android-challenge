@@ -78,5 +78,8 @@
         <action
             android:id="@+id/homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
     </fragment>
 </navigation>

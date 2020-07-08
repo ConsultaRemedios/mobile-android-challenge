@@ -29,6 +29,9 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
     private val clearCartItemSubject = PublishSubject.create<ShoppingCart>()
     val clearCartItemClicks: Observable<ShoppingCart> = clearCartItemSubject.map { shoppingCart -> shoppingCart }
 
+    private val imageGameSubject = PublishSubject.create<ShoppingCart>()
+    val imageGameClicks: Observable<ShoppingCart> = imageGameSubject.map { shoppingCart -> shoppingCart }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingCartViewHolder {
         val binding = DataBindingUtil.bind<ShoppingCardItemBinding>(
                 LayoutInflater.from(parent.context).inflate(
@@ -38,7 +41,7 @@ class ShoppingCardAdapter : ListAdapter<ShoppingCart, ShoppingCartViewHolder>(Di
                 )
         )
 
-        return ShoppingCartViewHolder(binding?.root!!, binding, addItemSubject, removeItemSubject, clearCartItemSubject)
+        return ShoppingCartViewHolder(binding?.root!!, binding, addItemSubject, removeItemSubject, clearCartItemSubject, imageGameSubject)
     }
 
     override fun onBindViewHolder(holder: ShoppingCartViewHolder, position: Int) {
@@ -56,7 +59,8 @@ class ShoppingCartViewHolder(
         private val binding: ShoppingCardItemBinding?,
         private val addItemClicksSubject: PublishSubject<ShoppingCart>,
         private val removeItemSubject: PublishSubject<ShoppingCart>,
-        private val clearCartItemSubject: PublishSubject<ShoppingCart>
+        private val clearCartItemSubject: PublishSubject<ShoppingCart>,
+        private val imageGameSubject: PublishSubject<ShoppingCart>
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(shoppingCart: ShoppingCart) {
@@ -70,6 +74,8 @@ class ShoppingCartViewHolder(
             shoppingCartRemoveItemImageButton.clicks()
                     .map { shoppingCart }.subscribe(removeItemSubject)
             shoppingCartClearCart.clicks().map { shoppingCart }.subscribe(clearCartItemSubject)
+
+            shoppingCartGameImageView.clicks().map { shoppingCart }.subscribe(imageGameSubject)
 
             executePendingBindings()
         }

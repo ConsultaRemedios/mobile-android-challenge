@@ -48,6 +48,7 @@ fun shoppingCartUpdate(
         is ClearButtonItemClicked -> dispatch(setOf(ClearButtonItemClickedEffect(event.shoppingCart)))
         is ButtonPurchaseClickedEvent -> dispatch(setOf(ButtonPurchaseEffect(event.shoppingItemsCart, total = event.total)))
         is PurchaseSuccessfully -> dispatch(setOf(ClearDatabaseEffect))
+        is ImageItemClicked -> dispatch(setOf(ImageItemClickedEffect(event.shoppingCart)))
     }
 }
 
@@ -76,25 +77,12 @@ class ShoppingCartViewModel @Inject constructor(
                                     var totalQuantity = 0
 
                                     if (shoppingCarts.isNotEmpty()) {
-                                        totalWithoutDiscount = shoppingCarts.map {
-                                            it.totalWithoutDiscount
-                                        }.reduce { acc, d ->
-                                            acc + d
-                                        }
+                                        totalWithoutDiscount = shoppingCarts.sumByDouble { it.totalWithoutDiscount }
+                                        totalWithDiscount = shoppingCarts.sumByDouble { it.totalWithDiscount }
+                                        totalQuantity = shoppingCarts.sumBy { it.quantity }
+                                        freteValue = shoppingCarts.sumByDouble { 10.00 * totalQuantity }
 
-                                        totalWithDiscount = shoppingCarts.map {
-                                            it.totalWithDiscount
-                                        }.reduce { acc, d ->
-                                            acc + d
-                                        }
-
-                                        totalQuantity = shoppingCarts.map { it.quantity }.reduce { acc, d ->
-                                            acc + d
-                                        }
-
-                                        freteValue = totalQuantity * 10.toDouble()
-
-                                        if (freteValue > 250) {
+                                        if (totalWithDiscount > 250) {
                                             freteValue = 0.0
                                         }
                                     }
@@ -210,6 +198,10 @@ class ShoppingCartViewModel @Inject constructor(
                                     ShoppingCartExceptionsEvent(errorMessage)
                                 }
                     }
+                }
+                .addConsumer(ImageItemClickedEffect::class.java) { consumer ->
+                    val game = consumer.shoppingCart.spotlight
+                    navigator.to(ShoppingCardFragmentDirections.gameDetailFragment(game.id))
                 }
                 .build()
 )
