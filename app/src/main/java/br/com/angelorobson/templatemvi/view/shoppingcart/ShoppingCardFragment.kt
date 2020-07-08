@@ -35,6 +35,7 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         val disposable = Observable.mergeArray(
                 adapter.addItemClicks.map { AddButtonItemClicked(it) },
                 adapter.removeItemClicks.map { RemoveButtonItemClicked(it) },
+                adapter.imageGameClicks.map { ImageItemClicked(it) },
                 adapter.clearCartItemClicks.switchMap {
                     showConfirmDialog(it, clearProductSubject)
                     clearProductSubject.map {
