@@ -13,7 +13,7 @@ import io.reactivex.subjects.PublishSubject
 
 class AndroidTestApplication : App() {
 
-    private val shoppingCartItemsSubject = PublishSubject.create<List<ShoppingCartEntity>>()
+    val shoppingCartItemsSubject = PublishSubject.create<List<ShoppingCartEntity>>()
 
     private val shoppingCartDao: ShoppingCartDao = object : ShoppingCartDao() {
         override fun getAll(): Observable<List<ShoppingCartEntity>> {
