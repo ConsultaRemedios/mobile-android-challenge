@@ -3,10 +3,11 @@ package br.com.angelorobson.templatemvi.model.repositories
 import androidx.room.EmptyResultSetException
 import br.com.angelorobson.templatemvi.model.database.dao.ShoppingCartDao
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
-import br.com.angelorobson.templatemvi.model.domains.Spotlight
-import br.com.angelorobson.templatemvi.model.entities.GameEntity
-import br.com.angelorobson.templatemvi.model.entities.ShoppingCartEntity
-import io.reactivex.*
+import br.com.angelorobson.templatemvi.model.utils.mapToDomain
+import br.com.angelorobson.templatemvi.model.utils.mapToEntity
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 class ShoppingCartRepository @Inject constructor(
@@ -67,45 +68,5 @@ class ShoppingCartRepository @Inject constructor(
                     }
                 }
     }
-
-}
-
-private fun mapToEntity(shoppingCart: ShoppingCart): ShoppingCartEntity {
-    val game = shoppingCart.spotlight
-    return ShoppingCartEntity(
-            id = if (shoppingCart.id != 0) shoppingCart.id else 0,
-            totalWithDiscount = shoppingCart.totalWithDiscount,
-            totalWithoutDiscount = shoppingCart.totalWithoutDiscount,
-            quantity = shoppingCart.quantity,
-            gameEntity = GameEntity(
-                    idGame = game.id,
-                    discount = game.discount,
-                    image = game.image,
-                    title = game.title,
-                    price = game.price
-            )
-    )
-}
-
-private fun mapToDomain(cartEntity: ShoppingCartEntity): ShoppingCart {
-    val game = cartEntity.gameEntity
-    return ShoppingCart(
-            id = cartEntity.id,
-            quantity = cartEntity.quantity,
-            totalWithDiscount = cartEntity.totalWithDiscount,
-            totalWithoutDiscount = cartEntity.totalWithoutDiscount,
-            spotlight = Spotlight(
-                    id = game.idGame,
-                    price = game.price,
-                    discount = game.discount,
-                    title = game.title,
-                    image = game.image,
-                    description = "",
-                    publisher = "",
-                    rating = 0f,
-                    reviews = 0,
-                    stars = 0
-            )
-    )
 
 }

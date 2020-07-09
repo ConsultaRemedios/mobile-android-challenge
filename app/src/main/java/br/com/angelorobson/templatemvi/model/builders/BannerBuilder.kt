@@ -6,9 +6,9 @@ import kotlin.random.Random
 class BannerBuilder {
 
     data class Builder(
-            var id: Int = 0,
-            var image: String = "",
-            var url: String = ""
+            private var id: Int = 0,
+            private var image: String = "",
+            private var url: String = ""
     ) {
 
         fun id(id: Int) =

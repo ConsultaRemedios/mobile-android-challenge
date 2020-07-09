@@ -30,14 +30,14 @@ class BannerWebViewFragment : Fragment(R.layout.fragment_banner_web_view) {
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                if (login_webview_progress != null) {
-                    login_webview_progress.visibility = View.VISIBLE
+                if (banner_web_view != null) {
+                    banner_web_view.visibility = View.VISIBLE
                 }
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                if (login_webview_progress != null) {
-                    login_webview_progress.visibility = View.GONE
+                if (banner_web_view != null) {
+                    banner_web_view.visibility = View.GONE
                 }
             }
         }

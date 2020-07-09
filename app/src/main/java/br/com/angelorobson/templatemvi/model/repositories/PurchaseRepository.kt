@@ -1,7 +1,7 @@
 package br.com.angelorobson.templatemvi.model.repositories
 
-import br.com.angelorobson.templatemvi.model.dtos.PurchaseRequestDto
 import br.com.angelorobson.templatemvi.model.services.PurchaseService
+import br.com.angelorobson.templatemvi.model.utils.mapToDto
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -17,11 +17,4 @@ class PurchaseRepository @Inject constructor(
                 }
     }
 
-}
-
-fun mapToDto(productsIds: List<Int>, total: Double): PurchaseRequestDto {
-    return PurchaseRequestDto(
-            items = productsIds,
-            total = total
-    )
 }

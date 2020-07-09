@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/gray_color"
+            android:backgroundTint="@color/grayColor"
             android:text="@string/try_again"
             android:visibility="gone"
             app:icon="@drawable/ic_refresh"

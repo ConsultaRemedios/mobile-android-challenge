@@ -8,11 +8,11 @@ import kotlin.random.Random
 class ShoppingCartEntityBuilder {
 
     data class Builder(
-            var id: Int = 0,
-            var totalWithDiscount: Double = 0.0,
-            var totalWithoutDiscount: Double = 0.0,
-            var quantity: Int = 0,
-            var gameEntity: GameEntity? = null
+            private var id: Int = 0,
+            private var totalWithDiscount: Double = 0.0,
+            private var totalWithoutDiscount: Double = 0.0,
+            private var quantity: Int = 0,
+            private var gameEntity: GameEntity? = null
     ) {
 
         fun id(id: Int) =

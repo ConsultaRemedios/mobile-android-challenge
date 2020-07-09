@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.databinding.ShoppingCardItemBinding
 import br.com.angelorobson.templatemvi.model.domains.ShoppingCart
-import br.com.angelorobson.templatemvi.view.shoppingcart.disable
-import br.com.angelorobson.templatemvi.view.shoppingcart.enable
 import br.com.angelorobson.templatemvi.view.utils.DiffUtilCallback
+import br.com.angelorobson.templatemvi.view.utils.disable
+import br.com.angelorobson.templatemvi.view.utils.enable
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

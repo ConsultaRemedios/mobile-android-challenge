@@ -37,7 +37,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should ShoppingItemsCartLoadedEvent is called then ShoppingCartItemsLoaded model is updated`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
         val list = listOf(shoppingCart, shoppingCart)
 
         val totalWithoutDiscount = 0.0
@@ -97,7 +97,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should RemoveButtonItemClicked is called then RemoveButtonItemClickedEffect is dispatched`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
 
         updateSpec
                 .given(model)
@@ -113,7 +113,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should AddButtonItemClicked is called then AddButtonItemClickedEffect is dispatched`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
 
         updateSpec
                 .given(model)
@@ -129,7 +129,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should ClearButtonItemClicked is called then ClearButtonItemClickedEffect is dispatched`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
 
         updateSpec
                 .given(model)
@@ -145,7 +145,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should ButtonPurchaseClickedEvent is called then ButtonPurchaseEffect is dispatched`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
         val list = listOf(shoppingCart, shoppingCart)
         val total = 0.0
 
@@ -163,7 +163,7 @@ class ShoppingCartViewModelTest {
     @Test
     fun `It should PurchaseSuccessfully is called then ClearDatabaseEffect is dispatched`() {
         val model = ShoppingCartModel()
-        val shoppingCart = ShoppingCartBuilder.Builder().oneSpotlight().build()
+        val shoppingCart = ShoppingCartBuilder.Builder().oneShoppingCart().build()
 
         updateSpec
                 .given(model)

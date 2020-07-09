@@ -56,14 +56,16 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
                                 }
                                 is ShoppingCartModelResult.ShoppingCartItemsLoaded -> {
                                     val result = model.shoppingCartResult
+
                                     mList = result.shoppingItemsCart
                                     mTotalWithDiscount = result.totalWithDiscount
-                                    binding.isButtonPurchaseEnable = mList.isNotEmpty()
 
+                                    binding.isButtonPurchaseEnable = mList.isNotEmpty()
                                     binding.totalQuantity = result.totalQuantity
                                     binding.priceWithDiscount = mTotalWithDiscount
                                     binding.priceWithoutDiscount = result.totalWithoutDiscount
                                     binding.freteValue = result.freteValue
+
                                     adapter.submitList(mList)
                                     game_search_progress.setVisibleOrGone(false)
                                 }
@@ -106,14 +108,4 @@ class ShoppingCardFragment : BindingFragment<FragmentShoppingCartBinding>() {
         alert.show()
     }
 
-}
-
-fun ImageButton.enable() {
-    this.isEnabled = true
-    this.imageAlpha = 0xFF
-}
-
-fun ImageButton.disable() {
-    this.isEnabled = false
-    this.imageAlpha = 0x3F
 }

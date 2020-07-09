@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:background="@color/bg_shopping_card_screen"
+                android:background="@color/nightRiderColor"
                 android:orientation="vertical">
 
                 <ProgressBar
@@ -138,7 +138,7 @@
                             android:layout_above="@id/shopping_purchase_button"
                             android:layout_alignEnd="@id/shopping_card_total_price_text_view"
                             android:layout_marginTop="8dp"
-                            android:text="R$ 697,00"
+                            tools:text="R$ 697,00"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/white"
                             android:textStyle="bold"
