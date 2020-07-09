@@ -22,7 +22,7 @@ class GameEntityBuilder {
         fun oneGameEntity() = apply {
             idGame = Random(50).nextInt()
             title = "The Legend Of Zelda Breath of The Wild"
-            image = "https://switch-brasil.com/wp-content/uploads/2020/02/Zelda-Breath-of-the-Wild_Keyart.jpg"
+            image = "fs"
             discount = 100.0
             price = 350.0
         }
