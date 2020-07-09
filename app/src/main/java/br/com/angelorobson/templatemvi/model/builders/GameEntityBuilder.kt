@@ -4,11 +4,11 @@ import kotlin.random.Random
 class GameEntityBuilder {
 
     data class Builder(
-            var idGame: Int = 0,
-            var title: String = "",
-            var image: String = "",
-            var discount: Double = 0.0,
-            var price: Double = 0.0
+            private var idGame: Int = 0,
+            private var title: String = "",
+            private var image: String = "",
+            private var discount: Double = 0.0,
+            private var price: Double = 0.0
     ) {
 
         fun idGame(idGame: Int) =

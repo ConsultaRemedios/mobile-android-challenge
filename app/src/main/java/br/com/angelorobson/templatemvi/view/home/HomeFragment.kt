@@ -117,7 +117,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun hideOrVisibleProgressBar(isVisible: Boolean) {
         home_progress_bar?.apply {
-            visibility = if (isVisible) View.VISIBLE else View.GONE
+            setVisibleOrGone(isVisible)
         }
     }
 

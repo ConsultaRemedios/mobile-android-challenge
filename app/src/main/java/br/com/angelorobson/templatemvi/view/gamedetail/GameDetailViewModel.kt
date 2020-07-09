@@ -77,7 +77,8 @@ class GameDetailViewModel @Inject constructor(
                     upstream.switchMap {
                         shoppingCartRepository.getBy(it.spotlight!!.id)
                                 .toObservable()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .switchMap { itemCart ->
                                     if (itemCart.id == 0) {
                                         val shoppingCart = ShoppingCart(
@@ -89,7 +90,7 @@ class GameDetailViewModel @Inject constructor(
 
                                         shoppingCartRepository
                                                 .addItem(shoppingCart)
-                                                .subscribeOn(Schedulers.newThread())
+                                                .subscribeOn(Schedulers.io())
                                                 .observeOn(AndroidSchedulers.mainThread())
                                                 .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = true) as GameDetailEvent)
                                                 .toObservable()
@@ -100,7 +101,7 @@ class GameDetailViewModel @Inject constructor(
                                                 }
                                     } else
                                         shoppingCartRepository.remove(itemCart)
-                                                .subscribeOn(Schedulers.newThread())
+                                                .subscribeOn(Schedulers.io())
                                                 .observeOn(AndroidSchedulers.mainThread())
                                                 .toSingleDefault(StatusShoppingCartItemEvent(isCartItemAdded = false) as GameDetailEvent)
                                                 .toObservable()
@@ -123,7 +124,7 @@ class GameDetailViewModel @Inject constructor(
                     upstream.switchMap {
                         shoppingCartRepository.getBy(it.spotlight!!.id)
                                 .toObservable()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCart ->
                                     if (shoppingCart.id != 0) {

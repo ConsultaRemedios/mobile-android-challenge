@@ -6,16 +6,16 @@ import kotlin.random.Random
 class SpotlightBuilder {
 
     data class Builder(
-            var id: Int = 0,
-            var title: String = "",
-            var publisher: String? = "",
-            var image: String? = "",
-            var discount: Double = 0.0,
-            var price: Double = 0.0,
-            var description: String? = "",
-            var rating: Float? = 0f,
-            var stars: Int? = 0,
-            var reviews: Int? = 0
+            private var id: Int = 0,
+            private var title: String = "",
+            private var publisher: String? = "",
+            private var image: String? = "",
+            private var discount: Double = 0.0,
+            private var price: Double = 0.0,
+            private var description: String? = "",
+            private var rating: Float? = 0f,
+            private var stars: Int? = 0,
+            private var reviews: Int? = 0
     ) {
 
         fun id(id: Int) =

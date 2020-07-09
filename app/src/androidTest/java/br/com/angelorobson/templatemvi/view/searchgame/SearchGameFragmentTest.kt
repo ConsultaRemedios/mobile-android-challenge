@@ -1,6 +1,5 @@
 package br.com.angelorobson.templatemvi.view.searchgame
 
-import android.os.Bundle
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
@@ -10,7 +9,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.di.TestComponent
-import br.com.angelorobson.templatemvi.model.builders.RepositoryBuilder
 import br.com.angelorobson.templatemvi.utils.FileUtils
 import br.com.angelorobson.templatemvi.utils.TestIdlingResource
 import br.com.angelorobson.templatemvi.utils.withRecyclerView
@@ -30,12 +28,6 @@ class SearchGameFragmentTest {
 
     @Before
     fun setUp() {
-        val repository = RepositoryBuilder.Builder().oneRepository().build()
-        val fragmentArgs = Bundle().apply {
-            putParcelable("repository", repository)
-            putString("title", repository.name)
-        }
-
         val mockResponse = MockResponse()
                 .setBody(FileUtils.getJson("json/game/game_search.json"))
         mockResponse.setResponseCode(200)
@@ -43,9 +35,7 @@ class SearchGameFragmentTest {
         mockWebServer.start(8500)
 
         scenario = launchFragmentInContainer<SearchGameFragment>(
-                themeResId = R.style.Theme_MaterialComponents_Light_NoActionBar,
-                fragmentArgs = fragmentArgs
-        )
+                themeResId = R.style.Theme_MaterialComponents_Light_NoActionBar)
 
         scenario?.onFragment { fragment ->
             idlingResource =

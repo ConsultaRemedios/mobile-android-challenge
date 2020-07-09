@@ -10,12 +10,9 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.di.TestComponent
-import br.com.angelorobson.templatemvi.model.builders.RepositoryBuilder
 import br.com.angelorobson.templatemvi.model.builders.SpotlightBuilder
 import br.com.angelorobson.templatemvi.utils.FileUtils
 import br.com.angelorobson.templatemvi.utils.TestIdlingResource
-import br.com.angelorobson.templatemvi.utils.TestUtils.waitEspresso
-import br.com.angelorobson.templatemvi.utils.withRecyclerView
 import br.com.angelorobson.templatemvi.view.component
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

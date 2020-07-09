@@ -66,7 +66,7 @@ class ShoppingCartViewModel @Inject constructor(
                 .addTransformer(ObserverShoppingCart::class.java) { upstream ->
                     upstream.switchMap {
                         repository.getAll()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCarts ->
                                     var totalWithoutDiscount = 0.0
@@ -103,7 +103,8 @@ class ShoppingCartViewModel @Inject constructor(
                     upstream.switchMap {
                         repository.getBy(it.shoppingCart.spotlight.id)
                                 .toObservable()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .switchMap { itemCart ->
                                     itemCart.totalWithDiscount += itemCart.spotlight.discount
                                     itemCart.totalWithoutDiscount += itemCart.spotlight.price
@@ -118,6 +119,10 @@ class ShoppingCartViewModel @Inject constructor(
                                                 activityService.activity?.toastWithResourceString(errorMessage.toInt())
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
+                                }.onErrorReturn {
+                                    val errorMessage = validateStatusCode(it)
+                                    activityService.activity?.toast(errorMessage)
+                                    ShoppingCartExceptionsEvent(errorMessage)
                                 }
 
                     }
@@ -126,7 +131,8 @@ class ShoppingCartViewModel @Inject constructor(
                     upstream.switchMap {
                         repository.getBy(it.shoppingCart.spotlight.id)
                                 .toObservable()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .switchMap { itemCart ->
                                     itemCart.totalWithDiscount -= itemCart.spotlight.discount
                                     itemCart.totalWithoutDiscount -= itemCart.spotlight.price
@@ -143,13 +149,18 @@ class ShoppingCartViewModel @Inject constructor(
                                                 ShoppingCartExceptionsEvent(errorMessage)
                                             }
                                 }
+                                .onErrorReturn {
+                                    val errorMessage = validateStatusCode(it)
+                                    activityService.activity?.toast(errorMessage)
+                                    ShoppingCartExceptionsEvent(errorMessage)
+                                }
 
                     }
                 }
                 .addTransformer(ClearButtonItemClickedEffect::class.java) { upstream ->
                     upstream.switchMap {
                         repository.remove(it.shoppingCart)
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .toSingleDefault(InitialEvent as ShoppingCartEvent)
                                 .toObservable()
@@ -167,7 +178,7 @@ class ShoppingCartViewModel @Inject constructor(
                         val total = it.total
 
                         purchaseRepository.checkout(itemsIds, total)
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .toSingleDefault(PurchaseSuccessfully as ShoppingCartEvent)
                                 .doAfterSuccess {
@@ -186,7 +197,7 @@ class ShoppingCartViewModel @Inject constructor(
                 .addTransformer(ClearDatabaseEffect::class.java) { upstream ->
                     upstream.switchMap {
                         repository.clearDatabase()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .toSingleDefault(InitialEvent as ShoppingCartEvent)
                                 .toObservable()
