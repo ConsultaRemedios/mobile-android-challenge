@@ -1,14 +1,9 @@
 package br.com.angelorobson.templatemvi.view
 
-import android.app.Activity
 import android.graphics.Color
-import android.os.Build
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -26,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var activityService: ActivityService
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private var isCartView = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

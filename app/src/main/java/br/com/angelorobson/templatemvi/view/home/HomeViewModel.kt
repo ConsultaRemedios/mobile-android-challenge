@@ -104,7 +104,7 @@ class HomeViewModel @Inject constructor(
                         idlingResource.increment()
                         shoppingCartRepository.getCount()
                                 .toObservable()
-                                .subscribeOn(Schedulers.newThread())
+                                .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { count ->
                                     idlingResource.decrement()
