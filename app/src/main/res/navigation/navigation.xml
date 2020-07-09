@@ -6,27 +6,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/repositoriesFragment"
-        android:name="br.com.angelorobson.templatemvi.view.repositories.RepositoriesFragment"
-        android:label="@string/repository_title"
-        tools:layout="@layout/fragment_repositories">
-        <action
-            android:id="@+id/pullRequestFragment"
-            app:destination="@id/pullRequestFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/pullRequestFragment"
-        android:name="br.com.angelorobson.templatemvi.view.pullrequest.PullRequestFragment"
-        android:label="{title}"
-        tools:layout="@layout/fragment_pull_request">
-        <argument
-            android:name="repository"
-            app:argType="br.com.angelorobson.templatemvi.model.domains.Repository" />
-        <argument
-            android:name="title"
-            app:argType="string" />
-    </fragment>
-    <fragment
         android:id="@+id/homeFragment"
         android:name="br.com.angelorobson.templatemvi.view.home.HomeFragment"
         tools:layout="@layout/fragment_home" >

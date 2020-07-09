@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import br.com.angelorobson.templatemvi.R
 import br.com.angelorobson.templatemvi.model.database.ApplicationDatabase
-import br.com.angelorobson.templatemvi.model.services.*
+import br.com.angelorobson.templatemvi.model.services.BannerService
+import br.com.angelorobson.templatemvi.model.services.PurchaseService
+import br.com.angelorobson.templatemvi.model.services.SpotlightService
 import br.com.angelorobson.templatemvi.view.gamedetail.GameDetailViewModel
 import br.com.angelorobson.templatemvi.view.home.HomeViewModel
-import br.com.angelorobson.templatemvi.view.pullrequest.PullRequestViewModel
-import br.com.angelorobson.templatemvi.view.repositories.RepositoriesViewModel
 import br.com.angelorobson.templatemvi.view.searchgame.SearchGameViewModel
 import br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCartViewModel
 import br.com.angelorobson.templatemvi.view.utils.ActivityService
@@ -99,16 +99,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(RepositoriesViewModel::class)
-    abstract fun repositoriesViewModel(viewModel: RepositoriesViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(PullRequestViewModel::class)
-    abstract fun pullRequestViewModel(viewModel: PullRequestViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun homeViewModel(viewModel: HomeViewModel): ViewModel
 
@@ -158,14 +148,6 @@ object ApiModule {
                 .build()
     }
 
-
-    @Provides
-    @Singleton
-    @JvmStatic
-    fun repositoryService(retrofit: Retrofit): RepositoryGitService {
-        return retrofit.create(RepositoryGitService::class.java)
-    }
-
     @Provides
     @Singleton
     @JvmStatic
@@ -185,13 +167,6 @@ object ApiModule {
     @JvmStatic
     fun purchaseService(retrofit: Retrofit): PurchaseService {
         return retrofit.create(PurchaseService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    @JvmStatic
-    fun pullRequestService(retrofit: Retrofit): PullRequestService {
-        return retrofit.create(PullRequestService::class.java)
     }
 
 }
