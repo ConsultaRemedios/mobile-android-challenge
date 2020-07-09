@@ -65,12 +65,10 @@ class ShoppingCartViewModel @Inject constructor(
         RxMobius.subtypeEffectHandler<ShoppingCartEffect, ShoppingCartEvent>()
                 .addTransformer(ObserverShoppingCart::class.java) { upstream ->
                     upstream.switchMap {
-                        idlingResource.increment()
                         repository.getAll()
                                 .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .map { shoppingCarts ->
-                                    idlingResource.decrement()
                                     var totalWithoutDiscount = 0.0
                                     var totalWithDiscount = 0.0
                                     var freteValue = 0.0
