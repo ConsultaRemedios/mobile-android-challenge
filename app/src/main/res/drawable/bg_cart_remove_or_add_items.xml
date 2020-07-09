@@ -4,7 +4,7 @@
     <stroke
         android:width="1dp"
         android:color="#cccccc" />
-    <solid android:color="@color/bg_shopping_card_screen" />
+    <solid android:color="@color/nightRiderColor" />
     <corners android:radius="3dp" />
 
 </shape>

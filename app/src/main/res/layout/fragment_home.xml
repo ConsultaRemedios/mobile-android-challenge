@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_color"
+    android:background="@color/grayColor"
     android:orientation="vertical">
 
     <com.google.android.material.button.MaterialButton
@@ -44,11 +44,11 @@
                 android:layout_marginTop="32dp"
                 app:autoPlay="true"
                 app:autoPlayDelay="3000"
-                app:carouselBackground="@color/gray_color"
+                app:carouselBackground="@color/grayColor"
                 app:carouselType="SHOWCASE"
                 app:imageScaleType="centerCrop"
                 app:imageViewId="@id/image_view"
-                app:itemLayout="@layout/custom_fixed_size_item_layout"
+                app:itemLayout="@layout/banner_item"
                 app:showBottomShadow="false"
                 app:showCaption="false"
                 app:showIndicator="false"
@@ -86,7 +86,7 @@
         app:backgroundTint="@color/colorAccent"
         app:badgeBackgroundColor="@color/white"
         app:badgePosition="RightTop"
-        app:badgeTextColor="#DB4438"
+        app:badgeTextColor="@color/strongRedColor"
         app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
