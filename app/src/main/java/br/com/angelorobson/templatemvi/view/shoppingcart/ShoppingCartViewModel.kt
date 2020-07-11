@@ -78,7 +78,8 @@ class ShoppingCartViewModel @Inject constructor(
                                         totalWithoutDiscount = shoppingCarts.sumByDouble { it.totalWithoutDiscount }
                                         totalWithDiscount = shoppingCarts.sumByDouble { it.totalWithDiscount }
                                         totalQuantity = shoppingCarts.sumBy { it.quantity }
-                                        freteValue = shoppingCarts.sumByDouble { 10.00 * totalQuantity }
+
+                                        freteValue = totalQuantity * 10.toDouble()
 
                                         if (totalWithDiscount > 250) {
                                             freteValue = 0.0
