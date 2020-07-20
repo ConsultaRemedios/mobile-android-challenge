@@ -1,4 +1,4 @@
-package com.benhurqs.network.domain
+package com.benhurqs.network.data
 
 import com.benhurqs.network.entities.Banner
 import com.benhurqs.network.entities.Cart
