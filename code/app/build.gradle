@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.benhurqs.challenge"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.minTargetVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "junit:junit:$junitVersion"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    androidTestImplementation "androidx.test:runner:$androidXTest"
+    androidTestImplementation "androidx.test:rules:$androidXTest"
+
+    //Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+}
