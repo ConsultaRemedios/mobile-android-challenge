@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benhurqs.banners.R
 import com.benhurqs.banners.adapters.BannerAdapter
-import com.benhurqs.network.domain.repository.BannerRepository
+import com.benhurqs.network.domain.repository.NetworkRepository
 import com.benhurqs.network.entities.Banner
 import kotlinx.android.synthetic.main.banner_list_view_render.view.*
 
@@ -40,7 +40,7 @@ class BannerList(context: Context, attrs: AttributeSet): FrameLayout(context, at
     }
 
     private fun callAPI(){
-        BannerRepository.getInstance().callBannerAPI(
+        NetworkRepository.getBanners(
             onStart = { onStart() },
             onSuccess = { onSuccess(it) },
             onFailure = { onFailure(it) },
