@@ -22,7 +22,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug{
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
     }
+
+
 
 }
 
@@ -37,4 +44,7 @@ dependencies {
 
     //Mockito
     testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+
+    implementation "androidx.appcompat:appcompat:$androidXVersion"
+    implementation project(path: ':features:search')
 }

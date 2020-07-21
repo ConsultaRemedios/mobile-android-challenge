@@ -13,6 +13,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+        buildConfigField "String", "SERVER_URL", "\"https://api-mobile-test.herokuapp.com/api/\""
     }
 
 
@@ -22,8 +23,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
 
+        debug{
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+    }
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
