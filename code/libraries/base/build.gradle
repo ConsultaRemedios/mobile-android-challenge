@@ -46,5 +46,6 @@ dependencies {
 
     //Mockito
     testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
 
 }
