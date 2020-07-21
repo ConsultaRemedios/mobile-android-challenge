@@ -3,6 +3,7 @@ package com.benhurqs.network.domain.repository
 import com.benhurqs.network.data.ChallengeService
 import com.benhurqs.network.entities.Banner
 import com.benhurqs.network.entities.Spotlight
+import com.benhurqs.network.entities.Suggestion
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.Scheduler
@@ -38,18 +39,30 @@ open class NetworkRepository(
                 onFinish = { onFinish() }
             )
         }
+
+        @Synchronized
+        fun getSuggestion(query: String?, onStart: () -> Unit, onSuccess: (response: List<Suggestion>?) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit) {
+            NetworkRepository(type = APIServiceType.SEARCH).callAPI<List<Suggestion>?>(
+                query = query,
+                onStart = { onStart() },
+                onSuccess = { onSuccess(it) },
+                onFailure = { onFailure(it) },
+                onFinish = { onFinish() }
+            )
+        }
     }
 
-    private fun <T> getAPIService(): Observable<T>?{
+    private fun <T> getAPIService(query: String? = null): Observable<T>?{
        return when (type){
            APIServiceType.BANNER -> apiService.getBanners() as Observable<T>
            APIServiceType.SPOTLIGHT -> apiService.getSpotlights() as Observable<T>
+           APIServiceType.SEARCH -> apiService.getSearchSuggestions(query) as Observable<T>
        }
     }
 
 
-    private fun <T> callAPI(onStart: () -> Unit, onSuccess: (response: T) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit){
-        val observable = getAPIService<T>()
+    private fun <T> callAPI(query: String?=null, onStart: () -> Unit, onSuccess: (response: T) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit){
+        val observable = getAPIService<T>(query)
 
         if(observable == null){
             onFailure("Type not found")

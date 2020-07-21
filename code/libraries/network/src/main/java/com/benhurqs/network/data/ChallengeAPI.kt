@@ -1,9 +1,6 @@
 package com.benhurqs.network.data
 
-import com.benhurqs.network.entities.Banner
-import com.benhurqs.network.entities.Cart
-import com.benhurqs.network.entities.GameDetail
-import com.benhurqs.network.entities.Spotlight
+import com.benhurqs.network.entities.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -20,7 +17,7 @@ interface ChallengeAPI {
     fun detail(@Path("game_id") gameID: Int): Observable<GameDetail?>
 
     @GET("games/search")
-    fun search(@Query("term") query: String): Observable<List<GameDetail>?>
+    fun search(@Query("term") query: String?): Observable<List<Suggestion>?>
 
     @POST("checkout")
     fun checkout(@Body checkout: Cart): Observable<List<GameDetail>?>

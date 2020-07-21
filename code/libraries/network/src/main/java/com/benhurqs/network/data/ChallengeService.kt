@@ -1,10 +1,7 @@
 package com.benhurqs.network.data
 
 import com.benhurqs.network.BuildConfig
-import com.benhurqs.network.entities.Banner
-import com.benhurqs.network.entities.Cart
-import com.benhurqs.network.entities.GameDetail
-import com.benhurqs.network.entities.Spotlight
+import com.benhurqs.network.entities.*
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,6 +44,6 @@ open class ChallengeService {
     open fun getBanners(): Observable<List<Banner>?> = api.banners()
     open fun getSpotlights(): Observable<List<Spotlight>?> = api.spotlight()
     open fun getDetail(id: Int): Observable<GameDetail?> = api.detail(id)
-    open fun getSearchSuggestions(query: String): Observable<List<GameDetail>?> = api.search(query)
+    open fun getSearchSuggestions(query: String?): Observable<List<Suggestion>?> = api.search(query)
     open fun checkout(checkout: Cart): Observable<List<GameDetail>?> = api.checkout(checkout)
 }

@@ -1,2 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.benhurqs.search" />
+    package="com.benhurqs.search" >
+
+    <application
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".suggestion.activity.SearchSuggestionsActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.benhurqs.suggestion.open"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
