@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.benhurqs.banners.R
 import com.benhurqs.base.adapter.DefaultViewHolder
+import com.benhurqs.base.utils.ImageUtils
 import com.benhurqs.network.entities.Banner
+import kotlinx.android.synthetic.main.banner_card_item.view.*
 
-class BannerAdapter(val list: List<Banner>?, val onClickItem: (banner: Banner) -> Unit) : RecyclerView.Adapter<DefaultViewHolder>(){
+class BannerAdapter(private val list: List<Banner>?, val onClickItem: (banner: Banner) -> Unit) : RecyclerView.Adapter<DefaultViewHolder>(){
 
     override fun getItemCount(): Int {
-        return 4
+        return list?.size ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DefaultViewHolder(
@@ -22,6 +24,8 @@ class BannerAdapter(val list: List<Banner>?, val onClickItem: (banner: Banner) -
     )
 
     override fun onBindViewHolder(holder: DefaultViewHolder, position: Int) {
+        ImageUtils.loadImage(holder.itemView.banner_item_image, list?.get(position)?.image)
+
         holder.itemView.setOnClickListener {
             onClickItem(Banner())
         }
