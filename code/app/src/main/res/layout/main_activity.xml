@@ -10,8 +10,27 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp" />
 
-    <com.benhurqs.banners.widgets.BannerList
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.benhurqs.banners.widgets.BannerList
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.benhurqs.cards.widgets.CardsList
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
 
 </LinearLayout>
