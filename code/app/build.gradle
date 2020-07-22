@@ -50,4 +50,5 @@ dependencies {
     implementation project(path: ':features:search')
     implementation project(path: ':features:banners')
     implementation project(path: ':features:cards')
+    implementation project(path: ':features:detail')
 }

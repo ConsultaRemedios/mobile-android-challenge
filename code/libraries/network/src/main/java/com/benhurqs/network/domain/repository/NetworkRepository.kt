@@ -18,10 +18,15 @@ open class NetworkRepository(
     private val type: APIServiceType
 ) {
 
-    companion object{
+    companion object {
 
         @Synchronized
-        fun getBanners(onStart: () -> Unit, onSuccess: (response: List<Banner>?) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit) {
+        fun getBanners(
+            onStart: () -> Unit,
+            onSuccess: (response: List<Banner>?) -> Unit,
+            onFinish: () -> Unit,
+            onFailure: (error: String?) -> Unit
+        ) {
             NetworkRepository(type = APIServiceType.BANNER).callAPI<List<Banner>?>(
                 onStart = { onStart() },
                 onSuccess = { onSuccess(it) },
@@ -31,7 +36,12 @@ open class NetworkRepository(
         }
 
         @Synchronized
-        fun getSpotlight(onStart: () -> Unit, onSuccess: (response: List<Spotlight>?) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit) {
+        fun getSpotlight(
+            onStart: () -> Unit,
+            onSuccess: (response: List<Spotlight>?) -> Unit,
+            onFinish: () -> Unit,
+            onFailure: (error: String?) -> Unit
+        ) {
             NetworkRepository(type = APIServiceType.SPOTLIGHT).callAPI<List<Spotlight>?>(
                 onStart = { onStart() },
                 onSuccess = { onSuccess(it) },
@@ -41,7 +51,13 @@ open class NetworkRepository(
         }
 
         @Synchronized
-        fun getSuggestion(query: String?, onStart: () -> Unit, onSuccess: (response: List<Suggestion>?) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit) {
+        fun getSuggestion(
+            query: String?,
+            onStart: () -> Unit,
+            onSuccess: (response: List<Suggestion>?) -> Unit,
+            onFinish: () -> Unit,
+            onFailure: (error: String?) -> Unit
+        ) {
             NetworkRepository(type = APIServiceType.SEARCH).callAPI<List<Suggestion>?>(
                 query = query,
                 onStart = { onStart() },
@@ -50,21 +66,46 @@ open class NetworkRepository(
                 onFinish = { onFinish() }
             )
         }
+
+        @Synchronized
+        fun getDetail(
+            spotlightID: Int?,
+            onStart: () -> Unit,
+            onSuccess: (response: Spotlight?) -> Unit,
+            onFinish: () -> Unit,
+            onFailure: (error: String?) -> Unit
+        ) {
+            NetworkRepository(type = APIServiceType.SPOTLIGHT_DETAIL).callAPI<Spotlight?>(
+                spotlightID = spotlightID,
+                onStart = { onStart() },
+                onSuccess = { onSuccess(it) },
+                onFailure = { onFailure(it) },
+                onFinish = { onFinish() }
+            )
+        }
     }
 
-    private fun <T> getAPIService(query: String? = null): Observable<T>?{
-       return when (type){
-           APIServiceType.BANNER -> apiService.getBanners() as Observable<T>
-           APIServiceType.SPOTLIGHT -> apiService.getSpotlights() as Observable<T>
-           APIServiceType.SEARCH -> apiService.getSearchSuggestions(query) as Observable<T>
-       }
+    private fun <T> getAPIService(query: String? = null, spotlightID: Int? = null): Observable<T>? {
+        return when (type) {
+            APIServiceType.BANNER -> apiService.getBanners() as Observable<T>
+            APIServiceType.SPOTLIGHT -> apiService.getSpotlights() as Observable<T>
+            APIServiceType.SEARCH -> apiService.getSearchSuggestions(query) as Observable<T>
+            APIServiceType.SPOTLIGHT_DETAIL -> apiService.getDetail(spotlightID) as Observable<T>
+        }
     }
 
 
-    private fun <T> callAPI(query: String?=null, onStart: () -> Unit, onSuccess: (response: T) -> Unit, onFinish: () -> Unit, onFailure: (error: String?) -> Unit){
-        val observable = getAPIService<T>(query)
+    private fun <T> callAPI(
+        query: String? = null,
+        spotlightID: Int? = null,
+        onStart: () -> Unit,
+        onSuccess: (response: T) -> Unit,
+        onFinish: () -> Unit,
+        onFailure: (error: String?) -> Unit
+    ) {
+        val observable = getAPIService<T>(query = query, spotlightID = spotlightID)
 
-        if(observable == null){
+        if (observable == null) {
             onFailure("Type not found")
             onFinish()
             return
@@ -92,7 +133,6 @@ open class NetworkRepository(
                 }
             })
     }
-
 
 
 }

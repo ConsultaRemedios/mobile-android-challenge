@@ -43,7 +43,7 @@ open class ChallengeService {
 
     open fun getBanners(): Observable<List<Banner>?> = api.banners()
     open fun getSpotlights(): Observable<List<Spotlight>?> = api.spotlight()
-    open fun getDetail(id: Int): Observable<GameDetail?> = api.detail(id)
+    open fun getDetail(id: Int?): Observable<Spotlight?> = api.detail(id)
     open fun getSearchSuggestions(query: String?): Observable<List<Suggestion>?> = api.search(query)
-    open fun checkout(checkout: Cart): Observable<List<GameDetail>?> = api.checkout(checkout)
+    open fun checkout(checkout: Cart): Observable<List<Spotlight>?> = api.checkout(checkout)
 }

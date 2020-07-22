@@ -1,9 +1,11 @@
 package com.benhurqs.cards.adapter
 
+import android.app.Activity
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.benhurqs.base.actions.Actions
 import com.benhurqs.base.adapter.DefaultViewHolder
 import com.benhurqs.base.utils.ImageUtils
 import com.benhurqs.base.utils.Utils
@@ -36,7 +38,7 @@ class CardsAdapter (val list: List<Spotlight>?, val onClickItem: (spotlight: Spo
         holder.itemView.card_last_price.paintFlags = holder.itemView.card_last_price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.setOnClickListener {
-            onClickItem(Spotlight())
+            onClickItem(spotlight)
         }
     }
 }

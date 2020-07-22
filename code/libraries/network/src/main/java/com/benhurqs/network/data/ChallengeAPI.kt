@@ -14,11 +14,11 @@ interface ChallengeAPI {
     fun spotlight(): Observable<List<Spotlight>?>
 
     @GET("games/{game_id}")
-    fun detail(@Path("game_id") gameID: Int): Observable<GameDetail?>
+    fun detail(@Path("game_id") gameID: Int?): Observable<Spotlight?>
 
     @GET("games/search")
     fun search(@Query("term") query: String?): Observable<List<Suggestion>?>
 
     @POST("checkout")
-    fun checkout(@Body checkout: Cart): Observable<List<GameDetail>?>
+    fun checkout(@Body checkout: Cart): Observable<List<Spotlight>?>
 }

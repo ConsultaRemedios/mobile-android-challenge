@@ -1,2 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.benhurqs.detail" />
+    package="com.benhurqs.detail">
+
+    <application
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.DetailActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.benhurqs.detail.open" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

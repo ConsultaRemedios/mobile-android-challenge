@@ -3,5 +3,6 @@ package com.benhurqs.network.domain.repository
 enum class APIServiceType {
     BANNER,
     SPOTLIGHT,
-    SEARCH
+    SEARCH,
+    SPOTLIGHT_DETAIL,
 }
