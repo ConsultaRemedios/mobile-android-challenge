@@ -1,5 +1,6 @@
 package com.benhurqs.search.suggestion.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.benhurqs.base.actions.Actions
 import com.benhurqs.base.utils.Utils
 import com.benhurqs.network.domain.repository.NetworkRepository
 import com.benhurqs.network.entities.Banner
@@ -48,8 +50,8 @@ class SearchSuggestionsActivity : AppCompatActivity(){
 
     private fun managerRecyclerView(list: List<Suggestion>?){
         search_suggestion_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        search_suggestion_list.adapter = SuggestionAdapter(list){
-            Log.e("click", "Suggestion item")
+        search_suggestion_list.adapter = SuggestionAdapter(list){ spotlight ->
+            startActivity(Actions.detailIntent(this, spotlight.id))
         }
     }
 

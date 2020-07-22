@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.benhurqs.base.actions.Actions.SPOTLIGHT_ID
 import com.benhurqs.base.utils.ImageUtils
 import com.benhurqs.base.utils.Utils
 import com.benhurqs.detail.R
@@ -14,9 +15,6 @@ import kotlinx.android.synthetic.main.detail_activity.*
 
 class DetailActivity : AppCompatActivity(){
 
-    companion object{
-        const val SPOTLIGHT_ID = "SPOTLIGHT_ID"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
