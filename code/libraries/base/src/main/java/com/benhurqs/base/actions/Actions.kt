@@ -16,6 +16,9 @@ object Actions {
     fun webviewIntent(context: Context, url: String?) =
         internalIntent(context, "com.benhurqs.webview.open").putExtra(BANNER_URL, url)
 
+    fun checkoutIntent(context: Context) =
+        internalIntent(context, "com.benhurqs.checkout.open")
+
     private fun internalIntent(context: Context, action: String) =
         Intent(action).setPackage(context.packageName)
 }
