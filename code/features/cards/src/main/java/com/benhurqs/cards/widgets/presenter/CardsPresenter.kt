@@ -1,14 +1,12 @@
-package com.benhurqs.banners.widgets.presenter
+package com.benhurqs.cards.widgets.presenter
 
-import com.benhurqs.banners.widgets.contracts.BannerContract
+import com.benhurqs.cards.widgets.contract.CardsContracts
 import com.benhurqs.network.domain.repository.NetworkRepository
-import com.benhurqs.network.entities.Banner
+import com.benhurqs.network.entities.Spotlight
 
-class BannerPresenter(private var view: BannerContract.View) : BannerContract.Presenter{
-
-
+class CardsPresenter(private val view: CardsContracts.View): CardsContracts.Presenter{
     override fun callAPI() {
-        NetworkRepository.getBanners(
+        NetworkRepository.getSpotlight(
             onStart = { onStart() },
             onSuccess = { onSuccess(it) },
             onFailure = { onFailure(it) },
@@ -20,11 +18,11 @@ class BannerPresenter(private var view: BannerContract.View) : BannerContract.Pr
         view.showLoading()
     }
 
-    private fun onSuccess(list: List<Banner>?) {
+    private fun onSuccess(list: List<Spotlight>?) {
         if(list.isNullOrEmpty()){
             view.hideContent()
         }else{
-            view.loadBanner(list)
+            view.loadCards(list)
         }
     }
 

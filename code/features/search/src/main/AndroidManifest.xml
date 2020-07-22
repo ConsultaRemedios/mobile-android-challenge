@@ -4,7 +4,7 @@
     <application
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".suggestion.activity.SearchSuggestionsActivity"
+        <activity android:name="com.benhurqs.search.suggestion.view.activity.SearchSuggestionsActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.benhurqs.suggestion.open"/>

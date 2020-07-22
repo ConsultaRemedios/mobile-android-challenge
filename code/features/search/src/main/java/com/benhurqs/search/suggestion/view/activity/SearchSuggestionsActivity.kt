@@ -1,24 +1,22 @@
-package com.benhurqs.search.suggestion.activity
+package com.benhurqs.search.suggestion.view.activity
 
-import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.benhurqs.base.actions.Actions
-import com.benhurqs.base.utils.Utils
-import com.benhurqs.network.domain.repository.NetworkRepository
-import com.benhurqs.network.entities.Banner
-import com.benhurqs.network.entities.Spotlight
 import com.benhurqs.network.entities.Suggestion
 import com.benhurqs.search.R
 import com.benhurqs.search.suggestion.adapter.SuggestionAdapter
+import com.benhurqs.search.suggestion.contract.SuggestionContract
+import com.benhurqs.search.suggestion.presenter.SuggestionPresenter
 import kotlinx.android.synthetic.main.search_suggestion_activity.*
 
-class SearchSuggestionsActivity : AppCompatActivity(){
+class SearchSuggestionsActivity : AppCompatActivity(), SuggestionContract.View{
+
+    var presenter: SuggestionContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +29,12 @@ class SearchSuggestionsActivity : AppCompatActivity(){
     }
 
     private fun initViews(){
+        presenter = SuggestionPresenter(this)
+
         search_edittext.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
                 var query = p0.toString()
-                if(Utils.isEmpty(query)){
-                    search_suggestion_list.visibility = View.GONE
-                }else{
-                    callAPI(p0.toString())
-                }
-
+                presenter?.callAPI(query)
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -48,41 +43,27 @@ class SearchSuggestionsActivity : AppCompatActivity(){
         })
     }
 
-    private fun managerRecyclerView(list: List<Suggestion>?){
+
+    override fun loadSuggestion(list: List<Suggestion>) {
         search_suggestion_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         search_suggestion_list.adapter = SuggestionAdapter(list){ spotlight ->
             startActivity(Actions.detailIntent(this, spotlight.id))
         }
     }
 
-
-    private fun callAPI(query: String?){
-        NetworkRepository.getSuggestion(
-            query = query,
-            onStart = { onLoading() },
-            onSuccess = { onSuccess(it) },
-            onFailure = { onFailure(it) },
-            onFinish = { onFinish() }
-        )
+    override fun showLoading() {
+        search_suggestion_progress.visibility = View.VISIBLE
     }
 
-    private fun onLoading() {
-        Log.e("Search", "Start")
+    override fun hideLoading() {
+        search_suggestion_progress.visibility = View.GONE
     }
 
-    private fun onSuccess(list: List<Suggestion>?) {
-        Log.e("Search", "Success")
+    override fun hideContent() {
+        search_suggestion_list.visibility = View.GONE
+    }
 
+    override fun showContent() {
         search_suggestion_list.visibility = View.VISIBLE
-        managerRecyclerView(list)
     }
-
-    private fun onFailure(error: String?){
-        Log.e("Search", "Error")
-    }
-
-    private fun onFinish(){
-        Log.e("Search", "Finishing")
-    }
-
 }
