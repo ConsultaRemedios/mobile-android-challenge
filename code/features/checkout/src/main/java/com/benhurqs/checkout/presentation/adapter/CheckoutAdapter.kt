@@ -1,4 +1,4 @@
-package com.benhurqs.checkout.adapter
+package com.benhurqs.checkout.presentation.adapter
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -8,10 +8,11 @@ import com.benhurqs.base.adapter.DefaultViewHolder
 import com.benhurqs.base.utils.ImageUtils
 import com.benhurqs.base.utils.Utils
 import com.benhurqs.checkout.R
+import com.benhurqs.checkout.data.CartRepository
 import com.benhurqs.network.entities.Cart
 import kotlinx.android.synthetic.main.cart_item.view.*
 
-class CheckoutAdapter (private val list: ArrayList<Cart>?) : RecyclerView.Adapter<DefaultViewHolder>(){
+class CheckoutAdapter (private val list: List<Cart>?) : RecyclerView.Adapter<DefaultViewHolder>(){
 
     private var qtd = 1
 
@@ -40,6 +41,8 @@ class CheckoutAdapter (private val list: ArrayList<Cart>?) : RecyclerView.Adapte
         holder.itemView.card_item_add.setOnClickListener {
             qtd++
             holder.itemView.cart_item_qtd.text = qtd.toString()
+
+            CartRepository.getInstance().addItem(item)
         }
 
         holder.itemView.card_item_remove.setOnClickListener {
@@ -48,7 +51,7 @@ class CheckoutAdapter (private val list: ArrayList<Cart>?) : RecyclerView.Adapte
         }
 
         holder.itemView.card_item_delete.setOnClickListener {
-            list.remove(item)
+            CartRepository.getInstance().removeItem(item)
         }
 
     }

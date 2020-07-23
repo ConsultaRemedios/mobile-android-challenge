@@ -26,7 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"/>
 
-                <com.benhurqs.checkout.widgets.CartButton
+                <com.benhurqs.checkout.presentation.widgets.CartButton
+                    android:id="@+id/detail_cart_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

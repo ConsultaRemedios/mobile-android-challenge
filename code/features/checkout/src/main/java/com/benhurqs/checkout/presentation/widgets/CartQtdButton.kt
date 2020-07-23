@@ -1,4 +1,4 @@
-package com.benhurqs.checkout.widgets
+package com.benhurqs.checkout.presentation.widgets
 
 import android.app.Activity
 import android.content.Context
@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import com.benhurqs.base.actions.Actions
 import com.benhurqs.checkout.R
 
-class CartButton(context: Context, attrs: AttributeSet): FrameLayout(context, attrs) {
+class CartQtdButton (context: Context, attrs: AttributeSet): FrameLayout(context, attrs) {
 
     init {
         initView()

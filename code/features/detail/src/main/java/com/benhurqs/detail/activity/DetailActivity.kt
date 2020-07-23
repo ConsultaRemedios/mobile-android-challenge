@@ -64,6 +64,8 @@ class DetailActivity : AppCompatActivity(){
         detail_spotlight_price.text = Utils.formatPrice(detail.price - detail.discount)
         detail_spotlight_last_price.text = Utils.formatPrice(detail.price)
 
+        detail_cart_button.setSpotlight(detail)
+
     }
 
     private fun onFailure(error: String?){
