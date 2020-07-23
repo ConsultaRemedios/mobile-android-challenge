@@ -2,7 +2,7 @@ package com.benhurqs.network.entities
 
 import java.io.Serializable
 
-class Spotlight : Serializable{
+open class Spotlight : Serializable{
     var id: Int = 0
     var title: String? = null
     var publisher: String? = null
