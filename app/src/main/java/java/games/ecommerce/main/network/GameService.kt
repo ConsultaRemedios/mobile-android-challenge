@@ -1,4 +1,4 @@
-package java.games.ecommerce.main.data.service
+package java.games.ecommerce.main.network
 
 import retrofit2.Call
 import retrofit2.http.GET

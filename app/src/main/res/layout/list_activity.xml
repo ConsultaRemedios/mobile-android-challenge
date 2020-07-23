@@ -8,6 +8,25 @@
     android:focusableInTouchMode="true"
     android:focusable="true"
     android:orientation="vertical">
+        
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            app:boxBackgroundColor="@color/white"
+            android:textColorHint="@color/colorHint"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/baseline_keyboard_voice_black_18dp"
+            app:endIconTint="@color/colorHint"
+            app:hintEnabled="false"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Pesquisar"
+                    android:textColorHint="@color/colorHint"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/banners_recyclerview"

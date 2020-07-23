@@ -27,7 +27,12 @@ class ListActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list_activity)
+        setupView()
         setupObservers()
+    }
+
+    private fun setupView() {
+        viewModel.fetchData()
     }
 
     private fun setupObservers() {
