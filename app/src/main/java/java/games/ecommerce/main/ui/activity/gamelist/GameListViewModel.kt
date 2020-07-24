@@ -1,4 +1,4 @@
-package java.games.ecommerce.main.viewmodel
+package java.games.ecommerce.main.ui.activity.gamelist
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +15,8 @@ class GameListViewModel @Inject constructor(
 ) : ViewModel() {
     val games: LiveData<List<Game>> = MutableLiveData()
     val banners: LiveData<List<Banner>> = MutableLiveData()
+    val gamesFound: LiveData<List<Game>> = MutableLiveData()
+    val isSearchTextVisible: LiveData<Boolean> = MutableLiveData(false)
 
     fun fetchData() {
         viewModelScope.launch {
@@ -26,4 +28,23 @@ class GameListViewModel @Inject constructor(
             }
         }
     }
+
+    fun searchGame(searchTerm: String) {
+        viewModelScope.launch {
+            when(val response = repository.searchGame(searchTerm)) {
+                is ResultWrapper.Success -> gamesFound.asMutable.postValue(response.value)
+            }
+        }
+    }
+    fun checkFragmentVisibility(length: Int){
+        if(length < 1 && isSearchTextVisible.value!!) {
+            isSearchTextVisible.asMutable.postValue(false)
+            return
+        }
+        if (length >= 1 && !isSearchTextVisible.value!!) {
+            isSearchTextVisible.asMutable.postValue(true)
+        }
+
+    }
+
 }

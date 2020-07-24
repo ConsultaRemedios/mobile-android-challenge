@@ -12,6 +12,7 @@ import javax.inject.Inject
 interface GameRepository {
     suspend fun getGames(): ResultWrapper<List<Game>>
     suspend fun getBanners():ResultWrapper<List<Banner>>
+    suspend fun searchGame(term: String):ResultWrapper<List<Game>>
 }
 
 class GameRepositoryImpl @Inject constructor(
@@ -24,5 +25,9 @@ class GameRepositoryImpl @Inject constructor(
 
     override suspend fun getBanners(): ResultWrapper<List<Banner>> {
         return safeApiCall(dispatcher) { gameService.getBanners() }
+    }
+
+    override suspend fun searchGame(term: String): ResultWrapper<List<Game>> {
+        return safeApiCall(dispatcher) { gameService.searchGame(term) }
     }
 }

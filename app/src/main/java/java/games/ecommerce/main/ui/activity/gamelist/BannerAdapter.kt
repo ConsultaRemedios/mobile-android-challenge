@@ -1,10 +1,10 @@
-package java.games.ecommerce.main.viewmodel.adapter
+package java.games.ecommerce.main.ui.activity.gamelist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.banner_card.view.*
+import kotlinx.android.synthetic.main.card_banner.view.*
 import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Banner
 import java.games.ecommerce.utils.loadImg
@@ -15,8 +15,11 @@ class BannerAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder> () {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cellsForRow = layoutInflater.inflate(R.layout.banner_card, parent, false)
-        return BannerViewHolder(cellsForRow, onCLick)
+        val cellsForRow = layoutInflater.inflate(R.layout.card_banner, parent, false)
+        return BannerViewHolder(
+            cellsForRow,
+            onCLick
+        )
     }
 
     override fun getItemCount(): Int {

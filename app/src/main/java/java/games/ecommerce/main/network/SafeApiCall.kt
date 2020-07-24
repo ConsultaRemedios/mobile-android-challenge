@@ -29,7 +29,7 @@ suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend ()
 private fun convertErrorBody(throwable: HttpException): ErrorResponse? {
     return try {
         throwable.response()?.errorBody()?.let {
-            Gson().fromJson(it?.charStream(), ErrorResponse::class.java)
+            Gson().fromJson(it.charStream(), ErrorResponse::class.java)
         }
     } catch (exception: Exception) {
         null

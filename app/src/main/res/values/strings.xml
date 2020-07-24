@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Games Ecommerce</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+  <string name="currencyExample">R$ 100,00</string>
+  <string name="search_text">Pesquisar</string>
 </resources>

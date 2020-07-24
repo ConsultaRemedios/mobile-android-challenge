@@ -1,11 +1,11 @@
-package java.games.ecommerce.main.viewmodel.adapter
+package java.games.ecommerce.main.ui.activity.gamelist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.game_card.view.*
-//import kotlinx.android.synthetic.main.game_card.view.*
+import kotlinx.android.synthetic.main.card_game.view.*
+//import kotlinx.android.synthetic.main.card_game.view.*
 import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Game
 import java.games.ecommerce.utils.loadImgCroped
@@ -17,8 +17,11 @@ class GameAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cellsForRow = layoutInflater.inflate(R.layout.game_card, parent, false)
-        return GameViewHolder(cellsForRow, onClick)
+        val cellsForRow = layoutInflater.inflate(R.layout.card_game, parent, false)
+        return GameViewHolder(
+            cellsForRow,
+            onClick
+        )
     }
 
     override fun getItemCount(): Int {

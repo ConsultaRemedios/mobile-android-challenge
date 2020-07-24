@@ -5,4 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
     <color name="colorHint">#646464</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="divider">#EEEEEE</color>
+    <color name="currency">#0091FF</color>
+    <color name="text_grey">#66000000</color>
 </resources>

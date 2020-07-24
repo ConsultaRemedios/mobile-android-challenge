@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
 import java.games.ecommerce.main.data.repository.GameRepository
-import java.games.ecommerce.main.viewmodel.GameListViewModel
+import java.games.ecommerce.main.ui.activity.gamelist.GameListViewModel
 import java.games.ecommerce.utils.ViewModelFactory
 import java.games.ecommerce.utils.ViewModelKey
 import javax.inject.Provider
@@ -16,8 +16,10 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(GameListViewModel::class)
-    fun provideMovieViewModule(movieRepository: GameRepository) : ViewModel {
-        return GameListViewModel(movieRepository)
+    fun provideListGameViewModule(movieRepository: GameRepository) : ViewModel {
+        return GameListViewModel(
+            movieRepository
+        )
     }
 
     @Provides
