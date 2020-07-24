@@ -4,4 +4,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
   <string name="currencyExample">R$ 100,00</string>
   <string name="search_text">Pesquisar</string>
+  <string name="gameNameExample">The Legend Of Zelda Breath of The Wild</string>
+  <string name="platformExample">Nintendo</string>
+  <string name="game_cover">Game Cover</string>
 </resources>

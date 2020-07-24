@@ -1,5 +1,7 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
+import android.text.SpannableString
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,8 @@ import kotlinx.android.synthetic.main.card_game.view.*
 //import kotlinx.android.synthetic.main.card_game.view.*
 import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Game
+import java.games.ecommerce.utils.asCurrency
+import java.games.ecommerce.utils.asStrokeText
 import java.games.ecommerce.utils.loadImgCroped
 
 
@@ -38,8 +42,8 @@ class GameViewHolder(private val view: View, private val onClick: (Game) -> Unit
     fun bind(game: Game) {
         itemView.apply {
             gameTitle.text = game.title
-            gameNewPrice.text = game.price.subtract(game.discount).toString()
-            gameOldPrice.text = game.price.toString()
+            gameNewPrice.text = game.price.subtract(game.discount).asCurrency()
+            gameOldPrice.text = ("de " + game.price.asCurrency()).asStrokeText()
             gamePublisher.text = game.publisher
             gameImage.loadImgCroped(game.image)
             gameCard.setOnClickListener {
