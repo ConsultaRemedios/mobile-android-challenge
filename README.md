@@ -30,9 +30,8 @@ O aplicativo foi feito seguindo o MVP (Model - View - Presenter).
 
 o CartReposiroty esta coberto com testes unitários.
 
-###Pendências
- 
+### Pendências
+
  - Criar testes de interface nas telas
  - Criar teste de integração
  - Criar testes unitários em todos os presenters
- 
