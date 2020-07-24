@@ -10,6 +10,7 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.ResponseBody
 
 open class NetworkRepository(
     private val apiService: ChallengeService = ChallengeService(),
@@ -83,6 +84,21 @@ open class NetworkRepository(
                 onFinish = { onFinish() }
             )
         }
+
+        @Synchronized
+        fun checkout(
+            onStart: () -> Unit,
+            onSuccess: () -> Unit,
+            onFinish: () -> Unit,
+            onFailure: (error: String?) -> Unit
+        ) {
+            NetworkRepository(type = APIServiceType.CHECKOUT).callAPI<ResponseBody?>(
+                 onStart = { onStart() },
+                onSuccess = { onSuccess() },
+                onFailure = { onFailure(it) },
+                onFinish = { onFinish() }
+            )
+        }
     }
 
     private fun <T> getAPIService(query: String? = null, spotlightID: Int? = null): Observable<T>? {
@@ -91,6 +107,7 @@ open class NetworkRepository(
             APIServiceType.SPOTLIGHT -> apiService.getSpotlights() as Observable<T>
             APIServiceType.SEARCH -> apiService.getSearchSuggestions(query) as Observable<T>
             APIServiceType.SPOTLIGHT_DETAIL -> apiService.getDetail(spotlightID) as Observable<T>
+            APIServiceType.CHECKOUT -> apiService.checkout() as Observable<T>
         }
     }
 

@@ -2,8 +2,10 @@ package com.benhurqs.detail.activity
 
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.benhurqs.base.actions.Actions.SPOTLIGHT_ID
 import com.benhurqs.base.utils.ImageUtils
@@ -12,6 +14,7 @@ import com.benhurqs.detail.R
 import com.benhurqs.network.domain.repository.NetworkRepository
 import com.benhurqs.network.entities.Spotlight
 import kotlinx.android.synthetic.main.detail_activity.*
+
 
 class DetailActivity : AppCompatActivity(){
 
@@ -66,6 +69,29 @@ class DetailActivity : AppCompatActivity(){
 
         detail_cart_button.setSpotlight(detail)
 
+        managerStars(detail.stars)
+
+    }
+
+    private fun managerStars(stars: Float){
+        detail_spotlight_rating_stars.removeAllViews()
+        for (position in 1..5){
+
+            var star = ImageView(this)
+            star.layoutParams = LinearLayout.LayoutParams(
+                0,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                1.0f
+            )
+
+            if(position < stars){
+                star.setImageResource(R.drawable.ic_star_enable)
+            }else{
+                star.setImageResource(R.drawable.ic_star_disable)
+            }
+
+            detail_spotlight_rating_stars.addView(star)
+        }
     }
 
     private fun onFailure(error: String?){

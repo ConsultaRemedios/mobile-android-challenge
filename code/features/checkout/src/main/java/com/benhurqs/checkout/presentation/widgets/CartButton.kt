@@ -22,13 +22,13 @@ class CartButton(context: Context, attrs: AttributeSet): FrameLayout(context, at
         addView(view)
 
         managerButtons()
-
     }
 
     private fun managerButtons(){
         rootView.cart_add.setOnClickListener {
             if(spotlight != null) {
                 CartRepository.getInstance().addItem(spotlight!!)
+                setSpotlight(spotlight!!)
             }
 
         }
@@ -36,6 +36,7 @@ class CartButton(context: Context, attrs: AttributeSet): FrameLayout(context, at
         rootView.cart_remove.setOnClickListener {
             if(spotlight != null) {
                 CartRepository.getInstance().removeItem(spotlight!!)
+                setSpotlight(spotlight!!)
             }
         }
 

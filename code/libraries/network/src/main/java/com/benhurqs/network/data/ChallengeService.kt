@@ -4,6 +4,7 @@ import com.benhurqs.network.BuildConfig
 import com.benhurqs.network.entities.*
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -45,5 +46,5 @@ open class ChallengeService {
     open fun getSpotlights(): Observable<List<Spotlight>?> = api.spotlight()
     open fun getDetail(id: Int?): Observable<Spotlight?> = api.detail(id)
     open fun getSearchSuggestions(query: String?): Observable<List<Suggestion>?> = api.search(query)
-    open fun checkout(checkout: Cart): Observable<List<Spotlight>?> = api.checkout(checkout)
+    open fun checkout(): Observable<ResponseBody?> = api.checkout()
 }

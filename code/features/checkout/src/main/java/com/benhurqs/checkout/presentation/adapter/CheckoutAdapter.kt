@@ -12,9 +12,8 @@ import com.benhurqs.checkout.data.CartRepository
 import com.benhurqs.network.entities.Cart
 import kotlinx.android.synthetic.main.cart_item.view.*
 
-class CheckoutAdapter (private val list: List<Cart>?) : RecyclerView.Adapter<DefaultViewHolder>(){
+class CheckoutAdapter (private val list: ArrayList<Cart>?) : RecyclerView.Adapter<DefaultViewHolder>(){
 
-    private var qtd = 1
 
     override fun getItemCount(): Int {
         return list?.size ?: 0
@@ -29,7 +28,7 @@ class CheckoutAdapter (private val list: List<Cart>?) : RecyclerView.Adapter<Def
     )
 
     override fun onBindViewHolder(holder: DefaultViewHolder, position: Int) {
-        var item = list?.get(position) ?: return
+        val item = list?.get(position) ?: return
         ImageUtils.loadImage(holder.itemView.cart_item_img, item.image)
         holder.itemView.cart_item_title.text = item.title
         holder.itemView.cart_item_qtd.text = item.qtd.toString()
@@ -39,19 +38,21 @@ class CheckoutAdapter (private val list: List<Cart>?) : RecyclerView.Adapter<Def
         holder.itemView.card_item_last_price.paintFlags = holder.itemView.card_item_last_price.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.card_item_add.setOnClickListener {
-            qtd++
-            holder.itemView.cart_item_qtd.text = qtd.toString()
-
-            CartRepository.getInstance().addItem(item)
+            holder.itemView.cart_item_qtd.text =  CartRepository.getInstance().addItem(item).toString()
         }
 
         holder.itemView.card_item_remove.setOnClickListener {
-            qtd--
-            holder.itemView.cart_item_qtd.text = qtd.toString()
+            if(item.qtd == 1){
+                return@setOnClickListener
+            }
+
+            holder.itemView.cart_item_qtd.text = CartRepository.getInstance().removeQtdItem(item).toString()
         }
 
         holder.itemView.card_item_delete.setOnClickListener {
             CartRepository.getInstance().removeItem(item)
+            list.remove(item)
+            this.notifyDataSetChanged()
         }
 
     }

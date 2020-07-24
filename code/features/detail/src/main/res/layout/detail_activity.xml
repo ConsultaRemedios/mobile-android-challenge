@@ -59,13 +59,14 @@
                         android:id="@+id/detail_spotlight_rating_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"/>
 
                     <LinearLayout
                         android:id="@+id/detail_spotlight_rating_stars"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:orientation="horizontal"/>
@@ -74,6 +75,7 @@
                         android:id="@+id/detail_spotlight_rating_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"/>
 

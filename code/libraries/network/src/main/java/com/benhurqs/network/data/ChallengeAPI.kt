@@ -2,6 +2,7 @@ package com.benhurqs.network.data
 
 import com.benhurqs.network.entities.*
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 
@@ -20,5 +21,5 @@ interface ChallengeAPI {
     fun search(@Query("term") query: String?): Observable<List<Suggestion>?>
 
     @POST("checkout")
-    fun checkout(@Body checkout: Cart): Observable<List<Spotlight>?>
+    fun checkout(): Observable<ResponseBody?>
 }

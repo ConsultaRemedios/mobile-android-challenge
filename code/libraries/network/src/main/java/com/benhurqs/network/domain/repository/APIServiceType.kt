@@ -5,4 +5,5 @@ enum class APIServiceType {
     SPOTLIGHT,
     SEARCH,
     SPOTLIGHT_DETAIL,
+    CHECKOUT
 }

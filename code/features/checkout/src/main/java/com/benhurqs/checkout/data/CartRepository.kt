@@ -5,13 +5,17 @@ import com.benhurqs.network.entities.Spotlight
 
 class CartRepository {
 
+
+    var freight: Double = FREIGHT_FREE
+    var total: Double = 0.0
+
     companion object{
-        private const val FREIGHT_FREE = 0.0
+        const val FREIGHT_FREE = 0.0
 
         private var INSTANCE: CartRepository? = null
         private var cartList: HashMap<Int, Cart> = HashMap()
-        var freight: Double = FREIGHT_FREE
-        var total: Double = 0.0
+        private var observerList = ArrayList<CartUpdateListener>()
+
 
         fun getInstance(): CartRepository{
             if(INSTANCE == null){
@@ -24,7 +28,7 @@ class CartRepository {
 
     fun hasItem(id: Int): Boolean = cartList.containsKey(id)
 
-    fun addItem(item: Spotlight){
+    fun addItem(item: Spotlight): Int{
         if(hasItem(item.id)){
             cartList[item.id]!!.qtd++
         }else{
@@ -32,6 +36,23 @@ class CartRepository {
         }
 
         updateValue()
+        return cartList[item.id]!!.qtd
+    }
+
+    fun removeQtdItem(item: Spotlight): Int?{
+        if(hasItem(item.id)){
+            val cartItem = cartList[item.id]
+            if(cartItem!!.qtd > 0) {
+                cartItem.qtd--
+            }else{
+                removeItem(item)
+            }
+        }else{
+            cartList[item.id] = Cart.convertToCart(item)
+        }
+
+        updateValue()
+        return cartList[item.id]?.qtd
     }
 
     fun removeItem(item: Spotlight){
@@ -41,7 +62,6 @@ class CartRepository {
         }
     }
 
-    fun getTotalItem() = cartList.size
 
     private fun updateValue(){
         total = 0.0
@@ -54,10 +74,30 @@ class CartRepository {
         if(total > 250.0){
             freight = FREIGHT_FREE
         }
+
+        notifyObservers()
     }
 
-    fun getList(): List<Cart>{
-        return cartList.values.toList()
+    fun addObserver(listener: CartUpdateListener){
+        observerList.add(listener)
+    }
+
+    fun removeObserver(listener: CartUpdateListener){
+        observerList.remove(listener)
+    }
+
+    fun clearCart(){
+        cartList.clear()
+    }
+
+    private fun notifyObservers(){
+        observerList.forEach {
+            it.onUpdate()
+        }
+    }
+
+    fun getList(): ArrayList<Cart>{
+        return ArrayList(cartList.values.toList())
     }
 
 

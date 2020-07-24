@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Produtos (7)"
+                android:text="@string/produtos_qtd"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -65,13 +65,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="R$ 700,00"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/checkout_freight_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Frete"
+                android:text="@string/freight"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -90,7 +90,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="R$ 20,00"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
@@ -106,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:textStyle="bold"
-                android:text="TOTAL"
+                android:text="@string/total"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -115,7 +114,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="R$ 20,00"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="20sp" />
@@ -124,18 +122,29 @@
 
 
         <TextView
+            android:id="@+id/checkout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/green_button"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Finalizar compra"
+            android:text="@string/buy"
+            android:onClick="onClickBuy"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ProgressBar
+            android:id="@+id/checkout_progress"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
