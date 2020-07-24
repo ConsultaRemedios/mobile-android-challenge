@@ -9,4 +9,6 @@
     <color name="divider">#EEEEEE</color>
     <color name="currency">#0091FF</color>
     <color name="text_grey">#66000000</color>
+    <color name="red">#FF0000</color>
+    <color name="star_rate">#F7B500</color>
 </resources>

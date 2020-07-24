@@ -14,6 +14,7 @@ class GameListViewModel @Inject constructor(
     private var repository: GameRepository
 ) : ViewModel() {
     val games: LiveData<List<Game>> = MutableLiveData()
+    val game: LiveData<Game> = MutableLiveData()
     val banners: LiveData<List<Banner>> = MutableLiveData()
     val gamesFound: LiveData<List<Game>> = MutableLiveData()
     val isSearchTextVisible: LiveData<Boolean> = MutableLiveData(false)
@@ -33,6 +34,14 @@ class GameListViewModel @Inject constructor(
         viewModelScope.launch {
             when(val response = repository.searchGame(searchTerm)) {
                 is ResultWrapper.Success -> gamesFound.asMutable.postValue(response.value)
+            }
+        }
+    }
+
+    fun gameById(id: Int ){
+        viewModelScope.launch {
+            when(val response = repository.gameById(id)) {
+                is ResultWrapper.Success -> game.asMutable.postValue(response.value)
             }
         }
     }

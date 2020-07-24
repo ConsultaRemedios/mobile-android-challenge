@@ -1,5 +1,6 @@
 package java.games.ecommerce.main.ui.fragment.searchgame
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_searchgame.*
 import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Game
+import java.games.ecommerce.main.ui.activity.gamedetails.GameDetailActivity
 import java.games.ecommerce.main.ui.activity.gamelist.GameListViewModel
 import java.games.ecommerce.utils.ViewModelFactory
 import java.games.ecommerce.utils.observe
@@ -40,15 +42,23 @@ class SearchGameFragment : DaggerFragment() {
         observe(viewModel.gamesFound) {
             addGames(it)
         }
+        observe(viewModel.game) {
+            startDetail(it)
+        }
     }
     private fun addGames(games: List<Game>) {
         recyclerview_searchgame.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter =
                 SearchGameAdapter(games) {
-                    println("teste")
+                    viewModel.gameById(it.id)
                 }
         }
+    }
+    private fun startDetail(game: Game) {
+        val intent = Intent(activity, GameDetailActivity::class.java)
+        intent.putExtra("game", game)
+        startActivity(intent)
     }
 
 }

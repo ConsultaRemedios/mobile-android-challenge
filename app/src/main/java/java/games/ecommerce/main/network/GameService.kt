@@ -14,4 +14,6 @@ interface GameService {
     suspend fun getBanners() : List<Banner>
     @GET("games/search")
     suspend fun searchGame(@Query("term") term: String) : List<Game>
+    @GET("games/{id}")
+    suspend fun gameById(@Path("id")id: Int): Game
 }

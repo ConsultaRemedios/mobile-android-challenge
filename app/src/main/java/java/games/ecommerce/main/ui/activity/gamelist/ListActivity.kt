@@ -1,5 +1,6 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_list.*
 import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Banner
 import java.games.ecommerce.main.data.model.Game
+import java.games.ecommerce.main.ui.activity.gamedetails.GameDetailActivity
 import java.games.ecommerce.main.ui.fragment.searchgame.SearchGameFragment
 import java.games.ecommerce.utils.ViewModelFactory
 import java.games.ecommerce.utils.observe
@@ -102,7 +104,7 @@ class ListActivity : DaggerAppCompatActivity() {
             layoutManager = GridLayoutManager(this@ListActivity, 2)
             adapter =
                 GameAdapter(games) {
-                    println("teste")
+                    startDetail(it)
                 }
         }
     }
@@ -117,6 +119,12 @@ class ListActivity : DaggerAppCompatActivity() {
                     println("clicked banner")
                 }
         }
+    }
+
+    private fun startDetail(game: Game) {
+        val intent = Intent(this, GameDetailActivity::class.java)
+        intent.putExtra("game", game)
+        startActivity(intent)
     }
 
 }

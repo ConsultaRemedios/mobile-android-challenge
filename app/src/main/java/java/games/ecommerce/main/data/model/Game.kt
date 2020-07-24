@@ -5,6 +5,7 @@ import java.io.Serializable
 import java.math.BigDecimal
 
 data class Game (
+    @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("image") val image: String,
     @SerializedName("price") val price: BigDecimal,

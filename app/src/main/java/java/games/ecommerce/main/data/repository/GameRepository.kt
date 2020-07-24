@@ -13,6 +13,7 @@ interface GameRepository {
     suspend fun getGames(): ResultWrapper<List<Game>>
     suspend fun getBanners():ResultWrapper<List<Banner>>
     suspend fun searchGame(term: String):ResultWrapper<List<Game>>
+    suspend fun gameById(id: Int):ResultWrapper<Game>
 }
 
 class GameRepositoryImpl @Inject constructor(
@@ -29,5 +30,9 @@ class GameRepositoryImpl @Inject constructor(
 
     override suspend fun searchGame(term: String): ResultWrapper<List<Game>> {
         return safeApiCall(dispatcher) { gameService.searchGame(term) }
+    }
+
+    override suspend fun gameById(id: Int): ResultWrapper<Game> {
+        return safeApiCall(dispatcher) { gameService.gameById(id) }
     }
 }
