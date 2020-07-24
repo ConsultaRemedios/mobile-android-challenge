@@ -42,17 +42,19 @@ class CartRepository {
     fun removeQtdItem(item: Spotlight): Int?{
         if(hasItem(item.id)){
             val cartItem = cartList[item.id]
-            if(cartItem!!.qtd > 0) {
+            if(cartItem!!.qtd > 1) {
                 cartItem.qtd--
             }else{
                 removeItem(item)
             }
+
+            updateValue()
+            return cartList[item.id]?.qtd
         }else{
-            cartList[item.id] = Cart.convertToCart(item)
+            return 0
         }
 
-        updateValue()
-        return cartList[item.id]?.qtd
+
     }
 
     fun removeItem(item: Spotlight){

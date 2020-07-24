@@ -22,7 +22,7 @@ open class NetworkRepository(
     companion object {
 
         @Synchronized
-        fun getBanners(
+        open fun getBanners(
             onStart: () -> Unit,
             onSuccess: (response: List<Banner>?) -> Unit,
             onFinish: () -> Unit,
@@ -150,6 +150,7 @@ open class NetworkRepository(
                 }
             })
     }
+
 
 
 }
