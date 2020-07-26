@@ -1,9 +1,11 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -115,7 +117,9 @@ class ListActivity : DaggerAppCompatActivity() {
                 BannerAdapter(
                     banners
                 ) {
-                    println("clicked banner")
+                    val builder = CustomTabsIntent.Builder();
+                    val customTabsIntent = builder.build();
+                    customTabsIntent.launchUrl(this@ListActivity, Uri.parse(it.url));
                 }
         }
     }
