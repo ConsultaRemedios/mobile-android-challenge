@@ -2,6 +2,7 @@ package java.games.ecommerce.main.network
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.games.ecommerce.main.data.model.Banner
@@ -16,4 +17,6 @@ interface GameService {
     suspend fun searchGame(@Query("term") term: String) : List<Game>
     @GET("games/{id}")
     suspend fun gameById(@Path("id")id: Int): Game
+    @POST("checkout")
+    suspend fun checkout()
 }

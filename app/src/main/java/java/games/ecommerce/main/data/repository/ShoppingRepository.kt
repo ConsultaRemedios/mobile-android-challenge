@@ -13,6 +13,7 @@ interface ShoppingRepository {
     suspend fun getShoppingGames(): List<ShoppingGame>
     suspend fun getShoppingById(id: Int): ShoppingGame
     suspend fun removeShoppingGame(id: Int) : StatusDB
+    suspend fun removeAllShopingGames()
     suspend fun getTotalAmount(): Int?
 }
 
@@ -45,6 +46,10 @@ class ShoppingRepositoryImpl(
         } catch (ex: Exception) {
             return StatusDB.ERROR
         }
+    }
+
+    override suspend fun removeAllShopingGames() {
+        shoppingGameDao.removeAll()
     }
 
     override suspend fun getTotalAmount(): Int? {

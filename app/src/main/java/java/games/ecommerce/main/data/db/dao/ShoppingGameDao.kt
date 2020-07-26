@@ -24,4 +24,7 @@ interface ShoppingGameDao {
 
     @Query("SELECT SUM(amount) FROM shopping")
     suspend fun getTotalAmount(): Int?
+
+    @Query("DELETE FROM shopping")
+    suspend fun removeAll()
 }

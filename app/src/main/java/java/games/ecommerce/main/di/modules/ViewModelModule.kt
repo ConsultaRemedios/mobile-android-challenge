@@ -38,8 +38,11 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(ShoppingCartViewModel::class)
-    fun providesShoppingCartViewModule(shoppingRepository: ShoppingRepository): ViewModel {
-        return ShoppingCartViewModel(shoppingRepository)
+    fun providesShoppingCartViewModule(
+        gameRepository: GameRepository,
+        shoppingRepository: ShoppingRepository
+    ): ViewModel {
+        return ShoppingCartViewModel(shoppingRepository, gameRepository)
     }
 
     @Provides

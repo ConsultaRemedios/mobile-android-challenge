@@ -1,11 +1,9 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.FontsContract
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.browser.customtabs.CustomTabsIntent
@@ -112,14 +110,13 @@ class ListActivity : DaggerAppCompatActivity() {
         builder.apply {
             setMessage(error)
             setTitle("Aviso")
-            setPositiveButton("Recarregar",
-                DialogInterface.OnClickListener { dialog, id ->
-                    viewModel.fetchData()
-                })
+            setPositiveButton("Recarregar"
+            ) { _, _ ->
+                viewModel.fetchData()
+            }
             val dialog: AlertDialog = builder.create()
             dialog.show()
         }
-
     }
 
     private fun addGames(games: List<Game>) {
@@ -140,9 +137,9 @@ class ListActivity : DaggerAppCompatActivity() {
                 BannerAdapter(
                     banners
                 ) {
-                    val builder = CustomTabsIntent.Builder();
-                    val customTabsIntent = builder.build();
-                    customTabsIntent.launchUrl(this@ListActivity, Uri.parse(it.url));
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(this@ListActivity, Uri.parse(it.url))
                 }
         }
     }

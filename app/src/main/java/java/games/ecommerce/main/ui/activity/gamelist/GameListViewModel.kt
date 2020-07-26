@@ -1,18 +1,16 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
-import android.R
-import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import java.games.ecommerce.main.data.model.Banner
 import java.games.ecommerce.main.data.model.Game
-import java.games.ecommerce.main.data.model.ShoppingGame
 import java.games.ecommerce.main.data.repository.GameRepository
 import java.games.ecommerce.main.data.repository.ShoppingRepository
-import java.games.ecommerce.main.data.repository.ShoppingRepositoryImpl
 import java.games.ecommerce.main.network.ResultWrapper
 import java.games.ecommerce.utils.asMutable
-import java.math.BigDecimal
 import javax.inject.Inject
 
 class GameListViewModel @Inject constructor(

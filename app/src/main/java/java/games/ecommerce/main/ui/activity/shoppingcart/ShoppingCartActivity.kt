@@ -1,5 +1,8 @@
 package java.games.ecommerce.main.ui.activity.shoppingcart
 
+import android.app.AlertDialog
+import java.games.ecommerce.main.ui.activity.gamelist.ListActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +31,9 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
     }
 
     private fun setupListeners() {
-
+        finish_shop_btn.setOnClickListener {
+            viewModel.checkout()
+        }
     }
 
 
@@ -51,6 +56,13 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
         }
         observe(viewModel.statusDB) {
             viewModel.fetchData()
+        }
+        observe(viewModel.checkoutSuccess) {
+            if(it) {
+                showSuccessDialog("Compra finalizada com sucesso!")
+                viewModel.clearCart()
+            }
+            else showErrorDialog("Ocorreu um erro ao realizar a compra")
         }
     }
 
@@ -82,6 +94,48 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
                     viewModel.removeAllFromCart(it)
                 })
         }
+    }
+
+    private fun showErrorDialog(error: String) {
+        val builder: AlertDialog.Builder = this.let {
+            AlertDialog.Builder(it)
+        }
+        builder.apply {
+            setMessage(error)
+            setTitle("Aviso")
+            setPositiveButton("Tentar Novamente"
+            ) { _, _ ->
+                viewModel.checkout()
+            }
+            setNegativeButton("Cancelar"
+            ) { _, _ ->
+            viewModel.fetchData()
+            }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    private fun showSuccessDialog(error: String) {
+        val builder: AlertDialog.Builder = this.let {
+            AlertDialog.Builder(it)
+        }
+        builder.apply {
+            setMessage(error)
+            setTitle("Aviso")
+            setPositiveButton("OK"
+            ) { _, _ ->
+                startMainActivity()
+            }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this@ShoppingCartActivity, ListActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
 }

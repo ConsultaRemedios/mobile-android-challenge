@@ -14,6 +14,7 @@ interface GameRepository {
     suspend fun getBanners():ResultWrapper<List<Banner>>
     suspend fun searchGame(term: String):ResultWrapper<List<Game>>
     suspend fun gameById(id: Int):ResultWrapper<Game>
+    suspend fun checkout(): ResultWrapper<Unit>
 }
 
 class GameRepositoryImpl @Inject constructor(
@@ -34,5 +35,9 @@ class GameRepositoryImpl @Inject constructor(
 
     override suspend fun gameById(id: Int): ResultWrapper<Game> {
         return safeApiCall(dispatcher) { gameService.gameById(id) }
+    }
+
+    override suspend fun checkout(): ResultWrapper<Unit> {
+        return safeApiCall(dispatcher) { gameService.checkout() }
     }
 }
