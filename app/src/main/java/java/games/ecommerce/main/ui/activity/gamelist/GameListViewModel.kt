@@ -25,6 +25,7 @@ class GameListViewModel @Inject constructor(
     val gamesFound: LiveData<List<Game>> = MutableLiveData()
     val cartAmount: LiveData<Int> = MutableLiveData()
     val isSearchTextVisible: LiveData<Boolean> = MutableLiveData(false)
+    val error: LiveData<String> = MutableLiveData()
 
     fun fetchData() {
         viewModelScope.launch {
@@ -32,9 +33,29 @@ class GameListViewModel @Inject constructor(
             
             when (val response = repository.getGames()) {
                 is ResultWrapper.Success -> games.asMutable.postValue(response.value)
+
+                is ResultWrapper.GenericError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
             }
             when (val response = repository.getBanners()) {
                 is ResultWrapper.Success -> banners.asMutable.postValue(response.value)
+
+                is ResultWrapper.GenericError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
             }
         }
     }
@@ -43,6 +64,16 @@ class GameListViewModel @Inject constructor(
         viewModelScope.launch {
             when (val response = repository.searchGame(searchTerm)) {
                 is ResultWrapper.Success -> gamesFound.asMutable.postValue(response.value)
+
+                is ResultWrapper.GenericError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
+                    return@launch
+                }
             }
         }
     }
@@ -51,6 +82,10 @@ class GameListViewModel @Inject constructor(
         viewModelScope.launch {
             when (val response = repository.gameById(id)) {
                 is ResultWrapper.Success -> game.asMutable.postValue(response.value)
+
+                is ResultWrapper.GenericError -> error.asMutable.postValue("Ocorreu um erro, tente novamente")
+
+                is ResultWrapper.NetworkError -> error.asMutable.postValue("Ocorreu um erro, tente novamente")
             }
         }
     }

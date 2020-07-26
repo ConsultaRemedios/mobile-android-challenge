@@ -1,8 +1,11 @@
 package java.games.ecommerce.main.ui.activity.gamelist
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.FontsContract
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.browser.customtabs.CustomTabsIntent
@@ -80,7 +83,6 @@ class ListActivity : DaggerAppCompatActivity() {
     }
 
 
-
     private fun setupView() {
         viewModel.fetchData()
     }
@@ -98,6 +100,26 @@ class ListActivity : DaggerAppCompatActivity() {
         observe(viewModel.cartAmount) {
             floatbutton_text.text = it.toString()
         }
+        observe(viewModel.error) {
+            showInfoDialog(it)
+        }
+    }
+
+    private fun showInfoDialog(error: String) {
+        val builder: AlertDialog.Builder = this.let {
+            AlertDialog.Builder(it)
+        }
+        builder.apply {
+            setMessage(error)
+            setTitle("Aviso")
+            setPositiveButton("Recarregar",
+                DialogInterface.OnClickListener { dialog, id ->
+                    viewModel.fetchData()
+                })
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
+
     }
 
     private fun addGames(games: List<Game>) {
@@ -112,7 +134,8 @@ class ListActivity : DaggerAppCompatActivity() {
 
     private fun addBanners(banners: List<Banner>) {
         banners_recyclerview.apply {
-            layoutManager = LinearLayoutManager(this@ListActivity, LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(this@ListActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter =
                 BannerAdapter(
                     banners
