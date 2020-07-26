@@ -14,6 +14,7 @@ import java.games.ecommerce.R
 import java.games.ecommerce.main.data.model.Banner
 import java.games.ecommerce.main.data.model.Game
 import java.games.ecommerce.main.ui.activity.gamedetails.GameDetailActivity
+import java.games.ecommerce.main.ui.activity.shoppingcart.ShoppingCartActivity
 import java.games.ecommerce.main.ui.fragment.searchgame.SearchGameFragment
 import java.games.ecommerce.utils.ViewModelFactory
 import java.games.ecommerce.utils.observe
@@ -22,7 +23,6 @@ import javax.inject.Inject
 class ListActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    var isFragmentVisible = false
     private val viewModel: GameListViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(GameListViewModel::class.java)
     }
@@ -35,12 +35,16 @@ class ListActivity : DaggerAppCompatActivity() {
         setupListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchData()
+    }
+
     private fun setupListeners() {
 
         searchTextGame.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-//                checkFragmentVisibility(s.toString().length)
-                checkFragmentVisibility(s.toString().length)
+                viewModel.checkFragmentVisibility(s.toString().length)
                 viewModel.searchGame(s.toString())
             }
 
@@ -52,19 +56,11 @@ class ListActivity : DaggerAppCompatActivity() {
                 return
             }
         })
-    }
 
-    fun checkFragmentVisibility(length: Int){
-        if(length < 1 && isFragmentVisible) {
-            isFragmentVisible = false
-            switchFragment(false)
-            return
+        floatButton.setOnClickListener {
+            val intent = Intent(this, ShoppingCartActivity::class.java)
+            startActivity(intent)
         }
-        if (length >= 1 && !isFragmentVisible) {
-            isFragmentVisible = true
-            switchFragment(true)
-        }
-
     }
 
     private fun switchFragment(visible: Boolean) {
@@ -96,6 +92,9 @@ class ListActivity : DaggerAppCompatActivity() {
         }
         observe(viewModel.isSearchTextVisible) {
             switchFragment(it)
+        }
+        observe(viewModel.cartAmount) {
+            floatbutton_text.text = it.toString()
         }
     }
 

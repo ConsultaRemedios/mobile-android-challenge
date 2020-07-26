@@ -21,7 +21,8 @@ class SearchGameFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private val viewModel: GameListViewModel by lazy {
-        ViewModelProviders.of(requireActivity(), viewModelFactory).get(GameListViewModel::class.java)
+        ViewModelProviders.of(requireActivity(), viewModelFactory)
+            .get(GameListViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -46,6 +47,7 @@ class SearchGameFragment : DaggerFragment() {
             startDetail(it)
         }
     }
+
     private fun addGames(games: List<Game>) {
         recyclerview_searchgame.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -55,8 +57,10 @@ class SearchGameFragment : DaggerFragment() {
                 }
         }
     }
+
     private fun startDetail(game: Game) {
         val intent = Intent(activity, GameDetailActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.putExtra("game", game)
         startActivity(intent)
     }

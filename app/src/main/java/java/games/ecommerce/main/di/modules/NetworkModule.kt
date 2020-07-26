@@ -8,7 +8,7 @@ import java.games.ecommerce.utils.Network
 @Module
 class NetworkModule {
     @Provides
-    fun provideService() : GameService {
+    fun providesService() : GameService {
         return Network.retrofit.create(GameService::class.java)
     }
 }

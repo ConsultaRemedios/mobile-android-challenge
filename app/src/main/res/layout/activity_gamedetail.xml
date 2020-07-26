@@ -17,7 +17,7 @@
     android:id="@+id/view_detail"
     android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:background="#2196F3"
+    android:background="@color/blue_view"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/image_detail" />
@@ -110,7 +110,7 @@
     app:srcCompat="@drawable/abc_vector_test" />
 
   <ImageButton
-    android:id="@+id/imageButton2"
+    android:id="@+id/addtocart_btn"
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_marginEnd="44dp"

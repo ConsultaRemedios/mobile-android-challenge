@@ -6,9 +6,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.card_game.view.*
-import java.math.BigDecimal
-import java.text.DecimalFormat
 
 fun ImageView.loadImgCroped(url: String) {
     Picasso.get()
@@ -44,7 +41,7 @@ fun AppCompatActivity.showFragment(fragment: Fragment, into: Int, push: Boolean 
     }
 }
 
-fun BigDecimal?.asCurrency() = "R$%.2f".format(this ?: 0,0F)
+fun Double?.asCurrency() = "R$%.2f".format(this ?: 0,0F)
 
 fun String.asStrokeText() : SpannableString {
     val content1 = this

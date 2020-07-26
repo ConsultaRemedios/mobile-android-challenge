@@ -7,4 +7,11 @@
   <string name="gameNameExample">The Legend Of Zelda Breath of The Wild</string>
   <string name="platformExample">Nintendo</string>
   <string name="game_cover">Game Cover</string>
+  <string name="total_cart">TOTAL</string>
+  <string name="finish_shop">Finalizar compra</string>
+  <string name="cart_label">Carrinho</string>
+  <string name="_1">1</string>
+  <string name="_0">0</string>
+  <string name="products_amount_example">Produtos(0)</string>
+  <string name="price_example">R$ 00,00</string>
 </resources>

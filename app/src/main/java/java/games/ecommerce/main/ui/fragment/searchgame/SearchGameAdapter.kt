@@ -40,7 +40,7 @@ class GameViewHolder(private val view: View, private val onClick: (Game) -> Unit
     fun bind(game: Game) {
         itemView.apply {
             searchGameTitle.text = game.title
-            searchGamePrice.text = game.price.subtract(game.discount).asCurrency()
+            searchGamePrice.text = (game.price - game.discount).asCurrency()
             card_searchgame.setOnClickListener {
                 onClick(game)
             }

@@ -6,10 +6,9 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import java.games.ecommerce.App
-import java.games.ecommerce.main.di.modules.ActivityModule
-import java.games.ecommerce.main.di.modules.ApplicationModule
-import java.games.ecommerce.main.di.modules.NetworkModule
-import java.games.ecommerce.main.di.modules.ViewModelModule
+import java.games.ecommerce.main.data.db.AppDatabase
+import java.games.ecommerce.main.data.db.dao.ShoppingGameDao
+import java.games.ecommerce.main.di.modules.*
 import javax.inject.Singleton
 
 
@@ -20,7 +19,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ApplicationModule::class,
         NetworkModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        DatabaseModule::class
     ])
 )
 

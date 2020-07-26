@@ -42,7 +42,7 @@ class GameViewHolder(private val view: View, private val onClick: (Game) -> Unit
     fun bind(game: Game) {
         itemView.apply {
             gameTitle.text = game.title
-            gameNewPrice.text = game.price.subtract(game.discount).asCurrency()
+            gameNewPrice.text = (game.price - game.discount).asCurrency()
             gameOldPrice.text = ("de " + game.price.asCurrency()).asStrokeText()
             gamePublisher.text = game.publisher
             gameImage.loadImgCroped(game.image)

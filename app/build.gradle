@@ -16,6 +16,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+                arg("room.incremental", "true")
+                arg("room.expandProjection", "true")
+            }
+        }
+
     }
 
     buildTypes {
@@ -50,6 +59,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     //Dagger import
     def dagger_version = '2.28.1'
@@ -61,6 +71,7 @@ dependencies {
 
     def room_version = '2.2.5'
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
 }
