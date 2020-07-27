@@ -1,11 +1,34 @@
 package com.games.ecommerce.utils
 
+import com.games.ecommerce.BuildConfig
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object Network {
-    val retrofit get() = Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+class Network {
+
+    private val logging by lazy {
+        HttpLoggingInterceptor().apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
+
+    private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(logging)
         .build()
+
+    fun retrofit(): Retrofit {
+
+
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
 }

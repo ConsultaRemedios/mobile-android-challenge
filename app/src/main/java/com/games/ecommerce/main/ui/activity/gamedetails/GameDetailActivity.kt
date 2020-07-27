@@ -1,12 +1,15 @@
 package com.games.ecommerce.main.ui.activity.gamedetails
 
 import android.os.Bundle
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.ViewModelProviders
 import com.games.ecommerce.R
 import com.games.ecommerce.main.data.model.GameRepositoryResponse
 import com.games.ecommerce.utils.*
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_gamedetail.*
+import java.security.AccessController.getContext
 import javax.inject.Inject
 
 class GameDetailActivity : DaggerAppCompatActivity() {
@@ -36,9 +39,11 @@ class GameDetailActivity : DaggerAppCompatActivity() {
     private fun changeCartStatus(isOnCart: Boolean) {
         if (isOnCart) {
             addtocart_btn.setBackgroundResource(R.drawable.circle_red_shape)
+            addtocart_btn.setImageResource(R.drawable.shopping_cart_remove)
             return
         }
         addtocart_btn.setBackgroundResource(R.drawable.circle_white_shape)
+        addtocart_btn.setImageResource(R.drawable.shopping_cart)
     }
 
     override fun onResume() {

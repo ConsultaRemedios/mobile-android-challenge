@@ -9,6 +9,6 @@ import dagger.Provides
 class NetworkModule {
     @Provides
     fun providesService(): GameService {
-        return Network.retrofit.create(GameService::class.java)
+        return Network().retrofit().create(GameService::class.java)
     }
 }

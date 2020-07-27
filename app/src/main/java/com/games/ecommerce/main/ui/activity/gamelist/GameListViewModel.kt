@@ -44,13 +44,9 @@ class GameListViewModel @Inject constructor(
             when (val response = repository.getBanners()) {
                 is ResultWrapper.Success -> banners.asMutable.postValue(response.value)
 
-                is ResultWrapper.GenericError -> {
-                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
-                }
+                is ResultWrapper.GenericError -> error.asMutable.postValue(ERROR_ON_FIND_GAMES)
 
-                is ResultWrapper.NetworkError -> {
-                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
-                }
+                is ResultWrapper.NetworkError -> error.asMutable.postValue(ERROR_ON_FIND_GAMES)
             }
         }
     }
@@ -60,13 +56,11 @@ class GameListViewModel @Inject constructor(
             when (val response = repository.searchGame(searchTerm)) {
                 is ResultWrapper.Success -> gamesFound.asMutable.postValue(response.value)
 
-                is ResultWrapper.GenericError -> {
-                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
-                }
+                is ResultWrapper.GenericError -> error.asMutable.postValue(ERROR_ON_FIND_GAMES)
 
-                is ResultWrapper.NetworkError -> {
-                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
-                }
+
+                is ResultWrapper.NetworkError -> error.asMutable.postValue(ERROR_ON_FIND_GAMES)
+
             }
         }
     }

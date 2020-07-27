@@ -34,7 +34,6 @@ class ListActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-        setupView()
         setupObservers()
         setupListeners()
     }
@@ -50,6 +49,7 @@ class ListActivity : DaggerAppCompatActivity() {
         searchTextGame.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.checkFragmentVisibility(s.toString().length)
+                if (s.toString().equals("")) return
                 viewModel.searchGame(s.toString())
             }
 
@@ -80,11 +80,6 @@ class ListActivity : DaggerAppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.listActivity, Fragment())
         fragmentTransaction.commit()
-    }
-
-
-    private fun setupView() {
-        viewModel.fetchData()
     }
 
     private fun setupObservers() {
