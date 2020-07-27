@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "932d0cbb1402e3a31b8581fc114652b6",
+    "identityHash": "5f0a42d6631ec3a8a700b5ab46bf48cf",
     "entities": [
       {
         "tableName": "shopping",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `price` REAL NOT NULL, `discount` REAL NOT NULL, `image` TEXT NOT NULL, `amount` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `price` REAL NOT NULL, `originalPrice` REAL NOT NULL, `image` TEXT NOT NULL, `amount` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -27,8 +27,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "discount",
-            "columnName": "discount",
+            "fieldPath": "originalPrice",
+            "columnName": "originalPrice",
             "affinity": "REAL",
             "notNull": true
           },
@@ -58,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '932d0cbb1402e3a31b8581fc114652b6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5f0a42d6631ec3a8a700b5ab46bf48cf')"
     ]
   }
 }

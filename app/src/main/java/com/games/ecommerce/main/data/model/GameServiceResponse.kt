@@ -3,7 +3,7 @@ package com.games.ecommerce.main.data.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class Game(
+data class GameServiceResponse(
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("image") val image: String,
@@ -15,3 +15,20 @@ data class Game(
     @SerializedName("publisher") val publisher: String,
     @SerializedName("reviews") val reviews: Int
 ) : Serializable
+
+
+fun GameServiceResponse.toGameRepositoryResponse(): GameRepositoryResponse {
+    return GameRepositoryResponse(
+        id = this.id,
+        title = this.title,
+        image = this.image,
+        price = this.price - this.discount,
+        originalPrice = this.price,
+        description = this.description,
+        rating = this.rating,
+        stars = this.stars,
+        publisher = this.publisher,
+        reviews = this.reviews
+    )
+}
+

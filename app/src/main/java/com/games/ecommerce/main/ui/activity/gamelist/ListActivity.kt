@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.games.ecommerce.R
 import com.games.ecommerce.main.data.model.Banner
-import com.games.ecommerce.main.data.model.Game
+import com.games.ecommerce.main.data.model.GameRepositoryResponse
 import com.games.ecommerce.main.ui.activity.gamedetails.GameDetailActivity
 import com.games.ecommerce.main.ui.activity.shoppingcart.ShoppingCartActivity
 import com.games.ecommerce.main.ui.fragment.searchgame.SearchGameFragment
@@ -26,6 +26,7 @@ import javax.inject.Inject
 class ListActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel: GameListViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(GameListViewModel::class.java)
     }
@@ -40,6 +41,7 @@ class ListActivity : DaggerAppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        searchTextGame.setText("")
         viewModel.fetchData()
     }
 
@@ -109,9 +111,9 @@ class ListActivity : DaggerAppCompatActivity() {
         }
         builder.apply {
             setMessage(error)
-            setTitle("Aviso")
+            setTitle(getString(R.string.warning_title))
             setPositiveButton(
-                "Recarregar"
+                getString(R.string.warning_reload_button)
             ) { _, _ ->
                 viewModel.fetchData()
             }
@@ -120,11 +122,11 @@ class ListActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun addGames(games: List<Game>) {
+    private fun addGames(gameRepositoryResponse: List<GameRepositoryResponse>) {
         games_recyclerView.apply {
             layoutManager = GridLayoutManager(this@ListActivity, 2)
             adapter =
-                GameAdapter(games) {
+                GameAdapter(gameRepositoryResponse) {
                     startDetail(it)
                 }
         }
@@ -145,9 +147,9 @@ class ListActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun startDetail(game: Game) {
+    private fun startDetail(gameRepositoryResponse: GameRepositoryResponse) {
         val intent = Intent(this, GameDetailActivity::class.java)
-        intent.putExtra("game", game)
+        intent.putExtra("game", gameRepositoryResponse)
         startActivity(intent)
     }
 

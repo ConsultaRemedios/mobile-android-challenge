@@ -4,18 +4,18 @@ data class ShoppingGame(
     val id: Int,
     val title: String,
     val price: Double,
-    val discount: Double,
+    val originalPrice: Double,
     val image: String,
     var amount: Int
 )
 
-fun Game.toShoppingGame(): ShoppingGame {
+fun GameRepositoryResponse.toShoppingGame(): ShoppingGame {
     return with(this) {
         ShoppingGame(
             id = this.id,
             title = this.title,
             price = this.price,
-            discount = this.discount,
+            originalPrice = this.originalPrice,
             image = this.image,
             amount = 1
         )

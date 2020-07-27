@@ -10,7 +10,7 @@ interface ShoppingRepository {
     suspend fun getShoppingGames(): List<ShoppingGame>
     suspend fun getShoppingById(id: Int): ShoppingGame
     suspend fun removeShoppingGame(id: Int): StatusDB
-    suspend fun removeAllShopingGames()
+    suspend fun removeAllShoppingGames()
     suspend fun getTotalAmount(): Int?
 }
 
@@ -18,11 +18,11 @@ class ShoppingRepositoryImpl(
     private val shoppingGameDao: ShoppingGameDao
 ) : ShoppingRepository {
     override suspend fun saveShoppingGame(shoppingGame: ShoppingGame): StatusDB {
-        try {
+        return try {
             shoppingGameDao.save(shoppingGame.toShoppingGameEntity())
-            return StatusDB.SUCCESS
+            StatusDB.SUCCESS
         } catch (ex: Exception) {
-            return StatusDB.ERROR
+            StatusDB.ERROR
         }
     }
 
@@ -37,22 +37,20 @@ class ShoppingRepositoryImpl(
     }
 
     override suspend fun removeShoppingGame(id: Int): StatusDB {
-        try {
+        return try {
             shoppingGameDao.removeGame(id)
-            return StatusDB.SUCCESS
+            StatusDB.SUCCESS
         } catch (ex: Exception) {
-            return StatusDB.ERROR
+            StatusDB.ERROR
         }
     }
 
-    override suspend fun removeAllShopingGames() {
+    override suspend fun removeAllShoppingGames() {
         shoppingGameDao.removeAll()
     }
 
     override suspend fun getTotalAmount(): Int? {
-        val result = shoppingGameDao.getTotalAmount()
-        if (result == null) return 0
-        return result
+        return shoppingGameDao.getTotalAmount() ?: return 0
     }
 }
 

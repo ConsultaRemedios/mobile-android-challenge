@@ -47,14 +47,14 @@ class ShoppingCartViewModel @Inject constructor(
 
     fun clearCart() {
         viewModelScope.launch {
-            repository.removeAllShopingGames()
+            repository.removeAllShoppingGames()
         }
     }
 
     private fun getTotalPrice(shoppingGames: List<ShoppingGame>): Double {
         var result = 0.0
         shoppingGames.forEach {
-            result += (it.price - it.discount) * it.amount
+            result += it.price * it.amount
         }
         return result
     }

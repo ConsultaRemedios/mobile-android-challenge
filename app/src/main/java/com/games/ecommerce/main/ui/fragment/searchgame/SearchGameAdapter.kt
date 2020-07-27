@@ -5,14 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.games.ecommerce.R
-import com.games.ecommerce.main.data.model.Game
+import com.games.ecommerce.main.data.model.GameRepositoryResponse
+import com.games.ecommerce.main.data.model.GameServiceResponse
 import com.games.ecommerce.utils.asCurrency
 import kotlinx.android.synthetic.main.card_searchgame.view.*
 
 
 class SearchGameAdapter(
-    private val gameList: List<Game>,
-    private val onClick: (Game) -> Unit
+    private val gameRepositoryResponseList: List<GameRepositoryResponse>,
+    private val onClick: (GameRepositoryResponse) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,23 +25,26 @@ class SearchGameAdapter(
     }
 
     override fun getItemCount(): Int {
-        return gameList.size
+        return gameRepositoryResponseList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as GameViewHolder).bind(gameList[position])
+        (holder as GameViewHolder).bind(gameRepositoryResponseList[position])
     }
 
 }
 
-class GameViewHolder(private val view: View, private val onClick: (Game) -> Unit) :
+class GameViewHolder(
+    private val view: View,
+    private val onClick: (GameRepositoryResponse) -> Unit
+) :
     RecyclerView.ViewHolder(view) {
-    fun bind(game: Game) {
+    fun bind(gameRepositoryResponse: GameRepositoryResponse) {
         itemView.apply {
-            searchGameTitle.text = game.title
-            searchGamePrice.text = (game.price - game.discount).asCurrency()
+            searchGameTitle.text = gameRepositoryResponse.title
+            searchGamePrice.text = gameRepositoryResponse.price.asCurrency()
             card_searchgame.setOnClickListener {
-                onClick(game)
+                onClick(gameRepositoryResponse)
             }
         }
     }

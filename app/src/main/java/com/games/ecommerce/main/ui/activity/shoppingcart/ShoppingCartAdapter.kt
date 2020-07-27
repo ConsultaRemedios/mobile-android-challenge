@@ -44,8 +44,8 @@ class ShoppingCartViewHolder(
     fun bind(cart: ShoppingGame) {
         itemView.apply {
             title_shopping_card.text = cart.title
-            price_shopping_card.text = (cart.price - cart.discount).asCurrency()
-            oldprice_shopping_card.text = ("de " + cart.price.asCurrency()).asStrokeText()
+            price_shopping_card.text = cart.price.asCurrency()
+            oldprice_shopping_card.text = ("de " + cart.originalPrice.asCurrency()).asStrokeText()
             image_shopping_card.loadImgCroped(cart.image)
             amount_shopping_card.text = cart.amount.toString()
             plus_btn_cart.setOnClickListener {

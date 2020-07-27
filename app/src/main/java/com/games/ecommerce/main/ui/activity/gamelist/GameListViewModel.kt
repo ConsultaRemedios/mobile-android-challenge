@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.games.ecommerce.main.data.model.Banner
-import com.games.ecommerce.main.data.model.Game
+import com.games.ecommerce.main.data.model.GameRepositoryResponse
 import com.games.ecommerce.main.data.repository.GameRepository
 import com.games.ecommerce.main.data.repository.ShoppingRepository
 import com.games.ecommerce.main.network.ResultWrapper
+import com.games.ecommerce.utils.SingleLiveEvent
 import com.games.ecommerce.utils.asMutable
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,10 +18,10 @@ class GameListViewModel @Inject constructor(
     private var repository: GameRepository,
     private var shoppingRepository: ShoppingRepository
 ) : ViewModel() {
-    val games: LiveData<List<Game>> = MutableLiveData()
-    val game: LiveData<Game> = MutableLiveData()
+    val games: LiveData<List<GameRepositoryResponse>> = MutableLiveData()
+    val gameServiceResponse: SingleLiveEvent<GameRepositoryResponse> = SingleLiveEvent()
     val banners: LiveData<List<Banner>> = MutableLiveData()
-    val gamesFound: LiveData<List<Game>> = MutableLiveData()
+    val gamesFound: LiveData<List<GameRepositoryResponse>> = MutableLiveData()
     val cartAmount: LiveData<Int> = MutableLiveData()
     val isSearchTextVisible: LiveData<Boolean> = MutableLiveData(false)
     val error: LiveData<String> = MutableLiveData()
@@ -33,26 +34,22 @@ class GameListViewModel @Inject constructor(
                 is ResultWrapper.Success -> games.asMutable.postValue(response.value)
 
                 is ResultWrapper.GenericError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
 
                 is ResultWrapper.NetworkError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
             }
             when (val response = repository.getBanners()) {
                 is ResultWrapper.Success -> banners.asMutable.postValue(response.value)
 
                 is ResultWrapper.GenericError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
 
                 is ResultWrapper.NetworkError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
             }
         }
@@ -64,13 +61,11 @@ class GameListViewModel @Inject constructor(
                 is ResultWrapper.Success -> gamesFound.asMutable.postValue(response.value)
 
                 is ResultWrapper.GenericError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
 
                 is ResultWrapper.NetworkError -> {
-                    error.asMutable.postValue("Ocorreu um erro ao buscar os jogos, tente novamente")
-                    return@launch
+                    error.asMutable.postValue(ERROR_ON_FIND_GAMES)
                 }
             }
         }
@@ -79,11 +74,11 @@ class GameListViewModel @Inject constructor(
     fun gameById(id: Int) {
         viewModelScope.launch {
             when (val response = repository.gameById(id)) {
-                is ResultWrapper.Success -> game.asMutable.postValue(response.value)
+                is ResultWrapper.Success -> gameServiceResponse.asMutable.postValue(response.value)
 
-                is ResultWrapper.GenericError -> error.asMutable.postValue("Ocorreu um erro, tente novamente")
+                is ResultWrapper.GenericError -> error.asMutable.postValue(GENERIC_ERROR)
 
-                is ResultWrapper.NetworkError -> error.asMutable.postValue("Ocorreu um erro, tente novamente")
+                is ResultWrapper.NetworkError -> error.asMutable.postValue(GENERIC_ERROR)
             }
         }
     }

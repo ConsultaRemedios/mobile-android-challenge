@@ -18,6 +18,7 @@ import javax.inject.Inject
 class ShoppingCartActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel: ShoppingCartViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(ShoppingCartViewModel::class.java)
     }
@@ -59,9 +60,9 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
         }
         observe(viewModel.checkoutSuccess) {
             if (it) {
-                showSuccessDialog("Compra finalizada com sucesso!")
+                showSuccessDialog(getString(R.string.message_success_finish))
                 viewModel.clearCart()
-            } else showErrorDialog("Ocorreu um erro ao realizar a compra")
+            } else showErrorDialog(getString(R.string.message_error_finish))
         }
     }
 
@@ -77,7 +78,7 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
 
     private fun updateTotalAmount(shoppingGames: List<ShoppingGame>) {
         val totalAmount = viewModel.getTotalAmount(shoppingGames)
-        productamount_cart.text = "Produtos(" + totalAmount.toString() + ")"
+        productamount_cart.text = String.format("Produtos (%s)", totalAmount.toString())
     }
 
 
@@ -101,14 +102,14 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
         }
         builder.apply {
             setMessage(error)
-            setTitle("Aviso")
+            setTitle(R.string.warning_title)
             setPositiveButton(
-                "Tentar Novamente"
+                getString(R.string.warning_tryagain_button)
             ) { _, _ ->
                 viewModel.checkout()
             }
             setNegativeButton(
-                "Cancelar"
+                getString(R.string.warning_cancel_button)
             ) { _, _ ->
                 viewModel.fetchData()
             }
@@ -123,9 +124,9 @@ class ShoppingCartActivity : DaggerAppCompatActivity() {
         }
         builder.apply {
             setMessage(error)
-            setTitle("Aviso")
+            setTitle(R.string.warning_title)
             setPositiveButton(
-                "OK"
+                getString(R.string.warning_ok_button)
             ) { _, _ ->
                 startMainActivity()
             }
