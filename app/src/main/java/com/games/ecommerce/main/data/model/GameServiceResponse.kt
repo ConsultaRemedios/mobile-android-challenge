@@ -21,14 +21,14 @@ fun GameServiceResponse.toGameRepositoryResponse(): GameRepositoryResponse {
     return GameRepositoryResponse(
         id = this.id,
         title = this.title,
-        image = this.image,
+        image = this.image?: "",
         price = this.price - this.discount,
         originalPrice = this.price,
-        description = this.description,
-        rating = this.rating,
-        stars = this.stars,
-        publisher = this.publisher,
-        reviews = this.reviews
+        description = this.description?: "",
+        rating = this.rating?: 0.0,
+        stars = this.stars?: 0,
+        publisher = this.publisher?: "",
+        reviews = this.reviews?: 0
     )
 }
 

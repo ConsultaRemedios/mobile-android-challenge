@@ -33,7 +33,8 @@ class GameServiceResponseListViewModelTest {
     private val service: GameService = mockk()
 
     private val gamesFoundObserver: Observer<List<GameRepositoryResponse>> = mockk(relaxed = true)
-    private val gameServiceResponseObserver: Observer<GameRepositoryResponse> = mockk(relaxed = true)
+    private val gameServiceResponseObserver: Observer<GameRepositoryResponse> =
+        mockk(relaxed = true)
 
 
     @Before
@@ -153,7 +154,6 @@ class GameServiceResponseListViewModelTest {
             "Nintendo",
             500
         )
-
     }
 
 }

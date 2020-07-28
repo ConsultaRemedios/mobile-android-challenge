@@ -14,9 +14,7 @@ import javax.inject.Inject
 class GameDetailViewModel @Inject constructor(
     private var shoppingRepository: ShoppingRepository
 ) : ViewModel() {
-    val games: LiveData<List<GameRepositoryResponse>> = MutableLiveData()
     val isOnCart: LiveData<Boolean> = MutableLiveData()
-
 
     fun checkGameStatus(gameRepositoryResponse: GameRepositoryResponse) {
         viewModelScope.launch {
