@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GamingShop</string>
+    <string name="finalizar_compra">Finalizar Compra</string>
+    <string name="total_label_cart">Total</string>
+</resources>
