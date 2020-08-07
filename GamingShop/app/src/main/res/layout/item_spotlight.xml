@@ -11,7 +11,7 @@
         android:layout_height="200dp"/>
 
     <TextView
-        android:id="@+id/tvProducer"
+        android:id="@+id/tvPublisher"
         android:layout_marginTop="8dp"
         tools:text="Nintendo"
         android:textSize="12sp"
