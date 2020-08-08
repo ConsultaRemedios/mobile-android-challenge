@@ -5,4 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="bgColorPrimary">#323232</color>
+    <color name="bgColorDark">#111111</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#0091FF</color>
+    <color name="red">#FF0000</color>
+
+
 </resources>
