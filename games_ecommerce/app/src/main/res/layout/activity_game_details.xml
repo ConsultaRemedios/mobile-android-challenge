@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinatorRootLayout"
+    android:background="@color/bgColorPrimary"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/android_appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayoutAndroidExample"
+            android:layout_width="match_parent"
+            app:collapsedTitleGravity="left"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:expandedTitleGravity="center_horizontal"
+            app:contentScrim="@color/blackTransparent"
+            app:statusBarScrim="@color/blackTransparent"
+            app:expandedTitleMarginStart="32dp"
+            app:expandedTitleMarginEnd="48dp"
+            android:background="@color/gray">
+
+            <ImageView
+                android:id="@+id/ivGamePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/placeholder"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.8"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                android:id="@+id/pbLoad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="none"
+                />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="-30dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icon_cart"
+                android:layout_marginRight="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundTint="@color/red"
+                app:borderWidth="0dp"
+                app:elevation="@dimen/cart_btn_elevation"
+                app:fabSize="normal"/>
+
+            <LinearLayout
+                android:id="@+id/llSpace"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/transparent"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/llTop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/llTop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/llSpace"
+                app:layout_constraintBottom_toTopOf="@+id/nsvDescription"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/bgBlue"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:id="@+id/llTopLoad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="150dp"
+                        android:layout_height="15dp"
+                        android:background="@color/whiteLight"/>
+                    <View
+                        android:layout_width="75dp"
+                        android:layout_height="15dp"
+                        android:background="@color/whiteLight"
+                        android:layout_marginTop="5dp"/>
+                    <View
+                        android:layout_width="75dp"
+                        android:layout_height="15dp"
+                        android:background="@color/whiteLight"
+                        android:layout_marginTop="5dp"/>
+                    <View
+                        android:layout_width="75dp"
+                        android:layout_height="15dp"
+                        android:background="@color/whiteLight"
+                        android:layout_marginTop="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llTopContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mario Galaxy"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_3"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.7"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_2"
+                            android:layout_marginRight="5dp"/>
+
+                        <ImageView
+                            android:id="@+id/ivStar1"
+                            android:layout_width="@dimen/rating_icon_size"
+                            android:layout_height="@dimen/rating_icon_size"
+                            android:tint="@color/white"
+                            android:src="@drawable/ic_star"/>
+                        <ImageView
+                            android:id="@+id/ivStar2"
+                            android:layout_width="@dimen/rating_icon_size"
+                            android:layout_height="@dimen/rating_icon_size"
+                            android:tint="@color/white"
+                            android:src="@drawable/ic_star"/>
+                        <ImageView
+                            android:id="@+id/ivStar3"
+                            android:layout_width="@dimen/rating_icon_size"
+                            android:layout_height="@dimen/rating_icon_size"
+                            android:tint="@color/white"
+                            android:src="@drawable/ic_star"/>
+                        <ImageView
+                            android:id="@+id/ivStar4"
+                            android:layout_width="@dimen/rating_icon_size"
+                            android:layout_height="@dimen/rating_icon_size"
+                            android:tint="@color/white"
+                            android:src="@drawable/ic_star"/>
+                        <ImageView
+                            android:id="@+id/ivStar5"
+                            android:layout_width="@dimen/rating_icon_size"
+                            android:layout_height="@dimen/rating_icon_size"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/white"
+                            android:layout_marginRight="5dp"/>
+
+                        <TextView
+                            android:id="@+id/tvReviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="350 reviews"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_1"/>
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="de R$500,00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_1"/>
+                    <TextView
+                        android:id="@+id/tvDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="R$400,00"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_4"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nsvDescription"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toBottomOf="@+id/llTop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/llDescriptionLoad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="20dp">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:background="@color/whiteLight"
+                            android:layout_marginTop="5dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:background="@color/whiteLight"
+                            android:layout_marginTop="5dp"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:background="@color/whiteLight"
+                            android:layout_marginTop="5dp"/>
+                        <View
+                            android:layout_width="150dp"
+                            android:layout_height="15dp"
+                            android:background="@color/whiteLight"
+                            android:layout_marginTop="5dp"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_3"
+                        android:textColor="@color/white"
+                        android:layout_margin="20dp"
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

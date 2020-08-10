@@ -56,26 +56,68 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vpBanner"
+        <LinearLayout
+            android:id="@+id/llBanner"
             android:layout_width="0dp"
             android:layout_height="@dimen/banner_height"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/rvSpotlight"
-            android:layout_margin="@dimen/banner_margin"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSpotlight"
+            app:layout_constraintBottom_toTopOf="@+id/llSpotlight"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvBannerLoad"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                app:cardElevation="@dimen/game_card_elevation"
+                app:cardCornerRadius="@dimen/game_card_radius"
+                app:cardBackgroundColor="@color/gray">
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/banner_height"
+                android:layout_margin="@dimen/banner_margin"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSpotlight"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/rv_spotlight_item"
-            app:layout_constraintTop_toBottomOf="@id/vpBanner"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/llBanner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvSpotlightLoad"
+                android:layout_width="@dimen/game_card_size"
+                android:layout_height="@dimen/game_card_size"
+                app:cardElevation="@dimen/game_card_elevation"
+                app:cardCornerRadius="@dimen/game_card_radius"
+                app:cardBackgroundColor="@color/gray"
+                android:layout_margin="10dp">
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSpotlight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/rv_spotlight_item"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

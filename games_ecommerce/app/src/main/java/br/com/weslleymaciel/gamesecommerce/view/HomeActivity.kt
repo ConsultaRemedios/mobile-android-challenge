@@ -3,14 +3,11 @@ package br.com.weslleymaciel.gamesecommerce.view
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.GridLayout
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.weslleymaciel.gamesecommerce.R
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
@@ -18,7 +15,7 @@ import br.com.weslleymaciel.gamesecommerce.view.adapters.BannerAdapter
 import br.com.weslleymaciel.gamesecommerce.view.adapters.SpotlightAdapter
 import br.com.weslleymaciel.gamesecommerce.viewmodel.GamesViewModel
 import kotlinx.android.synthetic.main.activity_home.*
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.startActivity
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel = GamesViewModel()
@@ -26,12 +23,16 @@ class HomeActivity : AppCompatActivity() {
     private val observerBanner = Observer<List<Banner>?> {
         it?.let {
             loadBanners(it)
+            cvBannerLoad.visibility = View.GONE
+            vpBanner.visibility = View.VISIBLE
         }
     }
 
     private val observerSpotlight = Observer<List<Game>?> {
         it?.let {
             loadGames(it)
+            cvSpotlightLoad.visibility = View.GONE
+            rvSpotlight.visibility = View.VISIBLE
         }
     }
 
@@ -51,10 +52,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun configureSpotlight(games: List<Game>){
         rvSpotlight.layoutManager = GridLayoutManager(this, 2)
-        rvSpotlight.adapter = SpotlightAdapter(games, {
-                gameId -> {
-
-            }})
+        rvSpotlight.adapter = SpotlightAdapter(games) {
+            run {
+                startActivity<GameDetailsActivity>("ID" to it.toInt())
+            }
+        }
     }
 
     private fun configureViewPager(fragments: List<Fragment>) {

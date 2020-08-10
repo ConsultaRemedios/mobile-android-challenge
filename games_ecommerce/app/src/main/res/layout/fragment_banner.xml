@@ -12,7 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:cardElevation="@dimen/game_card_elevation"
         app:cardCornerRadius="@dimen/game_card_radius"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@color/gray">
         <ImageView
             android:id="@+id/ivBanner"
             android:layout_width="match_parent"

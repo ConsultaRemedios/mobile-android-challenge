@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The Legend Of Zelda Breath of The Wild"
-            android:textSize="@dimen/text_2"
+            android:textSize="@dimen/text_3"
             android:textColor="@color/white"
             />
         <TextView
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="R$250,00"
-            android:textSize="@dimen/text_3"
+            android:textSize="@dimen/text_4"
             android:textColor="@color/blue"
             />
     </LinearLayout>
