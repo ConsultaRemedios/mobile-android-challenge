@@ -1,5 +1,6 @@
 package br.com.weslleymaciel.gamesecommerce.view.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import br.com.weslleymaciel.gamesecommerce.R
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
 import br.com.weslleymaciel.gamesecommerce.common.utils.loadImage
 import br.com.weslleymaciel.gamesecommerce.common.utils.numberToPrice
+import kotlinx.android.synthetic.main.activity_game_details.*
 import org.jetbrains.anko.find
 import java.lang.String
 
@@ -45,10 +47,11 @@ class SpotlightAdapter(private val items: List<Game>, val onClick: (gameId: Numb
             tvPublisher.text = game.publisher
             tvTitle.text = game.title
 
-            if (game.discount.toFloat() < game.price.toFloat()){
+            if (game.discount.toFloat() > 0.0){
                 tvPrice.visibility = View.VISIBLE
                 tvPrice.text = String.format(view.resources.getString(R.string.discount), numberToPrice(game.price))
-                tvDiscount.text = numberToPrice(game.discount)
+                tvDiscount.text = numberToPrice( game.price.toFloat() - game.discount.toFloat())
+                tvPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             }else{
                 tvPrice.visibility = View.GONE
                 tvDiscount.text = numberToPrice(game.price)

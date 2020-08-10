@@ -2,6 +2,7 @@
     <string name="app_name">Games Ecommerce</string>
     <string name="search_hint">Pesquisar</string>
     <string name="discount">de %s</string>
+    <string name="reviews">%s reviews</string>
 
     <string name="error_loading_banner">Erro ao carregar lista de banners</string>
     <string name="error_loading_games">Erro ao carregar lista de jogos</string>

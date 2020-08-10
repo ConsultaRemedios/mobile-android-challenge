@@ -20,8 +20,11 @@
     <dimen name="cart_btn_radius">75dp</dimen>
     <dimen name="cart_btn_icon_size">50dp</dimen>
 
+    <dimen name="rating_icon_size">13dp</dimen>
+
     <dimen name="text_1">12sp</dimen>
-    <dimen name="text_2">16sp</dimen>
-    <dimen name="text_3">20sp</dimen>
+    <dimen name="text_2">14sp</dimen>
+    <dimen name="text_3">16sp</dimen>
+    <dimen name="text_4">20sp</dimen>
 
 </resources>
