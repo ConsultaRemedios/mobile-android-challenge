@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import mazer.arthur.gamingshop.data.GamesRepository
-import mazer.arthur.gamingshop.data.Response
+import mazer.arthur.gamingshop.data.remote.Response
 
 class MainViewModel(private val gamesRepository: GamesRepository): ViewModel() {
 

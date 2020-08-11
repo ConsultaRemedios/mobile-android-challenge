@@ -1,8 +1,8 @@
-package mazer.arthur.gamingshop.data
+package mazer.arthur.gamingshop.data.remote
 
 import android.util.Log
 import mazer.arthur.gamingshop.BuildConfig
-import mazer.arthur.gamingshop.data.ApiConstants.BASE_URL
+import mazer.arthur.gamingshop.data.remote.ApiConstants.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitHelper {
 
-    val api: ApiNetwork = createRetrofitInstance().create(ApiNetwork::class.java)
+    val api: ApiNetwork = createRetrofitInstance()
+        .create(
+        ApiNetwork::class.java)
 
     private fun createRetrofitInstance(): Retrofit {
         val builder = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)

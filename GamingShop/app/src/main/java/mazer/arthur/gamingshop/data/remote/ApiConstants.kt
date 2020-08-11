@@ -1,4 +1,4 @@
-package mazer.arthur.gamingshop.data
+package mazer.arthur.gamingshop.data.remote
 
 object ApiConstants {
     const val BASE_URL = "https://api-mobile-test.herokuapp.com/api/"

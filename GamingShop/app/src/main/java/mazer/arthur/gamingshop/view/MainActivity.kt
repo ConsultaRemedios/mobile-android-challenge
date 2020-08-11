@@ -2,25 +2,27 @@ package mazer.arthur.gamingshop.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import mazer.arthur.gamingshop.R
-import mazer.arthur.gamingshop.data.ApiHelper
-import mazer.arthur.gamingshop.data.IntentConstants
-import mazer.arthur.gamingshop.data.RetrofitHelper
-import mazer.arthur.gamingshop.data.ViewModelFactory
-import mazer.arthur.gamingshop.models.Banner
-import mazer.arthur.gamingshop.models.GameDetails
-import mazer.arthur.gamingshop.models.Status
+import mazer.arthur.gamingshop.data.remote.ApiHelper
+import mazer.arthur.gamingshop.utils.IntentConstants
+import mazer.arthur.gamingshop.data.remote.RetrofitHelper
+import mazer.arthur.gamingshop.utils.ViewModelFactory
+import mazer.arthur.gamingshop.domain.models.Banner
+import mazer.arthur.gamingshop.domain.models.GameDetails
+import mazer.arthur.gamingshop.domain.models.Status
 import mazer.arthur.gamingshop.view.adapter.BannerAdapter
 import mazer.arthur.gamingshop.view.adapter.SpotlightAdapter
-import mazer.arthur.gamingshop.view.listeners.BannerClickListener
-import mazer.arthur.gamingshop.view.listeners.SpotlightClicked
+import mazer.arthur.gamingshop.utils.listeners.BannerClickListener
+import mazer.arthur.gamingshop.utils.listeners.SpotlightClicked
 
 class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked {
 
@@ -40,6 +42,14 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
     private fun setupView() {
         setupBannersRecyclerView()
         setupSpotlightRecyclerView()
+        setupCartButton()
+    }
+
+    private fun setupCartButton() {
+        fbAddToCart?.setOnClickListener {
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupBannersRecyclerView() {
@@ -49,7 +59,7 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
     }
 
     private fun setupSpotlightRecyclerView(){
-        rvGameCatalog.layoutManager = LinearLayoutManager(this)
+        rvGameCatalog.layoutManager = GridLayoutManager(this,2)
         rvGameCatalog.itemAnimator = DefaultItemAnimator()
         rvGameCatalog.adapter = spotlightAdapter
     }
@@ -78,7 +88,6 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
                     Status.SUCCESS -> {
                         rvGameCatalog.visibility = View.VISIBLE
                         response.data.let { spotlightList ->
-                            val aaaa = spotlightList
                             spotlightAdapter.gameDetailsList = spotlightList ?: return@Observer
                         }
                     }
@@ -94,17 +103,21 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
 
     private fun setupViewModel(){
         viewModel = ViewModelProvider(this,
-            ViewModelFactory(ApiHelper(RetrofitHelper.api))
+            ViewModelFactory(
+                ApiHelper(
+                    RetrofitHelper.api
+                ), applicationContext
+            )
         ).get(MainViewModel::class.java)
     }
 
     override fun onBannerClicked(banner: Banner) {
-
+        Log.d("banner_url", banner.url)
     }
 
     override fun onSpotlightClicked(gameDetails: GameDetails) {
         val intent = Intent(this, GameDetailActivity::class.java)
-        intent.putExtra(IntentConstants.EXTRA_ID_GAME, gameDetails.id)
+        intent.putExtra(IntentConstants.EXTRA_GAME_DETAILS, gameDetails)
         startActivity(intent)
     }
 }

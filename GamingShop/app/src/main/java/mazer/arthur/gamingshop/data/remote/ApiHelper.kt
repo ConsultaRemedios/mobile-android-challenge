@@ -1,4 +1,6 @@
-package mazer.arthur.gamingshop.data
+package mazer.arthur.gamingshop.data.remote
+
+import mazer.arthur.gamingshop.data.remote.ApiNetwork
 
 class ApiHelper(private val api: ApiNetwork) {
 

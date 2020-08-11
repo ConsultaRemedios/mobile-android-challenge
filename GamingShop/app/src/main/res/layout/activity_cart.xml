@@ -15,7 +15,7 @@
         android:background="@color/colorBackground" >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+            android:id="@+id/rvCart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -37,6 +37,7 @@
         android:background="@color/colorBackground">
 
         <LinearLayout
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -45,6 +46,9 @@
             <TextView
                 android:id="@+id/tvQntProducts"
                 android:text="Produtos (7)"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/helvetica"
+                android:textColor="@android:color/white"
                 android:layout_weight="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -52,7 +56,10 @@
             <TextView
                 android:id="@+id/tvSumOriginalPrice"
                 android:text="R$700,00"
+                android:layout_marginEnd="16dp"
                 android:gravity="end"
+
+                android:fontFamily="@font/helvetica"
                 android:layout_weight="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -68,6 +75,11 @@
             <TextView
                 android:text="@string/total_label_cart"
                 android:layout_weight="0.5"
+                android:fontFamily="@font/helvetica"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -75,6 +87,11 @@
                 android:id="@+id/tvSumDiscountedPrice"
                 android:text="R$700,00"
                 android:gravity="end"
+                android:fontFamily="@font/helvetica_bold"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
                 android:layout_weight="0.5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -84,6 +101,13 @@
         <Button
             android:id="@+id/btnCheckout"
             android:text="@string/finalizar_compra"
+            style="Widget.AppCompat.Button.Colored"
+            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_checkout_background"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

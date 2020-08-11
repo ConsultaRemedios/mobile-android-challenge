@@ -1,4 +1,4 @@
-package mazer.arthur.gamingshop.models
+package mazer.arthur.gamingshop.domain.models
 
 enum class Status {
     LOADING,

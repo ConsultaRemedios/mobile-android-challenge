@@ -1,7 +1,7 @@
-package mazer.arthur.gamingshop.data
+package mazer.arthur.gamingshop.data.remote
 
-import mazer.arthur.gamingshop.models.Banner
-import mazer.arthur.gamingshop.models.GameDetails
+import mazer.arthur.gamingshop.domain.models.Banner
+import mazer.arthur.gamingshop.domain.models.GameDetails
 import retrofit2.http.GET
 import retrofit2.http.Path
 

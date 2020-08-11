@@ -3,4 +3,9 @@
     <string name="finalizar_compra">Finalizar Compra</string>
     <string name="total_label_cart">Total</string>
     <string name="reviews_label">%1$s reviews</string>
+    <string name="item_added_cart">Jogo adicionado ao carrinho!</string>
+    <string name="item_removed_cart">Jogo removido do carrinho!</string>
+    <string name="original_price_placeholder">de R$%1$s</string>
+    <string name="discount_price_placeholder">R$%1$s</string>
+    <string name="products_label">Podutos (%1$s)</string>
 </resources>

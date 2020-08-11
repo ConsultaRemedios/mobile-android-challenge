@@ -1,4 +1,4 @@
-package mazer.arthur.gamingshop.extensions
+package mazer.arthur.gamingshop.utils.extensions
 
 import android.view.LayoutInflater
 import android.view.View

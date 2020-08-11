@@ -1,5 +1,7 @@
 package mazer.arthur.gamingshop.view.adapter
 
+import android.content.Context
+import android.graphics.Paint
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -7,12 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import mazer.arthur.gamingshop.R
-import mazer.arthur.gamingshop.extensions.inflate
-import mazer.arthur.gamingshop.models.GameDetails
-import mazer.arthur.gamingshop.view.listeners.SpotlightClicked
+import mazer.arthur.gamingshop.utils.extensions.inflate
+import mazer.arthur.gamingshop.domain.models.GameDetails
+import mazer.arthur.gamingshop.utils.listeners.SpotlightClicked
 
 class SpotlightAdapter(private var listener: SpotlightClicked? = null): RecyclerView.Adapter<SpotlightAdapter.ViewHolder>() {
 
+    private var context: Context? = null
 
     var gameDetailsList: ArrayList<GameDetails> = arrayListOf()
         set(value) {
@@ -22,6 +25,7 @@ class SpotlightAdapter(private var listener: SpotlightClicked? = null): Recycler
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotlightAdapter.ViewHolder {
+        context = parent.context
         return ViewHolder(inflate(R.layout.item_spotlight,parent))
     }
 
@@ -33,9 +37,11 @@ class SpotlightAdapter(private var listener: SpotlightClicked? = null): Recycler
         val spotlight = gameDetailsList[position]
         holder.publisher.text = spotlight.publisher
         holder.title.text = spotlight.title
-        holder.price.text = spotlight.price.toString()
-        holder.discount.text = spotlight.discount.toString()
         Picasso.get().load(spotlight.image).into(holder.gamePoster)
+
+        holder.price.text = context?.getString(R.string.original_price_placeholder, spotlight.price.toString().toFloat().toString())
+        holder.discount.text =  context?.getString(R.string.discount_price_placeholder, spotlight.discount.toDouble().toString())
+        holder.price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.setOnClickListener {
             listener?.onSpotlightClicked(spotlight)

@@ -11,8 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.GameDetailActivity"></activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.CartActivity"/>
+
+        <activity android:name=".view.GameDetailActivity"
+            android:theme="@style/Theme.Transparent"/>
+
+        <activity android:name=".view.MainActivity"
+            android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
