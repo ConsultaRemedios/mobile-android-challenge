@@ -19,4 +19,7 @@
     <string name="cart_item_added">Adicionado com sucesso!</string>
     <string name="checkout_empty_cart">Adicione um item para realizar o checkout.</string>
     <string name="checkout_success">Compra finalizada com sucesso.</string>
+    <string name="speech_not_supported">Reconhecimento de voz não suportado</string>
+    <string name="speech">Fale algo</string>
+
 </resources>

@@ -2,6 +2,7 @@ package br.com.weslleymaciel.gamesecommerce.data
 
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
+import br.com.weslleymaciel.gamesecommerce.common.models.SearchGame
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -19,7 +20,7 @@ interface WebService {
     @GET("games/{id}")
     fun getGameDetail(@Path("id") id: Number): Single<Game>
     @GET("games/search")
-    fun searchGame(@Query("term") term: String): Single<List<Game>>
+    fun searchGame(@Query("term") term: String): Single<List<SearchGame>>
     @POST("checkout")
     fun checkout(): Single<ResponseBody>
 }

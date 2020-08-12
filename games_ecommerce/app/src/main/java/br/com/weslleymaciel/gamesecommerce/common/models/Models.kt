@@ -8,6 +8,19 @@ data class Banner(
     @SerializedName("url") var url: String
 )
 
+data class SearchGame(
+    @SerializedName("id") var id : Number,
+    @SerializedName("description") var description: String?,
+    @SerializedName("title") var title: String,
+    @SerializedName("publisher") var publisher: String?,
+    @SerializedName("image") var image: String?,
+    @SerializedName("discount") var discount: Number,
+    @SerializedName("price") var price: Number,
+    @SerializedName("rating") var rating: Number?,
+    @SerializedName("stars") var stars: Number?,
+    @SerializedName("reviews") var reviews: Number?
+)
+
 data class Game(
     @SerializedName("id") var id : Number,
     @SerializedName("description") var description: String?,

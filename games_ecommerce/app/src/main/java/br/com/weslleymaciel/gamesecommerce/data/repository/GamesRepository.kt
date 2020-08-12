@@ -2,6 +2,7 @@ package br.com.weslleymaciel.gamesecommerce.data.repository
 
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
+import br.com.weslleymaciel.gamesecommerce.common.models.SearchGame
 import br.com.weslleymaciel.gamesecommerce.data.WebServiceFactory
 import io.reactivex.SingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -54,7 +55,7 @@ class GamesRepository {
             })
     }
 
-    fun searchGame(term: String, observer: SingleObserver<List<Game>>) {
+    fun searchGame(term: String, observer: SingleObserver<List<SearchGame>>) {
         service.searchGame(term)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
