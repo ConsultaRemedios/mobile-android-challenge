@@ -1,16 +1,21 @@
 package br.com.weslleymaciel.gamesecommerce.view
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.weslleymaciel.gamesecommerce.R
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
+import br.com.weslleymaciel.gamesecommerce.common.utils.CartHelper
 import br.com.weslleymaciel.gamesecommerce.view.adapters.BannerAdapter
 import br.com.weslleymaciel.gamesecommerce.view.adapters.SpotlightAdapter
 import br.com.weslleymaciel.gamesecommerce.viewmodel.GamesViewModel
@@ -80,11 +85,22 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ContextCompat.getColor(this, R.color.bgNavDark)
+        }
+
         viewModel.getBanners().observe(this, observerBanner)
         viewModel.getSpotlight().observe(this, observerSpotlight)
+
+        btnCart.setOnClickListener {
+            startActivity<CartActivity>()
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        tvCartCounter.text = CartHelper.getCartCounter().toString()
     }
 }
