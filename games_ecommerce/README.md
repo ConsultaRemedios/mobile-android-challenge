@@ -6,13 +6,13 @@ Desafio desenvolvido para Consulta Remédios que consiste em uma aplicação nat
   - Integração e configuração do projeto
   - Configuração da camada de web service
   - Implementação dos models
-
-## Todos
   - Implementação dos view models
   - Desenvolvimento da tela inicial
   - Desenvolvimento da tela de detalhes do produto
   - Desenvolvimento da tela de detalhes do carrinho de compra
   - Desenvolvimento do sistema de busca
+
+## Todos
 
 ## Libraries
 
