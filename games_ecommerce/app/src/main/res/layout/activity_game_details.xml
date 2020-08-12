@@ -65,17 +65,31 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnCart"
+                android:id="@+id/btnCartAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_icon_cart"
+                android:src="@drawable/ic_icon_cart_black"
+                android:layout_marginRight="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:backgroundTint="@color/white"
+                app:borderWidth="0dp"
+                app:elevation="@dimen/cart_btn_elevation"
+                app:fabSize="normal"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCartRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icon_cart_empty"
                 android:layout_marginRight="16dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:backgroundTint="@color/red"
                 app:borderWidth="0dp"
                 app:elevation="@dimen/cart_btn_elevation"
-                app:fabSize="normal"/>
+                app:fabSize="normal"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/llSpace"

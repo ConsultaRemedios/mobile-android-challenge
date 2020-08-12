@@ -93,7 +93,8 @@
             app:layout_constraintTop_toBottomOf="@id/llBanner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvSpotlightLoad"
@@ -120,16 +121,41 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCart"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_icon_cart"
-        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/red"
-        app:borderWidth="0dp"
-        app:elevation="@dimen/cart_btn_elevation"
-        app:fabSize="normal"/>
+        >
+        <TextView
+            android:id="@+id/tvCartCounter"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/round_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="28dp"
+            android:textColor="@color/red"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_1"
+            android:elevation="7dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_icon_cart"
+            android:layout_margin="16dp"
+            app:backgroundTint="@color/red"
+            app:borderWidth="0dp"
+            app:elevation="@dimen/cart_btn_elevation"
+            app:fabSize="normal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,19 @@
 package br.com.weslleymaciel.gamesecommerce.viewmodel
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.weslleymaciel.gamesecommerce.MainActivity
+import br.com.weslleymaciel.gamesecommerce.R
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
 import br.com.weslleymaciel.gamesecommerce.data.repository.GamesRepository
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_cart.*
 import okhttp3.ResponseBody
+import retrofit2.HttpException
 
 class GamesViewModel {
 
@@ -102,6 +107,7 @@ class GamesViewModel {
             override fun onSuccess(response: ResponseBody) {
                 response?.let {
                     isSaved.value = true
+                    Toast.makeText(MainActivity.ctx, MainActivity.ctx!!.resources.getString(R.string.checkout_success), Toast.LENGTH_SHORT).show()
                 }
                 compositeDisposable.clear()
             }
@@ -109,6 +115,15 @@ class GamesViewModel {
                 compositeDisposable.add(d)
             }
             override fun onError(e: Throwable) {
+                if (e is HttpException) {
+                    if (e.code() == 400) {
+                        Toast.makeText(MainActivity.ctx, MainActivity.ctx!!.resources.getString(R.string.error_checkout_400), Toast.LENGTH_SHORT).show()
+                        isSaved.value = false
+                    }else{
+                        Toast.makeText(MainActivity.ctx, MainActivity.ctx!!.resources.getString(R.string.error_checkout), Toast.LENGTH_SHORT).show()
+                        isSaved.value = false
+                    }
+                }
                 compositeDisposable.clear()
             }
         })

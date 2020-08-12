@@ -20,3 +20,13 @@ data class Game(
     @SerializedName("stars") var stars: Number?,
     @SerializedName("reviews") var reviews: Number?
 )
+
+data class CartItem(
+    @SerializedName("id") var id : Number,
+    @SerializedName("game_id") var game_id : Number,
+    @SerializedName("image") var image: String?,
+    @SerializedName("title") var title: String,
+    @SerializedName("count") var count : Number,
+    @SerializedName("discount") var discount: Number,
+    @SerializedName("price") var price: Number
+)

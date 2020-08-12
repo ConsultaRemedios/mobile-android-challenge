@@ -3,9 +3,20 @@
     <string name="search_hint">Pesquisar</string>
     <string name="discount">de %s</string>
     <string name="reviews">%s reviews</string>
+    <string name="title_cart">Carrinho</string>
+    <string name="products">Produtos (%s)</string>
+    <string name="total">Total</string>
+    <string name="checkout_btn">Finalizar compra</string>
+    <string name="empty_list">Não há itens no carrinho</string>
 
     <string name="error_loading_banner">Erro ao carregar lista de banners</string>
     <string name="error_loading_games">Erro ao carregar lista de jogos</string>
     <string name="error_loading_search">Erro na consulta de jogos</string>
     <string name="error_checkout">Erro no checkout</string>
+    <string name="error_checkout_400">Tratamento para o erro 400</string>
+
+    <string name="cart_item_removed">Removido com sucesso!</string>
+    <string name="cart_item_added">Adicionado com sucesso!</string>
+    <string name="checkout_empty_cart">Adicione um item para realizar o checkout.</string>
+    <string name="checkout_success">Compra finalizada com sucesso.</string>
 </resources>

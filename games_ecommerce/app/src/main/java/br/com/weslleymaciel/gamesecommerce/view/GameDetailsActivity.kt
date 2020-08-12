@@ -7,13 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import br.com.weslleymaciel.gamesecommerce.R
-import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
+import br.com.weslleymaciel.gamesecommerce.common.utils.CartHelper
 import br.com.weslleymaciel.gamesecommerce.common.utils.loadImage
 import br.com.weslleymaciel.gamesecommerce.common.utils.numberToPrice
 import br.com.weslleymaciel.gamesecommerce.viewmodel.GamesViewModel
 import kotlinx.android.synthetic.main.activity_game_details.*
 import kotlinx.android.synthetic.main.activity_home.*
+import org.jetbrains.anko.toast
 import java.lang.String
 
 class GameDetailsActivity: AppCompatActivity() {
@@ -68,6 +69,34 @@ class GameDetailsActivity: AppCompatActivity() {
                 5 -> {ivStar5.setColorFilter(ContextCompat.getColor(this,R.color.yellow))}
             }
         }
+
+        if (CartHelper.isItemOnCart(game.id.toInt())){
+            hideBtnAdd()
+        }else{
+            showBtnAdd()
+        }
+
+        btnCartAdd.setOnClickListener {
+            CartHelper.addItemToCart(game)
+            hideBtnAdd()
+            toast(resources.getString(R.string.cart_item_added))
+        }
+
+        btnCartRemove.setOnClickListener {
+            CartHelper.removeItemFromCart(game.id.toInt())
+            showBtnAdd()
+            toast(resources.getString(R.string.cart_item_removed))
+        }
+    }
+
+    private fun showBtnAdd(){
+        btnCartAdd.show()
+        btnCartRemove.hide()
+    }
+
+    private fun hideBtnAdd(){
+        btnCartAdd.hide()
+        btnCartRemove.show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
