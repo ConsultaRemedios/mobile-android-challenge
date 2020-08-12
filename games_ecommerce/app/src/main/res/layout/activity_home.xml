@@ -22,11 +22,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_card_height">
-            <EditText
-                android:id="@+id/etSearch"
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/acSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Pesquisar"
                 android:hint="@string/search_hint"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +41,7 @@
                 android:src="@drawable/ic_mic"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/etSearch"
+                app:layout_constraintStart_toEndOf="@+id/acSearch"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginRight="10dp"
                 android:paddingLeft="10dp"/>

@@ -7,6 +7,7 @@ import br.com.weslleymaciel.gamesecommerce.MainActivity
 import br.com.weslleymaciel.gamesecommerce.R
 import br.com.weslleymaciel.gamesecommerce.common.models.Banner
 import br.com.weslleymaciel.gamesecommerce.common.models.Game
+import br.com.weslleymaciel.gamesecommerce.common.models.SearchGame
 import br.com.weslleymaciel.gamesecommerce.data.repository.GamesRepository
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.CompositeDisposable
@@ -19,9 +20,10 @@ class GamesViewModel {
 
     private val gamesRepository = GamesRepository()
     private var listBanner = MutableLiveData<List<Banner>>()
-    private var listGame = MutableLiveData<List<Game>>()
+    private var listSearchGame = MutableLiveData<List<SearchGame>>()
     private var game = MutableLiveData<Game>()
     private var isSaved = MutableLiveData<Boolean>()
+    private var listGame = MutableLiveData<List<Game>>()
 
     fun getBanners(): LiveData<List<Banner>> {
         val compositeDisposable = CompositeDisposable()
@@ -80,13 +82,13 @@ class GamesViewModel {
         return game
     }
 
-    fun searchGame(term: String): LiveData<List<Game>> {
+    fun searchGame(term: String): LiveData<List<SearchGame>> {
         val compositeDisposable = CompositeDisposable()
 
-        listGame.value = null
-        gamesRepository.searchGame(term, object: SingleObserver<List<Game>> {
-            override fun onSuccess(response: List<Game>) {
-                listGame.value = response
+        listSearchGame.value = null
+        gamesRepository.searchGame(term, object: SingleObserver<List<SearchGame>> {
+            override fun onSuccess(response: List<SearchGame>) {
+                listSearchGame.value = response
                 compositeDisposable.clear()
             }
             override fun onSubscribe(d: Disposable) {
@@ -96,7 +98,7 @@ class GamesViewModel {
                 compositeDisposable.clear()
             }
         })
-        return listGame
+        return listSearchGame
     }
 
     fun checkout(): LiveData<Boolean> {
