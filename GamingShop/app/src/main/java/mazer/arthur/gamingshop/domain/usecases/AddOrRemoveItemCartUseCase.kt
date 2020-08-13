@@ -24,7 +24,7 @@ class AddOrRemoveItemCartUseCase(private val gamesRepository: GamesRepository, p
                 listener.error()
             }
         }else{
-            //id não nullo, item já se encontra no banco de dados
+            //id não nulo, item já se encontra no banco de dados
             gamesRepository.removeGameCart(id)
             listener.itemRemoved()
         }

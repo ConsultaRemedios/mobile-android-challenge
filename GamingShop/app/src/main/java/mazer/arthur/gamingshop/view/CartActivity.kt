@@ -1,6 +1,7 @@
 package mazer.arthur.gamingshop.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,13 @@ class CartActivity : AppCompatActivity(), CartAdapterListener {
         setupViewModel()
         setupCartRecyclerView()
         registerObservers()
+        setupView()
+    }
+
+    private fun setupView() {
+        btnCheckout?.setOnClickListener {
+            viewModel.checkout()
+        }
     }
 
     override fun onResume() {

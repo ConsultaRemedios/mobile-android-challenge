@@ -8,15 +8,20 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import mazer.arthur.gamingshop.data.GamesRepository
 import mazer.arthur.gamingshop.data.remote.Response
+import mazer.arthur.gamingshop.domain.usecases.CheckoutUseCase
 import mazer.arthur.gamingshop.domain.usecases.RemoveFromCartUseCase
 import mazer.arthur.gamingshop.domain.usecases.ShippingCalculatorUseCase
+import mazer.arthur.gamingshop.utils.listeners.CheckoutListener
 import mazer.arthur.gamingshop.utils.listeners.ShippingChangedListener
 
-class CartViewModel(private val gamesRepository: GamesRepository): ViewModel() , ShippingChangedListener {
+class CartViewModel(private val gamesRepository: GamesRepository): ViewModel() , ShippingChangedListener,
+CheckoutListener{
 
     sealed class ViewEvent {
         class ShippingValueChanged(val quant: Int): ViewEvent()
         object EmptyCart: ViewEvent()
+        object CheckoutSuccessful: ViewEvent()
+        object CheckoutFailure: ViewEvent()
     }
 
     var eventLiveData = MutableLiveData<ViewEvent>()
@@ -44,6 +49,13 @@ class CartViewModel(private val gamesRepository: GamesRepository): ViewModel() ,
         calculateShippingValue()
     }
 
+    fun checkout(){
+        val checkoutUseCase = CheckoutUseCase(gamesRepository, this)
+        GlobalScope.launch {
+            checkoutUseCase.checkout()
+        }
+    }
+
     fun calculateShippingValue(){
         val shippingUseCase = ShippingCalculatorUseCase(gamesRepository, this)
         GlobalScope.launch {
@@ -57,6 +69,14 @@ class CartViewModel(private val gamesRepository: GamesRepository): ViewModel() ,
 
     override fun emptyCart() {
         eventLiveData.postValue(ViewEvent.EmptyCart)
+    }
+
+    override fun checkoutSuccessful() {
+        eventLiveData.postValue(ViewEvent.CheckoutSuccessful)
+    }
+
+    override fun checkoutFailure() {
+        eventLiveData.postValue(ViewEvent.CheckoutFailure)
     }
 
 
