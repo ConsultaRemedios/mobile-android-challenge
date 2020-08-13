@@ -14,19 +14,17 @@ abstract class GameRoomDatabase: RoomDatabase() {
 
 
     companion object {
-        private var INSTANCE: GameRoomDatabase? = null
+        private lateinit var INSTANCE: GameRoomDatabase
 
-        fun getInstance(context: Context): GameRoomDatabase? {
+        fun getInstance(context: Context): GameRoomDatabase {
             createNewInstanceIfNecessary(context)
             return INSTANCE
         }
 
         private fun createNewInstanceIfNecessary(context: Context) {
             synchronized(this) {
-                if (INSTANCE == null) {
-                    val builder = Room.databaseBuilder(context, GameRoomDatabase::class.java, "gaming_shop.sqlite")
-                    INSTANCE = builder.build()
-                }
+                val builder = Room.databaseBuilder(context, GameRoomDatabase::class.java, "gaming_shop.sqlite")
+                INSTANCE = builder.build()
             }
         }
 

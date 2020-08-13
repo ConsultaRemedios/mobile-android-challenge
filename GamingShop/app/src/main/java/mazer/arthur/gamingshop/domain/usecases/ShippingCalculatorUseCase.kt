@@ -9,15 +9,15 @@ import mazer.arthur.gamingshop.data.GamesRepository
  */
 class ShippingCalculatorUseCase(private val gamesRepository: GamesRepository) {
 
-    
+
     suspend fun getShippingValue(): Int?{
         val totalSumCart = gamesRepository.getTotalDiscountSumCart()
-        if (totalSumCart != null && totalSumCart > 250){
+        if (totalSumCart > 250){
             //Frete grátis
             return 0
         }else{
             val totalItemsCart = gamesRepository.getTotalItemsCart()
-            if (totalItemsCart != null) {
+            if (totalItemsCart != null){
                 return totalItemsCart * 10
             }
         }

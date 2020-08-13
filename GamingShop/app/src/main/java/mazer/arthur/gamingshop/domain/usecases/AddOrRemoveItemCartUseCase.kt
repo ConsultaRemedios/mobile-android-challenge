@@ -18,7 +18,7 @@ class AddOrRemoveItemCartUseCase(private val gamesRepository: GamesRepository, p
         if (id == null){
             //se o id é null, o item ainda não se encontra no banco de dados
             val addDb = gamesRepository.addGameCart(cart)
-            if (addDb != null && addDb > 0) {
+            if (addDb > 0) {
                 listener.itemAdded()
             }else{
                 listener.error()

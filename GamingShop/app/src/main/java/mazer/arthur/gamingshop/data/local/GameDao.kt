@@ -1,5 +1,7 @@
 package mazer.arthur.gamingshop.data.local
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -25,7 +27,7 @@ interface GameDao {
     suspend fun getTotalDiscountSumCart(): Int
 
     @Query("SELECT idGameDetails FROM Cart WHERE idGameDetails=:id")
-    suspend fun getItemCartById(id: Int): Int
+    suspend fun getItemCartById(id: Int): Int?
 
     @Query("SELECT Count(idGameDetails) FROM Cart WHERE idGameDetails=:id")
     suspend fun isItemOnCart(id: Int): Int
@@ -34,7 +36,7 @@ interface GameDao {
     suspend fun getCartList(): List<Cart>
 
     @Query("SELECT SUM(quantity) FROM CART")
-    suspend fun getTotalItemsCart(): Int
+    suspend fun getTotalItemsCart(): Int?
 
 
 }

@@ -36,7 +36,11 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
         setupViewModel()
         setupView()
         registerObservers()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getTotalCartItems()
     }
 
     private fun setupView() {
@@ -97,6 +101,17 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
                     }
                 }
 
+            }
+        })
+        viewModel.eventLiveData.observe(this, Observer {
+            when(it){
+                is MainViewModel.ViewEvent.NumItemCartChanged -> {
+                        tvQuantItemsCart?.visibility = View.VISIBLE
+                        tvQuantItemsCart?.text = it.quant.toString()
+                }
+                is MainViewModel.ViewEvent.EmptyCart -> {
+                    tvQuantItemsCart?.visibility = View.GONE
+                }
             }
         })
     }
