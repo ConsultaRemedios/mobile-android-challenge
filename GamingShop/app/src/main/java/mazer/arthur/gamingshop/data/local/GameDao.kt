@@ -21,10 +21,16 @@ interface GameDao {
     suspend fun removeGameCart(id: Int)
 
     @Query("SELECT SUM(quantity*price) FROM Cart")
-    suspend fun getTotalOriginalSumCart(): Int
+    suspend fun getTotalOriginalSumCart(): Int?
 
     @Query("SELECT SUM(quantity*discount) FROM Cart")
-    suspend fun getTotalDiscountSumCart(): Int
+    suspend fun getTotalDiscountSumCart(): Int?
+
+    @Query("SELECT SUM(quantity*discount) FROM Cart")
+    fun getTotalDiscountSumCartLiveData(): LiveData<Int>
+
+    @Query("SELECT SUM(quantity*price) FROM Cart")
+    fun getTotalOriginalPriceSumCartLiveData(): LiveData<Int>
 
     @Query("SELECT idGameDetails FROM Cart WHERE idGameDetails=:id")
     suspend fun getItemCartById(id: Int): Int?
@@ -37,6 +43,9 @@ interface GameDao {
 
     @Query("SELECT SUM(quantity) FROM CART")
     suspend fun getTotalItemsCart(): Int?
+
+    @Query("SELECT SUM(quantity) FROM CART")
+    fun getTotalItemsCartLiveData(): LiveData<Int>
 
 
 }

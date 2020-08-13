@@ -40,7 +40,7 @@ class SpotlightAdapter(private var listener: SpotlightClicked? = null): Recycler
         Picasso.get().load(spotlight.image).into(holder.gamePoster)
 
         holder.price.text = context?.getString(R.string.original_price_placeholder, spotlight.price.toString().toFloat().toString())
-        holder.discount.text =  context?.getString(R.string.discount_price_placeholder, spotlight.discount.toDouble().toString())
+        holder.discount.text =  context?.getString(R.string.price_placeholder, spotlight.discount.toDouble().toString())
         holder.price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
         holder.itemView.setOnClickListener {

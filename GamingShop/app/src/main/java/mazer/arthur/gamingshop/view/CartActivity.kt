@@ -12,12 +12,13 @@ import mazer.arthur.gamingshop.data.remote.ApiHelper
 import mazer.arthur.gamingshop.data.remote.RetrofitHelper
 import mazer.arthur.gamingshop.utils.ViewModelFactory
 import mazer.arthur.gamingshop.domain.models.Status
+import mazer.arthur.gamingshop.utils.listeners.CartAdapterListener
 import mazer.arthur.gamingshop.view.adapter.CartAdapter
 
-class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity(), CartAdapterListener {
 
     private lateinit var viewModel: CartViewModel
-    private var cartAdapter = CartAdapter()
+    private var cartAdapter = CartAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +26,11 @@ class CartActivity : AppCompatActivity() {
         setupViewModel()
         setupCartRecyclerView()
         registerObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.calculateShippingValue()
     }
 
     private fun setupViewModel() {
@@ -62,42 +68,51 @@ class CartActivity : AppCompatActivity() {
                 }
             }
         })
-        viewModel.getOriginalValueList().observe(this, Observer {
-            it.let{ response ->
-                when (response.status){
-                    Status.SUCCESS -> {
-                        response.data.let { totalPrice ->
-                            if (totalPrice != null) {
-                                tvSumOriginalPrice?.text =
-                                    getString(R.string.discount_price_placeholder, totalPrice.toString())
-                            }
-                        }
-                    }
-                    Status.LOADING -> {
-                    }
-                    Status.ERROR -> {
-                    }
-                }
+        viewModel.getOriginalValueList.observe(this, Observer {
+            if (it != null){
+                tvSumOriginalPrice?.text =
+                    getString(R.string.price_placeholder, it.toString())
+            }else{
+                tvSumOriginalPrice?.text =
+                    getString(R.string.no_items_cart_price)
             }
         })
-        viewModel.getDiscountValueList().observe(this, Observer {
-            it.let{ response ->
-                when (response.status){
-                    Status.SUCCESS -> {
-                        response.data.let { totalDiscountedPrice ->
-                            if (totalDiscountedPrice != null) {
-                                tvSumDiscountedPrice?.text =
-                                    getString(R.string.discount_price_placeholder, totalDiscountedPrice.toString())
-                            }
-                        }
-                    }
-                    Status.LOADING -> {
-                    }
-                    Status.ERROR -> {
-                    }
+        viewModel.getDiscountValueList.observe(this, Observer {
+            if (it != null){
+                tvSumDiscountedPrice?.text =
+                    getString(R.string.price_placeholder, it.toString())
+            }else{
+                tvSumDiscountedPrice?.text =
+                    getString(R.string.no_items_cart_price)
+            }
+        })
+        viewModel.getTotalItemsCart.observe(this, Observer {
+            if (it != null){
+                tvQntProducts?.text =
+                    getString(R.string.products_label, it.toString())
+            }else{
+                tvQntProducts?.text =
+                    getString(R.string.products_label, "0")
+            }
+        })
+        viewModel.eventLiveData.observe(this, Observer {
+            when(it){
+                is CartViewModel.ViewEvent.ShippingValueChanged -> {
+                   if (it.quant > 0){
+                       tvShippingPrice?.text = getString(R.string.price_placeholder, it.quant.toString())
+                   }else{
+                       tvShippingPrice?.text = getString(R.string.free_shipping)
+                   }
+                }
+                is CartViewModel.ViewEvent.EmptyCart -> {
+                    tvShippingPrice?.text = getString(R.string.shipping_no_items)
                 }
             }
         })
 
+    }
+
+    override fun onDeleteClicked(id: Int) {
+        viewModel.removeItemCart(id)
     }
 }

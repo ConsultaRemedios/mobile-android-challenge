@@ -3,8 +3,6 @@ package mazer.arthur.gamingshop.view
 import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -119,7 +117,7 @@ class GameDetailActivity : AppCompatActivity() {
         tvGameDescription.text = gameDetails.description
 
         tvOriginalPrice.text = getString(R.string.original_price_placeholder,  gameDetails.price.toString())
-        tvDiscountedPrice.text =  getString(R.string.discount_price_placeholder, gameDetails.discount.toString())
+        tvDiscountedPrice.text =  getString(R.string.price_placeholder, gameDetails.discount.toString())
         tvOriginalPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
 }
