@@ -3,22 +3,20 @@
 O projeto tem como objetivo  desenvolver um aplicativo e-commerce de jogos que simule uma conexão real com servidor 
 e seja projetado com uma arquitetura que faça a separação das camadas do aplicativo.
 
-## O projeto está incompleto, as pendências estão listadas abaixo:
- - Search view na Main screen
- - Número de itens no carrinho não é mostrado no Floating Action Button na Main Screen
- - UI não está formatando corretamente os valores em dinheiro (falta formatar com duas casas decimais e com vírgula)
- - Falta testes unitários (a cadamada de regra de negócio foi praticamente toda isolada, mas não foi feito testes ainda)
- - Falta testes de UI com Espresso
- - Carrinho não remove itens
- - Carrinho não finaliza a compra
- - Number Picker no Carrinho não foi implementado, sempre é adicionado 1 item ao carrinho ( a lógica da quantidade foi implementada inclusive no calculo do frete, mas faltou
- desenvolver o custom widget pra ficar com estilo igual ao mockup)
- - Falta placeholders com loading pra todos os banners e itens carregados do back-end
- - O caso de uso para calculo de frete está criado e rascunhado, porém não está sendo chamado no código
- 
+A arquitetura escolhida foi MVVM, baseado no clean architecture para separaão de camadas.
+Ainda há melhorias a serem feitas na arquitetura, pois ela está um pouco simplificada, a camada de caso de uso pode ser melhorada pra isolar melhor
+as regras de negócio.
 
-## Melhorias previstas:
- - Pode ser usado algum injetor de dependência
- - o MVVM está aplicado, mas o clean architecture pode ser melhorado.
- - Pequenos ajustes na UI para ser mais fiel aos mockups
+## Melhorias a serem feitas
+ - Falta placeholders com loading pra todos os banners e itens carregados do back-end.
+ - Melhorar a interação da camada de dados com domínio, sinto que falta uma camada ainda entre elas.
+ - Valores em Real não estão formatados corretamente
+ - Alguns designs (Search view, item carrinho...) ficaram ligeiramente diferente
+ - Unit tests e Tests UI com Espresso
+ - Injeção de dependências
+
+ 
+ 
+ 
+ 
  
