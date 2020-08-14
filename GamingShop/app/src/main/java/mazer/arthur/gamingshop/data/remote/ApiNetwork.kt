@@ -6,6 +6,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface ApiNetwork {
@@ -21,4 +22,7 @@ interface ApiNetwork {
 
     @POST(ApiConstants.CHECKOUT)
     suspend fun checkout(): retrofit2.Response<ResponseBody>
+
+    @GET(ApiConstants.SEARCH)
+    suspend fun search(@Query("term") term: String): List<GameDetails>
 }

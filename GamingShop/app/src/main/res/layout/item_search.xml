@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+    <TextView
+        android:id="@+id/tvGameTitleSearch"
+        tools:text="Soul River"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/helvetica"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tvGamePriceSearch"
+        android:textColor="@color/lightBlue"
+        android:fontFamily="@font/helvetica_bold"
+        android:gravity="end|center_vertical"
+        tools:text="R$240,00"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    </LinearLayout>
+
+    <View
+        android:background="@color/colorPrimaryDark"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+</LinearLayout>

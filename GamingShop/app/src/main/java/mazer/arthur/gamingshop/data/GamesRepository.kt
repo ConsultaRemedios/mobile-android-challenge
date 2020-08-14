@@ -16,6 +16,7 @@ class GamesRepository(private val apiHelper: ApiHelper, context: Context){
     suspend fun getSpotlightList() = apiHelper.getSpotlight()
     suspend fun getGameDetails(id: Int) = apiHelper.getGameDetails(id)
     suspend fun checkout() = apiHelper.checkout()
+    suspend fun search(term: String) = apiHelper.search(term)
 
     //Local Database
     suspend fun addGameCart(cart: Cart) = gameDao.addGameCart(cart)

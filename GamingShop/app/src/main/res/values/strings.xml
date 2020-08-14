@@ -19,4 +19,6 @@
     <string name="title_checkout_error">Oopss</string>
     <string name="content_checkout_error">Falha ao finalizar seu pedido, tente novamente</string>
     <string name="checkout_empty_cart">Seu carrinho está vazio</string>
+
+    <string name="search_view_hint">Pesquisar</string>
 </resources>

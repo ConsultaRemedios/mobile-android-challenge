@@ -5,6 +5,6 @@ object ApiConstants {
     const val BANNER = "banners"
     const val SPOTLIGHT = "spotlight"
     const val GAME = "games/{id}"
-    const val SEARCH = "games/search?term={term}"
+    const val SEARCH = "games/search?"
     const val CHECKOUT = "checkout"
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,12 +24,14 @@ import mazer.arthur.gamingshop.view.adapter.BannerAdapter
 import mazer.arthur.gamingshop.view.adapter.SpotlightAdapter
 import mazer.arthur.gamingshop.utils.listeners.BannerClickListener
 import mazer.arthur.gamingshop.utils.listeners.SpotlightClicked
+import mazer.arthur.gamingshop.view.adapter.SearchListAdapter
 
 class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked {
 
     private lateinit var viewModel: MainViewModel
     private var bannerAdapter = BannerAdapter(this)
     private var spotlightAdapter = SpotlightAdapter(this)
+    private var searchAdapter = SearchListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +49,40 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
     private fun setupView() {
         setupBannersRecyclerView()
         setupSpotlightRecyclerView()
+        setupSearchRecyclerView()
         setupCartButton()
+        setupSearchView()
+    }
+
+    private fun setupSearchRecyclerView() {
+        rvGamesSearched.layoutManager = LinearLayoutManager(this)
+        rvGamesSearched.itemAnimator = DefaultItemAnimator()
+        rvGamesSearched.adapter = searchAdapter
+    }
+
+    private fun setupSearchView() {
+        searchBarGames?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query.isNullOrBlank()) {
+                    layoutPanelSearch.visibility = View.GONE
+                }else {
+                    layoutPanelSearch.visibility = View.VISIBLE
+                    viewModel.searchGame(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrBlank()) {
+                    layoutPanelSearch.visibility = View.GONE
+                }else {
+                    layoutPanelSearch.visibility = View.VISIBLE
+                    viewModel.searchGame(newText)
+                }
+                return true
+            }
+
+        })
     }
 
     private fun setupCartButton() {
@@ -112,8 +148,15 @@ class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked 
                 is MainViewModel.ViewEvent.EmptyCart -> {
                     tvQuantItemsCart?.visibility = View.GONE
                 }
+                is MainViewModel.ViewEvent.OnGamesSearched -> {
+                    showListGameSearchResult(it.gameList)
+                }
             }
         })
+    }
+
+    private fun showListGameSearchResult(listGames: List<GameDetails>){
+        searchAdapter.addSearchedGames(listGames)
     }
 
     private fun setupViewModel(){
