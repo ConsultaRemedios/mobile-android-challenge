@@ -1,14 +1,14 @@
 package mazer.arthur.gamingshop.view
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import mazer.arthur.gamingshop.data.GamesRepository
 import mazer.arthur.gamingshop.data.remote.Response
 import mazer.arthur.gamingshop.domain.models.GameDetails
-import mazer.arthur.gamingshop.domain.usecases.AddOrRemoveItemCartUseCase
-import mazer.arthur.gamingshop.domain.usecases.CheckoutUseCase
 import mazer.arthur.gamingshop.domain.usecases.GetQuantItemCartUseCase
 import mazer.arthur.gamingshop.domain.usecases.SearchGameUseCase
 import mazer.arthur.gamingshop.utils.listeners.CartQuantItemsListener

@@ -6,19 +6,13 @@
     <string name="shipping_no_items">--</string>
     <string name="free_shipping">Grátis</string>
     <string name="reviews_label">%1$s reviews</string>
-    <string name="item_added_cart">Jogo adicionado ao carrinho!</string>
-    <string name="item_removed_cart">Jogo removido do carrinho!</string>
     <string name="original_price_placeholder">de R$%1$s</string>
     <string name="price_placeholder">R$%1$s</string>
     <string name="products_label">Podutos (%1$s)</string>
     <string name="no_items_cart_price">R$0,00</string>
-
-    <string name="ok_dialog_checkout">OK</string>
     <string name="title_checkout_success">Sucesso</string>
     <string name="content_checkout_success">Sua pedido foi finalizado com sucesso</string>
     <string name="title_checkout_error">Oopss</string>
     <string name="content_checkout_error">Falha ao finalizar seu pedido, tente novamente</string>
     <string name="checkout_empty_cart">Seu carrinho está vazio</string>
-
-    <string name="search_view_hint">Pesquisar</string>
 </resources>

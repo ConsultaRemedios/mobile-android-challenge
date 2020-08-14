@@ -1,7 +1,6 @@
 package mazer.arthur.gamingshop.domain.usecases
 
 import mazer.arthur.gamingshop.data.GamesRepository
-import mazer.arthur.gamingshop.utils.listeners.CartChangedListener
 import mazer.arthur.gamingshop.utils.listeners.ShippingChangedListener
 
 /**

@@ -35,7 +35,7 @@ class GameDetailViewModel(private val gamesRepository: GamesRepository): ViewMod
     fun getGameDetail() = liveData(Dispatchers.IO){
         emit(Response.loading())
         try{
-            emit(Response.success(gamesRepository.getGameDetails(gameDetails?.idGameDetails)))
+            emit(Response.success(gamesRepository.getGameDetails(gameDetails.idGameDetails)))
         } catch (ex: Exception){
             emit(Response.error(null, "Error fetching banner list"))
         }
@@ -44,7 +44,7 @@ class GameDetailViewModel(private val gamesRepository: GamesRepository): ViewMod
     fun getItemCart() = liveData(Dispatchers.IO){
         emit(Response.loading())
         try{
-            emit(Response.success(gamesRepository.isItemOnCart(gameDetails?.idGameDetails)))
+            emit(Response.success(gamesRepository.isItemOnCart(gameDetails.idGameDetails)))
         } catch (ex: Exception){
             emit(Response.error(null, "Error get item cart"))
         }

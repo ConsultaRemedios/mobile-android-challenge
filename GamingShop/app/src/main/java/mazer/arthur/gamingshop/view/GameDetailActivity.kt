@@ -19,7 +19,6 @@ import mazer.arthur.gamingshop.domain.models.Status
 class GameDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: GameDetailViewModel
-    private var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +51,7 @@ class GameDetailActivity : AppCompatActivity() {
             it.let{ response ->
                 when (response.status){
                     Status.SUCCESS -> {
-                        response.data.let { gameDetail ->
-                            setGameDetail(gameDetail ?: return@Observer)
-                        }
+                        setGameDetail(response.data ?: return@Observer)
                     }
                     Status.LOADING -> {
                     }
@@ -100,10 +97,10 @@ class GameDetailActivity : AppCompatActivity() {
     //o botão volta a cor cinza e com ícone de adicionar ao carrinho se o item ainda não tiver sido adicionado.
     private fun setToggleCartButton(isGameAdded: Boolean){
         if (isGameAdded){
-            fbAddToCart?.setImageResource(R.drawable.ic_baseline_remove_shopping_cart_24);
+            fbAddToCart?.setImageResource(R.drawable.ic_baseline_remove_shopping_cart_24)
             fbAddToCart?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, R.color.colorAccent))
         }else{
-            fbAddToCart?.setImageResource(R.drawable.ic_baseline_shopping_cart_24);
+            fbAddToCart?.setImageResource(R.drawable.ic_baseline_shopping_cart_24)
             fbAddToCart?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(applicationContext, android.R.color.white))
         }
     }

@@ -29,7 +29,7 @@ import mazer.arthur.gamingshop.view.adapter.SearchListAdapter
 class MainActivity : AppCompatActivity(), BannerClickListener, SpotlightClicked {
 
     private lateinit var viewModel: MainViewModel
-    private var bannerAdapter = BannerAdapter(this)
+    private var bannerAdapter = BannerAdapter()
     private var spotlightAdapter = SpotlightAdapter(this)
     private var searchAdapter = SearchListAdapter()
 

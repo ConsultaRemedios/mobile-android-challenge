@@ -6,11 +6,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import mazer.arthur.gamingshop.R
-import mazer.arthur.gamingshop.utils.extensions.inflate
 import mazer.arthur.gamingshop.domain.models.Banner
-import mazer.arthur.gamingshop.utils.listeners.BannerClickListener
+import mazer.arthur.gamingshop.utils.extensions.inflate
 
-class BannerAdapter(private var listener: BannerClickListener? = null): RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
+class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
 
 
     var bannerList: ArrayList<Banner> = arrayListOf()
