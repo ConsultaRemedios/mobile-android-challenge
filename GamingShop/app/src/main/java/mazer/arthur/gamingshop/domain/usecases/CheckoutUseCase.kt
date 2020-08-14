@@ -8,14 +8,19 @@ class CheckoutUseCase(private val gamesRepository: GamesRepository, private val 
 
     private var courouTineJob: Job? = null
 
-    fun checkout(){
-        courouTineJob = CoroutineScope(Dispatchers.IO).launch {
-            val response = gamesRepository.checkout()
-            withContext(Dispatchers.Main){
-                if (response.isSuccessful){
-                    listener.checkoutSuccessful()
-                }else{
-                    listener.checkoutFailure()
+    suspend fun checkout(){
+        val quantItemsCart = gamesRepository.getTotalItemsCart()
+        if (quantItemsCart == null || quantItemsCart == 0){
+            listener.cartIsEmpty()
+        }else {
+            courouTineJob = CoroutineScope(Dispatchers.IO).launch {
+                val response = gamesRepository.checkout()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        listener.checkoutSuccessful()
+                    } else {
+                        listener.checkoutFailure()
+                    }
                 }
             }
         }

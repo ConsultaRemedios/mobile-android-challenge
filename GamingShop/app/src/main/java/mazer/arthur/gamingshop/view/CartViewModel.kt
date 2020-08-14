@@ -19,9 +19,10 @@ CheckoutListener{
 
     sealed class ViewEvent {
         class ShippingValueChanged(val quant: Int): ViewEvent()
-        object EmptyCart: ViewEvent()
+        object ShippingCartEmpty: ViewEvent()
         object CheckoutSuccessful: ViewEvent()
         object CheckoutFailure: ViewEvent()
+        object CheckouCartEmpty: ViewEvent()
     }
 
     var eventLiveData = MutableLiveData<ViewEvent>()
@@ -68,7 +69,7 @@ CheckoutListener{
     }
 
     override fun emptyCart() {
-        eventLiveData.postValue(ViewEvent.EmptyCart)
+        eventLiveData.postValue(ViewEvent.ShippingCartEmpty)
     }
 
     override fun checkoutSuccessful() {
@@ -77,6 +78,10 @@ CheckoutListener{
 
     override fun checkoutFailure() {
         eventLiveData.postValue(ViewEvent.CheckoutFailure)
+    }
+
+    override fun cartIsEmpty() {
+        eventLiveData.postValue(ViewEvent.CheckouCartEmpty)
     }
 
 
