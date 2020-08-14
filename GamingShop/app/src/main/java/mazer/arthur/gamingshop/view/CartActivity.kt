@@ -169,4 +169,8 @@ class CartActivity : AppCompatActivity(), CartAdapterListener {
     override fun onDeleteClicked(id: Int) {
         viewModel.removeItemCart(id)
     }
+
+    override fun onNumberPickerChanged(id: Int, value: Int) {
+        viewModel.updateGameQuanity(id, value)
+    }
 }

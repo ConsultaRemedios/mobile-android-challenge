@@ -8,9 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import mazer.arthur.gamingshop.data.GamesRepository
 import mazer.arthur.gamingshop.data.remote.Response
-import mazer.arthur.gamingshop.domain.usecases.CheckoutUseCase
-import mazer.arthur.gamingshop.domain.usecases.RemoveFromCartUseCase
-import mazer.arthur.gamingshop.domain.usecases.ShippingCalculatorUseCase
+import mazer.arthur.gamingshop.domain.usecases.*
 import mazer.arthur.gamingshop.utils.listeners.CheckoutListener
 import mazer.arthur.gamingshop.utils.listeners.ShippingChangedListener
 
@@ -41,12 +39,22 @@ CheckoutListener{
     }
 
     fun removeItemCart(id: Int){
-        //remove item from cart
+        //remove item do carrinho
         val removeItemCartUseCase = RemoveFromCartUseCase(gamesRepository)
         GlobalScope.launch {
             removeItemCartUseCase.removeItem(id)
         }
-        //calculate shipping again
+        //calcula o valor do frete novamente
+        calculateShippingValue()
+    }
+
+    fun updateGameQuanity(id: Int, value: Int){
+        //atualizar a quantidade de itens no carrinho
+        val updateGameQuantityUseCase = UpdateGameQuantityUseCase(gamesRepository)
+        GlobalScope.launch {
+            updateGameQuantityUseCase.updateQuantity(id, value)
+        }
+        //calcula o valor do frete novamente
         calculateShippingValue()
     }
 

@@ -19,6 +19,7 @@ class GamesRepository(private val apiHelper: ApiHelper, context: Context){
 
     //Local Database
     suspend fun addGameCart(cart: Cart) = gameDao.addGameCart(cart)
+    suspend fun updateGameQuanitty(id: Int, quantity: Int) = gameDao.updateGameQuantity(id, quantity)
     suspend fun removeGameCart(id: Int) = gameDao.removeGameCart(id)
     suspend fun getTotalDiscountSumCart() = gameDao.getTotalDiscountSumCart()
     suspend fun getTotalItemsCart() = gameDao.getTotalItemsCart()

@@ -12,6 +12,8 @@ import mazer.arthur.gamingshop.R
 import mazer.arthur.gamingshop.data.remote.entities.Cart
 import mazer.arthur.gamingshop.utils.extensions.inflate
 import mazer.arthur.gamingshop.utils.listeners.CartAdapterListener
+import mazer.arthur.gamingshop.utils.listeners.OnNumberPickerChanged
+import mazer.arthur.gamingshop.view.customview.CustomNumberPicker
 
 class CartAdapter(private var listener: CartAdapterListener): RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
@@ -50,6 +52,14 @@ class CartAdapter(private var listener: CartAdapterListener): RecyclerView.Adapt
             listener.onDeleteClicked(cart.idGameDetails)
             removeItemCart(holder.adapterPosition)
         }
+
+        holder.customNumberPicker.setValue(cart.quantity)
+        holder.customNumberPicker.setOnNumberChangedListener(object: OnNumberPickerChanged{
+            override fun onValueChanged(value: Int) {
+                listener.onNumberPickerChanged(cart.idGameDetails, value)
+            }
+
+        })
     }
 
 
@@ -59,6 +69,7 @@ class CartAdapter(private var listener: CartAdapterListener): RecyclerView.Adapt
         var price: TextView = view.findViewById(R.id.tvOriginalPrice)
         var discount: TextView = view.findViewById(R.id.tvDiscountedPrice)
         var icDelete: ImageView = view.findViewById(R.id.ivDeleteItem)
+        var customNumberPicker: CustomNumberPicker = view.findViewById(R.id.customNumberPicker)
 
     }
 

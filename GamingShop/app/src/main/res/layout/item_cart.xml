@@ -3,14 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBackground"
+    android:paddingBottom="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
     <ImageView
         android:id="@+id/ivGamePoster"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="92dp"
+        android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +25,8 @@
         android:fontFamily="@font/helvetica_bold"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:maxLines="2"
         android:maxLength="50"
@@ -33,13 +36,22 @@
         app:layout_constraintTop_toTopOf="@+id/ivGamePoster"
         tools:text="The Legendas ddasdsadsadasdaasdasdasd" />
 
-    <ImageView
-        android:id="@+id/ivDeleteItem"
+    <mazer.arthur.gamingshop.view.customview.CustomNumberPicker
+        android:id="@+id/customNumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_baseline_delete_outline_24"
         app:layout_constraintStart_toEndOf="@+id/ivGamePoster"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleGame" />
+
+    <ImageView
+        android:id="@+id/ivDeleteItem"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_baseline_delete_outline_24"
+        app:layout_constraintStart_toEndOf="@+id/customNumberPicker"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleGame" />
 
     <LinearLayout
