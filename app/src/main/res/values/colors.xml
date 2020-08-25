@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="app_grey">#646464</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="divider">#EEEEEE</color>
+    <color name="currency">#0091FF</color>
+    <color name="text_grey">#66000000</color>
+    <color name="red">#FF0000</color>
+    <color name="star_rate">#F7B500</color>
+    <color name="icon_grey">#D3D3D3</color>
+    <color name="finish_btn">#1BB738</color>
+    <color name="blue_view">#2196F3</color>
+    <color name="floating_cart">#DB4437</color>
+  <color name="background_dark_grey">#252525</color>
+</resources>

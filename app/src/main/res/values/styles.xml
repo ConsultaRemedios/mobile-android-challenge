@@ -1,0 +1,29 @@
+<resources>
+
+  <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:textColor">#FFFFFF</item>
+    <item name="colorPrimary">@color/blue_view</item>
+  </style>
+
+
+  <style name="ShoppingCartTheme" parent="@style/Theme.AppCompat">
+    <item name="android:statusBarColor">@color/blue_view</item>
+    <item name="colorPrimary">@color/blue_view</item>
+  </style>
+
+  <style name="DetailsTheme" parent="Theme.AppCompat.NoActionBar">
+    <item name="android:textColor">#FFFFFF</item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:statusBarColor">@android:color/transparent</item>
+  </style>
+
+
+  <style name="Divider">
+    <item name="android:background">@color/divider</item>
+  </style>
+
+  <style name="Divider.Horizontal" parent="Divider">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">1dp</item>
+  </style>
+</resources>

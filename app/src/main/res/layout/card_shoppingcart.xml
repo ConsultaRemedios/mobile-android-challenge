@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="20dp">
+
+  <androidx.cardview.widget.CardView
+    android:id="@+id/imagecard_shopping_card"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    app:cardCornerRadius="6dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+  <ImageView
+    android:id="@+id/image_shopping_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:srcCompat="@tools:sample/avatars" />
+  </androidx.cardview.widget.CardView>
+
+  <TextView
+    android:id="@+id/title_shopping_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:text="TextView"
+    app:layout_constraintStart_toEndOf="@+id/imagecard_shopping_card"
+    app:layout_constraintTop_toTopOf="@+id/imagecard_shopping_card" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint_shopping_card"
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:padding="10dp"
+    android:background="@drawable/constraint_border"
+    app:layout_constraintStart_toEndOf="@+id/imagecard_shopping_card"
+    app:layout_constraintTop_toBottomOf="@+id/title_shopping_card">
+
+    <ImageButton
+      android:id="@+id/minus_btn_cart"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@null"
+      android:src="@drawable/ic_minus_grey600_18dp"
+      android:tint="@color/icon_grey"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+      android:id="@+id/amount_shopping_card"
+      android:layout_width="40dp"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="@string/_1"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/plus_btn_cart"
+      app:layout_constraintStart_toEndOf="@+id/minus_btn_cart"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:id="@+id/plus_btn_cart"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@null"
+      android:tint="@color/icon_grey"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:src="@drawable/ic_plus_black_18dp" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <ImageButton
+    android:id="@+id/trash_shopping_card"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@null"
+    android:tint="@color/icon_grey"
+    app:layout_constraintBottom_toBottomOf="@+id/constraint_shopping_card"
+    app:layout_constraintStart_toEndOf="@+id/constraint_shopping_card"
+    app:layout_constraintTop_toBottomOf="@+id/title_shopping_card"
+    app:srcCompat="@drawable/ic_trash_can_outline_black_18dp" />
+
+  <TextView
+    android:id="@+id/oldprice_shopping_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="@string/price_example"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/title_shopping_card" />
+
+  <TextView
+    android:id="@+id/price_shopping_card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/price_example"
+    android:textColor="@color/blue_view"
+    android:textSize="20sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/oldprice_shopping_card" />
+</androidx.constraintlayout.widget.ConstraintLayout>
