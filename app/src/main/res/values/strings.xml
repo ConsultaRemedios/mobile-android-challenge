@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Mobile Android Challenge</string>
+
+    <!-- Content Description   -->
+    <string name="box_art">Arte de capa do jogo</string>
+
+    <!-- Sample Text   -->
+    <string name="sample_text_nintendo">Nintendo</string>
+    <string name="sample_text_naughty_dog">Naughty Dog</string>
+    <string name="sample_text_the_legend_of_zelda_breath_of_the_wild">The Legend of Zelda: Breath of The Wild</string>
+    <string name="sample_text_the_last_uf_us">The Last of Us</string>
+    <string name="sample_text_price">de R$ 350,00</string>
+    <string name="sample_text_price_with_discount">de R$ 250,00</string>
+
+    <!-- Warn Messages   -->
+    <string name="warn_games_not_loaded">Não foi possível carregar os jogos</string>
+    <string name="warn_games_details_not_loaded">Não foi possível carregar os detalhes do jogo</string>
+
 </resources>
