@@ -37,9 +37,7 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
                 openURL(carouselItem.caption)
             }
 
-            override fun onLongClick(position: Int, dataObject: CarouselItem) {
-                // do nothing
-            }
+            override fun onLongClick(position: Int, dataObject: CarouselItem) { }
         }
 
         val getBannersCall = mApi.getBanners()
