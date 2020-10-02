@@ -16,8 +16,8 @@ import com.bumptech.glide.request.RequestOptions
 class GamesAdapter(context: Context, games: List<Game>, onGameTapListener: OnGameTapListener):
     RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
 
-    private var mGames = games
     private val mContext = context
+    private var mGames = games
     private val mOnGameTapListener = onGameTapListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

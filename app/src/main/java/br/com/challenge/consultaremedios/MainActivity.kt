@@ -4,10 +4,14 @@ package br.com.challenge.consultaremedios
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import br.com.challenge.consultaremedios.adapter.BannerAdapter
 import br.com.challenge.consultaremedios.adapter.GamesAdapter
 import br.com.challenge.consultaremedios.api.mobiletest.Endpoints
 import br.com.challenge.consultaremedios.api.mobiletest.MobileTestService
@@ -31,28 +35,32 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val carousel: ImageCarousel = findViewById(R.id.banner)
-        carousel.onItemClickListener = object: OnItemClickListener {
-            override fun onClick(position: Int, carouselItem: CarouselItem) {
-                openURL(carouselItem.caption)
-            }
-
-            override fun onLongClick(position: Int, dataObject: CarouselItem) { }
-        }
+//        val carousel: ImageCarousel = findViewById(R.id.banner)
+//        carousel.onItemClickListener = object: OnItemClickListener {
+//            override fun onClick(position: Int, carouselItem: CarouselItem) {
+//                openURL(carouselItem.caption)
+//            }
+//
+//            override fun onLongClick(position: Int, dataObject: CarouselItem) { }
+//        }
 
         val getBannersCall = mApi.getBanners()
         getBannersCall.enqueue(object : Callback<List<Banner>> {
             override fun onResponse(call: Call<List<Banner>>, response: Response<List<Banner>>) {
                 if (response.isSuccessful) {
-                    val list = mutableListOf<CarouselItem>()
-                    val banners = response.body()
-                    banners?.forEach { list.add(CarouselItem(imageUrl = it.image, it.url)) }
-                    carousel.addData(list)
+//                    val list = mutableListOf<CarouselItem>()
+                    val banners = response.body().orEmpty()
+                    val banner = findViewById<ViewPager>(R.id.banner)
+                    val adapter = BannerAdapter(this@MainActivity, banners.orEmpty())
+                    banner.adapter = adapter
+                    banner.setPadding(130, 0, 130, 0)
+//                    banners?.forEach { list.add(CarouselItem(imageUrl = it.image, it.url)) }
+//                    carousel.addData(list)
                 }
             }
 
             override fun onFailure(call: Call<List<Banner>>, t: Throwable) {
-                Snackbar.make(carousel, "Não foi possíverl bla bla bla", Snackbar.LENGTH_LONG)
+//                Snackbar.make(carousel, "Não foi possíverl bla bla bla", Snackbar.LENGTH_LONG)
             }
         })
 
