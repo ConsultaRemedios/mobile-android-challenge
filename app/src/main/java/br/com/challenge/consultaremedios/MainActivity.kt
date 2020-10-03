@@ -4,6 +4,8 @@ package br.com.challenge.consultaremedios
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.view.View
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +26,11 @@ import org.imaginativeworld.whynotimagecarousel.OnItemClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.Normalizer
+import java.util.*
 
 const val EXTRA_GAME_ID = "br.com.challenge.consultaremedios.GAME_ID"
+const val REQUEST_CODE_SPEECH_INPUT = 1001
 
 class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
     private var mGames: List<Game>? = null
@@ -68,6 +73,20 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         loadGames()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            REQUEST_CODE_SPEECH_INPUT -> {
+                if (resultCode == RESULT_OK && data != null) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    val searchText = result?.joinToString { it }
+                    searchGame(searchText.orEmpty())
+                }
+            }
+        }
+    }
+
     override fun onGameTap(position: Int) {
         val game = mGames?.get(position)
         val intent = Intent(this, GameDetailsActivity::class.java).apply {
@@ -102,5 +121,43 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         })
 
 
+    }
+
+    fun speak(view: View) {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.label_speech_search_hint))
+        }
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
+        } catch (err: Exception) {
+            Toast.makeText(this, "${err.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun searchGame(searchText: String) {
+        val query = searchText
+            .toLowerCase(Locale.getDefault())
+            .unaccent()
+
+        mApi.searchGames(query).enqueue(object: Callback<List<Game>> {
+            override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@MainActivity, "${response.body()}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Game>>, t: Throwable) {
+                Toast.makeText(this@MainActivity, getString(R.string.warn_games_not_loaded), Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun CharSequence.unaccent(): String {
+        val re = "\\p{InCombiningDiacriticalMarks}+".toRegex()
+        val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+        return re.replace(temp, "")
     }
 }
