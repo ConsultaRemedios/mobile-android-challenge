@@ -17,4 +17,7 @@
     <string name="warn_games_not_loaded">Não foi possível carregar os jogos</string>
     <string name="warn_games_details_not_loaded">Não foi possível carregar os detalhes do jogo</string>
 
+    <!-- Other   -->
+    <string name="label_speech_search_hint">Fale parte ou nome do jogo que deseja encontrar</string>
+
 </resources>
