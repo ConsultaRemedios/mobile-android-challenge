@@ -1,5 +1,6 @@
 package br.com.challenge.consultaremedios.api.mobiletest
 
+import br.com.challenge.consultaremedios.db.entity.CartItem
 import br.com.challenge.consultaremedios.model.Banner
 import br.com.challenge.consultaremedios.model.Game
 import retrofit2.Call
@@ -20,5 +21,5 @@ interface Endpoints {
     fun searchGames(@Query("term") query:String): Call<List<Game>>
 
     @POST("checkout")
-    fun postCheckout(@Body body:Any): Call<Void>
+    fun postCheckout(@Body body:List<CartItem>): Call<Void>
 }

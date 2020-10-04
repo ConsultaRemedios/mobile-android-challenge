@@ -25,4 +25,9 @@
     <string name="cart_items_sum">Produtos (%1$d)</string>
     <string name="gratis">Grátis</string>
 
+    <!-- Messages   -->
+    <string name="message.warn.empty.cart">O carrinho está vazio</string>
+    <string name="message.success.checkout">Ahooy!! Logo você recerá seus jogos!</string>
+    <string name="message.error.api.request">Ops! Não conseguimos carregar isso, por favor tente novamente.</string>
+
 </resources>
