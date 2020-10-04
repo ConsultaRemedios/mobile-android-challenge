@@ -52,6 +52,6 @@
         app:backgroundTint="@color/colorButtonSubmit"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:tint="@color/white" />
+        app:tint="@color/colorWhite" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

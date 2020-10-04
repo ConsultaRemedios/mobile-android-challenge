@@ -11,4 +11,5 @@
     <color name="colorFooter">#252525</color>
     <color name="colorButtonSubmit">#1BB738</color>
     <color name="colorBorder">#CCCCCC</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

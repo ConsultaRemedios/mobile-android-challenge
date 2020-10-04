@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -30,9 +29,9 @@ import java.util.*
 const val EXTRA_GAME_ID = "br.com.challenge.consultaremedios.GAME_ID"
 const val REQUEST_CODE_SPEECH_INPUT = 1001
 
-class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
-    private var mGames: List<Game>? = null
-    private val mApi = MobileTestService.buildService(Endpoints::class.java)
+class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, BannerAdapter.BannerTapListener {
+    private var games: List<Game>? = null
+    private val api = MobileTestService.buildService(Endpoints::class.java)
 
     private lateinit var cartViewModel: CartViewModel
 
@@ -40,27 +39,28 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val carousel: ImageCarousel = findViewById(R.id.banner)
-//        carousel.onItemClickListener = object: OnItemClickListener {
-//            override fun onClick(position: Int, carouselItem: CarouselItem) {
-//                openURL(carouselItem.caption)
-//            }
-//
-//            override fun onLongClick(position: Int, dataObject: CarouselItem) { }
-//        }
+        initData()
+    }
 
-        val getBannersCall = mApi.getBanners()
+    private fun initData() {
+        // quantity badge
+        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        findViewById<TextView>(R.id.cart_count).apply {
+            cartViewModel.cartItems.observe(this@MainActivity, { item ->
+                text = item.map { it.quantity }.sum().toString()
+            })
+        }
+
+        // banners
+        val getBannersCall = api.getBanners()
         getBannersCall.enqueue(object : Callback<List<Banner>> {
             override fun onResponse(call: Call<List<Banner>>, response: Response<List<Banner>>) {
                 if (response.isSuccessful) {
-//                    val list = mutableListOf<CarouselItem>()
                     val banners = response.body().orEmpty()
                     val banner = findViewById<ViewPager>(R.id.banner)
-                    val adapter = BannerAdapter(this@MainActivity, banners.orEmpty())
+                    val adapter = BannerAdapter(this@MainActivity, banners.orEmpty(), this@MainActivity)
                     banner.adapter = adapter
-                    banner.setPadding(130, 0, 130, 0)
-//                    banners?.forEach { list.add(CarouselItem(imageUrl = it.image, it.url)) }
-//                    carousel.addData(list)
+                    banner.setPadding(60, 0, 60, 0)
                 }
             }
 
@@ -69,15 +69,33 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
             }
         })
 
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-        findViewById<TextView>(R.id.cart_count).apply {
-            cartViewModel.cartItems.observe(this@MainActivity, { item ->
-                text = item.map { it.quantity }.sum().toString()
-            })
-        }
+        // games
+        api.getSpotlight().enqueue(object: Callback<List<Game>> {
+            override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
+                if (response.isSuccessful) {
+                    val recyclerView: RecyclerView = findViewById(R.id.games_view)
+                    recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
 
-        // load list GridView
-        loadGames()
+                    games = response.body()
+                    val adapter = GamesAdapter(this@MainActivity, games.orEmpty(), this@MainActivity)
+                    recyclerView.adapter = adapter
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.message_error_api_request),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Game>>, t: Throwable) {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.message_error_api_request),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -94,53 +112,26 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         }
     }
 
-    override fun onGameTap(position: Int) {
-        val game = mGames?.get(position)
-        val intent = Intent(this, GameDetailsActivity::class.java).apply {
-            putExtra(EXTRA_GAME_ID, game?.id)
+    override fun onBannerTap(url: String) {
+        Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+            startActivity(this)
         }
-        startActivity(intent)
     }
 
-    fun openURL(url: String?) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(browserIntent)
-    }
-
-    private fun loadGames() {
-        mApi.getSpotlight().enqueue(object: Callback<List<Game>> {
-            override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
-                if (response.isSuccessful) {
-                    val recyclerView: RecyclerView = findViewById(R.id.games_view)
-                    recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
-
-                    mGames = response.body()
-                    val adapter = GamesAdapter(this@MainActivity, mGames.orEmpty(), this@MainActivity)
-                    recyclerView.adapter = adapter
-                } else {
-                    Toast.makeText(this@MainActivity, getString(R.string.warn_games_not_loaded), Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<Game>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, getString(R.string.warn_games_not_loaded), Toast.LENGTH_LONG).show()
-            }
-        })
-
-
+    override fun onGameTap(position: Int) {
+        val game = games?.get(position)
+        Intent(this, GameDetailsActivity::class.java).apply {
+            putExtra(EXTRA_GAME_ID, game?.id)
+            startActivity(this)
+        }
     }
 
     fun speak(view: View) {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+        Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
             putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.label_speech_search_hint))
-        }
-
-        try {
             startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
-        } catch (err: Exception) {
-            Toast.makeText(this, "${err.message}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -149,27 +140,38 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
             .toLowerCase(Locale.getDefault())
             .unaccent()
 
-        mApi.searchGames(query).enqueue(object: Callback<List<Game>> {
+        api.searchGames(query).enqueue(object: Callback<List<Game>> {
             override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@MainActivity, "${response.body()}", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        getString(R.string.message_error_api_request),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Game>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, getString(R.string.warn_games_not_loaded), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.message_error_api_request),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }
 
-    fun CharSequence.unaccent(): String {
+    fun openCart(view: View) {
+        Intent(this, CartActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun CharSequence.unaccent(): String {
         val re = "\\p{InCombiningDiacriticalMarks}+".toRegex()
         val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
         return re.replace(temp, "")
-    }
-
-    fun openCart(view: View) {
-        val intent = Intent(this, CartActivity::class.java)
-        startActivity(intent)
     }
 }

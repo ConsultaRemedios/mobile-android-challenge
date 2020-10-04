@@ -11,10 +11,11 @@ import br.com.challenge.consultaremedios.model.Banner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class BannerAdapter(context: Context, banners: List<Banner>): PagerAdapter() {
+class BannerAdapter(context: Context, banners: List<Banner>, bannerTapListener: BannerTapListener): PagerAdapter() {
 
     private val mContext = context
     private val mBanners = banners
+    private val bannerTapListener = bannerTapListener
 
     override fun getCount(): Int {
         return mBanners.size
@@ -36,10 +37,17 @@ class BannerAdapter(context: Context, banners: List<Banner>): PagerAdapter() {
                 .into(this)
         }
 
+        view.setOnClickListener {
+            bannerTapListener.onBannerTap(mBanners[position].url)
+        }
+
+        container.addView(view)
         return view
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View?)
     }
+
+    interface BannerTapListener { fun onBannerTap(url: String) }
 }

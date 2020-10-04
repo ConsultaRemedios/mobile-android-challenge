@@ -6,35 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--    <org.imaginativeworld.whynotimagecarousel.ImageCarousel-->
-    <!--        android:id="@+id/banner"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="180dp"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        app:autoPlay="true"-->
-    <!--        app:autoWidthFixing="true"-->
-    <!--        app:carouselBackground="@android:color/transparent"-->
-    <!--        app:carouselType="SHOWCASE"-->
-    <!--        app:imageScaleType="fitCenter"-->
-    <!--        app:imageViewId="@id/img"-->
-    <!--        app:itemLayout="@layout/item_carousel"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:scaleOnScroll="false"-->
-    <!--        app:showBottomShadow="false"-->
-    <!--        app:showCaption="false"-->
-    <!--        app:showIndicator="false"-->
-    <!--        app:showNavigationButtons="false"-->
-    <!--        app:showTopShadow="false" />-->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:clipToPadding="false"
         android:foregroundGravity="center"
         android:overScrollMode="never"
@@ -55,28 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/banner" />
 
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="16dp"-->
-    <!--        android:src="@drawable/ic_shopping_cart"-->
-    <!--        app:backgroundTint="@color/colorRedLight"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        android:onClick="openCart"-->
-    <!--        app:tint="@color/white" />-->
-
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        android:layout_margin="16dp">-->
-
-    <!--        -->
-    <!--        -->
-    <!--    </RelativeLayout>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/colorWhite" />
 
         <View
             android:layout_width="20dp"
@@ -119,7 +74,7 @@
             android:textColor="@color/colorRedLight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="3" />
+            tools:text="@string/tools.text.badge.quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
