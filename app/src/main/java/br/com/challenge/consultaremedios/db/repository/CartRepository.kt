@@ -21,12 +21,4 @@ class CartRepository(application: Application) {
         cartDao.delete(cartItem)
     }
 
-    suspend fun getAll() {
-        cartDao.getAll()
-    }
-
-    suspend fun cartItemsSum() {
-        cartDao.cartItemsSum()
-    }
-
 }

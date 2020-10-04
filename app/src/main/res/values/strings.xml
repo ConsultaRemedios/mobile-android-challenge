@@ -8,7 +8,6 @@
     <!-- Sample Text   -->
     <string name="sample_text_nintendo">Nintendo</string>
     <string name="sample_text_naughty_dog">Naughty Dog</string>
-    <string name="sample_text_the_legend_of_zelda_breath_of_the_wild">The Legend of Zelda: Breath of The Wild</string>
     <string name="sample_text_the_last_uf_us">The Last of Us</string>
     <string name="sample_text_price">de R$ 350,00</string>
     <string name="sample_text_price_with_discount">de R$ 250,00</string>
@@ -26,8 +25,17 @@
     <string name="gratis">Grátis</string>
 
     <!-- Messages   -->
-    <string name="message.warn.empty.cart">O carrinho está vazio</string>
     <string name="message.success.checkout">Ahooy!! Logo você recerá seus jogos!</string>
-    <string name="message.error.api.request">Ops! Não conseguimos carregar isso, por favor tente novamente.</string>
+    <string name="message.success.product.removed">Produto removido do carrinho</string>
+    <string name="message.warn.empty.cart">O carrinho está vazio</string>
+    <string name="message.error.api.request">Ops! Não conseguimos carregar isso, por favor tente novamente</string>
+
+    <!-- Tools Text   -->
+    <string name="tools.text.game.title">The Legend of Zelda: Breath of The Wild</string>
+    <string name="tools.text.game.rating">4.7</string>
+    <string name="tools.text.game.reviews">337 reviews</string>
+    <string name="tools.text.game.price">de R$350,00</string>
+    <string name="tools.text.game.price.with.discount">R$250,00</string>
+
 
 </resources>

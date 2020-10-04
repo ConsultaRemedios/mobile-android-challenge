@@ -43,14 +43,15 @@
     <include layout="@layout/layout_game_details" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_game_to_cart"
-        android:onClick="addGameToChart"
+        android:id="@+id/fab_cart_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:backgroundTint="@color/colorRed"
+        android:src="@drawable/ic_add_shopping_cart"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorButtonSubmit"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_cart" />
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

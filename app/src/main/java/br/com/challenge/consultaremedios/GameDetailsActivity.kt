@@ -8,76 +8,109 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import br.com.challenge.consultaremedios.api.mobiletest.Endpoints
 import br.com.challenge.consultaremedios.api.mobiletest.MobileTestService
 import br.com.challenge.consultaremedios.db.entity.CartItem
 import br.com.challenge.consultaremedios.db.viewmodel.CartViewModel
 import br.com.challenge.consultaremedios.model.Game
+import br.com.challenge.consultaremedios.utils.GenericUtils.Companion.brazilianNumberFormat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_game_details.*
-import br.com.challenge.consultaremedios.utils.GenericUtils.Companion.brazilianNumberFormat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class GameDetailsActivity : AppCompatActivity() {
-    private val mApi = MobileTestService.buildService(Endpoints::class.java)
+    private val api = MobileTestService.buildService(Endpoints::class.java)
     private lateinit var cartViewModel: CartViewModel
 
-    var mGame: Game? = null
+    var game: Game? = null
+    var cartItem: CartItem? = null
+    var gameId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_details)
-        showCustomUI()
+        gameId = intent.getIntExtra(EXTRA_GAME_ID, 0)
 
-        // Get the Intent that started this activity and extract the string
-        val gameId = intent.getIntExtra(EXTRA_GAME_ID, 0)
-        loadGameDetails(gameId)
+        initView()
+        initData(gameId!!)
     }
 
-    private fun loadGameDetails(gameId: Int) {
-        mApi.getGameDetails(gameId).enqueue(object : Callback<Game> {
+    private fun initView() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun initData(gameId: Int) {
+        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        api.getGameDetails(gameId).enqueue(object : Callback<Game> {
             override fun onResponse(call: Call<Game>, response: Response<Game>) {
                 if (response.isSuccessful) {
-                    mGame = response.body()
+                    game = response.body()
+                    cartViewModel.cartItems.observe(this@GameDetailsActivity, { items ->
+                        val fabCartAction = findViewById<FloatingActionButton>(R.id.fab_cart_action)
+
+                        cartItem = items.find { it.gameId == gameId }
+                        if(cartItem == null) {
+                            fabCartAction.apply {
+                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity, R.color.colorButtonSubmit)
+                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,R.drawable.ic_add_shopping_cart))
+                                setOnClickListener(addGameToCartListener)
+                            }
+                        } else {
+                            fabCartAction.apply {
+                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity, R.color.colorRed)
+                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,R.drawable.ic_remove_shopping_cart))
+                                setOnClickListener(removeGameFromCartListener)
+                            }
+                        }
+                        fabCartAction.visibility = View.VISIBLE
+                        cartViewModel.cartItems.removeObservers(this@GameDetailsActivity)
+                    })
+
+                    val price = game?.price ?: 0.0
+                    val discount = game?.discount ?: 0.0
+
+                    val requestOptions = RequestOptions.placeholderOf(R.drawable.game_cover_placeholder)
+                    Glide.with(this@GameDetailsActivity)
+                        .load(game?.image)
+                        .apply(requestOptions)
+                        .into(findViewById(R.id.game_boxart))
 
                     findViewById<TextView>(R.id.title).apply {
-                        text = mGame?.title
+                        text = game?.title
                     }
                     findViewById<TextView>(R.id.game_rating).apply {
-                        text = mGame?.rating.toString()
+                        text = game?.rating.toString()
                     }
                     findViewById<RatingBar>(R.id.game_rating_bar).apply {
-                        rating = mGame?.stars?.toFloat() ?: 0f
+                        rating = game?.stars?.toFloat() ?: 0f
                     }
                     findViewById<TextView>(R.id.game_reviews).apply {
-                        text = String.format("%s reviews",mGame?.reviews)
+                        text = String.format("%s reviews",game?.reviews)
                     }
                     findViewById<TextView>(R.id.game_price).apply {
-                        text = String.format("de %s", brazilianNumberFormat().format(mGame?.price))
+                        text = String.format("de %s", brazilianNumberFormat().format(game?.price))
                         paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                     }
-                    val price = mGame?.price ?: 0.0
-                    val discount = mGame?.discount ?: 0.0
                     findViewById<TextView>(R.id.game_price_with_discount).apply {
                         text = brazilianNumberFormat().format(price.minus(discount))
                     }
                     findViewById<TextView>(R.id.game_description).apply {
-                        text = mGame?.description
+                        text = game?.description
                     }
-
-                    val requestOptions = RequestOptions.placeholderOf(R.drawable.game_cover_placeholder)
-                    Glide.with(this@GameDetailsActivity)
-                        .load(mGame?.image)
-                        .apply(requestOptions)
-                        .into(findViewById(R.id.game_boxart))
                 } else {
                     Toast.makeText(
                         this@GameDetailsActivity,
-                        getString(R.string.warn_games_details_not_loaded),
+                        getString(R.string.message_error_api_request),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -86,37 +119,37 @@ class GameDetailsActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Game>, t: Throwable) {
                 Toast.makeText(
                     this@GameDetailsActivity,
-                    getString(R.string.warn_games_details_not_loaded),
+                    getString(R.string.message_error_api_request),
                     Toast.LENGTH_LONG
                 ).show()
             }
         })
     }
 
-    private fun showCustomUI() {
-//        val decorView: View = window.decorView
-//        decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
-
-    fun addGameToChart(view: View) {
+    val addGameToCartListener = View.OnClickListener {
         val item = CartItem(
-            gameId = mGame?.id!!,
-            title = mGame?.title!!,
-            boxArtUrl = mGame?.image!!,
+            gameId = game?.id!!,
+            title = game?.title!!,
+            boxArtUrl = game?.image!!,
             quantity = 1,
-            unitPrice = mGame?.price!!,
-            unitPriceWithDiscount = (mGame?.price!! - mGame?.discount!!)
+            unitPrice = game?.price!!,
+            unitPriceWithDiscount = (game?.price!! - game?.discount!!)
         )
-
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
         cartViewModel.insert(item)
 
         val intent = Intent(this, CartActivity::class.java)
         startActivity(intent)
+    }
+
+    val removeGameFromCartListener = View.OnClickListener {
+        cartViewModel.delete(cartItem!!)
+        Toast.makeText(
+            this,
+            getString(R.string.message_success_product_removed),
+            Toast.LENGTH_LONG
+        ).show()
+
+        val intent = Intent(this, MainActivity::class.java)
+        navigateUpTo(intent)
     }
 }

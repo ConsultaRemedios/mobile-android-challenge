@@ -31,8 +31,4 @@ class CartViewModel(application: Application): AndroidViewModel(application) {
     fun delete(cartItem: CartItem) = viewModelScope.launch {
         cartRepository.delete(cartItem)
     }
-
-    fun cartItemsSum() = viewModelScope.launch {
-        cartRepository.cartItemsSum()
-    }
 }
