@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/game_title"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_title"
+            app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="4.7" />
 
         <RatingBar
@@ -43,7 +43,7 @@
             android:stepSize="1"
             android:theme="@style/RatingBar"
             app:layout_constraintStart_toEndOf="@id/game_rating"
-            app:layout_constraintTop_toBottomOf="@id/game_title" />
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
             android:id="@+id/game_reviews"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/game_rating_bar"
-            app:layout_constraintTop_toBottomOf="@id/game_title"
+            app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="337 reviews" />
 
         <TextView

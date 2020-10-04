@@ -6,23 +6,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.View
-import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import br.com.challenge.consultaremedios.adapter.BannerAdapter
 import br.com.challenge.consultaremedios.adapter.GamesAdapter
 import br.com.challenge.consultaremedios.api.mobiletest.Endpoints
 import br.com.challenge.consultaremedios.api.mobiletest.MobileTestService
+import br.com.challenge.consultaremedios.db.viewmodel.CartViewModel
 import br.com.challenge.consultaremedios.model.Banner
 import br.com.challenge.consultaremedios.model.Game
-import com.google.android.material.snackbar.Snackbar
-import org.imaginativeworld.whynotimagecarousel.CarouselItem
-import org.imaginativeworld.whynotimagecarousel.ImageCarousel
-import org.imaginativeworld.whynotimagecarousel.OnItemClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +33,8 @@ const val REQUEST_CODE_SPEECH_INPUT = 1001
 class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
     private var mGames: List<Game>? = null
     private val mApi = MobileTestService.buildService(Endpoints::class.java)
+
+    private lateinit var cartViewModel: CartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +68,13 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
 //                Snackbar.make(carousel, "Não foi possíverl bla bla bla", Snackbar.LENGTH_LONG)
             }
         })
+
+        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        findViewById<TextView>(R.id.cart_count).apply {
+            cartViewModel.cartItems.observe(this@MainActivity, { item ->
+                text = item.map { it.quantity }.sum().toString()
+            })
+        }
 
         // load list GridView
         loadGames()
@@ -159,5 +166,10 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener {
         val re = "\\p{InCombiningDiacriticalMarks}+".toRegex()
         val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
         return re.replace(temp, "")
+    }
+
+    fun openCart(view: View) {
+        val intent = Intent(this, CartActivity::class.java)
+        startActivity(intent)
     }
 }

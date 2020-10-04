@@ -1,6 +1,7 @@
 package br.com.challenge.consultaremedios.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,34 +40,35 @@ class GamesAdapter(context: Context, games: List<Game>, onGameTapListener: OnGam
             .apply(requestOptions)
             .into(holder.boxArt)
 
-        holder.publisher.text = game.publisher
-        holder.title.text = game.title
-        holder.price.text = brazilianNumberFormat().format(game.price)
-        holder.priceWithDiscount.text = brazilianNumberFormat().format(game.price - game.discount)
+        holder.publisher.apply { text = game.publisher }
+        holder.title.apply { text = game.title }
+        holder.price.apply {
+            text = brazilianNumberFormat().format(game.price)
+            paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        }
+        holder.priceWithDiscount.apply { text = brazilianNumberFormat().format(game.price.minus(game.discount)) }
     }
 
     class ViewHolder(itemView: View, onGameTapListener: OnGameTapListener):
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        private var onGameTapListener: OnGameTapListener
+        private val onGameTapListener: OnGameTapListener
 
         init {
             itemView.setOnClickListener(this)
             this.onGameTapListener = onGameTapListener
         }
 
-        var boxArt: ImageView = itemView.findViewById(R.id.item_game_boxart)
-        var publisher: TextView = itemView.findViewById(R.id.item_game_publisher)
-        var title: TextView = itemView.findViewById(R.id.item_game_title)
-        var price: TextView = itemView.findViewById(R.id.item_game_price)
-        var priceWithDiscount: TextView = itemView.findViewById(R.id.item_game_price_with_discount)
+        var boxArt: ImageView = itemView.findViewById(R.id.boxart)
+        var publisher: TextView = itemView.findViewById(R.id.publisher)
+        var title: TextView = itemView.findViewById(R.id.title)
+        var price: TextView = itemView.findViewById(R.id.price)
+        var priceWithDiscount: TextView = itemView.findViewById(R.id.price_with_discount)
 
         override fun onClick(v: View?) {
             onGameTapListener.onGameTap(adapterPosition)
         }
     }
 
-    interface OnGameTapListener {
-        fun onGameTap(position: Int)
-    }
+    interface OnGameTapListener { fun onGameTap(position: Int) }
 }

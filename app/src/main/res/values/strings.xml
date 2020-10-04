@@ -19,5 +19,10 @@
 
     <!-- Other   -->
     <string name="label_speech_search_hint">Fale parte ou nome do jogo que deseja encontrar</string>
+    <string name="frete">Frete</string>
+    <string name="total">TOTAL</string>
+    <string name="finalizar_compra">Finalizar compra</string>
+    <string name="cart_items_sum">Produtos (%1$d)</string>
+    <string name="gratis">Grátis</string>
 
 </resources>
