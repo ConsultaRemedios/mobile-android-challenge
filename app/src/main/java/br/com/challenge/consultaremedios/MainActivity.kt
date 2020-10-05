@@ -1,11 +1,15 @@
 
 package br.com.challenge.consultaremedios
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -30,16 +34,33 @@ const val EXTRA_GAME_ID = "br.com.challenge.consultaremedios.GAME_ID"
 const val REQUEST_CODE_SPEECH_INPUT = 1001
 
 class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, BannerAdapter.BannerTapListener {
-    private var games: List<Game>? = null
-    private val api = MobileTestService.buildService(Endpoints::class.java)
 
+    private val api = MobileTestService.buildService(Endpoints::class.java)
+    private var games: List<Game>? = null
     private lateinit var cartViewModel: CartViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initView()
         initData()
+    }
+
+    private fun initView() {
+
+        findViewById<EditText>(R.id.edit_search).apply {
+            setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH)
+                    searchGame(this.text.toString())
+
+                // hide virtual keyboard
+                val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(this.windowToken, 0)
+                this.clearFocus()
+                true
+            }
+        }
     }
 
     private fun initData() {
@@ -58,26 +79,38 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
                 if (response.isSuccessful) {
                     val banners = response.body().orEmpty()
                     val banner = findViewById<ViewPager>(R.id.banner)
-                    val adapter = BannerAdapter(this@MainActivity, banners.orEmpty(), this@MainActivity)
+                    val adapter = BannerAdapter(
+                        this@MainActivity,
+                        banners,
+                        this@MainActivity
+                    )
                     banner.adapter = adapter
                     banner.setPadding(60, 0, 60, 0)
                 }
             }
 
             override fun onFailure(call: Call<List<Banner>>, t: Throwable) {
-//                Snackbar.make(carousel, "Não foi possíverl bla bla bla", Snackbar.LENGTH_LONG)
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.message_error_api_request),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
 
         // games
-        api.getSpotlight().enqueue(object: Callback<List<Game>> {
+        api.getSpotlight().enqueue(object : Callback<List<Game>> {
             override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
                 if (response.isSuccessful) {
                     val recyclerView: RecyclerView = findViewById(R.id.games_view)
                     recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
 
                     games = response.body()
-                    val adapter = GamesAdapter(this@MainActivity, games.orEmpty(), this@MainActivity)
+                    val adapter = GamesAdapter(
+                        this@MainActivity,
+                        games.orEmpty(),
+                        this@MainActivity
+                    )
                     recyclerView.adapter = adapter
                 } else {
                     Toast.makeText(
@@ -105,8 +138,12 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
             REQUEST_CODE_SPEECH_INPUT -> {
                 if (resultCode == RESULT_OK && data != null) {
                     val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    val searchText = result?.joinToString { it }
-                    searchGame(searchText.orEmpty())
+                    val resultText = result?.joinToString { it }
+
+                    findViewById<EditText>(R.id.edit_search).apply {
+                        setText(resultText)
+                        searchGame(this.text.toString())
+                    }
                 }
             }
         }
@@ -126,12 +163,15 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
         }
     }
 
-    fun speak(view: View) {
+    fun openSpeechDialog(view: View) {
         Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
             putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.label_speech_search_hint))
-            startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT)
+            startActivityForResult(this, REQUEST_CODE_SPEECH_INPUT)
         }
     }
 
@@ -140,10 +180,11 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
             .toLowerCase(Locale.getDefault())
             .unaccent()
 
-        api.searchGames(query).enqueue(object: Callback<List<Game>> {
+        api.searchGames(query).enqueue(object : Callback<List<Game>> {
             override fun onResponse(call: Call<List<Game>>, response: Response<List<Game>>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@MainActivity, "${response.body()}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "${response.body()}", Toast.LENGTH_LONG)
+                        .show()
                 } else {
                     Toast.makeText(
                         this@MainActivity,

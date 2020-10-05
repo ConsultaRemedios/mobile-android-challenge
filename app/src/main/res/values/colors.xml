@@ -12,4 +12,5 @@
     <color name="colorButtonSubmit">#1BB738</color>
     <color name="colorBorder">#CCCCCC</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrayLight">#7F7F7F</color>
 </resources>
