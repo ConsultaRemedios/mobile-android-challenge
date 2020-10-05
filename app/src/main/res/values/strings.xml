@@ -1,0 +1,33 @@
+<resources>
+    <string name="app.name">Mobile Android Challenge</string>
+
+    <!-- Content Description   -->
+    <string name="text.content.description.default">Descrição para acessibilidade</string>
+
+    <!-- Other   -->
+    <string name="text.speech.hint">Fale parte ou nome do jogo que deseja encontrar</string>
+    <string name="text.finish.shopping">Finalizar compra</string>
+    <string name="text.items.sum">Produtos (%1$d)</string>
+    <string name="text.cart">Carrinho</string>
+    <string name="text.free">Grátis</string>
+    <string name="text.search">Pesquisar</string>
+    <string name="text.total">TOTAL</string>
+    <string name="text.shipping">Frete</string>
+    <string name="text.quantity.number">1</string>
+
+    <!-- Messages   -->
+    <string name="message.success.checkout">Ahooy!! Logo você recerá seus jogos!</string>
+    <string name="message.success.product.removed">Produto removido do carrinho</string>
+    <string name="message.warn.empty.cart">O carrinho está vazio</string>
+    <string name="message.error.api.request">Ops! Não conseguimos carregar isso, por favor tente novamente</string>
+
+    <!-- Tools Text   -->
+    <string name="tools.text.publisher">Nintendo</string>
+    <string name="tools.text.game.title">The Legend of Zelda: Breath of The Wild</string>
+    <string name="tools.text.game.rating">4.7</string>
+    <string name="tools.text.game.reviews">337 reviews</string>
+    <string name="tools.text.game.price">de R$350,00</string>
+    <string name="tools.text.game.price.with.discount">R$250,00</string>
+    <string name="tools.text.badge.quantity">3</string>
+
+</resources>
