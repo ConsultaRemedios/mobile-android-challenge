@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_margin="8dp"
+        android:contentDescription="@string/text.content.description.default"
         android:scaleType="centerCrop"
         tools:src="@mipmap/ic_launcher_round" />
 

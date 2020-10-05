@@ -1,4 +1,4 @@
-package br.com.challenge.consultaremedios
+package br.com.challenge.consultaremedios.activity
 
 import android.content.Intent
 import android.graphics.Paint
@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import br.com.challenge.consultaremedios.R
 import br.com.challenge.consultaremedios.api.mobiletest.Endpoints
-import br.com.challenge.consultaremedios.api.mobiletest.MobileTestService
+import br.com.challenge.consultaremedios.api.mobiletest.ApiService
 import br.com.challenge.consultaremedios.db.entity.CartItem
 import br.com.challenge.consultaremedios.db.viewmodel.CartViewModel
 import br.com.challenge.consultaremedios.model.Game
@@ -26,7 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class GameDetailsActivity : AppCompatActivity() {
-    private val api = MobileTestService.buildService(Endpoints::class.java)
+    private val api = ApiService.buildService(Endpoints::class.java)
     private lateinit var cartViewModel: CartViewModel
 
     var game: Game? = null
@@ -61,14 +62,22 @@ class GameDetailsActivity : AppCompatActivity() {
                         cartItem = items.find { it.gameId == gameId }
                         if(cartItem == null) {
                             fabCartAction.apply {
-                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity, R.color.colorButtonSubmit)
-                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,R.drawable.ic_add_shopping_cart))
+                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity,
+                                    R.color.colorButtonSubmit
+                                )
+                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,
+                                    R.drawable.ic_add_shopping_cart
+                                ))
                                 setOnClickListener(addGameToCartListener)
                             }
                         } else {
                             fabCartAction.apply {
-                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity, R.color.colorRed)
-                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,R.drawable.ic_remove_shopping_cart))
+                                backgroundTintList = AppCompatResources.getColorStateList(this@GameDetailsActivity,
+                                    R.color.colorRed
+                                )
+                                setImageDrawable(ContextCompat.getDrawable(this@GameDetailsActivity,
+                                    R.drawable.ic_remove_shopping_cart
+                                ))
                                 setOnClickListener(removeGameFromCartListener)
                             }
                         }
@@ -149,7 +158,8 @@ class GameDetailsActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show()
 
-        val intent = Intent(this, MainActivity::class.java)
-        navigateUpTo(intent)
+        Intent(this, MainActivity::class.java).apply {
+            navigateUpTo(this)
+        }
     }
 }

@@ -14,28 +14,26 @@ import br.com.challenge.consultaremedios.utils.GenericUtils.Companion.brazilianN
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class GamesAdapter(context: Context, games: List<Game>, onGameTapListener: OnGameTapListener):
+class GamesAdapter(private val context: Context,
+                   private var games: List<Game>,
+                   private val onGameTapListener: OnGameTapListener):
     RecyclerView.Adapter<GamesAdapter.ViewHolder>() {
-
-    private val mContext = context
-    private var mGames = games
-    private val mOnGameTapListener = onGameTapListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.layout_item_game, parent, false)
-        return ViewHolder(view, mOnGameTapListener)
+        return ViewHolder(view, onGameTapListener)
     }
 
     override fun getItemCount(): Int {
-        return mGames.size
+        return games.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val game = mGames[position]
+        val game = games[position]
 
         val requestOptions = RequestOptions.placeholderOf(R.drawable.game_cover_placeholder)
-        Glide.with(mContext)
+        Glide.with(context)
             .load(game.image)
             .apply(requestOptions)
             .into(holder.boxArt)

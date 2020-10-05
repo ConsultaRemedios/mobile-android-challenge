@@ -21,7 +21,7 @@
             android:id="@+id/boxart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/box_art"
+            android:contentDescription="@string/text.content.description.default"
             android:scaleType="center"
             tools:src="@mipmap/ic_launcher_round" />
 
@@ -50,8 +50,8 @@
             android:id="@+id/view_quantidade"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:cardCornerRadius="4dp"
             android:backgroundTint="@android:color/transparent"
+            app:cardCornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title">
@@ -67,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:background="?android:selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/text.content.description.default"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:src="@drawable/ic_remove"
@@ -85,13 +86,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/remove_one"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="1" />
+                    tools:text="@string/text.quantity.number" />
 
                 <ImageButton
                     android:id="@+id/add_one"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:background="?android:selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/text.content.description.default"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:src="@drawable/ic_add"
@@ -108,6 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/text.content.description.default"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:src="@drawable/ic_trash_bin"
@@ -122,7 +125,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="@string/sample_text_price" />
+            tools:text="@string/tools.text.game.price" />
 
         <TextView
             android:id="@+id/price_with_discount"
@@ -132,7 +135,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/price"
-            tools:text="@string/sample_text_price_with_discount" />
+            tools:text="@string/tools.text.game.price.with.discount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

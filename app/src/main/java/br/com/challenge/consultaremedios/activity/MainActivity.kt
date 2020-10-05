@@ -1,5 +1,5 @@
 
-package br.com.challenge.consultaremedios
+package br.com.challenge.consultaremedios.activity
 
 import android.content.Context
 import android.content.Intent
@@ -17,10 +17,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import br.com.challenge.consultaremedios.R
 import br.com.challenge.consultaremedios.adapter.BannerAdapter
 import br.com.challenge.consultaremedios.adapter.GamesAdapter
 import br.com.challenge.consultaremedios.api.mobiletest.Endpoints
-import br.com.challenge.consultaremedios.api.mobiletest.MobileTestService
+import br.com.challenge.consultaremedios.api.mobiletest.ApiService
 import br.com.challenge.consultaremedios.db.viewmodel.CartViewModel
 import br.com.challenge.consultaremedios.model.Banner
 import br.com.challenge.consultaremedios.model.Game
@@ -35,7 +36,7 @@ const val REQUEST_CODE_SPEECH_INPUT = 1001
 
 class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, BannerAdapter.BannerTapListener {
 
-    private val api = MobileTestService.buildService(Endpoints::class.java)
+    private val api = ApiService.buildService(Endpoints::class.java)
     private var games: List<Game>? = null
     private lateinit var cartViewModel: CartViewModel
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
     }
 
     private fun initView() {
-
+        window.statusBarColor = getColor(R.color.colorBlackish)
         findViewById<EditText>(R.id.edit_search).apply {
             setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH)
@@ -170,7 +171,7 @@ class MainActivity : AppCompatActivity(), GamesAdapter.OnGameTapListener, Banner
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
             putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-            putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.label_speech_search_hint))
+            putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.text_speech_hint))
             startActivityForResult(this, REQUEST_CODE_SPEECH_INPUT)
         }
     }

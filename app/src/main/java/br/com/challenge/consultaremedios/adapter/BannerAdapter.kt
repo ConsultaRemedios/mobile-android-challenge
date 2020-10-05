@@ -11,14 +11,15 @@ import br.com.challenge.consultaremedios.model.Banner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class BannerAdapter(context: Context, banners: List<Banner>, bannerTapListener: BannerTapListener): PagerAdapter() {
+class BannerAdapter(context: Context,
+                    private val banners: List<Banner>,
+                    private val bannerTapListener: BannerTapListener
+): PagerAdapter() {
 
     private val mContext = context
-    private val mBanners = banners
-    private val bannerTapListener = bannerTapListener
 
     override fun getCount(): Int {
-        return mBanners.size
+        return banners.size
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -32,13 +33,13 @@ class BannerAdapter(context: Context, banners: List<Banner>, bannerTapListener: 
         val requestOptions = RequestOptions.placeholderOf(R.drawable.game_cover_placeholder)
         view.findViewById<ImageView>(R.id.banner_image).apply {
             Glide.with(mContext)
-                .load(mBanners[position].image)
+                .load(banners[position].image)
                 .apply(requestOptions)
                 .into(this)
         }
 
         view.setOnClickListener {
-            bannerTapListener.onBannerTap(mBanners[position].url)
+            bannerTapListener.onBannerTap(banners[position].url)
         }
 
         container.addView(view)

@@ -1,44 +1,26 @@
-## Consulta Remedios Mobile Challenge
+# Teste Mobile Android
 
-O teste consiste em construir uma aplicação nativa Android de um pseudo ecommerce de games.
+ Aplicativo Android nativo desenvolvido como parte de processo seletivo.
 
-### Recursos
-- Siga o layout: [Layout Android](https://github.com/ConsultaRemedios/mobile-android-challenge/raw/master/Layout.sketch)
-- Documentação da api no arquivo [api.md](api.md)
+## Bibliotecas utilizadas
 
-### Escopo
-- Faça um fork deste repositório e faça as alterações no projeto já iniciado
-- Os banners devem ser carregados automaticamente ao entrar no aplicativo, os banners devem vir da API
-- A lista de jogos deve ser carregada automaticamente ao entrar no aplicativo, jogos devem vir da API
-- Ao clicar na pesquisa, qualquer termo deve ser aceito para iniciar a busca e os resultados devem vir da API
-- Ao clicar em algum banner, a url associada ao mesmo deve ser exibida internamente no app
-- Ao clicar em algum game, o usuário deve ser levado a tela de detalhamento do mesmo
-- No detlhamento do game, deve ser possivel adicionar o mesmo ao carrinho clicando no botao do carrinho
-- Caso o produto ja esteja adicionado ao carrinho, o botao de adicionar deve ganhar a ação de remover
-- Na home o ícone do carrinho deve ser flutuante e deve refletir a quantidade de produtos associados ao mesmo
-- O carrinho de compra deve exibir todos os itens adicionados
-- Cada produto adicionado no carrinho, soma R$10,00 ao frete total
-- O frete deve se tornar grátis quando a soma de todos os produtos do carrinho for acima de R$250,00
-- Deve ser possível remover produtos do carrinho
-- Ao clicar em finalizar compra deve haver a validação com a API
+- `Retrofit` para criar clientes HTTP de chamada assíncrona utilizando interfaces.
+- `Glide` para carregar imagens de URLs e aplica-las em ImageView.
+- `Room` ORM mantida pela Google para acesso ao banco de dados.
 
-### O que iremos avaliar...
-- Funcionamento do aplicativo(ele não pode quebrar)
-- Como você planejou a arquitetura como implementou novas funcionalidades
-- Layout(Usabilidade e se fez conforme escopo)
-- O Código(Domínio da linguagem, estrutura, uso de boas práticas, Legibilidade e Lint)
-- Uso do git e github(iremos olhar os commits; branches; pull request. Recomendado uso do gitflow)
+## Dificuldades
 
-### Diferencias
-- Rotinas de teste
+- Tive um pouco de dificuldade com o Room e uso de coroutines, provavelmten não utilizei da melhor forma, como exemplo, queria uma query para verificar se o jogo estava no carrinho mas não conseguia o retorno do repositório, então li a lista de jogos carregada no ViewModel e a partir de lá fiz essa verificação.
+- Fiquei um bom tempo procurando uma biblioteca para fazer os banners, até perceber que com o ViewPager nativo seria bem mais simples.
 
-### Como aplicar
-Faça um pull request para este repositório com o código a ser avaliado
+## O quê faltou no teste
 
-##### Recomendações
-* Crie um código escalável
-* Versione como se estivesse trabalhando em equipe
-* Descreva em um `README.md` o que você fez de interessante, a arquitetura que usou, lista de bibliotecas que usou e as dificuldades encontradas no desenvolvimento da aplicação(Se não consegui terminar em tempo hábil, aproveite este espaço para fazer um checklist do que está faltando)
-* Preze pela qualidade, se faltar tempo para terminar o teste, faça uma lista de pendências
+- A funcionalidade de busca de jogo pelo nome está incompleta. A busca na API utilizando texto e fala estão funcionando, mas não consegui entregar com a visualização do resultado em lista.
+- Os links dos banners estão sendo abertos no browser, problemas com WebView, site da Consulta Remédios abria, mas os outros dois não, acgei melhor abrir no browser mesmo.
+- Testes automatizados para componentes visuais.
 
-Estou aguardando o teu pull request, boa sorte!
+## Pontos de interesse
+
+- No fechamento do carrinho, achei confuso a somatória dos valores com o frete, preço cheio + frete = preço com desconto + frete, mas mantive como no layout.
+- Foi um teste divertido de fazer, achei bem mais completo 🙂
+- Obrigado pela oportunidade, boa sorte pra mim 👨‍💻

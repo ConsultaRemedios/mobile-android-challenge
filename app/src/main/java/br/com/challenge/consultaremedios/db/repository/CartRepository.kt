@@ -21,4 +21,8 @@ class CartRepository(application: Application) {
         cartDao.delete(cartItem)
     }
 
+    suspend fun deleteAll(cartItems: List<CartItem>) {
+        cartDao.deleteAll(cartItems)
+    }
+
 }

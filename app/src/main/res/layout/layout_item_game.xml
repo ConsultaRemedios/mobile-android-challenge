@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
-    android:layout_marginEnd="8dp"
     android:layout_marginTop="16dp"
+    android:layout_marginEnd="8dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground">
@@ -25,7 +25,7 @@
             android:id="@+id/boxart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/box_art"
+            android:contentDescription="@string/text.content.description.default"
             android:scaleType="center"
             tools:src="@mipmap/ic_launcher_round" />
 
@@ -44,21 +44,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            tools:text="@string/sample_text_nintendo" />
+            tools:text="@string/tools.text.publisher" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            tools:text="@string/sample_text_the_legend_of_zelda_breath_of_the_wild" />
+            tools:text="@string/tools.text.game.title" />
 
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            tools:text="@string/sample_text_price" />
+            tools:text="@string/tools.text.game.price" />
 
         <TextView
             android:id="@+id/price_with_discount"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            tools:text="@string/sample_text_price_with_discount" />
+            tools:text="@string/tools.text.game.price.with.discount" />
 
     </LinearLayout>
 

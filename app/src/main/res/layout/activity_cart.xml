@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
+    tools:context=".activity.CartActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/cart_toolbar"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/cart" />
+        app:title="@string/text.cart" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_items"
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="@string/frete"
+            android:text="@string/text.shipping"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/price_sum"
             tools:text="Frete" />
@@ -79,7 +79,7 @@
             android:id="@+id/shipping_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gratis"
+            android:text="@string/text.free"
             app:layout_constraintBottom_toBottomOf="@id/shipping_label"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Grátis" />
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="@string/total"
+            android:text="@string/text.total"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shipping_value"
@@ -112,7 +112,7 @@
             android:onClick="checkout"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
-            android:text="@string/finalizar_compra"
+            android:text="@string/text.finish.shopping"
             android:textAllCaps="false"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"

@@ -1,27 +1,19 @@
 <resources>
-    <string name="app_name">Mobile Android Challenge</string>
-    <string name="cart">Carrinho</string>
+    <string name="app.name">Mobile Android Challenge</string>
 
     <!-- Content Description   -->
-    <string name="box_art">Arte de capa do jogo</string>
-
-    <!-- Sample Text   -->
-    <string name="sample_text_nintendo">Nintendo</string>
-    <string name="sample_text_naughty_dog">Naughty Dog</string>
-    <string name="sample_text_the_last_uf_us">The Last of Us</string>
-    <string name="sample_text_price">de R$ 350,00</string>
-    <string name="sample_text_price_with_discount">de R$ 250,00</string>
-
-    <!-- Warn Messages   -->
-    <string name="warn_games_details_not_loaded">Não foi possível carregar os detalhes do jogo</string>
+    <string name="text.content.description.default">Descrição para acessibilidade</string>
 
     <!-- Other   -->
-    <string name="label_speech_search_hint">Fale parte ou nome do jogo que deseja encontrar</string>
-    <string name="frete">Frete</string>
-    <string name="total">TOTAL</string>
-    <string name="finalizar_compra">Finalizar compra</string>
-    <string name="cart_items_sum">Produtos (%1$d)</string>
-    <string name="gratis">Grátis</string>
+    <string name="text.speech.hint">Fale parte ou nome do jogo que deseja encontrar</string>
+    <string name="text.finish.shopping">Finalizar compra</string>
+    <string name="text.items.sum">Produtos (%1$d)</string>
+    <string name="text.cart">Carrinho</string>
+    <string name="text.free">Grátis</string>
+    <string name="text.search">Pesquisar</string>
+    <string name="text.total">TOTAL</string>
+    <string name="text.shipping">Frete</string>
+    <string name="text.quantity.number">1</string>
 
     <!-- Messages   -->
     <string name="message.success.checkout">Ahooy!! Logo você recerá seus jogos!</string>
@@ -30,12 +22,12 @@
     <string name="message.error.api.request">Ops! Não conseguimos carregar isso, por favor tente novamente</string>
 
     <!-- Tools Text   -->
+    <string name="tools.text.publisher">Nintendo</string>
     <string name="tools.text.game.title">The Legend of Zelda: Breath of The Wild</string>
     <string name="tools.text.game.rating">4.7</string>
     <string name="tools.text.game.reviews">337 reviews</string>
     <string name="tools.text.game.price">de R$350,00</string>
     <string name="tools.text.game.price.with.discount">R$250,00</string>
     <string name="tools.text.badge.quantity">3</string>
-
 
 </resources>

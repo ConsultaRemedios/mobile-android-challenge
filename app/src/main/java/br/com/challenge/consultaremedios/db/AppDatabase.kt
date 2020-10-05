@@ -12,7 +12,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun cartDao(): CartDao
 
     companion object {
-        var INSTANCE: AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
         fun getAppAdapter(context: Context): AppDatabase? {
             if (INSTANCE == null) {

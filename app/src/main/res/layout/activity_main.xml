@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search_view"
@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
-                android:hint="Pesquisar"
+                android:hint="@string/text.search"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:textColor="@color/colorGrayLight"
@@ -40,6 +40,7 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="match_parent"
                 android:background="?android:selectableItemBackgroundBorderless"
+                android:contentDescription="@string/text.content.description.default"
                 android:onClick="openSpeechDialog"
                 android:src="@drawable/ic_keyboard_voice"
                 app:layout_constraintEnd_toEndOf="parent"
