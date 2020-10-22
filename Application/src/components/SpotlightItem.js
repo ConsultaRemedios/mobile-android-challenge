@@ -16,7 +16,12 @@ class SpotlightItem extends Component{
 
    render(){
       return(
-         <TouchableOpacity style={styles.container}>
+         <TouchableOpacity 
+            style={styles.container}
+            onPress={()=>{
+               this.props.navigation.navigate('details',{data: this.props.data})
+            }}
+         >
             <Image source={{uri: this.props.data.image}} style={styles.image} resizeMode="cover"/>
             <Text style={styles.publisherText}>{this.props.data.publisher}</Text>
             <Text style={styles.titleText}>{this.props.data.title}</Text>

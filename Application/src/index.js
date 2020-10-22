@@ -3,6 +3,7 @@ import React from 'react';
 import { Text } from 'react-native'
 
 import Main from './pages/Main';
+import Details from './pages/Details';
 import WebViewPage from './pages/WebViewPage';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,6 +18,7 @@ function MainNavigator() {
          <Stack.Navigator initialRouteName="main" headerMode="none">
             <Stack.Screen name="main" component={Main} options={{headerShown: false}}/>
             <Stack.Screen name="webViewPage" component={WebViewPage} options={{headerShown: false}}/>
+            <Stack.Screen name="details" component={Details} options={{headerShown: false}}/>
          </Stack.Navigator>
       </NavigationContainer>
    );

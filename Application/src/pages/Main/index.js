@@ -146,7 +146,7 @@ class Main extends Component{
                      this.state.spotlight != undefined ?
                         this.state.spotlight.map((item, index) => {
                            return(
-                              <SpotlightRow data={item} style={styles.spotlightRow}/>
+                              <SpotlightRow data={item} style={styles.spotlightRow} navigation={this.props.navigation}/>
                            )
                         })
                      :

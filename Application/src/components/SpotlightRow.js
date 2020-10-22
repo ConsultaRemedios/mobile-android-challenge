@@ -13,12 +13,12 @@ class SpotlightRow extends Component{
       return(
          <View style={this.props.style}>
             <View style={{flex: 1}}>
-               <SpotlightItem data={this.props.data[0]}/>
+               <SpotlightItem data={this.props.data[0]} navigation={this.props.navigation}/>
             </View>
             {
                this.props.data[1] != null ?
                   <View style={styles.item}>
-                     <SpotlightItem data={this.props.data[1]}/>
+                     <SpotlightItem data={this.props.data[1]} navigation={this.props.navigation}/>
                   </View>
                :
                   <View style={styles.item}/>
