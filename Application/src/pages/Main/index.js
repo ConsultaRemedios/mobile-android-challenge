@@ -1,8 +1,29 @@
 import React, {Component} from 'react';
-import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
 
 import SpotlightRow from '../../components/SpotlightRow'
 import styles from './styles';
+const {width, height} = Dimensions.get('window')
+
+import Animated, {Easing} from 'react-native-reanimated';
+
+const {
+   Value, 
+   event, 
+   block, 
+   cond, 
+   eq, 
+   set, 
+   Clock, 
+   stopClock, 
+   startClock, 
+   debug, 
+   timing, 
+   clockRunning,
+   interpolate,
+   Extrapolate,
+   concat
+ } = Animated
 
 class Main extends Component{
    
@@ -13,6 +34,18 @@ class Main extends Component{
          banners: undefined,
          spotlight: undefined
       };
+
+      this.scrollY = new Value(0)
+      this.searchBarY = interpolate(this.scrollY,{
+         inputRange: [0,150],
+         outputRange: [-0, -width*2],
+         extrapolate: Extrapolate.CLAMP
+      })
+      this.searchBarOpacity =  interpolate(this.scrollY,{
+         inputRange: [0,25],
+         outputRange: [1, 0],
+         extrapolate: Extrapolate.CLAMP
+      })
    }
 
    async componentDidMount(){
@@ -69,7 +102,18 @@ class Main extends Component{
          <View style={styles.container}>
             <StatusBar translucent backgroundColor="transparent"/>
             
-            <ScrollView style={styles.mainScroll} contentContainerStyle={styles.mainScrollContent}>
+            <Animated.ScrollView 
+               style={styles.mainScroll} 
+               contentContainerStyle={styles.mainScrollContent}
+               onScroll={
+                  Animated.event(
+                     [
+                        {nativeEvent: {contentOffset:{y: this.scrollY}}}
+                     ],
+                     {useNativeDriver: true}
+                  )
+               }
+            >
                <FlatList
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
@@ -108,15 +152,25 @@ class Main extends Component{
                   }
                </View>
 
-            </ScrollView>
+            </Animated.ScrollView>
 
             <TouchableOpacity style={styles.cartBtn}>
 
             </TouchableOpacity>
 
-            <View style={styles.searchBar}>
+            <Animated.View 
+               style={[
+                  styles.searchBar,
+                  {
+                     transform:[{
+                        translateX: this.searchBarY
+                     }],
+                     opacity: this.searchBarOpacity
+                  }
+               ]}
+            >
 
-            </View>
+            </Animated.View>
          </View>
       );
    }
