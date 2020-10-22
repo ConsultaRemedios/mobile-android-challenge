@@ -1,7 +1,7 @@
 import {StyleSheet, StatusBar, Dimensions} from 'react-native';
 import colors from '../../assets/colors'
 
-const {width, height} = Dimensions.get('window')
+const {width, height} = Dimensions.get('screen')
 
 const SEARCH_BAR_HEIGHT = 50
 

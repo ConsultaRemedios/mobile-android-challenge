@@ -4,6 +4,7 @@ import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpa
 import SpotlightRow from '../../components/SpotlightRow'
 import styles from './styles';
 const {width, height} = Dimensions.get('window')
+import { WebView } from 'react-native-webview';
 
 import Animated, {Easing} from 'react-native-reanimated';
 
@@ -42,7 +43,7 @@ class Main extends Component{
          extrapolate: Extrapolate.CLAMP
       })
       this.searchBarOpacity =  interpolate(this.scrollY,{
-         inputRange: [0,25],
+         inputRange: [0,70],
          outputRange: [1, 0],
          extrapolate: Extrapolate.CLAMP
       })
@@ -126,7 +127,8 @@ class Main extends Component{
                      return(
                         <TouchableOpacity 
                            onPress={()=>{
-                              Alert.alert('',`Open ${item.url}`)
+                              //Alert.alert('',`Open ${item.url}`)
+                              this.props.navigation.navigate('webViewPage',{url: item.url})
                            }}
                         >
                            <Image
@@ -171,6 +173,7 @@ class Main extends Component{
             >
 
             </Animated.View>
+
          </View>
       );
    }
