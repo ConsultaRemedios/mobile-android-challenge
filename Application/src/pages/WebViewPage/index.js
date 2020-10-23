@@ -4,6 +4,8 @@ import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpa
 import SpotlightRow from '../../components/SpotlightRow'
 const {width, height} = Dimensions.get('window')
 import { WebView } from 'react-native-webview';
+import Icon from 'react-native-vector-icons/AntDesign';
+import colors from '../../assets/colors'
 
 import styles from './styles'
 
@@ -31,7 +33,7 @@ class WebViewPage extends Component{
                   goBack();
                }}
             >
-
+               <Icon name="arrowleft" size={25} color={colors.white}/>
             </TouchableOpacity>
          </View>
       );

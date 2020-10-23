@@ -49,12 +49,14 @@ export default styles = StyleSheet.create({
    },
    cartBtn:{
       position: 'absolute',
-      width: 50,
-      height: 50,
+      width: 60,
+      height: 60,
       bottom: 15,
       right: 15,
-      borderRadius: 25,
-      backgroundColor: colors.red1
+      borderRadius: 30,
+      backgroundColor: colors.red1,
+      justifyContent: 'center',
+      alignItems: 'center'
    }
 });
 

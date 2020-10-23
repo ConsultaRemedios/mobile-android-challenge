@@ -19,7 +19,10 @@ export default styles = StyleSheet.create({
       top: StatusBar.currentHeight + 10,
       width: 50,
       height: 50,
-      backgroundColor: 'red'
+      backgroundColor: colors.blue,
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center'
    }
 });
 

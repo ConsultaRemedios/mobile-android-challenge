@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
    oldPriceText:{
       fontSize: 11,
       color: colors.white,
-      marginTop: 5
+      marginTop: 5,
+      textDecorationLine: 'line-through'
    },
    newPriceText:{
       fontSize: 18,

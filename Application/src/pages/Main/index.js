@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { View, RefreshControl, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import colors from '../../assets/colors'
 
 import SpotlightRow from '../../components/SpotlightRow'
 import styles from './styles';
 const {width, height} = Dimensions.get('window')
 import { WebView } from 'react-native-webview';
+import {runTiming} from '../../services/animationHelper'
 
 import Animated, {Easing} from 'react-native-reanimated';
 
@@ -23,7 +26,8 @@ const {
    clockRunning,
    interpolate,
    Extrapolate,
-   concat
+   call,
+   concat,
  } = Animated
 
 class Main extends Component{
@@ -34,17 +38,18 @@ class Main extends Component{
       this.state = {
          banners: undefined,
          spotlight: undefined
-      };
+      }
 
       this.scrollY = new Value(0)
-      this.searchBarY = interpolate(this.scrollY,{
-         inputRange: [0,150],
-         outputRange: [-0, -width*2],
+
+      this.searchBarX = interpolate(this.scrollY,{
+         inputRange: [0, 25, 150],
+         outputRange: [0, 0, -width*2],
          extrapolate: Extrapolate.CLAMP
       })
       this.searchBarOpacity =  interpolate(this.scrollY,{
-         inputRange: [0,70],
-         outputRange: [1, 0],
+         inputRange: [0, 25, 100],
+         outputRange: [1, 1, 0],
          extrapolate: Extrapolate.CLAMP
       })
    }
@@ -86,6 +91,14 @@ class Main extends Component{
       }
 
       return organizedSpotlight
+   }
+
+   toggleAnimation(isExiting){
+      if(isExiting){
+         this.searchBarX = runTiming(new Clock(), 0, -width, 200, ()=>{})
+      }else{
+         this.searchBarX = runTiming(new Clock(), -width, 0, 200, ()=>{})
+      }
    }
 
    renderSeparator = () => {
@@ -156,8 +169,26 @@ class Main extends Component{
 
             </Animated.ScrollView>
 
-            <TouchableOpacity style={styles.cartBtn}>
-
+            <TouchableOpacity 
+               style={styles.cartBtn}
+               onPress={() => {
+                  this.props.navigation.navigate('cart')
+               }}
+            >
+               <Icon name="shoppingcart" size={30} color={colors.white}/>
+               <Text style={{
+                  position: 'absolute',
+                  width: 16,
+                  height: 16,
+                  right: 14,
+                  top: 14,
+                  backgroundColor: colors.white,
+                  borderRadius: 8,
+                  textAlign: 'center',
+                  textAlignVertical: 'center',
+                  color: colors.red1,
+                  fontSize: 12
+               }}>2</Text>
             </TouchableOpacity>
 
             <Animated.View 
@@ -165,7 +196,7 @@ class Main extends Component{
                   styles.searchBar,
                   {
                      transform:[{
-                        translateX: this.searchBarY
+                        translateX: this.searchBarX
                      }],
                      opacity: this.searchBarOpacity
                   }
