@@ -8,6 +8,7 @@ import styles from './styles';
 const {width, height} = Dimensions.get('window')
 import { WebView } from 'react-native-webview';
 import {runTiming} from '../../services/animationHelper'
+import { cartGet } from '../../assets/Cart'
 
 import Animated, {Easing} from 'react-native-reanimated';
 
@@ -37,7 +38,8 @@ class Main extends Component{
       
       this.state = {
          banners: undefined,
-         spotlight: undefined
+         spotlight: undefined,
+         cartAmount: 0
       }
 
       this.scrollY = new Value(0)
@@ -51,6 +53,12 @@ class Main extends Component{
          inputRange: [0, 25, 100],
          outputRange: [1, 1, 0],
          extrapolate: Extrapolate.CLAMP
+      })
+
+      this.props.navigation.addListener('focus', e => {
+         cartGet((cart) => {
+            this.setState({ cartAmount: cart.length })
+         })
       })
    }
 
@@ -74,8 +82,6 @@ class Main extends Component{
 
    async organizeSpotlight(spotlight){
       var organizedSpotlight = []    
-      
-      spotlight.splice(5,1)
       
       for (let index = 0; index < spotlight.length; index += 2) {
          if(spotlight[index+1] == null){
@@ -188,7 +194,7 @@ class Main extends Component{
                   textAlignVertical: 'center',
                   color: colors.red1,
                   fontSize: 12
-               }}>2</Text>
+               }}>{this.state.cartAmount}</Text>
             </TouchableOpacity>
 
             <Animated.View 

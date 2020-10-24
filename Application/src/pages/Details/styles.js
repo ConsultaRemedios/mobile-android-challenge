@@ -38,15 +38,21 @@ export default styles = StyleSheet.create({
       fontSize: 17,
       lineHeight: 23
    },
-   cartBtn:{
+   cartBtnView:{
       position: 'absolute',
       top: height / 3  - 30,
       right: 20,
       width: 60,
       height: 60,
+      elevation: 10,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+   cartBtn:{
+      width: '100%',
+      height: '100%',
       borderRadius: 30,
       backgroundColor: colors.green,
-      elevation: 10,
       justifyContent: 'center',
       alignItems: 'center'
    },
