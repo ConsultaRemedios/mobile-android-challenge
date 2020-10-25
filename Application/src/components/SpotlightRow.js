@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import SpotlightItem from '../components/SpotlightItem'
 

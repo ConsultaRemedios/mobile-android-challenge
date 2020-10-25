@@ -1,35 +1,21 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, BackHandler, Keyboard, View, RefreshControl, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { ActivityIndicator, BackHandler, Keyboard, View, RefreshControl, Text, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../../assets/colors'
-
 import SpotlightRow from '../../components/SpotlightRow'
 import styles from './styles';
 const {width, height} = Dimensions.get('window')
-import { WebView } from 'react-native-webview';
 import {runTiming} from '../../services/animationHelper'
-import { cartGet, cartGetTotalQuantity } from '../../assets/Cart'
+import { cartGetTotalQuantity } from '../../assets/Cart'
 
 import Animated, {Easing} from 'react-native-reanimated';
 import { TextInput } from 'react-native-gesture-handler';
 
 const {
    Value, 
-   event, 
-   block, 
-   cond, 
-   eq, 
-   set, 
-   Clock, 
-   stopClock, 
-   startClock, 
-   debug, 
-   timing, 
-   clockRunning,
-   interpolate,
-   Extrapolate,
-   call,
-   concat,
+   block,
+   Clock,
+   call
  } = Animated
 
 class Main extends Component{

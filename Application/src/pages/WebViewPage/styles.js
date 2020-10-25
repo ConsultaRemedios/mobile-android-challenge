@@ -1,8 +1,6 @@
 import {StyleSheet, StatusBar, Dimensions} from 'react-native';
 import colors from '../../assets/colors'
 
-const {width, height} = Dimensions.get('screen')
-
 export default styles = StyleSheet.create({
    container:{
       flex: 1,

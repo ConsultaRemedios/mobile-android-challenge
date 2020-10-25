@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Alert, Image, TouchableOpacity, Dimensions } from 'react-native';
 import colors from '../assets/colors';
 import Quantity from './Quantity'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -12,21 +12,7 @@ import Animated, {Easing} from 'react-native-reanimated';
 
 const {
    Value, 
-   event, 
-   block, 
-   cond, 
-   eq, 
-   set, 
-   Clock, 
-   stopClock, 
-   startClock, 
-   debug, 
-   timing, 
-   clockRunning,
-   interpolate,
-   Extrapolate,
-   call,
-   concat,
+   Clock
  } = Animated
 
 class CartItem extends Component{

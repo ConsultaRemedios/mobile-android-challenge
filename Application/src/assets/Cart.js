@@ -1,11 +1,10 @@
 import {retrieveData, storeData} from '../services/persistHelper'
-import {Alert} from 'react-native'
-import { call } from 'react-native-reanimated'
 
+//adds an item in the cart
 cartAdd = (item) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
-      var entrou = false
+      var entered = false
 
       const newItem = {
          'item': item,
@@ -18,17 +17,18 @@ cartAdd = (item) => {
 
       cartJson.map((item2, index) => {
          if(item.id == item2.item.id){
-            entrou = true
+            entered = true
          }
       })
 
-      if(!entrou){
+      if(!entered){
          cartJson.push(newItem)
          storeData('cart', JSON.stringify(cartJson))
       }
    })
 }
 
+//sets the quantity of an item
 cartSetQuantity = (index, quantity) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -39,6 +39,7 @@ cartSetQuantity = (index, quantity) => {
    })
 }
 
+//removes an item from the cart
 cartRemove = (item) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -57,6 +58,7 @@ cartRemove = (item) => {
    })
 }
 
+//get the whole cart
 cartGet = (callback) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -64,6 +66,7 @@ cartGet = (callback) => {
    })
 }
 
+//check if an item is on the cart
 isOnCart = (item, callback) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -87,6 +90,7 @@ isOnCart = (item, callback) => {
    })
 }
 
+//gets the total quantity of items in the cart
 cartGetTotalQuantity = (callback) =>{
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -100,6 +104,7 @@ cartGetTotalQuantity = (callback) =>{
    })
 }
 
+//resets the cart
 clearCart = () => {
    storeData('cart', "[]")
 }

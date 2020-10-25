@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import { ActivityIndicator, BackHandler, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { ActivityIndicator, BackHandler, View, Text, ScrollView, Alert, Image, TouchableOpacity, Dimensions } from 'react-native';
 import styles from './styles';
 import Rating from  '../../components/Rating'
-const {width, height} = Dimensions.get('window')
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import colors from '../../assets/colors'
-import {cartAdd, cartRemove, cartGet, isOnCart} from '../../assets/Cart'
+import {cartAdd, cartRemove, isOnCart} from '../../assets/Cart'
 import {runTiming} from '../../services/animationHelper'
 
 import Animated, {Easing} from 'react-native-reanimated';

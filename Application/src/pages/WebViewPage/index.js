@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import { BackHandler, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
-
-import SpotlightRow from '../../components/SpotlightRow'
-const {width, height} = Dimensions.get('window')
+import { BackHandler, View, TouchableOpacity, Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../../assets/colors'

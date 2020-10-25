@@ -1,4 +1,3 @@
-import {Alert} from 'react-native'
 import Animated, {Easing, useCode} from 'react-native-reanimated';
 
 var functionCalled = false

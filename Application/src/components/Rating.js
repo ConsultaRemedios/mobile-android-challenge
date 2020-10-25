@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import colors from '../assets/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const {width, height} = Dimensions.get('window')
 
 class Rating extends Component{
    constructor(){

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { BackHandler, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { BackHandler, View, Text, Alert, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import styles from './styles';
 const {width, height} = Dimensions.get('window')
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../../assets/colors'
-import {cartAdd, cartRemove, cartGet, isOnCart, cartSetQuantity, clearCart} from '../../assets/Cart'
+import { cartRemove, cartGet, cartSetQuantity, clearCart} from '../../assets/Cart'
 import CartItem from '../../components/CartItem'
 import _ from 'lodash'
 
@@ -13,22 +13,8 @@ import {runTiming} from '../../services/animationHelper'
 import Animated, {Easing} from 'react-native-reanimated';
 
 const {
-   Value, 
-   event, 
-   block, 
-   cond, 
-   eq, 
-   set, 
-   Clock, 
-   stopClock, 
-   startClock, 
-   debug, 
-   timing, 
-   clockRunning,
-   interpolate,
-   Extrapolate,
-   call,
-   concat,
+   Value,
+   Clock
  } = Animated
 
 class Cart extends Component{
