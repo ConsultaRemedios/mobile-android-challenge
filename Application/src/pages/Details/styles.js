@@ -26,7 +26,7 @@ export default styles = StyleSheet.create({
       backgroundColor: colors.blue,
       paddingLeft: 17,
       paddingRight: 17,
-      paddingBottom: 27
+      paddingBottom: 20
    },
    descriptionView:{
       flex: 1,
@@ -44,7 +44,6 @@ export default styles = StyleSheet.create({
       right: 20,
       width: 60,
       height: 60,
-      elevation: 10,
       justifyContent: 'center',
       alignItems: 'center'
    },
@@ -54,7 +53,8 @@ export default styles = StyleSheet.create({
       borderRadius: 30,
       backgroundColor: colors.green,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      elevation: 10
    },
    backBtn:{
       position: 'absolute',

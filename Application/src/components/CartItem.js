@@ -33,15 +33,18 @@ class CartItem extends Component{
    constructor(){
       super()
 
+      this.itemX = new Value(0)
       this.itemOpacity = new Value(1)
    }
 
-   componentDidMount(){
-
-   }
-
-   animate(){
-      this.itemOpacity = runTiming(new Clock(), 1, 0, 200)
+   animate(callback){
+      this.itemX = runTiming(new Clock(), 0, width - 20, 200)
+      this.itemOpacity = runTiming(new Clock(), 1, 0, 200, ()=>{
+         this.itemX = new Value(0)
+         this.itemOpacity = new Value(1)
+         callback()
+      })
+      this.forceUpdate()
    }
 
    render(){
@@ -50,6 +53,7 @@ class CartItem extends Component{
             style={[
                styles.container,
                {
+                  transform:[{translateX: this.itemX}],
                   height: this.props.itemHeight,
                   opacity: this.itemOpacity
                }
@@ -74,8 +78,18 @@ class CartItem extends Component{
                         height: 38, 
                         width: 110
                      }}
-                     onChange={(value) => {
-                        
+                     onZeroReached={() => {
+                        Alert.alert('','Deseja remover este item?', [
+                           {text: 'sim', onPress: ()=>{
+                              this.animate(()=>{
+                                 this.props.onRemovePress()
+                              })
+                           }},
+                           {text: 'não'}
+                        ])
+                     }}
+                     onChange={(value) => {   
+                        this.props.onQuantityChange(value)
                      }}
                   />
 
@@ -84,8 +98,9 @@ class CartItem extends Component{
                      onPress={() => {
                         Alert.alert('','Deseja remover este item?', [
                            {text: 'sim', onPress: ()=>{
-                              this.props.onRemovePress()
-                              //this.animate()
+                              this.animate(()=>{
+                                 this.props.onRemovePress()
+                              })
                            }},
                            {text: 'não'}
                         ])

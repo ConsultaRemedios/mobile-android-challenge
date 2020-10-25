@@ -19,7 +19,7 @@ class SpotlightItem extends Component{
          <TouchableOpacity 
             style={styles.container}
             onPress={()=>{
-               this.props.navigation.navigate('details',{data: this.props.data})
+               this.props.navigation.navigate('details',{id: this.props.data.id})
             }}
          >
             <Image source={{uri: this.props.data.image}} style={styles.image} resizeMode="cover"/>

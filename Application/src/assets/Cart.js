@@ -29,6 +29,16 @@ cartAdd = (item) => {
    })
 }
 
+cartSetQuantity = (index, quantity) => {
+   retrieveData('cart', (cart) => {
+      var cartJson = JSON.parse(cart)
+      
+      cartJson[index].quantidade = quantity
+
+      storeData('cart', JSON.stringify(cartJson))
+   })
+}
+
 cartRemove = (item) => {
    retrieveData('cart', (cart) => {
       var cartJson = JSON.parse(cart)
@@ -77,9 +87,29 @@ isOnCart = (item, callback) => {
    })
 }
 
+cartGetTotalQuantity = (callback) =>{
+   retrieveData('cart', (cart) => {
+      var cartJson = JSON.parse(cart)
+      var quantity = 0
+
+      cartJson.map((item, index) => {
+         quantity += item.quantidade
+      })
+
+      callback(quantity)
+   })
+}
+
+clearCart = () => {
+   storeData('cart', "[]")
+}
+
 module.exports = {
    cartAdd,
    cartRemove,
    cartGet,
-   isOnCart
+   isOnCart,
+   cartSetQuantity,
+   cartGetTotalQuantity,
+   clearCart
 }

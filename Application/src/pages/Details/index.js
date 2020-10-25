@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { ActivityIndicator, BackHandler, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
 import styles from './styles';
 import Rating from  '../../components/Rating'
 const {width, height} = Dimensions.get('window')
@@ -38,24 +38,67 @@ class Details extends Component{
       this.state = {
          cartIconName: 'cart-plus',
          carIconBackColor: colors.green,
-         isOnCart: false
+         isOnCart: false,
+         item: {
+            title: '...',
+            price: 0,
+            discount: 0,
+            reviews: 0,
+            rating: 0,
+            stars: 0
+         },
+         loading: true
       }
 
       this.btnRotation = new Value(0)
+   }
 
-      isOnCart(this.props.route.params.data, (isOnCart) => {
-         if(isOnCart){
-            this.setState({
-               cartIconName: 'cart-arrow-down',
-               carIconBackColor: colors.red1
-            })
-         }else{
-            this.setState({
-               cartIconName: 'cart-plus',
-               carIconBackColor: colors.green
-            })
-         }
-      })
+   async componentDidMount(){
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress',() => this.backAction())
+      
+      try{
+         const apiCall = await fetch(`https://api-mobile-test.herokuapp.com/api/games/${this.props.route.params.id}`)
+         const response = await apiCall.json()
+
+         isOnCart(response, (isOnCart) => {
+            if(isOnCart){
+               this.setState({
+                  cartIconName: 'cart-arrow-down',
+                  carIconBackColor: colors.red1
+               })
+            }else{
+               this.setState({
+                  cartIconName: 'cart-plus',
+                  carIconBackColor: colors.green
+               })
+            }
+         })
+
+         this.setState({
+            item: response,
+            loading: false
+         })
+      }catch(err){
+         this.setState({
+            loading: false
+         })
+         Alert.alert('','Verifique sua conexão com a internet.')
+
+         const { goBack } = this.props.navigation;
+         goBack();
+         
+         console.log("Error fetching data-----------", err);
+      }
+   }
+
+   componentWillUnmount(){
+      this.backHandler.remove()
+   }
+
+   backAction(){
+      const { goBack } = this.props.navigation;
+      goBack();
+      return true
    }
 
    toggleAnimation(){
@@ -74,27 +117,27 @@ class Details extends Component{
          <View style={styles.container}>
             <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
                <Image
-                  source={{uri: this.props.route.params.data.image}}
+                  source={{uri: this.state.item.image}}
                   style={styles.image}  
                   resizeMode="cover"
                />
 
                <View style={styles.infoView}>
-                  <Text style={styles.titleText}>{this.props.route.params.data.title}</Text>
+                  <Text style={styles.titleText}>{this.state.item.title}</Text>
                   <View
                      style={styles.ratingView}
                   >
-                     <Text style={styles.ratingText}>{this.props.route.params.data.rating}</Text>
-                     <Rating style={styles.rating} rating={this.props.route.params.data.stars} size={15} color="#f7b500"/>
-                     <Text style={styles.reviewsNumberText}>{this.props.route.params.data.reviews}</Text>
+                     <Text style={styles.ratingText}>{this.state.item.rating}</Text>
+                     <Rating style={styles.rating} rating={this.state.item.stars} size={15} color="#f7b500"/>
+                     <Text style={styles.reviewsNumberText}>{this.state.item.reviews}</Text>
                      <Text style={styles.reviewsText}>reviews</Text>
                   </View>
-                  <Text style={styles.oldPrice}>de R${this.props.route.params.data.price},00</Text>
-                  <Text style={styles.newPrice}>R${this.props.route.params.data.price - this.props.route.params.data.discount},00</Text>
+                  <Text style={styles.oldPrice}>de R${this.state.item.price},00</Text>
+                  <Text style={styles.newPrice}>R${this.state.item.price - this.state.item.discount},00</Text>
                </View>
 
                <View style={styles.descriptionView}>
-                  <Text style={styles.descriptionText}>{this.props.route.params.data.description}</Text>
+                  <Text style={styles.descriptionText}>{this.state.item.description}</Text>
                </View>
 
                <Animated.View
@@ -113,15 +156,15 @@ class Details extends Component{
                         }
                      ]}
                      onPress={()=>{
-                        isOnCart(this.props.route.params.data, (isOnCart) => {
+                        isOnCart(this.state.item, (isOnCart) => {
                            if(isOnCart){
-                              cartRemove(this.props.route.params.data)
+                              cartRemove(this.state.item)
                               this.setState({
                                  cartIconName: 'cart-plus',
                                  carIconBackColor: colors.green
                               })
                            }else{
-                              cartAdd(this.props.route.params.data)
+                              cartAdd(this.state.item)
                               this.setState({
                                  cartIconName: 'cart-arrow-down',
                                  carIconBackColor: colors.red1
@@ -145,6 +188,28 @@ class Details extends Component{
                   <Icon name="arrowleft" size={25} color={colors.white}/>
                </TouchableOpacity>
             </ScrollView>
+
+            {
+               this.state.loading ?
+                  <View 
+                     style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        height: Dimensions.get('screen').height,
+                        width: Dimensions.get('screen').width,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'transparent',
+                        elevation: 10
+                     }}
+                  >
+                     <ActivityIndicator animating={true} color={colors.green} size={80}/>
+                  </View>
+               :
+                  <></>
+            }
+
          </View>
       );
    }

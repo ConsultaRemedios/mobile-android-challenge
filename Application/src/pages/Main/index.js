@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, RefreshControl, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { ActivityIndicator, BackHandler, Keyboard, View, RefreshControl, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../../assets/colors'
 
@@ -8,9 +8,10 @@ import styles from './styles';
 const {width, height} = Dimensions.get('window')
 import { WebView } from 'react-native-webview';
 import {runTiming} from '../../services/animationHelper'
-import { cartGet } from '../../assets/Cart'
+import { cartGet, cartGetTotalQuantity } from '../../assets/Cart'
 
 import Animated, {Easing} from 'react-native-reanimated';
+import { TextInput } from 'react-native-gesture-handler';
 
 const {
    Value, 
@@ -39,30 +40,42 @@ class Main extends Component{
       this.state = {
          banners: undefined,
          spotlight: undefined,
-         cartAmount: 0
+         cartAmount: 0,
+         isSearchBarExiting: false,
+         isSearchResultExiting: false,
+         searchResult: [],
+         loading: true
       }
+
+      this.searchInputRef
 
       this.scrollY = new Value(0)
 
-      this.searchBarX = interpolate(this.scrollY,{
-         inputRange: [0, 25, 150],
-         outputRange: [0, 0, -width*2],
-         extrapolate: Extrapolate.CLAMP
-      })
-      this.searchBarOpacity =  interpolate(this.scrollY,{
-         inputRange: [0, 25, 100],
-         outputRange: [1, 1, 0],
-         extrapolate: Extrapolate.CLAMP
-      })
+      this.searchBarX = new Value(0)
+      this.searchBarOpacity =  new Value(1)
+
+      this.searchResultViewX = new Value(-height - 100)
+
+      this.highest = new Value(0)
+      this.old = new Value(0)
 
       this.props.navigation.addListener('focus', e => {
-         cartGet((cart) => {
-            this.setState({ cartAmount: cart.length })
+         cartGetTotalQuantity((quantity) => {
+            this.setState({ cartAmount: quantity})
          })
       })
    }
 
-   async componentDidMount(){
+   componentDidMount(){
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress',() => this.backAction())
+
+      this.fetchData()
+   }
+
+   async fetchData(){
+      this.setState({
+         loading: true 
+      })
       try{
          const apiCallBanner = await fetch("https://api-mobile-test.herokuapp.com/api/banners")
          const responseBanner = await apiCallBanner.json()
@@ -73,10 +86,53 @@ class Main extends Component{
 
          this.setState({
             banners: responseBanner,
-            spotlight: organizedSpotlight   
+            spotlight: organizedSpotlight,
+            loading: false 
          })
       }catch(err){
+         this.setState({
+            loading: false
+         })
+
+         Alert.alert('','Verifique sua conexão com a internet.')
+         
          console.log("Error fetching data-----------", err);
+      }
+   }
+
+   componentWillUnmount(){
+      this.backHandler.remove()
+   }
+
+   backAction(){
+      if (!this.state.isSearchResultExiting) {
+         Alert.alert('',"Deseja sair?",
+            [
+               {text: 'NÃO'},
+               {text: 'SIM',onPress: () => { 
+                  BackHandler.exitApp();
+               }}
+            ],
+            {cancelable: true}
+         )
+      }else{
+         this.toggleSeachResultAnimation()
+      }
+
+      return true
+   }
+
+   async searchGames(text){
+      try{   
+         const apiCall = await fetch(`https://api-mobile-test.herokuapp.com/api/games/search?term=${text}`)
+         const response = await apiCall.json()
+
+         this.setState({searchResult: response})
+      }catch(err){
+         Alert.alert('','Verifique sua conexão com a internet.')
+         
+         console.log("Error fetching data-----------", err);
+         this.setState({searchResult: []})
       }
    }
 
@@ -99,12 +155,28 @@ class Main extends Component{
       return organizedSpotlight
    }
 
-   toggleAnimation(isExiting){
-      if(isExiting){
-         this.searchBarX = runTiming(new Clock(), 0, -width, 200, ()=>{})
+   toggleSeachResultAnimation(){
+      if(!this.state.isSearchResultExiting){
+         this.searchResultViewX = runTiming(new Clock(), -height - 100, 0, 400)
       }else{
-         this.searchBarX = runTiming(new Clock(), -width, 0, 200, ()=>{})
+         this.searchResultViewX = runTiming(new Clock(), 0, -height - 100, 400)
+         this.searchInputRef.blur()
+         Keyboard.dismiss()
       }
+
+      this.setState({isSearchResultExiting: !this.state.isSearchResultExiting})
+   }
+
+   toggleSeachBarAnimation(){
+      if(!this.state.isSearchBarExiting){
+         this.searchBarX = runTiming(new Clock(), 0, -width, 200)
+         this.searchBarOpacity = runTiming(new Clock(), 1, 0, 200)
+      }else{
+         this.searchBarX = runTiming(new Clock(), -width, 0, 200)
+         this.searchBarOpacity = runTiming(new Clock(), 0, 1, 200)
+      }
+
+      this.setState({isSearchBarExiting: !this.state.isSearchBarExiting})
    }
 
    renderSeparator = () => {
@@ -113,6 +185,19 @@ class Main extends Component{
           style={{
             width: 9
           }}
+        />
+      );
+   }
+
+   renderSeparatorVertical = () => {
+      return (
+        <View
+            style={{
+               width: '100%',
+               height: 0,
+               borderColor: colors.lightGray,
+               borderTopWidth: 1
+            }}
         />
       );
    };
@@ -125,10 +210,25 @@ class Main extends Component{
             <Animated.ScrollView 
                style={styles.mainScroll} 
                contentContainerStyle={styles.mainScrollContent}
+               refreshControl={
+                  <RefreshControl
+                     refreshing={this.state.loading}
+                     colors={[colors.green]}
+                     onRefresh={() => this.fetchData()}
+                  />
+               }
                onScroll={
                   Animated.event(
                      [
-                        {nativeEvent: {contentOffset:{y: this.scrollY}}}
+                        {nativeEvent: {contentOffset:{y: y => block(
+                           call([y], y => {
+                              if(y > height*0.04 && !this.state.isSearchBarExiting){
+                                 this.toggleSeachBarAnimation()
+                              }else if(y < height*0.04 && this.state.isSearchBarExiting){
+                                 this.toggleSeachBarAnimation()
+                              }
+                           }),
+                        )}}}
                      ],
                      {useNativeDriver: true}
                   )
@@ -165,7 +265,7 @@ class Main extends Component{
                      this.state.spotlight != undefined ?
                         this.state.spotlight.map((item, index) => {
                            return(
-                              <SpotlightRow data={item} style={styles.spotlightRow} navigation={this.props.navigation}/>
+                              <SpotlightRow key={JSON.stringify(index)} data={item} style={styles.spotlightRow} navigation={this.props.navigation}/>
                            )
                         })
                      :
@@ -174,6 +274,7 @@ class Main extends Component{
                </View>
 
             </Animated.ScrollView>
+
 
             <TouchableOpacity 
                style={styles.cartBtn}
@@ -197,6 +298,36 @@ class Main extends Component{
                }}>{this.state.cartAmount}</Text>
             </TouchableOpacity>
 
+            <Animated.View
+               style={[
+                  styles.searchResultView,
+                  {
+                     transform:[{translateY: this.searchResultViewX}]
+                  }
+               ]}
+            >
+               <FlatList
+                  style={styles.searchResultList}
+                  data={this.state.searchResult}
+                  keyExtractor={(item, index) => JSON.stringify(index)}
+                  ItemSeparatorComponent={this.renderSeparatorVertical}
+                  renderItem={({item, index}) => {
+                     return(
+                        <TouchableOpacity 
+                           style={styles.searchItemView}
+                           onPress={() => {
+                              this.toggleSeachResultAnimation()
+                              this.props.navigation.navigate('details',{id: item.id})
+                           }}
+                        >
+                           <Text style={styles.searchItemTitleText}>{item.title}</Text>
+                           <Text style={styles.searchItemPriceText}>R${item.price - item.discount},00</Text>
+                        </TouchableOpacity>
+                     )
+                  }}
+               />
+            </Animated.View>
+
             <Animated.View 
                style={[
                   styles.searchBar,
@@ -208,8 +339,57 @@ class Main extends Component{
                   }
                ]}
             >
+               {
+                  this.state.isSearchResultExiting ?
+                     <TouchableOpacity
+                        style={styles.searchBarBackBtn}
+                        onPress={()=>{
+                           this.toggleSeachResultAnimation()
+                        }}
+                     >
+                        <Icon name="arrowleft" size={20} color={colors.bg}/>
+                     </TouchableOpacity>
+                  :
+                     <></>
+               }
 
+               <TextInput 
+                  placeholder="Pesquisar"
+                  style={styles.searchBarInput}
+                  onTouchStart={()=>{
+                     if(!this.state.isSearchResultExiting){
+                        this.toggleSeachResultAnimation()
+                     }
+                  }}
+                  ref={ref => this.searchInputRef = ref}
+                  onChangeText={(text) => this.searchGames(text)}
+               />
+
+               <View style={styles.searchIconView}>
+                  <Icon name="search1" size={20} color={colors.bg}/>
+               </View>
             </Animated.View>
+
+            {
+               this.state.loading ?
+                  <View 
+                     style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        height: Dimensions.get('screen').height,
+                        width: Dimensions.get('screen').width,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'transparent',
+                        elevation: 10
+                     }}
+                  >
+                     <ActivityIndicator animating={true} color={colors.green} size={80}/>
+                  </View>
+               :
+                  <></>
+            }
 
          </View>
       );

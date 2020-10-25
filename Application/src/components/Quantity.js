@@ -40,11 +40,15 @@ class Quantity extends Component{
                   }
                ]}
                onPress={() => {
-                  if(this.state.quantity > 0){
+                  if(this.state.quantity > 1){
                      if(this.props.onChange != undefined){
                         this.props.onChange(this.state.quantity-1)
                      }
                      this.setState({quantity: this.state.quantity-1})
+                  }else if(this.state.quantity > 0){
+                     if(this.props.onZeroReached != undefined){
+                        this.props.onZeroReached()
+                     }
                   }
                }}
             >

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
+import { BackHandler, View, Text, ScrollView, StatusBar, Alert, FlatList, Image, TouchableOpacity, Dimensions, TouchableOpacityBase } from 'react-native';
 
 import SpotlightRow from '../../components/SpotlightRow'
 const {width, height} = Dimensions.get('window')
@@ -18,6 +18,21 @@ class WebViewPage extends Component{
          
       };
    }
+
+   componentDidMount(){
+      this.backHandler = BackHandler.addEventListener('hardwareBackPress',() => this.backAction())
+   }
+
+   componentWillUnmount(){
+      this.backHandler.remove()
+   }
+
+   backAction(){
+      const { goBack } = this.props.navigation;
+      goBack();
+      return true
+   }
+
    render(){
       return(
          <View style={styles.container}>
