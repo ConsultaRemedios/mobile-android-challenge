@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="@color/colorBackground" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:background="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+        android:background="@color/colorBackground">
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tvQntProducts"
+                tools:text="Produtos (7)"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/helvetica"
+                android:textColor="@android:color/white"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvSumOriginalPrice"
+                tools:text="R$700,00"
+                android:layout_marginEnd="16dp"
+                android:gravity="end"
+
+                android:fontFamily="@font/helvetica"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:text="@string/total_label_cart"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/helvetica"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvSumDiscountedPrice"
+                tools:text="R$700,00"
+                android:gravity="end"
+                android:fontFamily="@font/helvetica_bold"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            <TextView
+                android:text="@string/shipping_label"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/helvetica"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvShippingPrice"
+                tools:text="R$50,00"
+                android:gravity="end"
+                android:fontFamily="@font/helvetica_bold"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="20sp"
+                android:textColor="@color/lightBlue"
+                android:layout_weight="0.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCheckout"
+            android:text="@string/finalizar_compra"
+            style="Widget.AppCompat.Button.Colored"
+            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_checkout_background"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

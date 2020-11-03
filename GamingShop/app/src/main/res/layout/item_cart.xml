@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorBackground"
+    android:paddingBottom="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/ivGamePoster"
+        android:layout_width="92dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tvTitleGame"
+        android:layout_width="0dp"
+        android:fontFamily="@font/helvetica_bold"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:maxLines="2"
+        android:maxLength="50"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivGamePoster"
+        app:layout_constraintTop_toTopOf="@+id/ivGamePoster"
+        tools:text="The Legendas ddasdsadsadasdaasdasdasd" />
+
+    <mazer.arthur.gamingshop.view.customview.CustomNumberPicker
+        android:id="@+id/customNumberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ivGamePoster"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleGame" />
+
+    <ImageView
+        android:id="@+id/ivDeleteItem"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_baseline_delete_outline_24"
+        app:layout_constraintStart_toEndOf="@+id/customNumberPicker"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleGame" />
+
+    <LinearLayout
+        android:id="@+id/layoutPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleGame">
+
+        <TextView
+            android:id="@+id/tvOriginalPrice"
+            android:fontFamily="@font/helvetica"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            tools:text="de R$250,00" />
+
+        <TextView
+            android:id="@+id/tvDiscountedPrice"
+            android:fontFamily="@font/helvetica_bold"
+            android:textColor="@color/color_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            tools:text="R$250,00" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
