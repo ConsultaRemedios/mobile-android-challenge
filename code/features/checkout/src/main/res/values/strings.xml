@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cart_title">Carrinho</string>
+    <string name="produtos_qtd">Produtos (%1$d)</string>
+    <string name="freight">Frete</string>
+    <string name="total">TOTAL</string>
+    <string name="buy">Finalizar compra</string>
+</resources>

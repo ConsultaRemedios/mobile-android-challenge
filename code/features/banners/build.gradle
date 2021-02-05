@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.minTargetVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        buildConfigField "String", "SERVER_URL", "\"https://api-mobile-test.herokuapp.com/api/\""
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug{
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$androidXVersion"
+    implementation "androidx.core:core-ktx:$androidXVersion"
+    implementation "com.android.support:design:$android_support_version"
+    testImplementation "junit:junit:$junitVersion"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    androidTestImplementation "androidx.test:runner:$androidXTest"
+    androidTestImplementation "androidx.test:rules:$androidXTest"
+
+    //Mockito
+    testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+
+
+
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+
+    implementation project(path: ':libraries:network')
+    implementation project(path: ':libraries:base')
+}

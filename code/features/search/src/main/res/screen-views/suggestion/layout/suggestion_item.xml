@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/search_spotlight_title"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_toLeftOf="@+id/search_spotlight_price"
+        android:textSize="12sp"
+        android:textColor="#9E9E9E"
+        android:text="Soul River"/>
+
+    <TextView
+        android:id="@+id/search_spotlight_price"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="#29A3FF"
+        android:text="R$50,00"/>
+
+    <View
+        android:id="@+id/search_suggestion_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/search_spotlight_title"
+        android:background="#EEEEEE"/>
+
+</RelativeLayout>
