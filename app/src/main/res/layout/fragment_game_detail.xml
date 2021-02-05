@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isProgressBarVisible"
+            type="Boolean" />
+
+        <variable
+            name="isItemAdded"
+            type="Boolean" />
+
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grayColor">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            tools:context=".view.gamedetail.GameDetailFragment">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/game_detail_try_again_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/grayColor"
+                android:text="@string/try_again"
+                android:visibility="gone"
+                app:icon="@drawable/ic_refresh"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/game_detail_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/mario"
+                app:imageUrl="@{item.image}"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/game_Detail_add_item_card_floating_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@{isItemAdded ? @color/red : @color/white}"
+                android:src="@{isItemAdded ? @drawable/remove_shopping_cart : @drawable/cart}"
+                app:layout_constraintBottom_toBottomOf="@+id/game_detail_image_view"
+                app:layout_constraintEnd_toEndOf="@+id/game_detail_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/game_detail_image_view"
+                tools:src="@drawable/cart" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/game_detail_game_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/game_Detail_add_item_card_floating_action_button"
+                tools:text="Mario Galaxy" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/game_detail_game_rating_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/white"
+                app:convertFloatToString="@{item.rating}"
+                app:layout_constraintStart_toStartOf="@id/game_detail_game_name_text_view"
+                app:layout_constraintTop_toBottomOf="@id/game_detail_game_name_text_view"
+                tools:text="4.7" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/game_detail_rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressBackgroundTint="@android:color/white"
+                android:progressTint="@color/yellow"
+                android:rating="@{item.rating}"
+                android:stepSize="0"
+                app:layout_constraintBottom_toBottomOf="@id/game_detail_game_rating_text_view"
+                app:layout_constraintStart_toEndOf="@id/game_detail_game_rating_text_view"
+                app:layout_constraintTop_toTopOf="@id/game_detail_game_rating_text_view" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/game_detail_game_reviews_count_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{String.format(@string/reviews, item.reviews)}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="@id/game_detail_game_rating_text_view"
+                app:layout_constraintStart_toEndOf="@id/game_detail_rating_bar"
+                app:layout_constraintTop_toTopOf="@id/game_detail_game_rating_text_view"
+                tools:text="337 reviews" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/game_detail_pricing_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:discount="@{item.price}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/game_detail_game_rating_text_view"
+                app:layout_constraintTop_toBottomOf="@id/game_detail_game_rating_text_view"
+                tools:text="de R$350,00" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/game_detail_pricing_discount_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:convertToCurrency="@{item.discount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/game_detail_game_rating_text_view"
+                app:layout_constraintTop_toBottomOf="@id/game_detail_pricing_text_view"
+                tools:text="R$197,00" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@color/grayColor"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/game_detail_pricing_discount_text_view">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/game_detail_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{item.description}"
+                    android:textColor="@color/lightGray"
+                    android:textSize="16sp"
+                    tools:text="Super Mario Galaxy é um jogo eletrônico de plataforma desenvolvido pela Nintendo Entertainment Analysis Development e publicado pela Nintendo. Ele foi lançado exclusivamente para Wii em novembro de 2007. É o terceiro título tridimensional da série Super Mario e o décimo quinto no geral." />
+
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibleOrGone="@{isProgressBarVisible}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

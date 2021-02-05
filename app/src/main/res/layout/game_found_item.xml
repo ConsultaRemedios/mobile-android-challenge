@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="br.com.angelorobson.templatemvi.model.domains.Spotlight" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/game_found_item_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_found_title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@{item.title}"
+            android:textColor="#9F9F9F"
+            android:textSize="16sp"
+            tools:text="Soul River" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/game_found_game_pricing_discount_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:convertToCurrency="@{item.discount}"
+            tools:text="R$197,00" />
+
+
+    </LinearLayout>
+
+</layout>

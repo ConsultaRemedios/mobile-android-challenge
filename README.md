@@ -1,44 +1,42 @@
-## Consulta Remedios Mobile Challenge
+### Informações gerais sobre o Projeto
 
-O teste consiste em construir uma aplicação nativa Android de um pseudo ecommerce de games.
+-  O projeto foi elaborado utilizando o padrão arquitetural MVI (Model-View-Intent).
 
-### Recursos
-- Siga o layout: [Layout Android](https://github.com/ConsultaRemedios/mobile-android-challenge/raw/master/Layout.sketch)
-- Documentação da api no arquivo [api.md](api.md)
+- O projeto do teste foi criado com base de um template que criei no meu Github, a intenção do template é deixar toda a estrutura pronta para ganhar tempo na criação de um novo projeto e evitar o processo demorado e repetitiva quando tiver que criar um projeto do zero.
 
-### Escopo
-- Faça um fork deste repositório e faça as alterações no projeto já iniciado
-- Os banners devem ser carregados automaticamente ao entrar no aplicativo, os banners devem vir da API
-- A lista de jogos deve ser carregada automaticamente ao entrar no aplicativo, jogos devem vir da API
-- Ao clicar na pesquisa, qualquer termo deve ser aceito para iniciar a busca e os resultados devem vir da API
-- Ao clicar em algum banner, a url associada ao mesmo deve ser exibida internamente no app
-- Ao clicar em algum game, o usuário deve ser levado a tela de detalhamento do mesmo
-- No detlhamento do game, deve ser possivel adicionar o mesmo ao carrinho clicando no botao do carrinho
-- Caso o produto ja esteja adicionado ao carrinho, o botao de adicionar deve ganhar a ação de remover
-- Na home o ícone do carrinho deve ser flutuante e deve refletir a quantidade de produtos associados ao mesmo
-- O carrinho de compra deve exibir todos os itens adicionados
-- Cada produto adicionado no carrinho, soma R$10,00 ao frete total
-- O frete deve se tornar grátis quando a soma de todos os produtos do carrinho for acima de R$250,00
-- Deve ser possível remover produtos do carrinho
-- Ao clicar em finalizar compra deve haver a validação com a API
+- para desenvolver, utilizei o esquema de criar uma branch develop, e em seguida criar uma branch com o prefixo: feature, fix.
+Após a conclusão tarefa, realizar o merge na branch develop e no fim fazer merge da develop com a master. (Embora que ás vezes eu esquecia de seguir o padrão por conta do tempo, mas geralmente é assim que desenvolvo)
 
-### O que iremos avaliar...
-- Funcionamento do aplicativo(ele não pode quebrar)
-- Como você planejou a arquitetura como implementou novas funcionalidades
-- Layout(Usabilidade e se fez conforme escopo)
-- O Código(Domínio da linguagem, estrutura, uso de boas práticas, Legibilidade e Lint)
-- Uso do git e github(iremos olhar os commits; branches; pull request. Recomendado uso do gitflow)
+### Motivos para escolher este padrão arquitetural
+ - Fluxo de dados unidirecional e cíclico.
+ - Um estado consistente durante o ciclo de vida das Views.
+ - Modelos imutáveis ​​que fornecem comportamento confiável e segurança de threads em aplicativos grandes.
 
-### Diferencias
-- Rotinas de teste
 
-### Como aplicar
-Faça um pull request para este repositório com o código a ser avaliado
+### Linguagem utilizada:
+   - Kotlin
 
-##### Recomendações
-* Crie um código escalável
-* Versione como se estivesse trabalhando em equipe
-* Descreva em um `README.md` o que você fez de interessante, a arquitetura que usou, lista de bibliotecas que usou e as dificuldades encontradas no desenvolvimento da aplicação(Se não consegui terminar em tempo hábil, aproveite este espaço para fazer um checklist do que está faltando)
-* Preze pela qualidade, se faltar tempo para terminar o teste, faça uma lista de pendências
 
-Estou aguardando o teu pull request, boa sorte!
+###  Bibliotecas utilizadas na implementação:
+   - Mobius Spotify (Uma biblioteca criada pela equipe do Spoty com uma estrutura reativa funcional para gerenciar a evolução do estado e efeitos colaterais, com complementos para conectar-se às UIs do Android e ao RxJava Observables. Ele enfatiza a separação de preocupações, a testabilidade e o isolamento de partes com estado do código.)
+   - rxbinding3 (Para converter os widgets em observables)
+   - Dagger 2 (Para injentar as dependências)
+   - ViewModels (Trabalhar a lógica de negócio)
+   - Jetpack navigation
+   - Room database
+   - Databinding (Para evitar boilerplate e manter um código mais limpo)
+   - Safe Args
+   - Retrofit2: moshi-converter, adapter-rxjava2
+   - RxJava2
+   - Glide
+   - AndroidX
+   - RxJava (RxKotlin)
+   - Material Design 2.0
+   - CounterFab (Botão flutuante com a contagem dos itens na tela home)
+   - PersistentSearch (Para facilitar a criação do search na tela de pesquisa dos jogos)
+   - Why Not! Image Carousel (Utilizei para criar a parte dos banner na home screen)
+
+### Bibliotecas utilizadas para testes:
+   - Espresso
+   - JUnit
+   - MockWebServer (Para simular a api criando um servidor local)

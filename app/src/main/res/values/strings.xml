@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">TemplateMVI</string>
+
+    <!--    Return message from treatments with external calls-->
+    <string name="unauthorized">E-mail ou senha incorreta.</string>
+    <string name="internal_error">Ocorreu um erro interno no servidor.</string>
+    <string name="socket_timout_error">Tempo de requisição esgotado, por favor tente novamente.</string>
+    <string name="no_internet_connection_error">Sem conexão com a internet. Por favor, confirme a conexão com a internet do seu telefone.</string>
+    <string name="unknown_error">Erro desconhecido, entre em contato com o desenvolvedor do aplicativo</string>
+
+    <!-- Repositories Screen -->
+    <string name="repository_title">Github JavaPop</string>
+    <string name="loren_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus tellus, volutpat in neque in, semper interdum tortor. Nullam non ultricies diam. Vivamus ut magna venenatis, fringilla est rhoncus, dictum risus. Quisque quis metus faucibus, tincidunt dolor non, luctus metus. Donec id erat vulputate, fringilla purus quis, pulvinar ante. Donec vitae consectetur dolor. Proin hendrerit enim eu nulla tempus, quis fermentum dui blandit. Sed faucibus id quam tincidunt luctus. Vivamus ac elit vitae purus egestas tincidunt. In ut viverra orci. Nam ut velit lorem. Etiam eu ex non nibh maximus malesuada eget eu libero. Phasellus commodo eleifend lacus, et aliquam nulla tincidunt a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque a volutpat tellus.</string>
+
+    <string name="try_again">Tentar Novamente</string>
+
+    <!--    home Screen-->
+    <string name="from" translatable="false">de %1$s</string>
+
+    <!--    Detail Screen-->
+    <string name="reviews" translatable="false">%1$s reviews</string>
+
+    <string name="search">Pesquisar</string>
+    <string name="game_not_found">Jogo não encontrado</string>
+    <string name="speak_now">Pode falar agora</string>
+    <string name="products_size">Produtos (%1$s)</string>
+    <string name="total">Total</string>
+    <string name="frete">Frete</string>
+    <string name="clear_product">Limpar Produto</string>
+    <string name="product_clear_warning_msg">Deseja realmente remover o produto %1$s do carrinho?</string>
+    <string name="finish_purchase">Finalizar Compra</string>
+    <string name="game_detail">Detalhes do Jogo</string>
+    <string name="shopping_cart">Carrinho</string>
+    <string name="purchase_error">Houve um erro, por favor, tente novamente.</string>
+    <string name="purchase_sucessfully">Compra efetuada com sucesso!</string>
+    <string name="add_item_cart">Adicione items ao carrinho</string>
+
+</resources>

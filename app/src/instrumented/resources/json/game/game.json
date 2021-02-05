@@ -1,0 +1,12 @@
+{
+  "id": 3,
+  "title": "Mario Galaxy",
+  "publisher": "Nintendo",
+  "image": "https://i.ytimg.com/vi/2pklIgYHIQ0/maxresdefault.jpg",
+  "discount": 100,
+  "price": 350,
+  "description": "Super Mario Galaxy é um jogo eletrônico de plataforma desenvolvido pela Nintendo Entertainment Analysis & Development e publicado pela Nintendo. Ele foi lançado exclusivamente para Wii em novembro de 2007. É o terceiro título tridimensional da série Super Mario e o décimo quinto no geral.",
+  "rating": 4.7,
+  "stars": 4,
+  "reviews": 300
+}

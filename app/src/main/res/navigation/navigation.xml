@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="br.com.angelorobson.templatemvi.view.home.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+        <action
+            android:id="@+id/searchGameFragment"
+            app:destination="@id/searchGameFragment" />
+        <action
+            android:id="@+id/webViewFragment"
+            app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/shoppingCardFragment"
+            app:destination="@id/shoppingCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="br.com.angelorobson.templatemvi.view.gamedetail.GameDetailFragment"
+        android:label="@string/game_detail"
+        tools:layout="@layout/fragment_game_detail" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchGameFragment"
+        android:name="br.com.angelorobson.templatemvi.view.searchgame.SearchGameFragment"
+        android:label="fragment_search_game"
+        tools:layout="@layout/fragment_search_game" >
+        <action
+            android:id="@+id/to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="br.com.angelorobson.templatemvi.view.bannerwebview.BannerWebViewFragment"
+        android:label="activity_web_view"
+        tools:layout="@layout/fragment_banner_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingCardFragment"
+        android:name="br.com.angelorobson.templatemvi.view.shoppingcart.ShoppingCardFragment"
+        android:label="@string/shopping_cart"
+        tools:layout="@layout/fragment_shopping_cart" >
+        <action
+            android:id="@+id/homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+</navigation>
